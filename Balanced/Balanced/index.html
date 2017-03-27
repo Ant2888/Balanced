@@ -5,11 +5,18 @@
     <meta charset="utf-8" />
     <title>TypeScript HTML App</title>
     <link rel="stylesheet" href="assets/res/app.css" type="text/css" />
-    <script src="assets/scripts/phaser.js"></script>
-
+    <!-- For ordering the scripts it goes from leaf all the way up -->
+    <script src="assets/scripts/phaser.js"></script>    
+    <!-- Gui Componenets-->
+    <script src="assets/scripts/gui/Drawable.js"></script>
+    <script src="assets/scripts/gui/TestDrawable.js"></script>
+    <!-- States -->
     <script src="assets/scripts/States/State.js"></script>
-    <script src="assets/scripts/States/GameStateManager.js"></script>
     <script src="assets/scripts/States/TestState.js"></script>
+    <!-- Managers -->
+    <script src="assets/scripts/gui/GUIManager.js"></script>
+    <script src="assets/scripts/States/GameStateManager.js"></script>
+    <!-- Boot Strap -->
     <script src="assets/scripts/Boot.js"></script>
 </head>
 <body>

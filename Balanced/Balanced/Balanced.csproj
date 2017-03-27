@@ -30,6 +30,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\Drawable.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\TestDrawable.ts" />
     <TypeScriptCompile Include="assets\scripts\States\GameStateManager.ts" />
     <TypeScriptCompile Include="assets\scripts\States\State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\TestState.ts" />

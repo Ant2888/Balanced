@@ -77,7 +77,7 @@ module GUI {
          * Draws all the drawables in the list (left -> right).
          */
         public draw(): void {
-            this.drawables.forEach(function (e) { e.draw(this.gsm) });
+            this.drawables.forEach(function (e) { e.draw(this.gsm) }, this);
         }
     }
 }

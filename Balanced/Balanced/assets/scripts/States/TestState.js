@@ -1,3 +1,5 @@
+///<referenced path = "States" />
+///<referenced path = "GUI" />
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -8,7 +10,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-///<referenced path = "States" />
 var States;
 (function (States) {
     var TestState = (function (_super) {
@@ -17,14 +18,15 @@ var States;
             return _super.call(this, gsm) || this;
         }
         TestState.prototype.update = function () {
-            console.log("Updating TestState!");
+            this.test.x = this.test.x + 1;
         };
-        TestState.prototype.render = function () { };
+        TestState.prototype.render = function () {
+            this.gsm.getGUIM().add(this.test);
+        };
         TestState.prototype.init = function () { };
         TestState.prototype.startup = function () {
-            var logo = this.gsm.game.add.sprite(this.gsm.game.world.centerX, this.gsm.game.world.centerY, 'logo');
-            logo.anchor.setTo(0.5, 0.5);
-            console.log("State started!");
+            this.test = new GUI.TestDrawable(this);
+            console.log("Test State Started. Drawable Initialized!");
             return true;
         };
         TestState.prototype.end = function () { return false; };

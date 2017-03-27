@@ -24,6 +24,9 @@ var States;
          * The render function is called after update function. This can be used to
          * draw anything state related to the screen. This is also where you should
          * decide what to and not to draw from the GSM.
+         *
+         * It is recommended to simply ADD things to the GUIM for simplicity but not
+         * enforced.
          */
         State.prototype.render = function () { };
         /**

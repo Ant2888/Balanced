@@ -18,11 +18,12 @@ var States;
          */
         function GameStateManager(game) {
             this.game = game;
-            this.state = new States.TestState(this);
             this.initState();
         }
-        //helper to place the initial state
+        //helper to place the initial states and managers
         GameStateManager.prototype.initState = function () {
+            this.state = new States.TestState(this);
+            this.guiM = new GUI.GUIManager(this);
             this.state.init();
             if (this.state.startup() == false) {
                 //TODO: ERROUT
@@ -93,9 +94,17 @@ var States;
          * the GSM whether or not to render something static.
          */
         GameStateManager.prototype.render = function () {
+            this.guiM.clear();
             //TODO: DO PRE STATE CLIENT RENDERING HERE
             this.state.render();
             //TODO: DO POST STATE CLIENT RENDERING HERE
+            this.guiM.draw();
+        };
+        /**
+         * Getter for GUIM
+         */
+        GameStateManager.prototype.getGUIM = function () {
+            return this.guiM;
         };
         return GameStateManager;
     }());

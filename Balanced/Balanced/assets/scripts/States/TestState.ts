@@ -1,22 +1,28 @@
 ﻿///<referenced path = "States" />
+///<referenced path = "GUI" />
+
 module States {
     export class TestState extends States.State {
+
+        private test: GUI.TestDrawable;
 
         constructor(gsm: States.GameStateManager) {
             super(gsm);
         }
 
         public update(): void {
-            console.log("Updating TestState!");
+            this.test.x = this.test.x + 1;
         }
-        public render(): void { }
+
+        public render(): void {
+            this.gsm.getGUIM().add(this.test);
+        }
 
         public init(): void { }
 
         public startup(): boolean {
-            var logo = this.gsm.game.add.sprite(this.gsm.game.world.centerX, this.gsm.game.world.centerY, 'logo');
-            logo.anchor.setTo(0.5, 0.5);
-            console.log("State started!");
+            this.test = new GUI.TestDrawable(this);
+            console.log("Test State Started. Drawable Initialized!");
             return true;
         }
 

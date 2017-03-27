@@ -12,6 +12,7 @@ module States {
 
         public game: Phaser.Game;
         protected state: States.State;
+        protected guiM: GUI.GUIManager;
 
         /**
          * Intializes the GSM. Places the state that is determined to be the start.
@@ -21,12 +22,14 @@ module States {
          */
         constructor(game: Phaser.Game) {
             this.game = game;
-            this.state = new States.TestState(this);
             this.initState();
         }
 
-        //helper to place the initial state
+        //helper to place the initial states and managers
         private initState(): void {
+            this.state = new States.TestState(this);
+            this.guiM = new GUI.GUIManager(this);
+
             this.state.init();
 
             if (this.state.startup() == false) {
@@ -108,9 +111,18 @@ module States {
          * the GSM whether or not to render something static.
          */
         public render(): void {
+            this.guiM.clear();
             //TODO: DO PRE STATE CLIENT RENDERING HERE
             this.state.render();
             //TODO: DO POST STATE CLIENT RENDERING HERE
+            this.guiM.draw();
+        }
+
+        /**
+         * Getter for GUIM
+         */
+        public getGUIM(): GUI.GUIManager {
+            return this.guiM;
         }
     }
 }

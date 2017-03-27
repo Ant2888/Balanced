@@ -29,9 +29,11 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\Drawable.ts" />
     <TypeScriptCompile Include="assets\scripts\States\GameStateManager.ts" />
     <TypeScriptCompile Include="assets\scripts\States\State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\TestState.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\GUIManager.ts" />
     <TypeScriptCompile Include="p2.d.ts" />
     <TypeScriptCompile Include="phaser.d.ts" />
     <TypeScriptCompile Include="pixi.d.ts" />
@@ -49,7 +51,6 @@
   <ItemGroup>
     <Folder Include="assets\scripts\core\" />
     <Folder Include="assets\scripts\DynamicManagers\" />
-    <Folder Include="assets\scripts\StaticManagers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

@@ -1,5 +1,4 @@
-﻿///<referenced path="State.ts"/>
-
+﻿
 /**
  * This is the core/main of the game. It initializes the game
  * and the GSM. The game is then sent off with the GSM and all
@@ -17,13 +16,16 @@ class BalancedGame {
     private gsm: States.GameStateManager;
 
     preload() {
+        //center game
+        this.game.scale.pageAlignHorizontally = true;
+        this.game.scale.pageAlignVertically = true;
+        this.game.scale.refresh();
+
         this.game.load.image('logo', 'phaser2.png');
         this.gsm = new States.GameStateManager(this.game);
     }
 
     create() {
-        var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
-        logo.anchor.setTo(0.5, 0.5);
         //TODO: INITIALIZE ALL STATES
         //TODO: INITIALIZE RESOURCES REQUIRED -- GOTO RES MANAGER
         //TODO: Launch Build State
@@ -31,7 +33,6 @@ class BalancedGame {
 
     update() {
         this.gsm.update();
-        this.gsm.render();
     }
 
 }

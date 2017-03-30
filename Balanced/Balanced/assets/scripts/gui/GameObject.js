@@ -1,4 +1,3 @@
-///<referenced path = "../States/GameStateManager.ts"/>
 var GUI;
 (function (GUI) {
     /**
@@ -50,4 +49,4 @@ var GUI;
     }());
     GUI.GameObject = GameObject;
 })(GUI || (GUI = {}));
-//# sourceMappingURL=Drawable.js.map
+//# sourceMappingURL=GameObject.js.map

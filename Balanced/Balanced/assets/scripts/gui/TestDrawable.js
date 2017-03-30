@@ -26,7 +26,7 @@ var GUI;
             this.graphics.drawRect(this.x, this.y, 100, 100);
         };
         return TestDrawable;
-    }(GUI.Drawable));
+    }(Drawable));
     GUI.TestDrawable = TestDrawable;
 })(GUI || (GUI = {}));
 //# sourceMappingURL=TestDrawable.js.map

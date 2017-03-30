@@ -1,31 +1,33 @@
-﻿///<referenced path = "States" />
-///<referenced path = "GUI" />
-
+﻿
 module States {
     export class TestState extends States.State {
 
-        private test: GUI.TestDrawable;
+        private test: GUI.TestGraphic;
 
         constructor(gsm: States.GameStateManager) {
             super(gsm);
         }
 
         public update(): void {
-            this.test.x = this.test.x + 1;
+            var num = this.test.getBox().x;
+            this.test.setBox(num + 1);
         }
 
-        public render(): void {
-            this.gsm.getGUIM().add(this.test);
+        public init(): void {
+            var group = this.gsm.game.add.group();
+            this.test = new GUI.TestGraphic(group);
+            this.gsm.getGUIM().addGroup(this.test);
         }
-
-        public init(): void { }
 
         public startup(): boolean {
-            this.test = new GUI.TestDrawable(this);
             console.log("Test State Started. Drawable Initialized!");
             return true;
         }
 
         public end(): boolean { return false; }
+
+        public getType(): any {
+            return this;
+        }
     }
 }

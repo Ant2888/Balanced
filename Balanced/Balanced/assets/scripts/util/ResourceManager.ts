@@ -19,18 +19,21 @@
         * Attemps to add a resource to the game.
         * @param res    Resource to add
         * @param overwrite  If a value is found should it overwrite.
-        * @param callBack   The function used to ADD the resource.
-        * @param passed   The reference to the resource just sent.
+        * @param callBack   The function used to ADD the resource. It takes one argument
+        *                   which is the resource passed.
         * @param thisArg    The context of this.
         */
-        public addResource(res: Resource, overwrite: boolean, callBack: (passed: Resource) => any, thisArg?: any): boolean {
+        public addResource(res: Resource, overwrite: boolean, callBack: any, thisArg?: any): boolean {
             if (!overwrite && this.resourceExists(res) == true)
                 return false;
 
             if (callBack === undefined || callBack === null)
                 return false;
 
-            thisArg.callBack(res);
+            if (thisArg !== undefined && thisArg !== null)
+                callBack.bind(thisArg);
+
+            callBack(res);
 
             this.resources[res.uid] = res;
 
@@ -45,23 +48,6 @@
          */
         public resourceExists(res: Resource): boolean {
             return this.resources[res.uid] !== undefined ||this.resources[res.uid] !== null;
-        }
-    }
-
-    /**
-     * Simple intermediate class to represent a Phaser asset.
-     *
-     * @author Anthony
-     */
-    export class Resource {
-        public uid: number;
-        public key: string;
-        public assetUrl: string
-
-        constructor(key: string, assetUrl: string, uid: number) {
-            this.key = key;
-            this.uid = uid;
-            this.assetUrl = assetUrl;
         }
     }
 }

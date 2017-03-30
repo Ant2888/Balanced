@@ -13,8 +13,8 @@ var UTIL;
          * Attemps to add a resource to the game.
          * @param res    Resource to add
          * @param overwrite  If a value is found should it overwrite.
-         * @param callBack   The function used to ADD the resource.
-         * @param passed   The reference to the resource just sent.
+         * @param callBack   The function used to ADD the resource. It takes one argument
+         *                   which is the resource passed.
          * @param thisArg    The context of this.
          */
         ResourceManager.prototype.addResource = function (res, overwrite, callBack, thisArg) {
@@ -22,7 +22,9 @@ var UTIL;
                 return false;
             if (callBack === undefined || callBack === null)
                 return false;
-            thisArg.callBack(res);
+            if (thisArg !== undefined && thisArg !== null)
+                callBack.bind(thisArg);
+            callBack(res);
             this.resources[res.uid] = res;
             return true;
         };
@@ -38,19 +40,5 @@ var UTIL;
         return ResourceManager;
     }());
     UTIL.ResourceManager = ResourceManager;
-    /**
-     * Simple intermediate class to represent a Phaser asset.
-     *
-     * @author Anthony
-     */
-    var Resource = (function () {
-        function Resource(key, assetUrl, uid) {
-            this.key = key;
-            this.uid = uid;
-            this.assetUrl = assetUrl;
-        }
-        return Resource;
-    }());
-    UTIL.Resource = Resource;
 })(UTIL || (UTIL = {}));
 //# sourceMappingURL=ResourceManager.js.map

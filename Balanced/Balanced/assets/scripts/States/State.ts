@@ -1,11 +1,11 @@
-﻿///<referenced path="GameStateManager.ts"/>
+﻿
 module States {
     /**
      * This class acts as a template for all States. Use it as an abstract class
      * and extend it to create a new game state.
      * @author Anthony 
      */
-    export class State {
+    export abstract class State {
 
         protected gsm: States.GameStateManager;
 
@@ -18,21 +18,10 @@ module States {
         }
 
         /**
-         * The update function will be called before the render function. Use this
-         * to perform any calculations, movements and animations that aren't dealt
+         * Use this to perform any calculations, movements and animations that aren't dealt
          * with in any StaticManagers.
          */
-        public update(): void { }
-
-        /**
-         * The render function is called after update function. This can be used to
-         * draw anything state related to the screen. This is also where you should
-         * decide what to and not to draw from the GSM.
-         *
-         * It is recommended to simply ADD things to the GUIM for simplicity but not
-         * enforced.
-         */
-        public render(): void { }
+        public abstract update(): void;
 
         /**
          * This function should be used to initialize the class and prepare it for
@@ -41,7 +30,7 @@ module States {
          * Note: Init will get called  BEFORE you start the state whilst startup will
          * be called AS you dock.
          */
-        public init(): void { }
+        public abstract init(): void;
 
         /**
          * This function will be called as it being docked so any initial drawing or
@@ -50,7 +39,7 @@ module States {
          *
          * @returns If the startup was succesfull. Errout otherwise.
          */
-        public startup(): boolean { return false; }
+        public abstract startup(): boolean;
 
         /**
          * This function will be called when another state has been sent to be docked.
@@ -59,6 +48,12 @@ module States {
          *
          * @returns If the ending was succesful. Errout otherwise.
          */
-        public end(): boolean { return false; }
+        public abstract end(): boolean;
+
+        /**
+         * This function is meant to give a type for something like the GSM to
+         * bind a context to.
+         */
+        public abstract getType(): any;
     }
 }

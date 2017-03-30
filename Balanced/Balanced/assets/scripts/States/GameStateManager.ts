@@ -1,4 +1,4 @@
-﻿///<referenced path="State.ts"/>
+﻿
 module States {
     /**
      * This class acts as the primary controller of the entire game.
@@ -69,6 +69,9 @@ module States {
 
             s.init();
 
+            if (start)
+                this.guiM.destroyAll();
+
             if (start && this.state.startup() == false) {
                 //TODO: ERROUT
             }
@@ -103,19 +106,6 @@ module States {
             //TODO: DO PRE STATE CLIENT UPDATING HERE
             this.state.update();
             //TODO: DO POST STATE CLIENT UPDATING HERE
-        }
-
-        /**
-         * Render function gets passed from the main. Executed after update.
-         * Used to draw to the screen. The state will be able to decide to tell
-         * the GSM whether or not to render something static.
-         */
-        public render(): void {
-            this.guiM.clear();
-            //TODO: DO PRE STATE CLIENT RENDERING HERE
-            this.state.render();
-            //TODO: DO POST STATE CLIENT RENDERING HERE
-            this.guiM.draw();
         }
 
         /**

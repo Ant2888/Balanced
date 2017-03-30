@@ -1,7 +1,4 @@
-﻿///<referenced path = "../States/GameStateManager.ts" />
-///<referenced path = "Drawable.ts" />
-
-module GUI {
+﻿module GUI {
     /**
      * This class will manage ALL GUI elements of the game.
      * this may also include any actual game elements but that is
@@ -10,74 +7,101 @@ module GUI {
      * @author Anthony
      */
     export class GUIManager {
-
-        private gsm: States.GameStateManager;
-        protected drawables: GUI.Drawable[]; //list of drawables
+        /**
+         * The instance of the GSM
+         */
+        protected gsm: States.GameStateManager;
 
         /**
-         * Initializes the GUIM with the GSM
-         *
-         * @param gsm The GameStateManager.
+         * The groups that will be present in the current state
          */
+        protected groups: GUI.GameObject[];
+
         constructor(gsm: States.GameStateManager) {
             this.gsm = gsm;
-            this.drawables = new Array();
+            this.groups = new Array();
         }
 
         /**
-         * Clears ALL entries in the drawables array.
+         * Adds (to the end) the group into the manager.
+         * @param group
          */
-        public clear(): void {
-            this.drawables = new Array();
+        public addGroup(group: GUI.GameObject): void {
+            group.initialize(this.gsm);
+            this.groups.push(group);
         }
 
         /**
-         * Adds a drawable to the drawables array. This
-         * will queue it to be drawn. Once added the order
-         * is fixed; it is up to the caller to control the order
-         * if anymore flexibility than 1st or last is required.
-         *
-         * @param drawable The drawable to add to the list.
-         * @param first Whether to add to the front or last.
-         *        Adding to the front will make it the MOST visible.
+         * Destroys all groups. This will unrender them AND null them. Use this
+         * for ending a state.
          */
-        public add(drawable: GUI.Drawable, first = false): void {
-            if (first == true) {
-                this.drawables.push(drawable);
-            } else {
-                this.drawables.unshift(drawable);
-            }
+        public destroyAll(): void {
+            this.groups.forEach(function (g) {
+                g.getGroup().destroy();
+            });
         }
 
         /**
-         * This will remove all drawables of a certain parent from
-         * the list. An example would be to get rid of all things that
-         * are NOT being explicitly drawn from a particular instance.
-         *
-         * @param parent The parent for a set (or single) of drawables.
+         * Destroys a particular group if it is found in the array.
+         * This will destroy the entities in the group.
+         * @param group
          */
-        public removeByParent(parent: any): void {
-            this.drawables = this.drawables
-                .filter(function (e) { return e.getParent() !== parent });
+        public destroyGroup(group: Phaser.Group): void {
+            if (group === undefined || group === null)
+                return;
+
+            var ind = 0;
+
+            for (; ind < this.groups.length; ind++)
+                if (this.groups[ind].group == group)
+                    break;
+
+            if (ind == this.groups.length)
+                return;
+
+            this.groups.splice(ind, 1);
         }
 
         /**
-         * This will get all the drawables in the list for a given parent.
-         * This should be used to keep track of what you removed if you so desire.
-         *
-         * @param parent The parent for a set (or single) of drawables.
-         * @returns The list of drawables in the list.
+         * Removes an object from the group list. Does not destroy.
+         * @param gameObj GameObject to search by
          */
-        public getAllByParent(parent: any): GUI.Drawable[] {
-            return this.drawables
-                .filter(function (e) { return e.getParent() === parent });
+        public removeObject(gameObj: GameObject) {
+            var ind = this.groups.indexOf(gameObj);
+
+            if (ind >= 0)
+                this.groups.splice(ind, 1);
         }
 
         /**
-         * Draws all the drawables in the list (left -> right).
+         * Looks inside the group list for an object by id.
+         * If multiple are found it will return all of them.
+         * @param id The id to search by.
          */
-        public draw(): void {
-            this.drawables.forEach(function (e) { e.draw(this.gsm) }, this);
+        public findByID(id: any): GUI.GameObject[]{
+            var filtered = this.groups.filter(function (e) { return e.getParent() == id });
+
+            return filtered;
         }
+
+        /**
+         * Returns all the groups that are in the state.
+         */
+        public getGroups(): GameObject[] {
+            return this.groups;
+        }
+
+        /**
+         * Sets the visibility of a give group.
+         * @param id The id to search for.
+         * @param visible Whether to enable or disable
+         */
+        public setVisibility(id: any, visible: boolean): void {
+            this.groups.forEach(function (e) {
+                if (e.getParent() == id)
+                    e.getGroup().exists = visible;
+            });
+        }
+
     }
 }

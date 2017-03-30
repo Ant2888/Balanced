@@ -1,5 +1,3 @@
-///<referenced path = "../States/GameStateManager.ts" />
-///<referenced path = "Drawable.ts" />
 var GUI;
 (function (GUI) {
     /**
@@ -10,67 +8,77 @@ var GUI;
      * @author Anthony
      */
     var GUIManager = (function () {
-        /**
-         * Initializes the GUIM with the GSM
-         *
-         * @param gsm The GameStateManager.
-         */
         function GUIManager(gsm) {
             this.gsm = gsm;
-            this.drawables = new Array();
+            this.groups = new Array();
         }
         /**
-         * Clears ALL entries in the drawables array.
+         * Adds (to the end) the group into the manager.
+         * @param group
          */
-        GUIManager.prototype.clear = function () {
-            this.drawables = new Array();
+        GUIManager.prototype.addGroup = function (group) {
+            group.initialize(this.gsm);
+            this.groups.push(group);
         };
         /**
-         * Adds a drawable to the drawables array. This
-         * will queue it to be drawn. Once added the order
-         * is fixed; it is up to the caller to control the order
-         * if anymore flexibility than 1st or last is required.
-         *
-         * @param drawable The drawable to add to the list.
-         * @param first Whether to add to the front or last.
-         *        Adding to the front will make it the MOST visible.
+         * Destroys all groups. This will unrender them AND null them. Use this
+         * for ending a state.
          */
-        GUIManager.prototype.add = function (drawable, first) {
-            if (first === void 0) { first = false; }
-            if (first == true) {
-                this.drawables.push(drawable);
-            }
-            else {
-                this.drawables.unshift(drawable);
-            }
+        GUIManager.prototype.destroyAll = function () {
+            this.groups.forEach(function (g) {
+                g.getGroup().destroy();
+            });
         };
         /**
-         * This will remove all drawables of a certain parent from
-         * the list. An example would be to get rid of all things that
-         * are NOT being explicitly drawn from a particular instance.
-         *
-         * @param parent The parent for a set (or single) of drawables.
+         * Destroys a particular group if it is found in the array.
+         * This will destroy the entities in the group.
+         * @param group
          */
-        GUIManager.prototype.removeByParent = function (parent) {
-            this.drawables = this.drawables
-                .filter(function (e) { return e.getParent() !== parent; });
+        GUIManager.prototype.destroyGroup = function (group) {
+            if (group === undefined || group === null)
+                return;
+            var ind = 0;
+            for (; ind < this.groups.length; ind++)
+                if (this.groups[ind].group == group)
+                    break;
+            if (ind == this.groups.length)
+                return;
+            this.groups.splice(ind, 1);
         };
         /**
-         * This will get all the drawables in the list for a given parent.
-         * This should be used to keep track of what you removed if you so desire.
-         *
-         * @param parent The parent for a set (or single) of drawables.
-         * @returns The list of drawables in the list.
+         * Removes an object from the group list. Does not destroy.
+         * @param gameObj GameObject to search by
          */
-        GUIManager.prototype.getAllByParent = function (parent) {
-            return this.drawables
-                .filter(function (e) { return e.getParent() === parent; });
+        GUIManager.prototype.removeObject = function (gameObj) {
+            var ind = this.groups.indexOf(gameObj);
+            if (ind >= 0)
+                this.groups.splice(ind, 1);
         };
         /**
-         * Draws all the drawables in the list (left -> right).
+         * Looks inside the group list for an object by id.
+         * If multiple are found it will return all of them.
+         * @param id The id to search by.
          */
-        GUIManager.prototype.draw = function () {
-            this.drawables.forEach(function (e) { e.draw(this.gsm); }, this);
+        GUIManager.prototype.findByID = function (id) {
+            var filtered = this.groups.filter(function (e) { return e.getParent() == id; });
+            return filtered;
+        };
+        /**
+         * Returns all the groups that are in the state.
+         */
+        GUIManager.prototype.getGroups = function () {
+            return this.groups;
+        };
+        /**
+         * Sets the visibility of a give group.
+         * @param id The id to search for.
+         * @param visible Whether to enable or disable
+         */
+        GUIManager.prototype.setVisibility = function (id, visible) {
+            this.groups.forEach(function (e) {
+                if (e.getParent() == id)
+                    e.getGroup().exists = visible;
+            });
         };
         return GUIManager;
     }());

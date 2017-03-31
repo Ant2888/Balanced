@@ -20,12 +20,17 @@ class BalancedGame {
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.pageAlignVertically = true;
         this.game.scale.refresh();
+        var rem = new UTIL.ResourceManager();
 
-        this.game.load.image('logo', 'phaser2.png');
-        this.gsm = new States.GameStateManager(this.game);
+        rem.addResource(new UTIL.Resource('logo2', 'phaser2.jpg', 0), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+
+
     }
 
     create() {
+        this.gsm = new States.GameStateManager(this.game);
         //TODO: INITIALIZE ALL STATES
         //TODO: INITIALIZE RESOURCES REQUIRED -- GOTO RES MANAGER
         //TODO: Launch Build State
@@ -36,7 +41,6 @@ class BalancedGame {
     }
 
 }
-
 // When the window is loaded completely this will be executed.
 window.onload = () => {
     var game = new BalancedGame();

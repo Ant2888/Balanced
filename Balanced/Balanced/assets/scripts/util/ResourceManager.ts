@@ -5,14 +5,21 @@
      * @author Anthony
      */
     export class ResourceManager {
-
-        private gsm: States.GameStateManager;
-
+        
         //HashSet
         private resources: object;
 
-        constructor(gsm: States.GameStateManager) {
-            this.gsm = gsm;
+        constructor() {
+            var obj = {};
+            this.resources = obj;
+        }
+
+        /**
+         * Grabs the resource that is currently loaded.
+         * @param uid The ID to search by.
+         */
+        public getResouce(uid: number): Resource {
+            return this.resources[uid];
         }
         
        /**
@@ -31,7 +38,7 @@
                 return false;
 
             if (thisArg !== undefined && thisArg !== null)
-                callBack.bind(thisArg);
+                callBack = callBack.bind(thisArg);
 
             callBack(res);
 

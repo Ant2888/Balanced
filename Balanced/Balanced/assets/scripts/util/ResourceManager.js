@@ -6,9 +6,17 @@ var UTIL;
      * @author Anthony
      */
     var ResourceManager = (function () {
-        function ResourceManager(gsm) {
-            this.gsm = gsm;
+        function ResourceManager() {
+            var obj = {};
+            this.resources = obj;
         }
+        /**
+         * Grabs the resource that is currently loaded.
+         * @param uid The ID to search by.
+         */
+        ResourceManager.prototype.getResouce = function (uid) {
+            return this.resources[uid];
+        };
         /**
          * Attemps to add a resource to the game.
          * @param res    Resource to add
@@ -23,7 +31,7 @@ var UTIL;
             if (callBack === undefined || callBack === null)
                 return false;
             if (thisArg !== undefined && thisArg !== null)
-                callBack.bind(thisArg);
+                callBack = callBack.bind(thisArg);
             callBack(res);
             this.resources[res.uid] = res;
             return true;

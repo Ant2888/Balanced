@@ -14,10 +14,13 @@ var BalancedGame = (function () {
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.pageAlignVertically = true;
         this.game.scale.refresh();
-        this.game.load.image('logo', 'phaser2.png');
-        this.gsm = new States.GameStateManager(this.game);
+        var rem = new UTIL.ResourceManager();
+        rem.addResource(new UTIL.Resource('logo2', 'phaser2.jpg', 0), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
     };
     BalancedGame.prototype.create = function () {
+        this.gsm = new States.GameStateManager(this.game);
         //TODO: INITIALIZE ALL STATES
         //TODO: INITIALIZE RESOURCES REQUIRED -- GOTO RES MANAGER
         //TODO: Launch Build State

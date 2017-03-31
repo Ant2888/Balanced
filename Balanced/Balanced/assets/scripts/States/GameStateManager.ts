@@ -83,6 +83,8 @@ module States {
          * Starts the state if not started in the setState.
          */
         public startState(): void {
+            this.guiM.destroyAll();
+
             if (this.state.startup() == false) {
                 //TODO: ERROUT
             }

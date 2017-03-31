@@ -67,6 +67,7 @@ var States;
          * Starts the state if not started in the setState.
          */
         GameStateManager.prototype.startState = function () {
+            this.guiM.destroyAll();
             if (this.state.startup() == false) {
                 //TODO: ERROUT
             }

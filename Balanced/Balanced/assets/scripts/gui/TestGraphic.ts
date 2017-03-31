@@ -8,7 +8,7 @@
         }
 
         public initialize(gsm: States.GameStateManager): void {
-            this.box = gsm.game.add.sprite(150, 150, 'logo');
+            this.box = gsm.game.add.sprite(150, 150, 'logo2');
             this.group.add(this.box);
         }
 

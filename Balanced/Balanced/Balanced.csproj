@@ -25,6 +25,7 @@
     <Content Include="assets\res\app.css" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
+    <Content Include="phaser2.jpg" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

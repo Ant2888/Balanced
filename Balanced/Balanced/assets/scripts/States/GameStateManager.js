@@ -17,11 +17,10 @@ var States;
          */
         function GameStateManager(game) {
             this.game = game;
-            this.initState();
         }
         //helper to place the initial states and managers
         GameStateManager.prototype.initState = function () {
-            this.state = new States.TestState(this);
+            this.state = States.TEST_STATE2;
             this.guiM = new GUI.GUIManager(this);
             this.state.init();
             if (this.state.startup() == false) {
@@ -45,7 +44,7 @@ var States;
          * @param start Whether to automatically start the state after docking.
          */
         GameStateManager.prototype.setState = function (s, start) {
-            if (start === void 0) { start = false; }
+            if (start === void 0) { start = true; }
             if (s === undefined || s === null) {
                 //TODO: ERROUT
             }
@@ -55,19 +54,19 @@ var States;
             if (this.state.end() == false) {
                 //TODO: ERROUT
             }
-            s.init();
             if (start)
                 this.guiM.destroyAll();
-            if (start && this.state.startup() == false) {
+            s.init();
+            if (start && s.startup() == false) {
                 //TODO: ERROUT
             }
             this.state = s;
         };
         /**
          * Starts the state if not started in the setState.
+         * NOTE YOU MUST DESTROY EVERYTHING ON YOUR OWN!
          */
         GameStateManager.prototype.startState = function () {
-            this.guiM.destroyAll();
             if (this.state.startup() == false) {
                 //TODO: ERROUT
             }

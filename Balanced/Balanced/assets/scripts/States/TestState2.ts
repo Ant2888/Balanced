@@ -1,8 +1,8 @@
-﻿
-module States {
-    export class TestState extends State {
+﻿module States {
+    export class TestState2 extends State {
 
         private test: GUI.TestGraphic;
+        private press: Phaser.Key;
 
         constructor(gsm: States.GameStateManager) {
             super(gsm);
@@ -10,7 +10,7 @@ module States {
 
         public update(): void {
             var num = this.test.getBox().x;
-            this.test.setBox(num + 1);
+            this.test.setBox(num - 1);
         }
 
         public init(): void {
@@ -21,10 +21,19 @@ module States {
 
         public startup(): boolean {
             console.log("Test State Started. Drawable Initialized!");
+
+            this.press = this.gsm.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
+            this.press.onDown.add(function () {
+                this.gsm.setState(States.TEST_STATE);
+            }, this);
+
             return true;
         }
 
-        public end(): boolean { return true; }
+        public end(): boolean {
+            this.press.reset();
+            return true;
+        }
 
         public getType(): any {
             return this;

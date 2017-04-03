@@ -10,30 +10,37 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var States;
 (function (States) {
-    var TestState = (function (_super) {
-        __extends(TestState, _super);
-        function TestState(gsm) {
+    var TestState2 = (function (_super) {
+        __extends(TestState2, _super);
+        function TestState2(gsm) {
             return _super.call(this, gsm) || this;
         }
-        TestState.prototype.update = function () {
+        TestState2.prototype.update = function () {
             var num = this.test.getBox().x;
-            this.test.setBox(num + 1);
+            this.test.setBox(num - 1);
         };
-        TestState.prototype.init = function () {
+        TestState2.prototype.init = function () {
             var group = this.gsm.game.add.group();
             this.test = new GUI.TestGraphic(group);
             this.gsm.getGUIM().addGroup(this.test);
         };
-        TestState.prototype.startup = function () {
+        TestState2.prototype.startup = function () {
             console.log("Test State Started. Drawable Initialized!");
+            this.press = this.gsm.game.input.keyboard.addKey(Phaser.Keyboard.ONE);
+            this.press.onDown.add(function () {
+                this.gsm.setState(States.TEST_STATE);
+            }, this);
             return true;
         };
-        TestState.prototype.end = function () { return true; };
-        TestState.prototype.getType = function () {
+        TestState2.prototype.end = function () {
+            this.press.reset();
+            return true;
+        };
+        TestState2.prototype.getType = function () {
             return this;
         };
-        return TestState;
+        return TestState2;
     }(States.State));
-    States.TestState = TestState;
+    States.TestState2 = TestState2;
 })(States || (States = {}));
-//# sourceMappingURL=TestState.js.map
+//# sourceMappingURL=TestState2.js.map

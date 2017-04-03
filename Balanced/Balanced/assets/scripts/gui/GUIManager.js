@@ -26,7 +26,7 @@ var GUI;
          */
         GUIManager.prototype.destroyAll = function () {
             this.groups.forEach(function (g) {
-                g.getGroup().destroy();
+                g.getGroup().removeAll(true);
             });
         };
         /**
@@ -44,6 +44,7 @@ var GUI;
             if (ind == this.groups.length)
                 return;
             this.groups.splice(ind, 1);
+            group.destroy(true);
         };
         /**
          * Removes an object from the group list. Does not destroy.

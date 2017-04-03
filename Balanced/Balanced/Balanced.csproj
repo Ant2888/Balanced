@@ -25,14 +25,18 @@
     <Content Include="assets\res\app.css" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
-    <Content Include="phaser2.jpg" />
+    <Content Include="assets\res\phaser2.jpg" />
     <Content Include="web.config" />
+    <Content Include="bg.jpg" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\TestGraphic.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\TestState2.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />
+    <TypeScriptCompile Include="assets\scripts\util\ResourceList.ts" />
     <TypeScriptCompile Include="assets\scripts\util\ResourceManager.ts" />
     <TypeScriptCompile Include="assets\scripts\States\GameStateManager.ts" />
     <TypeScriptCompile Include="assets\scripts\States\State.ts" />

@@ -37,7 +37,7 @@
          */
         public destroyAll(): void {
             this.groups.forEach(function (g) {
-                g.getGroup().destroy();
+                g.getGroup().removeAll(true);
             });
         }
 
@@ -60,6 +60,7 @@
                 return;
 
             this.groups.splice(ind, 1);
+            group.destroy(true);
         }
 
         /**
@@ -80,7 +81,6 @@
          */
         public findByID(id: any): GUI.GameObject[]{
             var filtered = this.groups.filter(function (e) { return e.getParent() == id });
-
             return filtered;
         }
 

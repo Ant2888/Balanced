@@ -15,15 +15,18 @@ var BalancedGame = (function () {
         this.game.scale.pageAlignVertically = true;
         this.game.scale.refresh();
         var rem = new UTIL.ResourceManager();
-        rem.addResource(new UTIL.Resource('logo2', 'phaser2.jpg', 0), true, function (e) {
+        //PUT ALL RESOURCES YOU NEED LOADED DOWN HERE
+        rem.addResource(new UTIL.Resource('logo2', 'assets/res/phaser2.jpg', UTIL.TESTLOGO_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
     };
     BalancedGame.prototype.create = function () {
         this.gsm = new States.GameStateManager(this.game);
-        //TODO: INITIALIZE ALL STATES
-        //TODO: INITIALIZE RESOURCES REQUIRED -- GOTO RES MANAGER
-        //TODO: Launch Build State
+        // START STATES
+        States.TEST_STATE = new States.TestState(this.gsm);
+        States.TEST_STATE2 = new States.TestState2(this.gsm);
+        // END STATES
+        this.gsm.initState();
     };
     BalancedGame.prototype.update = function () {
         this.gsm.update();

@@ -9,7 +9,6 @@ module States {
      * @author Anthony
      */
     export class GameStateManager {
-
         public game: Phaser.Game;
         protected state: States.State;
         protected guiM: GUI.GUIManager;
@@ -22,12 +21,11 @@ module States {
          */
         constructor(game: Phaser.Game) {
             this.game = game;
-            this.initState();
         }
 
         //helper to place the initial states and managers
-        private initState(): void {
-            this.state = new States.TestState(this);
+        public initState(): void {
+            this.state = States.TEST_STATE2;
             this.guiM = new GUI.GUIManager(this);
 
             this.state.init();
@@ -54,7 +52,7 @@ module States {
          * @param s The state to dock.
          * @param start Whether to automatically start the state after docking.
          */
-        public setState(s: States.State, start = false): void {
+        public setState(s: States.State, start = true): void {
             if (s === undefined || s === null) {
                 //TODO: ERROUT
             }
@@ -67,12 +65,12 @@ module States {
                 //TODO: ERROUT
             }
 
-            s.init();
-
             if (start)
                 this.guiM.destroyAll();
 
-            if (start && this.state.startup() == false) {
+            s.init();
+
+            if (start && s.startup() == false) {
                 //TODO: ERROUT
             }
 
@@ -81,10 +79,9 @@ module States {
 
         /**
          * Starts the state if not started in the setState.
+         * NOTE YOU MUST DESTROY EVERYTHING ON YOUR OWN!
          */
         public startState(): void {
-            this.guiM.destroyAll();
-
             if (this.state.startup() == false) {
                 //TODO: ERROUT
             }

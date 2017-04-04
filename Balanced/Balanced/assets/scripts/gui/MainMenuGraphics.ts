@@ -3,22 +3,18 @@
 
         private backgroundImage: Phaser.Sprite
 
-        private playButton: Phaser.Sprite
-        private loadButton: Phaser.Sprite
-        private optionsHelpButton: Phaser.Sprite
+        private playButton: Phaser.Button
+        private loadButton: Phaser.Button
+        private optionsHelpButton: Phaser.Button
+        private gsm: States.GameStateManager;
 
         constructor(group: Phaser.Group) {
             super(200, group);
         }
 
         public initialize(gsm: States.GameStateManager): void {
+            this.gsm = gsm;
             this.backgroundImage = gsm.game.add.sprite(0, 0, 'mmBackground');
-
-            this.playButton = gsm.game.add.sprite(556, 313, 'mmPlayButton');
-            this.loadButton = gsm.game.add.sprite(556, 398, 'mmLoadButton');
-            this.optionsHelpButton = gsm.game.add.sprite(436, 484, 'mmOptionsHelpButton');
-
-
 
             this.group.add(this.backgroundImage);
         }
@@ -27,16 +23,19 @@
             return this.backgroundImage;
         }
 
-        public getPlayButton(): Phaser.Sprite {
-            return this.playButton;
+        public getPlayButton(func: any): void {
+            this.playButton = this.gsm.game.add.button(556, 313, 'mmPlayButton', func);
+            //return this.playButton;
         }
 
-        public getLoadButton(): Phaser.Sprite {
-            return this.loadButton;
+        public getLoadButton(func: any): void {
+            this.loadButton = this.gsm.game.add.button(556, 398, 'mmLoadButton', func);
+            //return this.loadButton;
         }
 
-        public getOptionsHelpButton(): Phaser.Sprite {
-            return this.optionsHelpButton;
+        public getOptionsHelpButton(func: any): void {
+            this.optionsHelpButton = this.gsm.game.add.button(436, 484, 'mmOptionsHelpButton', func);
+            //return this.optionsHelpButton;
         }
     }
 }

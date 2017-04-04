@@ -29,6 +29,18 @@ var States;
         };
         MainMenuState.prototype.startup = function () {
             console.log("Main Menu Started.");
+            // THIS WORKS
+            this.mainMenu.getPlayButton(function () {
+                console.log('play button was pressed');
+            });
+            this.mainMenu.getLoadButton(function () {
+                console.log('load button was pressed');
+            });
+            this.mainMenu.getOptionsHelpButton(function () {
+                console.log('options/help button was pressed');
+            });
+            // THIS DOES NOT WORK
+            //this.mainMenu.getPlayButton(this.playButtonPressed());
             return true;
         };
         MainMenuState.prototype.end = function () {

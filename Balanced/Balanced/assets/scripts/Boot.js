@@ -13,13 +13,14 @@ var BalancedGame = (function () {
         //center game
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.pageAlignVertically = true;
+        this.game.scale.refresh();
         var rem = new UTIL.ResourceManager();
         //PUT ALL RESOURCES YOU NEED LOADED DOWN HERE
         rem.addResource(new UTIL.Resource('logo2', 'assets/res/phaser2.jpg', UTIL.TESTLOGO_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         // MAIN MENU RESOURCES
-        rem.addResource(new UTIL.Resource('mmBackground', 'assets/res/mmBackground_w.o_buttons.jpg', UTIL.MM_BACKGROUND_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('mmBackground', 'assets/res/mmBackground.png', UTIL.MM_BACKGROUND_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         // play button
@@ -37,7 +38,6 @@ var BalancedGame = (function () {
         // END MAIN MENU
     };
     BalancedGame.prototype.create = function () {
-        this.game.scale.refresh();
         this.gsm = new States.GameStateManager(this.game);
         // START STATES
         States.TEST_STATE = new States.TestState(this.gsm);

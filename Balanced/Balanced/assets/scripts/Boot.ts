@@ -19,7 +19,8 @@ class BalancedGame {
         //center game
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.pageAlignVertically = true;
-       
+        this.game.scale.refresh();
+
         var rem = new UTIL.ResourceManager();
 
         //PUT ALL RESOURCES YOU NEED LOADED DOWN HERE
@@ -28,7 +29,7 @@ class BalancedGame {
         }, this);
 
         // MAIN MENU RESOURCES
-        rem.addResource(new UTIL.Resource('mmBackground', 'assets/res/mmBackground_w.o_buttons.jpg', UTIL.MM_BACKGROUND_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('mmBackground', 'assets/res/mmBackground.png', UTIL.MM_BACKGROUND_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
 
@@ -50,9 +51,7 @@ class BalancedGame {
         
     }
 
-    create() {
-        this.game.scale.refresh();
-
+    create() {        
         this.gsm = new States.GameStateManager(this.game);
         // START STATES
         States.TEST_STATE = new States.TestState(this.gsm);

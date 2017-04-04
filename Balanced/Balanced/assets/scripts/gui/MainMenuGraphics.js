@@ -16,23 +16,24 @@ var GUI;
             return _super.call(this, 200, group) || this;
         }
         MainMenuGraphics.prototype.initialize = function (gsm) {
+            this.gsm = gsm;
             this.backgroundImage = gsm.game.add.sprite(0, 0, 'mmBackground');
-            this.playButton = gsm.game.add.sprite(556, 313, 'mmPlayButton');
-            this.loadButton = gsm.game.add.sprite(556, 398, 'mmLoadButton');
-            this.optionsHelpButton = gsm.game.add.sprite(436, 484, 'mmOptionsHelpButton');
             this.group.add(this.backgroundImage);
         };
         MainMenuGraphics.prototype.getBackgroundImage = function () {
             return this.backgroundImage;
         };
-        MainMenuGraphics.prototype.getPlayButton = function () {
-            return this.playButton;
+        MainMenuGraphics.prototype.getPlayButton = function (func) {
+            this.playButton = this.gsm.game.add.button(556, 313, 'mmPlayButton', func);
+            //return this.playButton;
         };
-        MainMenuGraphics.prototype.getLoadButton = function () {
-            return this.loadButton;
+        MainMenuGraphics.prototype.getLoadButton = function (func) {
+            this.loadButton = this.gsm.game.add.button(556, 398, 'mmLoadButton', func);
+            //return this.loadButton;
         };
-        MainMenuGraphics.prototype.getOptionsHelpButton = function () {
-            return this.optionsHelpButton;
+        MainMenuGraphics.prototype.getOptionsHelpButton = function (func) {
+            this.optionsHelpButton = this.gsm.game.add.button(436, 484, 'mmOptionsHelpButton', func);
+            //return this.optionsHelpButton;
         };
         return MainMenuGraphics;
     }(GUI.GameObject));

@@ -23,16 +23,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\res\app.css" />
+    <Content Include="assets\res\mmBackground_w.o_buttons.jpg" />
+    <Content Include="assets\res\mm_loadBtn.png" />
+    <Content Include="assets\res\mm_optionsHelpBtn.png" />
+    <Content Include="assets\res\mm_playerBtn.png" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
     <Content Include="assets\res\phaser2.jpg" />
     <Content Include="web.config" />
-    <Content Include="bg.jpg" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\MainMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\TestGraphic.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\MainMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
     <TypeScriptCompile Include="assets\scripts\States\TestState2.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />

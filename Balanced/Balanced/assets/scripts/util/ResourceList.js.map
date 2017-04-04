@@ -1,1 +1,1 @@
-{"version":3,"file":"ResourceList.js","sourceRoot":"","sources":["ResourceList.ts"],"names":[],"mappings":"AAWA,+BAA+B;AAC/B,oBAAoB;AACpB,uBAAuB;AACvB,sBAAsB;AACtB,IAAI,CAAC,WAAW,GAAG,CAAC,CAAC"}
+{"version":3,"file":"ResourceList.js","sourceRoot":"","sources":["ResourceList.ts"],"names":[],"mappings":"AAmBA,+BAA+B;AAE/B,oBAAoB;AACpB,IAAI,CAAC,WAAW,GAAG,CAAC,CAAC;AAErB,uBAAuB;AAEvB,sBAAsB;AACtB,IAAI,CAAC,gBAAgB,GAAG,GAAG,CAAC;AAC5B,IAAI,CAAC,gBAAgB,GAAG,GAAG,CAAC;AAC5B,IAAI,CAAC,uBAAuB,GAAG,GAAG,CAAC"}

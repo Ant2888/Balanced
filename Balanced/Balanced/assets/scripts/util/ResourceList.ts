@@ -13,7 +13,8 @@ declare class UTIL {
 
     static MM_PLAYBUTTON_ID: number; // player button image
     static MM_LOADBUTTON_ID: number; // load button image
-    static MM_OPTIONSHELPBUTTON_ID: number; // options/help button image
+    static MM_HELPBUTTON_ID: number; // help button image
+    static MM_OPTIONSBUTTON_ID: number; // help button image
     // End Main menu id's
 }
 
@@ -28,4 +29,5 @@ UTIL.TESTLOGO_ID = 0;
 UTIL.MM_BACKGROUND_ID = 200;
 UTIL.MM_PLAYBUTTON_ID = 201;
 UTIL.MM_LOADBUTTON_ID = 202;
-UTIL.MM_OPTIONSHELPBUTTON_ID = 203;
+UTIL.MM_HELPBUTTON_ID = 203;
+UTIL.MM_OPTIONSBUTTON_ID = 204;

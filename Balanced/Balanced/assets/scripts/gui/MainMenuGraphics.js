@@ -20,20 +20,34 @@ var GUI;
             this.backgroundImage = gsm.game.add.sprite(0, 0, 'mmBackground');
             this.group.add(this.backgroundImage);
         };
+        // initializes the button when the gui is loaded
+        MainMenuGraphics.prototype.setPlayButton = function (func) {
+            this.playButton = this.gsm.game.add.button(550, 280, 'mmPlayButton', func, this, 1, 0, 2);
+        };
+        MainMenuGraphics.prototype.setLoadButton = function (func) {
+            this.loadButton = this.gsm.game.add.button(550, 360, 'mmLoadButton', func, this, 1, 0, 2);
+        };
+        MainMenuGraphics.prototype.setHelpButton = function (func) {
+            this.helpButton = this.gsm.game.add.button(550, 440, 'mmHelpButton', func, this, 1, 0, 2);
+        };
+        MainMenuGraphics.prototype.setOptionsButton = function (func) {
+            this.optionsButton = this.gsm.game.add.button(465, 520, 'mmOptionsButton', func, this, 1, 0, 2);
+        };
+        // getters
         MainMenuGraphics.prototype.getBackgroundImage = function () {
             return this.backgroundImage;
         };
-        MainMenuGraphics.prototype.getPlayButton = function (func) {
-            this.playButton = this.gsm.game.add.button(556, 313, 'mmPlayButton', func);
-            //return this.playButton;
+        MainMenuGraphics.prototype.getPlayButton = function () {
+            return this.playButton;
         };
-        MainMenuGraphics.prototype.getLoadButton = function (func) {
-            this.loadButton = this.gsm.game.add.button(556, 398, 'mmLoadButton', func);
-            //return this.loadButton;
+        MainMenuGraphics.prototype.getLoadButton = function () {
+            return this.loadButton;
         };
-        MainMenuGraphics.prototype.getOptionsHelpButton = function (func) {
-            this.optionsHelpButton = this.gsm.game.add.button(436, 484, 'mmOptionsHelpButton', func);
-            //return this.optionsHelpButton;
+        MainMenuGraphics.prototype.getHelpButton = function () {
+            return this.helpButton;
+        };
+        MainMenuGraphics.prototype.getOptionsButton = function () {
+            return this.optionsButton;
         };
         return MainMenuGraphics;
     }(GUI.GameObject));

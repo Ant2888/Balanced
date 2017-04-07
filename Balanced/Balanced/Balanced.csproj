@@ -23,10 +23,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\res\app.css" />
-    <Content Include="assets\res\mmBackground.png" />
-    <Content Include="assets\res\mm_loadBtn.png" />
-    <Content Include="assets\res\mm_optionsHelpBtn.png" />
-    <Content Include="assets\res\mm_playerBtn.png" />
+    <Content Include="assets\res\main-menu\mm_background.png" />
+    <Content Include="assets\res\main-menu\mm_help_btns.png" />
+    <Content Include="assets\res\main-menu\mm_load_btns.png" />
+    <Content Include="assets\res\main-menu\mm_options_btns.png" />
+    <Content Include="assets\res\main-menu\mm_play_btns.png" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
     <Content Include="assets\res\phaser2.jpg" />

@@ -5,7 +5,8 @@
 
         private playButton: Phaser.Button
         private loadButton: Phaser.Button
-        private optionsHelpButton: Phaser.Button
+        private helpButton: Phaser.Button
+        private optionsButton: Phaser.Button
         private gsm: States.GameStateManager;
 
         constructor(group: Phaser.Group) {
@@ -19,23 +20,42 @@
             this.group.add(this.backgroundImage);
         }
 
+        // initializes the button when the gui is loaded
+        public setPlayButton(func: any): void {
+            this.playButton = this.gsm.game.add.button(550, 280, 'mmPlayButton', func, this, 1, 0, 2);
+        }
+
+        public setLoadButton(func: any): void {
+            this.loadButton = this.gsm.game.add.button(550, 360, 'mmLoadButton', func, this, 1, 0, 2);
+        }
+
+        public setHelpButton(func: any): void {
+            this.helpButton = this.gsm.game.add.button(550, 440, 'mmHelpButton', func, this, 1, 0, 2);
+        }
+
+        public setOptionsButton(func: any): void {
+            this.optionsButton = this.gsm.game.add.button(465, 520, 'mmOptionsButton', func, this, 1, 0, 2);
+        }
+
+        // getters
         public getBackgroundImage(): Phaser.Sprite {
             return this.backgroundImage;
         }
 
-        public getPlayButton(func: any): void {
-            this.playButton = this.gsm.game.add.button(556, 313, 'mmPlayButton', func);
-            //return this.playButton;
+        public getPlayButton(): Phaser.Button {
+            return this.playButton;
         }
 
-        public getLoadButton(func: any): void {
-            this.loadButton = this.gsm.game.add.button(556, 398, 'mmLoadButton', func);
-            //return this.loadButton;
+        public getLoadButton(): Phaser.Button {
+            return this.loadButton;
         }
 
-        public getOptionsHelpButton(func: any): void {
-            this.optionsHelpButton = this.gsm.game.add.button(436, 484, 'mmOptionsHelpButton', func);
-            //return this.optionsHelpButton;
+        public getHelpButton(): Phaser.Button {
+            return this.helpButton;
+        }
+
+        public getOptionsButton(): Phaser.Button {
+            return this.optionsButton;
         }
     }
 }

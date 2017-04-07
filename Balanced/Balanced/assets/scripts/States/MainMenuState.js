@@ -29,18 +29,10 @@ var States;
         };
         MainMenuState.prototype.startup = function () {
             console.log("Main Menu Started.");
-            // THIS WORKS
-            this.mainMenu.getPlayButton(function () {
-                console.log('play button was pressed');
-            });
-            this.mainMenu.getLoadButton(function () {
-                console.log('load button was pressed');
-            });
-            this.mainMenu.getOptionsHelpButton(function () {
-                console.log('options/help button was pressed');
-            });
-            // THIS DOES NOT WORK
-            //this.mainMenu.getPlayButton(this.playButtonPressed());
+            this.mainMenu.setPlayButton(this.playButtonPressed);
+            this.mainMenu.setLoadButton(this.loadButtonPressed);
+            this.mainMenu.setHelpButton(this.helpButtonPressed);
+            this.mainMenu.setOptionsButton(this.optionsButtonPressed);
             return true;
         };
         MainMenuState.prototype.end = function () {
@@ -56,8 +48,11 @@ var States;
         MainMenuState.prototype.loadButtonPressed = function () {
             console.log('load button was pressed');
         };
-        MainMenuState.prototype.optionsHelpButtonPressed = function () {
-            console.log('options/help button was pressed');
+        MainMenuState.prototype.helpButtonPressed = function () {
+            console.log('help button was pressed');
+        };
+        MainMenuState.prototype.optionsButtonPressed = function () {
+            console.log('options button was pressed');
         };
         return MainMenuState;
     }(States.State));

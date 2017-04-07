@@ -30,22 +30,10 @@
         public startup(): boolean {
             console.log("Main Menu Started.");
 
-            // THIS WORKS
-            
-            this.mainMenu.getPlayButton(function () {
-                console.log('play button was pressed');
-            });
-
-            this.mainMenu.getLoadButton(function () {
-                console.log('load button was pressed');
-            });
-
-            this.mainMenu.getOptionsHelpButton(function () {
-                console.log('options/help button was pressed');
-            });
-
-            // THIS DOES NOT WORK
-            //this.mainMenu.getPlayButton(this.playButtonPressed());
+            this.mainMenu.setPlayButton(this.playButtonPressed);
+            this.mainMenu.setLoadButton(this.loadButtonPressed);
+            this.mainMenu.setHelpButton(this.helpButtonPressed);
+            this.mainMenu.setOptionsButton(this.optionsButtonPressed);
 
             return true;
         }
@@ -67,8 +55,12 @@
             console.log('load button was pressed');
         }
 
-        private optionsHelpButtonPressed(): any {
-            console.log('options/help button was pressed');
+        private helpButtonPressed(): any {
+            console.log('help button was pressed');
+        }
+
+        private optionsButtonPressed(): any {
+            console.log('options button was pressed');
         }
     }
 }

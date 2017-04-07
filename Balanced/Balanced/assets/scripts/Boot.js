@@ -20,20 +20,24 @@ var BalancedGame = (function () {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         // MAIN MENU RESOURCES
-        rem.addResource(new UTIL.Resource('mmBackground', 'assets/res/mmBackground.png', UTIL.MM_BACKGROUND_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('mmBackground', 'assets/res/main-menu/mm_background.png', UTIL.MM_BACKGROUND_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         // play button
-        rem.addResource(new UTIL.Resource('mmPlayButton', 'assets/res/mm_playerBtn.png', UTIL.MM_PLAYBUTTON_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl);
+        rem.addResource(new UTIL.Resource('mmPlayButton', 'assets/res/main-menu/mm_play_btns.png', UTIL.MM_PLAYBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
         }, this);
         // load buton
-        rem.addResource(new UTIL.Resource('mmLoadButton', 'assets/res/mm_loadBtn.png', UTIL.MM_LOADBUTTON_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl);
+        rem.addResource(new UTIL.Resource('mmLoadButton', 'assets/res/main-menu/mm_load_btns.png', UTIL.MM_LOADBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
         }, this);
-        // options/help button
-        rem.addResource(new UTIL.Resource('mmOptionsHelpButton', 'assets/res/mm_optionsHelpBtn.png', UTIL.MM_OPTIONSHELPBUTTON_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl);
+        // help button
+        rem.addResource(new UTIL.Resource('mmHelpButton', 'assets/res/main-menu/mm_help_btns.png', UTIL.MM_HELPBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
+        }, this);
+        // options button
+        rem.addResource(new UTIL.Resource('mmOptionsButton', 'assets/res/main-menu/mm_options_btns.png', UTIL.MM_HELPBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 330, 80);
         }, this);
         // END MAIN MENU
     };

@@ -23,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\res\app.css" />
+    <Content Include="assets\res\help-menu\hm_ok_btns.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />
     <Content Include="assets\res\main-menu\mm_help_btns.png" />
     <Content Include="assets\res\main-menu\mm_load_btns.png" />

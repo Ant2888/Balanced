@@ -78,6 +78,7 @@ var States;
             if (this.state.end() == false) {
                 //TODO: ERROUT
             }
+            this.game.input.destroy();
         };
         /**
          * The update function that gets passed from the main. This will

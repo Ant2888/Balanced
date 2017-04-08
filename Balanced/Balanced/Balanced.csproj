@@ -37,7 +37,14 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="assets\scripts\balance\BalanceEvent.ts" />
+    <TypeScriptCompile Include="assets\scripts\balance\BalanceManager.ts" />
+    <TypeScriptCompile Include="assets\scripts\balance\EventDetails.ts" />
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\AbilityManager.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\EnergyManager.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\Player.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\HelpMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\MainMenuGraphics.ts" />
@@ -69,9 +76,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="assets\scripts\entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

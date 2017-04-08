@@ -1,6 +1,6 @@
 ﻿body, html {
     font-family: 'Segoe UI', sans-serif;
-    overflow-x : hidden;
+    overflow-x: hidden;
     overflow-y: hidden;
 }
 
@@ -9,5 +9,5 @@ span {
 }
 
 div {
-    height:100vh
+    height: 100vh;
 }

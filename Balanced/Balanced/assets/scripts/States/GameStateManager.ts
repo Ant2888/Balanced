@@ -25,7 +25,7 @@ module States {
 
         //helper to place the initial states and managers
         public initState(): void {
-            this.state = States.TEST_STATE2;
+            this.state = States.MAIN_MENU_STATE;
             this.guiM = new GUI.GUIManager(this);
 
             this.state.init();

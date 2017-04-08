@@ -28,6 +28,9 @@
     <Content Include="assets\res\main-menu\mm_load_btns.png" />
     <Content Include="assets\res\main-menu\mm_options_btns.png" />
     <Content Include="assets\res\main-menu\mm_play_btns.png" />
+    <Content Include="assets\res\options-menu\om_background.png" />
+    <Content Include="assets\res\options-menu\om_cancel_btns.png" />
+    <Content Include="assets\res\options-menu\om_ok_btns.png" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
     <Content Include="assets\res\phaser2.jpg" />
@@ -36,9 +39,13 @@
   <ItemGroup>
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\HelpMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\MainMenuGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\OptionsMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\TestGraphic.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\HelpMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\MainMenuState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\OptionsMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
     <TypeScriptCompile Include="assets\scripts\States\TestState2.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />

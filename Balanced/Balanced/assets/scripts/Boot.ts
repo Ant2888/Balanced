@@ -53,7 +53,31 @@ class BalancedGame {
             this.game.load.spritesheet(e.key, e.assetUrl, 330, 80);
         }, this);
         // END MAIN MENU
-        
+
+        // OPTIONS MENU RESOURCES
+        rem.addResource(new UTIL.Resource('omBackground', 'assets/res/options-menu/om_background.png', UTIL.OM_BACKGROUND_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+
+        rem.addResource(new UTIL.Resource('omOkButton', 'assets/res/options-menu/om_ok_btns.png', UTIL.OM_OKBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 80);
+        }, this);
+
+        rem.addResource(new UTIL.Resource('omCancelButton', 'assets/res/options-menu/om_cancel_btns.png', UTIL.OM_CANCELBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 300, 80);
+        }, this);
+        // END OPTIONS MENU
+
+        // HELP MENU RESOURCES
+        rem.addResource(new UTIL.Resource('hmBackground', 'assets/res/help-menu/hm_background.png', UTIL.HM_BACKGROUND_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+
+        rem.addResource(new UTIL.Resource('hmOkButton', 'assets/res/help-menu/hm_ok_btns.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 80);
+        }, this);
+        // END HELP MENU RESOURCES
+
     }
 
     create() {        
@@ -62,6 +86,8 @@ class BalancedGame {
         States.TEST_STATE = new States.TestState(this.gsm);
         States.TEST_STATE2 = new States.TestState2(this.gsm);
         States.MAIN_MENU_STATE = new States.MainMenuState(this.gsm);
+        States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
+        States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
         // END STATES
         this.gsm.initState();
     }

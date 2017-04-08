@@ -10,6 +10,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var GUI;
 (function (GUI) {
+    /**
+    *This is the main menu gui of the game
+    *
+    * @author Emerson
+    */
     var MainMenuGraphics = (function (_super) {
         __extends(MainMenuGraphics, _super);
         function MainMenuGraphics(group) {
@@ -23,15 +28,19 @@ var GUI;
         // initializes the button when the gui is loaded
         MainMenuGraphics.prototype.setPlayButton = function (func) {
             this.playButton = this.gsm.game.add.button(550, 280, 'mmPlayButton', func, this, 1, 0, 2);
+            this.group.add(this.playButton);
         };
         MainMenuGraphics.prototype.setLoadButton = function (func) {
             this.loadButton = this.gsm.game.add.button(550, 360, 'mmLoadButton', func, this, 1, 0, 2);
+            this.group.add(this.loadButton);
         };
         MainMenuGraphics.prototype.setHelpButton = function (func) {
             this.helpButton = this.gsm.game.add.button(550, 440, 'mmHelpButton', func, this, 1, 0, 2);
+            this.group.add(this.helpButton);
         };
         MainMenuGraphics.prototype.setOptionsButton = function (func) {
             this.optionsButton = this.gsm.game.add.button(465, 520, 'mmOptionsButton', func, this, 1, 0, 2);
+            this.group.add(this.optionsButton);
         };
         // getters
         MainMenuGraphics.prototype.getBackgroundImage = function () {

@@ -38,15 +38,14 @@
             return true;
         }
 
-        public end(): boolean {
-            this.press.reset();
+        public end(): boolean {            
             return true;
         }
 
         public getType(): any {
             return this;
         }
-              
+
         private playButtonPressed(): any {
             console.log('play button was pressed');
         }
@@ -61,6 +60,7 @@
 
         private optionsButtonPressed(): any {
             console.log('options button was pressed');
+            this.gsm.setState(States.OPTIONS_MENU_STATE);
         }
     }
 }

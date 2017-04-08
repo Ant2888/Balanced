@@ -36,7 +36,6 @@ var States;
             return true;
         };
         MainMenuState.prototype.end = function () {
-            this.press.reset();
             return true;
         };
         MainMenuState.prototype.getType = function () {
@@ -53,6 +52,7 @@ var States;
         };
         MainMenuState.prototype.optionsButtonPressed = function () {
             console.log('options button was pressed');
+            this.gsm.setState(States.OPTIONS_MENU_STATE);
         };
         return MainMenuState;
     }(States.State));

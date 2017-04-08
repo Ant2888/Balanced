@@ -1,7 +1,13 @@
-﻿body {
+﻿body, html {
     font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 span {
     font-style: italic;
+}
+
+div {
+    height: 100vh;
 }

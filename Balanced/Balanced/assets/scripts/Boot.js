@@ -7,7 +7,7 @@
  */
 var BalancedGame = (function () {
     function BalancedGame() {
-        this.game = new Phaser.Game(960, 540, Phaser.AUTO, 'content', { preload: this.preload, create: this.create, update: this.update });
+        this.game = new Phaser.Game(1280, 720, Phaser.AUTO, 'content', { preload: this.preload, create: this.create, update: this.update });
     }
     BalancedGame.prototype.preload = function () {
         //center game

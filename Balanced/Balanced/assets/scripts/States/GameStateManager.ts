@@ -94,6 +94,8 @@ module States {
             if (this.state.end() == false) {
                 //TODO: ERROUT
             }
+
+            this.game.input.destroy();
         }
 
         /**

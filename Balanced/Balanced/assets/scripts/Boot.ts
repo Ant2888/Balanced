@@ -9,7 +9,7 @@
 class BalancedGame {
 
     constructor() {
-        this.game = new Phaser.Game(960, 540, Phaser.AUTO, 'content', { preload: this.preload, create: this.create, update: this.update });
+        this.game = new Phaser.Game(1280, 720, Phaser.AUTO, 'content', { preload: this.preload, create: this.create, update: this.update });
     }
 
     private game: Phaser.Game;

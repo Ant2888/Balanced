@@ -6,6 +6,7 @@
     <title>Benchmark 2: Balanced Prototype</title>
     <link rel="stylesheet" href="assets/res/app.css" type="text/css" />
     <!-- For ordering the scripts it goes from leaf all the way up -->
+    <!-- Start with the MOST depedent thing then down.-->
     <script src="assets/scripts/phaser.js"></script>    
     <!-- First-Build UTILS-->
     <script src="assets/scripts/util/Resource.js"></script>
@@ -13,6 +14,16 @@
     <!-- Gui Componenets-->
     <script src="assets/scripts/gui/GameObject.js"></script>
     <script src="assets/scripts/gui/TestGraphic.js"></script>
+    <!-- Balancing-->
+    <script src="assets/scripts/balance/EventDetails.js"></script>
+    <script src="assets/scripts/balance/BalanceEvent.js"></script>
+    <script src="assets/scripts/balance/BalanceManager.js"></script>
+    <!-- Entities -->
+    <script src="assets/scripts/entities/Entity.js"></script>
+    <script src="assets/scripts/entities/Player.js"></script>
+    <!-- Combat -->
+    <script src="assets/scripts/combat/EnergyManager.js"></script>
+    <script src="assets/scripts/combat/AbilityManager.js"></script>
     <!-- States -->
     <script src="assets/scripts/States/State.js"></script>
     <script src="assets/scripts/States/TestState.js"></script>
@@ -26,8 +37,6 @@
     <script src="assets/scripts/Boot.js"></script>
 </head>
 <body>
-    <h1>Balanced Prototype</h1>
-
     <div id="content"></div>
 </body>
 </html>

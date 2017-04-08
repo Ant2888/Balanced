@@ -27,10 +27,16 @@
     <Content Include="assets\scripts\phaser.js" />
     <Content Include="assets\res\phaser2.jpg" />
     <Content Include="web.config" />
-    <Content Include="bg.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="assets\scripts\balance\BalanceEvent.ts" />
+    <TypeScriptCompile Include="assets\scripts\balance\BalanceManager.ts" />
+    <TypeScriptCompile Include="assets\scripts\balance\EventDetails.ts" />
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\AbilityManager.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\EnergyManager.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\Player.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\TestGraphic.ts" />
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
@@ -56,9 +62,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="assets\scripts\entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

@@ -20,7 +20,10 @@ declare class States {
     static OPTIONS_MENU_STATE_ID: number;
 
     static HELP_MENU_STATE: States.State;
-    static HELP_MENU_STATE_ID: number;
+    static HELP_MENU_STATE_ID: number
+
+    static TEST_BUILD_STATE: States.State;
+    static TEST_BUILD_STATE_ID: number;
 }
 
 //DEFINE THE ID'S HERE
@@ -28,6 +31,7 @@ declare class States {
 //ANTHONY START AT 0
 States.TEST_STATE_ID = 0;
 States.TEST_STATE2_ID = 1;
+States.TEST_BUILD_STATE_ID = 2;
 
 //FRANCOIS START AT 100
 

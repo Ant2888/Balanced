@@ -27,12 +27,44 @@ declare class UTIL {
     static HM_BACKGROUND_ID: number; // Help menu background
     static HM_OKBUTTON_ID: number; // ok button spritesheet    
     // End Help menu id's
+
+    //--------------- HUD
+    static AB_AB1_SS_ID: number;
+    static AB_AB2_SS_ID: number;
+    static AB_AB3_SS_ID: number;
+    static AB_AB4_SS_ID: number;
+    static AB_BG_ID: number;
+
+    static AB_BAG_SS_ID: number;
+    static AB_STATS_SS_ID: number;
+    static AB_TOWN_SS_ID: number;
+    static UL_UI_ID: number;
+
+    static AB_P1_SS_ID: number;
+    static AB_P2_SS_ID: number;
+    //--------------- HUD
 }
 
 //GIVE THE GLOBAL VAR THE VALUE
 
 //ANTHONY START AT 0
 UTIL.TESTLOGO_ID = 0;
+
+UTIL.AB_AB1_SS_ID = 1;
+UTIL.AB_AB2_SS_ID = 2;
+UTIL.AB_AB3_SS_ID = 3;
+UTIL.AB_AB4_SS_ID = 4;
+UTIL.AB_BG_ID = 5;
+
+UTIL.AB_BAG_SS_ID = 6;
+UTIL.AB_STATS_SS_ID = 7;
+UTIL.AB_TOWN_SS_ID = 8;
+UTIL.UL_UI_ID = 9;
+
+UTIL.AB_P1_SS_ID = 10;
+UTIL.AB_P2_SS_ID = 11;
+
+
 
 //FRANCOIS START AT 100
 

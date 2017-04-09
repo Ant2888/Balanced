@@ -20,7 +20,7 @@ var States;
         }
         //helper to place the initial states and managers
         GameStateManager.prototype.initState = function () {
-            this.state = States.MAIN_MENU_STATE;
+            this.state = States.TEST_BUILD_STATE;
             this.guiM = new GUI.GUIManager(this);
             this.state.init();
             if (this.state.startup() == false) {

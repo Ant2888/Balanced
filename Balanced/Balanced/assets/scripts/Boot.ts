@@ -24,6 +24,44 @@ class BalancedGame {
         var rem = new UTIL.ResourceManager();
 
         //PUT ALL RESOURCES YOU NEED LOADED DOWN HERE
+
+        // --------------------------------- HUD
+        rem.addResource(new UTIL.Resource('ab_ab1_ss', 'assets/res/hud/ab_ab1_ss.png', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 75, 75);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_ab2_ss', 'assets/res/hud/ab_ab2_ss.png', UTIL.AB_AB2_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 75, 75);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_ab3_ss', 'assets/res/hud/ab_ab3_ss.png', UTIL.AB_AB3_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 75, 75);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_ab4_ss', 'assets/res/hud/ab_ab4_ss.png', UTIL.AB_AB4_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 75, 75);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_bag_ss', 'assets/res/hud/ab_bag_ss.png', UTIL.AB_BAG_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 35, 38);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_bg', 'assets/res/hud/ab_bg.png', UTIL.AB_BG_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_p1_ss', 'assets/res/hud/ab_p1_ss.png', UTIL.AB_P1_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 42.5, 43);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_p2_ss', 'assets/res/hud/ab_p2_ss.png', UTIL.AB_P2_SS_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_stats_ss', 'assets/res/hud/ab_stats_ss.png', UTIL.AB_STATS_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 35, 36);
+        }, this);
+        rem.addResource(new UTIL.Resource('ab_town_ss', 'assets/res/hud/ab_town_ss.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 45, 40);
+        }, this);
+        rem.addResource(new UTIL.Resource('ul_ui', 'assets/res/hud/UL_UI.png', UTIL.UL_UI_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        // --------------------------------- HUD
+
+
         rem.addResource(new UTIL.Resource('logo2', 'assets/res/phaser2.jpg', UTIL.TESTLOGO_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
@@ -88,6 +126,7 @@ class BalancedGame {
         States.MAIN_MENU_STATE = new States.MainMenuState(this.gsm);
         States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
         States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
+        States.TEST_BUILD_STATE = new States.TestBuildingState(this.gsm);
         // END STATES
         this.gsm.initState();
     }

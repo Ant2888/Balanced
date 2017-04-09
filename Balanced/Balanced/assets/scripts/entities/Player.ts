@@ -5,6 +5,8 @@
             abilities: COMBAT.AbilityManager, energy: COMBAT.EnergyManager,
             key?: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture, frame?: string | number) {
             super(gsm, x, y, abilities, energy, key, frame);
+
+            this.maxHealth = 100;
         }
     }
 }

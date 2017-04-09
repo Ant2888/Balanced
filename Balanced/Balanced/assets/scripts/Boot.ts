@@ -42,7 +42,7 @@ class BalancedGame {
             this.game.load.spritesheet(e.key, e.assetUrl, 35, 38);
         }, this);
         rem.addResource(new UTIL.Resource('ab_bg', 'assets/res/hud/ab_bg.png', UTIL.AB_BG_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl);
+            this.game.load.spritesheet(e.key, e.assetUrl);
         }, this);
         rem.addResource(new UTIL.Resource('ab_p1_ss', 'assets/res/hud/ab_p1_ss.png', UTIL.AB_P1_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 42.5, 43);
@@ -129,7 +129,8 @@ class BalancedGame {
             this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
         }, this);
         // END LEVEL 1 RESOURCES
-    }
+
+        }
 
     create() {        
         this.gsm = new States.GameStateManager(this.game);

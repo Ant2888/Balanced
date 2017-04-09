@@ -6,7 +6,7 @@
     */
     export class MainMenuGraphics extends GameObject {
 
-        private backgroundImage: Phaser.Sprite;
+        private backgroundImage: Phaser.Image;
 
         private playButton: Phaser.Button;
         private loadButton: Phaser.Button;
@@ -21,7 +21,7 @@
         public initialize(gsm: States.GameStateManager): void {
             this.gsm = gsm;
 
-            this.backgroundImage = gsm.game.add.sprite(0, 0, 'mmBackground');
+            this.backgroundImage = gsm.game.add.image(0, 0, 'mmBackground');
             this.group.add(this.backgroundImage);
         }
 
@@ -47,7 +47,7 @@
         }
 
         // getters
-        public getBackgroundImage(): Phaser.Sprite {
+        public getBackgroundImage(): Phaser.Image {
             return this.backgroundImage;
         }
 

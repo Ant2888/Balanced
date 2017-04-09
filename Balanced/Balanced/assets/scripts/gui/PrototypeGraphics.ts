@@ -15,9 +15,7 @@
         }
 
         public initialize(gsm: States.GameStateManager): void {
-            this.gsm = gsm;
-            
-            
+            this.gsm = gsm;            
         }   
     }
 }

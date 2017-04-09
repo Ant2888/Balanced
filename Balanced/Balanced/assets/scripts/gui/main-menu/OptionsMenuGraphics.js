@@ -23,14 +23,24 @@ var GUI;
         OptionsMenuGraphics.prototype.initialize = function (gsm) {
             this.gsm = gsm;
             this.backgroundImage = gsm.game.add.sprite(0, 0, 'omBackground');
+            this.setOkButton(this.okButtonPressed);
+            this.setCancelButton(this.cancelButtonPressed);
             this.group.add(this.backgroundImage);
         };
-        // initializes the button when the gui is loaded
+        // initializes the buttons
         OptionsMenuGraphics.prototype.setOkButton = function (func) {
             this.okButton = this.gsm.game.add.button(360, 606, 'omOkButton', func, this, 1, 0, 2);
         };
         OptionsMenuGraphics.prototype.setCancelButton = function (func) {
             this.cancelButton = this.gsm.game.add.button(600, 606, 'omCancelButton', func, this, 1, 0, 2);
+        };
+        OptionsMenuGraphics.prototype.okButtonPressed = function () {
+            console.log('ok button was pressed');
+            this.gsm.setState(States.MAIN_MENU_STATE);
+        };
+        OptionsMenuGraphics.prototype.cancelButtonPressed = function () {
+            console.log('cancel button was pressed');
+            this.gsm.setState(States.MAIN_MENU_STATE);
         };
         // getters
         OptionsMenuGraphics.prototype.getBackgroundImage = function () {

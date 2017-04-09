@@ -29,10 +29,6 @@ var States;
         };
         MainMenuState.prototype.startup = function () {
             console.log("Main Menu Started.");
-            this.mainMenu.setPlayButton(this.playButtonPressed);
-            this.mainMenu.setLoadButton(this.loadButtonPressed);
-            this.mainMenu.setHelpButton(this.helpButtonPressed);
-            this.mainMenu.setOptionsButton(this.optionsButtonPressed);
             return true;
         };
         MainMenuState.prototype.end = function () {
@@ -40,21 +36,6 @@ var States;
         };
         MainMenuState.prototype.getType = function () {
             return this;
-        };
-        MainMenuState.prototype.playButtonPressed = function () {
-            console.log('play button was pressed');
-            this.gsm.setState(States.PROTOTYPE_STATE);
-        };
-        MainMenuState.prototype.loadButtonPressed = function () {
-            console.log('load button was pressed');
-        };
-        MainMenuState.prototype.helpButtonPressed = function () {
-            console.log('help button was pressed');
-            this.gsm.setState(States.HELP_MENU_STATE);
-        };
-        MainMenuState.prototype.optionsButtonPressed = function () {
-            console.log('options button was pressed');
-            this.gsm.setState(States.OPTIONS_MENU_STATE);
         };
         return MainMenuState;
     }(States.State));

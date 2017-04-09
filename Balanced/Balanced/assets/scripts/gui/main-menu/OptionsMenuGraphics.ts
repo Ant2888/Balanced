@@ -21,10 +21,13 @@
             this.gsm = gsm;
             this.backgroundImage = gsm.game.add.sprite(0, 0, 'omBackground');
 
+            this.setOkButton(this.okButtonPressed);
+            this.setCancelButton(this.cancelButtonPressed);
+
             this.group.add(this.backgroundImage);
         }
 
-        // initializes the button when the gui is loaded
+        // initializes the buttons
         public setOkButton(func: any): void {
             this.okButton = this.gsm.game.add.button(360, 606, 'omOkButton', func, this, 1, 0, 2);
         }
@@ -32,6 +35,16 @@
         public setCancelButton(func: any): void {
             this.cancelButton = this.gsm.game.add.button(600, 606, 'omCancelButton', func, this, 1, 0, 2);
         }
+
+        private okButtonPressed(): any {
+            console.log('ok button was pressed');
+            this.gsm.setState(States.MAIN_MENU_STATE);
+        }
+
+        private cancelButtonPressed(): any {
+            console.log('cancel button was pressed');
+            this.gsm.setState(States.MAIN_MENU_STATE);
+        }  
         
         // getters
         public getBackgroundImage(): Phaser.Sprite {

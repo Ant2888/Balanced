@@ -23,12 +23,7 @@
         }
 
         public startup(): boolean {
-            console.log("Main Menu Started.");
-
-            this.mainMenu.setPlayButton(this.playButtonPressed);
-            this.mainMenu.setLoadButton(this.loadButtonPressed);
-            this.mainMenu.setHelpButton(this.helpButtonPressed);
-            this.mainMenu.setOptionsButton(this.optionsButtonPressed);
+            console.log("Main Menu Started.");                       
 
             return true;
         }
@@ -39,25 +34,6 @@
 
         public getType(): any {
             return this;
-        }
-
-        private playButtonPressed(): any {
-            console.log('play button was pressed');
-            this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private loadButtonPressed(): any {
-            console.log('load button was pressed');
-        }
-
-        private helpButtonPressed(): any {
-            console.log('help button was pressed');
-            this.gsm.setState(States.HELP_MENU_STATE);
-        }
-
-        private optionsButtonPressed(): any {
-            console.log('options button was pressed');
-            this.gsm.setState(States.OPTIONS_MENU_STATE);
         }
     }
 }

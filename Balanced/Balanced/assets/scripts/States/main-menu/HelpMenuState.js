@@ -29,7 +29,6 @@ var States;
         };
         HelpMenuState.prototype.startup = function () {
             console.log("Help Menu Started.");
-            this.helpMenu.setOkButton(this.okButtonPressed);
             return true;
         };
         HelpMenuState.prototype.end = function () {
@@ -37,10 +36,6 @@ var States;
         };
         HelpMenuState.prototype.getType = function () {
             return this;
-        };
-        HelpMenuState.prototype.okButtonPressed = function () {
-            console.log('ok button was pressed');
-            this.gsm.setState(States.MAIN_MENU_STATE);
         };
         return HelpMenuState;
     }(States.State));

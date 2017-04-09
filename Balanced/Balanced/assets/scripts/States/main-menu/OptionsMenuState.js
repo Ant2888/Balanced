@@ -29,8 +29,6 @@ var States;
         };
         OptionsMenuState.prototype.startup = function () {
             console.log("Options Menu Started.");
-            this.optionsMenu.setOkButton(this.okButtonPressed);
-            this.optionsMenu.setCancelButton(this.cancelButtonPressed);
             return true;
         };
         OptionsMenuState.prototype.end = function () {
@@ -38,14 +36,6 @@ var States;
         };
         OptionsMenuState.prototype.getType = function () {
             return this;
-        };
-        OptionsMenuState.prototype.okButtonPressed = function () {
-            console.log('ok button was pressed');
-            this.gsm.setState(States.MAIN_MENU_STATE);
-        };
-        OptionsMenuState.prototype.cancelButtonPressed = function () {
-            console.log('cancel button was pressed');
-            this.gsm.setState(States.MAIN_MENU_STATE);
         };
         return OptionsMenuState;
     }(States.State));

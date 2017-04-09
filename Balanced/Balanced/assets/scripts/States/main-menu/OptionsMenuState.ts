@@ -24,9 +24,7 @@
 
         public startup(): boolean {
             console.log("Options Menu Started.");
-            this.optionsMenu.setOkButton(this.okButtonPressed);
-            this.optionsMenu.setCancelButton(this.cancelButtonPressed);
-           
+                       
             return true;
         }
 
@@ -36,16 +34,6 @@
 
         public getType(): any {
             return this;
-        }
-
-        private okButtonPressed(): any {
-            console.log('ok button was pressed');
-            this.gsm.setState(States.MAIN_MENU_STATE);
-        }
-
-        private cancelButtonPressed(): any {
-            console.log('cancel button was pressed');
-            this.gsm.setState(States.MAIN_MENU_STATE);
-        }               
+        }                     
     }
 }

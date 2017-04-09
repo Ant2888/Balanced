@@ -24,8 +24,7 @@
 
         public startup(): boolean {
             console.log("Help Menu Started.");
-            this.helpMenu.setOkButton(this.okButtonPressed);
-            
+                        
             return true;
         }
 
@@ -35,11 +34,6 @@
 
         public getType(): any {
             return this;
-        }
-
-        private okButtonPressed(): any {
-            console.log('ok button was pressed');
-            this.gsm.setState(States.MAIN_MENU_STATE);
-        }               
+        }             
     }
 }

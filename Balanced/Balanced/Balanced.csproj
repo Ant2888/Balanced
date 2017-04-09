@@ -23,6 +23,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\res\app.css" />
+    <Content Include="assets\res\help-menu\hm_background.png" />
+    <Content Include="assets\res\help-menu\hm_ok_btns.png" />
+    <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
+    <Content Include="assets\res\level1-dungeon\grunge_tile.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />
     <Content Include="assets\res\main-menu\mm_help_btns.png" />
     <Content Include="assets\res\main-menu\mm_load_btns.png" />
@@ -46,13 +50,15 @@
     <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Player.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />
-    <TypeScriptCompile Include="assets\scripts\gui\HelpMenuGraphics.ts" />
-    <TypeScriptCompile Include="assets\scripts\gui\MainMenuGraphics.ts" />
-    <TypeScriptCompile Include="assets\scripts\gui\OptionsMenuGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\main-menu\HelpMenuGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\main-menu\MainMenuGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\main-menu\OptionsMenuGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\PrototypeGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\TestGraphic.ts" />
-    <TypeScriptCompile Include="assets\scripts\States\HelpMenuState.ts" />
-    <TypeScriptCompile Include="assets\scripts\States\MainMenuState.ts" />
-    <TypeScriptCompile Include="assets\scripts\States\OptionsMenuState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\main-menu\HelpMenuState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\main-menu\MainMenuState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\main-menu\OptionsMenuState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\PrototypeState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
     <TypeScriptCompile Include="assets\scripts\States\TestState2.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />
@@ -69,6 +75,8 @@
   <ItemGroup>
     <Content Include="tslint.json" />
     <Content Include="typings.json" />
+    <Content Include="assets\res\level1-dungeon\Balanced_level1.json" />
+    <Content Include="assets\res\level1-dungeon\Balanced_level1.tmx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

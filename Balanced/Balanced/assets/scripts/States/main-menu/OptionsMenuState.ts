@@ -5,8 +5,6 @@
     * @author Emerson
     */
     export class OptionsMenuState extends State {
-
-        // the background of the main menu, could be just a placeholder for now
         private optionsMenu: GUI.OptionsMenuGraphics;
                 
         constructor(gsm: States.GameStateManager) {
@@ -25,12 +23,10 @@
         }
 
         public startup(): boolean {
-            console.log("Main Menu Started.");
-
+            console.log("Options Menu Started.");
             this.optionsMenu.setOkButton(this.okButtonPressed);
             this.optionsMenu.setCancelButton(this.cancelButtonPressed);
            
-
             return true;
         }
 
@@ -50,7 +46,6 @@
         private cancelButtonPressed(): any {
             console.log('cancel button was pressed');
             this.gsm.setState(States.MAIN_MENU_STATE);
-        }
-               
+        }               
     }
 }

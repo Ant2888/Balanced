@@ -6,10 +6,10 @@
     */
     export class HelpMenuGraphics extends GameObject {
 
-        private backgroundImage: Phaser.Sprite
+        private backgroundImage: Phaser.Sprite;
 
-        private okButton: Phaser.Button
-       
+        private okButton: Phaser.Button;
+
         private gsm: States.GameStateManager;
 
         constructor(group: Phaser.Group) {
@@ -25,9 +25,8 @@
 
         // initializes the button when the gui is loaded
         public setOkButton(func: any): void {
-            this.okButton = this.gsm.game.add.button(360, 606, 'hmOkButton', func, this, 1, 0, 2);
+            this.okButton = this.gsm.game.add.button(570, 550, 'hmOkButton', func, this, 1, 0, 2);
         }
-
         
         // getters
         public getBackgroundImage(): Phaser.Sprite {
@@ -37,7 +36,5 @@
         public getOkButton(): Phaser.Button {
             return this.okButton;
         }
-
-        
     }
 }

@@ -43,6 +43,7 @@ var States;
         };
         MainMenuState.prototype.playButtonPressed = function () {
             console.log('play button was pressed');
+            this.gsm.setState(States.PROTOTYPE_STATE);
         };
         MainMenuState.prototype.loadButtonPressed = function () {
             console.log('load button was pressed');

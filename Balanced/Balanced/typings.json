@@ -1,6 +1,6 @@
 {
     "name": "phaser",
     "main": "phaser.comments.d.ts",
-    "files": ["pixi.comments.d.ts", "p2.d.ts"],
+    "files": ["pixi.comments.d.ts", "p2.d.ts", "floating_text.d.ts"],
     "global": true
 }

@@ -26,6 +26,16 @@ var GUI;
             this.ab_bg.anchor.setTo(.5, .5);
             this.ab_bg.fixedToCamera = true;
             this.group.add(this.ab_bg);
+            // creating all the buttons and setting the callback
+            this.setAbility1(this.ability1Pressed);
+            this.setAbility2(this.ability2Pressed);
+            this.setAbility3(this.ability3Pressed);
+            this.setAbility4(this.ability4Pressed);
+            this.setPotion1(this.potion1Pressed);
+            this.setPotion2(this.potion2Pressed);
+            this.setStats(this.statsPressed);
+            this.setBag(this.bagPressed);
+            this.setTown(this.townPressed);
         };
         ActionBarGraphics.prototype.setStats = function (func) {
             this.ab_stats_ss = this.gsm.game.add.button(825, 605, 'ab_stats_ss', func, this, 0, 0, 1);
@@ -80,6 +90,42 @@ var GUI;
             this.ab_ab4_ss.anchor.setTo(.5, .5);
             this.ab_ab4_ss.fixedToCamera = true;
             this.group.add(this.ab_ab4_ss);
+        };
+        ActionBarGraphics.prototype.statsPressed = function () {
+            console.log('stats button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        ActionBarGraphics.prototype.bagPressed = function () {
+            console.log('bag button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        ActionBarGraphics.prototype.townPressed = function () {
+            console.log('town button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        ActionBarGraphics.prototype.potion1Pressed = function () {
+            console.log('potion1 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        ActionBarGraphics.prototype.potion2Pressed = function () {
+            console.log('potion2 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        ActionBarGraphics.prototype.ability1Pressed = function () {
+            console.log('ability1 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        ActionBarGraphics.prototype.ability2Pressed = function () {
+            console.log('ability2 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        ActionBarGraphics.prototype.ability3Pressed = function () {
+            console.log('ability3 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        ActionBarGraphics.prototype.ability4Pressed = function () {
+            console.log('ability4 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
         };
         return ActionBarGraphics;
     }(GUI.GameObject));

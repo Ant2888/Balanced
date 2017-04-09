@@ -76,66 +76,11 @@
             this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group);
 
             this.gsm.getGUIM().addGroup(this.prototypeLevel);
-            this.gsm.getGUIM().addGroup(this.prototypeUnitframe);
-
-            // creating all the buttons and setting the callback
-            this.prototypeLevel.setAbility1(this.ability1Pressed);
-            this.prototypeLevel.setAbility2(this.ability2Pressed);
-            this.prototypeLevel.setAbility3(this.ability3Pressed);
-            this.prototypeLevel.setAbility4(this.ability4Pressed);
-            this.prototypeLevel.setPotion1(this.potion1Pressed);
-            this.prototypeLevel.setPotion2(this.potion2Pressed);
-            this.prototypeLevel.setStats(this.statsPressed);
-            this.prototypeLevel.setBag(this.bagPressed);
-            this.prototypeLevel.setTown(this.townPressed);
+            this.gsm.getGUIM().addGroup(this.prototypeUnitframe);                      
 
             return true;
         }
-
-        private statsPressed(): any {
-            console.log('stats button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private bagPressed(): any {
-            console.log('bag button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private townPressed(): any {
-            console.log('town button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private potion1Pressed(): any {
-            console.log('potion1 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private potion2Pressed(): any {
-            console.log('potion2 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private ability1Pressed(): any {
-            console.log('ability1 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private ability2Pressed(): any {
-            console.log('ability2 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private ability3Pressed(): any {
-            console.log('ability3 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private ability4Pressed(): any {
-            console.log('ability4 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
+               
 
         public findObjectsByType(type, map, layer) {
             var result = new Array();

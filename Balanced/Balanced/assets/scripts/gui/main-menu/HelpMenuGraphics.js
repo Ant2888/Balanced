@@ -24,10 +24,15 @@ var GUI;
             this.gsm = gsm;
             this.backgroundImage = gsm.game.add.sprite(0, 0, 'hmBackground');
             this.group.add(this.backgroundImage);
+            this.setOkButton(this.okButtonPressed);
         };
-        // initializes the button when the gui is loaded
+        // initializes the buttons
         HelpMenuGraphics.prototype.setOkButton = function (func) {
             this.okButton = this.gsm.game.add.button(570, 550, 'hmOkButton', func, this, 1, 0, 2);
+        };
+        HelpMenuGraphics.prototype.okButtonPressed = function () {
+            console.log('ok button was pressed');
+            this.gsm.setState(States.MAIN_MENU_STATE);
         };
         // getters
         HelpMenuGraphics.prototype.getBackgroundImage = function () {

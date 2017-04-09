@@ -3,7 +3,7 @@
  * This class will provide a water fall of options to the
  * already defined module to include "global" static vars.
  *
- * @author Anthony
+ * @author Anthony, Emerson
  */
 declare class States {
     //MAKE THE GLOBAL VARS HERE
@@ -24,6 +24,7 @@ declare class States {
 
     static PROTOTYPE_STATE: States.State;
     static PROTOTYPE_STATE_ID: number;
+    
 }
 
 //DEFINE THE ID'S HERE

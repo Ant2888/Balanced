@@ -25,28 +25,25 @@ var States;
             this.player.body.velocity.x = 0;
             if (this.keyboard.left.isDown) {
                 //Move to the left
-                this.player.body.velocity.x = -150;
+                this.player.body.velocity.x = -250;
             }
             else if (this.keyboard.right.isDown) {
                 //Move to the right
-                this.player.body.velocity.x = 150;
+                this.player.body.velocity.x = 250;
             }
             else {
                 //Stand still
             }
-            //Allow the player to jump if they are touching the ground.
             if (this.keyboard.up.isDown && this.isOnGround) {
                 this.player.body.velocity.y = -350;
             }
         };
         PrototypeState.prototype.init = function () {
-            var group = this.gsm.game.add.group();
-            this.prototypeLevel = new GUI.PrototypeGraphics(group);
-            this.gsm.getGUIM().addGroup(this.prototypeLevel);
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
         };
         PrototypeState.prototype.startup = function () {
             console.log("prototype Level Started.");
+            // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
             this.map = this.gsm.game.add.tilemap('level1');
             this.map.addTilesetImage('dun', 'gameTiles');
@@ -65,7 +62,59 @@ var States;
             this.player.body.collideWorldBounds = true;
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
+            // end player
+            var group = this.gsm.game.add.group();
+            this.prototypeLevel = new GUI.ActionBarGraphics(group);
+            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group);
+            this.gsm.getGUIM().addGroup(this.prototypeLevel);
+            this.gsm.getGUIM().addGroup(this.prototypeUnitframe);
+            // creating all the buttons and setting the callback
+            this.prototypeLevel.setAbility1(this.ability1Pressed);
+            this.prototypeLevel.setAbility2(this.ability2Pressed);
+            this.prototypeLevel.setAbility3(this.ability3Pressed);
+            this.prototypeLevel.setAbility4(this.ability4Pressed);
+            this.prototypeLevel.setPotion1(this.potion1Pressed);
+            this.prototypeLevel.setPotion2(this.potion2Pressed);
+            this.prototypeLevel.setStats(this.statsPressed);
+            this.prototypeLevel.setBag(this.bagPressed);
+            this.prototypeLevel.setTown(this.townPressed);
             return true;
+        };
+        PrototypeState.prototype.statsPressed = function () {
+            console.log('stats button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        PrototypeState.prototype.bagPressed = function () {
+            console.log('bag button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        PrototypeState.prototype.townPressed = function () {
+            console.log('town button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        PrototypeState.prototype.potion1Pressed = function () {
+            console.log('potion1 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        PrototypeState.prototype.potion2Pressed = function () {
+            console.log('potion2 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        PrototypeState.prototype.ability1Pressed = function () {
+            console.log('ability1 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        PrototypeState.prototype.ability2Pressed = function () {
+            console.log('ability2 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        PrototypeState.prototype.ability3Pressed = function () {
+            console.log('ability3 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
+        };
+        PrototypeState.prototype.ability4Pressed = function () {
+            console.log('ability4 button was pressed');
+            //this.gsm.setState(States.PROTOTYPE_STATE);
         };
         PrototypeState.prototype.findObjectsByType = function (type, map, layer) {
             var result = new Array();

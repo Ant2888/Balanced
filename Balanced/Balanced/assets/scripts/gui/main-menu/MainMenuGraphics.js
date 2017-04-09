@@ -22,7 +22,7 @@ var GUI;
         }
         MainMenuGraphics.prototype.initialize = function (gsm) {
             this.gsm = gsm;
-            this.backgroundImage = gsm.game.add.sprite(0, 0, 'mmBackground');
+            this.backgroundImage = gsm.game.add.image(0, 0, 'mmBackground');
             this.group.add(this.backgroundImage);
         };
         // initializes the button when the gui is loaded

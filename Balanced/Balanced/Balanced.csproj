@@ -64,7 +64,6 @@
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\HelpMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\MainMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\OptionsMenuGraphics.ts" />
-    <TypeScriptCompile Include="assets\scripts\gui\PrototypeGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\TestGraphic.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\HealthAndEnergyGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\HelpMenuState.ts" />

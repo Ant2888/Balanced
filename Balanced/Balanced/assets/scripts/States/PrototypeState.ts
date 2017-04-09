@@ -72,6 +72,7 @@
             var result = this.findObjectsByType('playerStart', this.map, 'Object Layer');
             this.player = this.gsm.game.add.sprite(result[0].x, result[0].y, 'tempPlayer');
             this.player.frame = 49;
+            this.player.anchor.setTo(0.5, 0.5);
 
             this.gsm.game.physics.arcade.enable(this.player);
             this.player.body.gravity.y = 500;

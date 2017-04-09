@@ -46,6 +46,7 @@
     <Content Include="assets\res\options-menu\om_background.png" />
     <Content Include="assets\res\options-menu\om_cancel_btns.png" />
     <Content Include="assets\res\options-menu\om_ok_btns.png" />
+    <Content Include="assets\scripts\floatingText.js" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
     <Content Include="assets\res\phaser2.jpg" />
@@ -80,6 +81,7 @@
     <TypeScriptCompile Include="assets\scripts\States\State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\test-states\TestState.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GUIManager.ts" />
+    <TypeScriptCompile Include="floating_text.d.ts" />
     <TypeScriptCompile Include="p2.d.ts" />
     <TypeScriptCompile Include="phaser.d.ts" />
     <TypeScriptCompile Include="pixi.d.ts" />

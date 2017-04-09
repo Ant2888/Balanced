@@ -6,10 +6,10 @@
     */
     export class OptionsMenuGraphics extends GameObject {
 
-        private backgroundImage: Phaser.Sprite
+        private backgroundImage: Phaser.Sprite;
 
-        private okButton: Phaser.Button
-        private cancelButton: Phaser.Button
+        private okButton: Phaser.Button;
+        private cancelButton: Phaser.Button;
 
         private gsm: States.GameStateManager;
 
@@ -45,6 +45,5 @@
         public getCancelButton(): Phaser.Button {
             return this.cancelButton;
         }
-
     }
 }

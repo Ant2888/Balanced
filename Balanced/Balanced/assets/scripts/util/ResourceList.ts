@@ -27,6 +27,11 @@ declare class UTIL {
     static HM_BACKGROUND_ID: number; // Help menu background
     static HM_OKBUTTON_ID: number; // ok button spritesheet    
     // End Help menu id's
+
+    // Prototype id's
+    static PROTOTYPE_TILEMAP_ID: number; 
+    static PROTOTYPE_TILESET_ID: number; 
+    // End Prototype id's
 }
 
 //GIVE THE GLOBAL VAR THE VALUE
@@ -49,3 +54,6 @@ UTIL.OM_CANCELBUTTON_ID = 207;
 
 UTIL.HM_BACKGROUND_ID = 208;
 UTIL.HM_OKBUTTON_ID = 209;
+
+UTIL.PROTOTYPE_TILEMAP_ID = 210
+UTIL.PROTOTYPE_TILESET_ID = 211;

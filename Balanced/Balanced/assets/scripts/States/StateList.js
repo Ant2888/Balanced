@@ -7,4 +7,5 @@ States.TEST_STATE2_ID = 1;
 States.MAIN_MENU_STATE_ID = 200;
 States.OPTIONS_MENU_STATE_ID = 201;
 States.OPTIONS_MENU_STATE_ID = 202;
+States.PROTOTYPE_STATE_ID = 203;
 //# sourceMappingURL=StateList.js.map

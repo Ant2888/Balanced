@@ -4,9 +4,7 @@
     *
     * @author Emerson
     */
-    export class HelpMenuState extends State {
-
-        // the background of the main menu, could be just a placeholder for now
+    export class HelpMenuState extends State {        
         private helpMenu: GUI.HelpMenuGraphics;
 
         constructor(gsm: States.GameStateManager) {
@@ -25,8 +23,7 @@
         }
 
         public startup(): boolean {
-            console.log("Main Menu Started.");
-
+            console.log("Help Menu Started.");
             this.helpMenu.setOkButton(this.okButtonPressed);
             
             return true;
@@ -43,7 +40,6 @@
         private okButtonPressed(): any {
             console.log('ok button was pressed');
             this.gsm.setState(States.MAIN_MENU_STATE);
-        }
-               
+        }               
     }
 }

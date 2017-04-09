@@ -4,13 +4,8 @@
     *
     * @author Emerson
     */
-    export class MainMenuState extends State {
-
-        // the background of the main menu, could be just a placeholder for now
-        private mainMenu: GUI.MainMenuGraphics;
-
-        // this is all the keybinding actions that will take place, if any
-        private press: Phaser.Key;
+    export class MainMenuState extends State {        
+        private mainMenu: GUI.MainMenuGraphics;            
 
         constructor(gsm: States.GameStateManager) {
             super(gsm);
@@ -48,6 +43,7 @@
 
         private playButtonPressed(): any {
             console.log('play button was pressed');
+            this.gsm.setState(States.PROTOTYPE_STATE);
         }
 
         private loadButtonPressed(): any {
@@ -56,6 +52,7 @@
 
         private helpButtonPressed(): any {
             console.log('help button was pressed');
+            this.gsm.setState(States.HELP_MENU_STATE);
         }
 
         private optionsButtonPressed(): any {

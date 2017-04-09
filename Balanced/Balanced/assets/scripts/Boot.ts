@@ -78,6 +78,19 @@ class BalancedGame {
         }, this);
         // END HELP MENU RESOURCES
 
+        // LEVEL 1 RESOURCES
+        rem.addResource(new UTIL.Resource('level1', 'assets/res/level1-dungeon/Balanced_level1.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
+            this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
+        }, this);
+
+        rem.addResource(new UTIL.Resource('gameTiles', 'assets/res/level1-dungeon/grunge_tile.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+
+        rem.addResource(new UTIL.Resource('tempPlayer', 'assets/res/level1-dungeon/balancedSprite.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
+        }, this);
+        // END LEVEL 1 RESOURCES
     }
 
     create() {        
@@ -88,6 +101,7 @@ class BalancedGame {
         States.MAIN_MENU_STATE = new States.MainMenuState(this.gsm);
         States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
         States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
+        States.PROTOTYPE_STATE = new States.PrototypeState(this.gsm);
         // END STATES
         this.gsm.initState();
     }

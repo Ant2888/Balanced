@@ -6,12 +6,12 @@
     */
     export class MainMenuGraphics extends GameObject {
 
-        private backgroundImage: Phaser.Sprite
+        private backgroundImage: Phaser.Sprite;
 
-        private playButton: Phaser.Button
-        private loadButton: Phaser.Button
-        private helpButton: Phaser.Button
-        private optionsButton: Phaser.Button
+        private playButton: Phaser.Button;
+        private loadButton: Phaser.Button;
+        private helpButton: Phaser.Button;
+        private optionsButton: Phaser.Button;
         private gsm: States.GameStateManager;
 
         constructor(group: Phaser.Group) {

@@ -47,6 +47,9 @@ declare class UTIL {
 
     static AB_P1_SS_ID: number;
     static AB_P2_SS_ID: number;
+
+    static UF_ENERGY_TICK_ID: number;
+    static UF_HEALTH_TICK_ID: number;
     //--------------- HUD
 }
 
@@ -89,3 +92,6 @@ UTIL.HM_OKBUTTON_ID = 209;
 
 UTIL.PROTOTYPE_TILEMAP_ID = 210
 UTIL.PROTOTYPE_TILESET_ID = 211;
+
+UTIL.UF_ENERGY_TICK_ID = 212;
+UTIL.UF_HEALTH_TICK_ID = 213;

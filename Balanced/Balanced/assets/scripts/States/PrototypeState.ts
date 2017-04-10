@@ -5,7 +5,7 @@
     * @author Emerson
     */
     export class PrototypeState extends State {
-        private prototypeLevel: GUI.ActionBarGraphics;
+        private prototypeActionbar: GUI.ActionBarGraphics;
         private prototypeUnitframe: GUI.HealthAndEnergyGraphics;
         private map: Phaser.Tilemap;
         private backgroundlayer: Phaser.TilemapLayer;
@@ -24,6 +24,7 @@
             this.isOnGround = this.gsm.game.physics.arcade.collide(this.player, this.blockedLayer);
 
             this.player.body.velocity.x = 0;
+
             if (this.keyboard.left.isDown) {
                 //Move to the left
                 this.player.body.velocity.x = -250;
@@ -66,21 +67,101 @@
             this.gsm.game.physics.arcade.enable(this.player);
             this.player.body.gravity.y = 500;
             this.player.body.collideWorldBounds = true;
-            
+
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
             // end player
 
             var group = this.gsm.game.add.group();
-            this.prototypeLevel = new GUI.ActionBarGraphics(group);
-            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group);
+            this.prototypeActionbar = new GUI.ActionBarGraphics(group);
+            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group, null);
 
-            this.gsm.getGUIM().addGroup(this.prototypeLevel);
-            this.gsm.getGUIM().addGroup(this.prototypeUnitframe);                      
+            this.gsm.getGUIM().addGroup(this.prototypeActionbar);
+            this.gsm.getGUIM().addGroup(this.prototypeUnitframe);
 
+            this.setupKeybinds(this.prototypeActionbar);
+                        
+            
             return true;
         }
-               
+
+        public setupKeybinds(btns: GUI.ActionBarGraphics): void {
+            this.gsm.game.input.keyboard.onDownCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.Q) {
+                    btns.getAbility1().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.W) {
+                    btns.getAbility2().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.E) {
+                    btns.getAbility3().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.R) {
+                    btns.getAbility4().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.Z) {
+                    btns.getPotion1().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.X) {
+                    btns.getPotion2().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.I) {
+                    btns.getBag().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.H) {
+                    btns.getTown().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.C) {
+                    btns.getStats().frame = 1;
+                }
+            }
+
+            this.gsm.game.input.keyboard.onUpCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.Q) {
+                    btns.getAbility1().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.W) {
+                    btns.getAbility2().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.E) {
+                    btns.getAbility3().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.R) {
+                    btns.getAbility4().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.Z) {
+                    btns.getPotion1().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.X) {
+                    btns.getPotion2().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.I) {
+                    btns.getBag().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.H) {
+                    btns.getTown().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.C) {
+                    btns.getStats().frame = 0;
+                }
+            }
+        }
 
         public findObjectsByType(type, map, layer) {
             var result = new Array();

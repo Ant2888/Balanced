@@ -35,6 +35,8 @@
     <Content Include="assets\res\hud\ab_p2_ss.png" />
     <Content Include="assets\res\hud\ab_stats_ss.png" />
     <Content Include="assets\res\hud\ab_town_ss.png" />
+    <Content Include="assets\res\hud\uf_energy_tick.png" />
+    <Content Include="assets\res\hud\uf_health_tick.png" />
     <Content Include="assets\res\hud\UL_UI.png" />
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
     <Content Include="assets\res\level1-dungeon\grunge_tile.png" />

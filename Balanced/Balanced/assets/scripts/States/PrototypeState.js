@@ -62,6 +62,27 @@ var States;
             this.player.body.collideWorldBounds = true;
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
+            this.player.inputEnabled = true;
+            this.player.events.onInputDown.add(function () {
+                console.log("CLICKING!");
+                var damage = Math.floor(Math.random() * (99)) + 1;
+                new FloatingText(this.gsm.game, {
+                    text: "" + damage,
+                    animation: "smoke",
+                    textOptions: {
+                        fontSize: 32,
+                        fill: "#FFFFFF",
+                        stroke: "#000000",
+                        strokeThickness: 1,
+                        wordWrap: true,
+                        wordWrapWidth: 200,
+                        font: "Papyrus"
+                    },
+                    x: this.player.x,
+                    y: this.player.y,
+                    timeToLive: 300
+                });
+            }, this);
             // end player
             var group = this.gsm.game.add.group();
             this.prototypeLevel = new GUI.ActionBarGraphics(group);

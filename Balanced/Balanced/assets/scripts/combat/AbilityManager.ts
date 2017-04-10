@@ -11,5 +11,6 @@
             this.gsm = gsm;
         }
 
+        public abstract attemptCast(ability: number): boolean;
     }
 }

@@ -1,12 +1,7 @@
+declare var FloatingText: any;
+
 declare module FloatingText {
-	
-	class FloatingText {
-		
-		constructor(state: Phaser.Game, options: FloatingText.Options);
-		animateFloatingText(): void;
-		
-	}
-	
+
 	interface Options {
 		
 		text: string;

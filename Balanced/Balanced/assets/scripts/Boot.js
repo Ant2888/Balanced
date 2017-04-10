@@ -54,7 +54,7 @@ var BalancedGame = (function () {
             this.game.load.image(e.key, e.assetUrl, 2, 25);
         }, this);
         rem.addResource(new UTIL.Resource('uf_health_tick', 'assets/res/hud/uf_health_tick.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 4, 31);
+            this.game.load.image(e.key, e.assetUrl, 3.23, 31);
         }, this);
         // --------------------------------- HUD
         rem.addResource(new UTIL.Resource('logo2', 'assets/res/phaser2.jpg', UTIL.TESTLOGO_ID), true, function (e) {

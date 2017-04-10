@@ -12,25 +12,11 @@ var ENTITIES;
 (function (ENTITIES) {
     var Entity = (function (_super) {
         __extends(Entity, _super);
-        function Entity(gsm, x, y, abilities, energy, key, frame) {
+        function Entity(gsm, x, y, key, frame) {
             var _this = _super.call(this, gsm.game, x, y, key, frame) || this;
-            _this.abilities = abilities;
-            _this.energy = energy;
             _this.gsm = gsm;
             return _this;
         }
-        Entity.prototype.getAbilityManager = function () {
-            return this.abilities;
-        };
-        Entity.prototype.getEnergyManager = function () {
-            return this.energy;
-        };
-        Entity.prototype.setAbilityManager = function (ab) {
-            this.abilities = ab;
-        };
-        Entity.prototype.setEnergyManager = function (em) {
-            this.energy = em;
-        };
         return Entity;
     }(Phaser.Sprite));
     ENTITIES.Entity = Entity;

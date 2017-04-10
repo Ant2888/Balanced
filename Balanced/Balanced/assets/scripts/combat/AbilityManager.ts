@@ -11,5 +11,10 @@
             this.gsm = gsm;
         }
 
+        public abstract attemptCast(ability: number): boolean;
+
+        public getEnergyManager(): EnergyManager {
+            return this.energyMan;
+        }
     }
 }

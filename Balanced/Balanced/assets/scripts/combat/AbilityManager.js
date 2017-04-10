@@ -6,6 +6,9 @@ var COMBAT;
             this.energyMan = energyMan;
             this.gsm = gsm;
         }
+        AbilityManager.prototype.getEnergyManager = function () {
+            return this.energyMan;
+        };
         return AbilityManager;
     }());
     COMBAT.AbilityManager = AbilityManager;

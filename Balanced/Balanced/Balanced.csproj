@@ -38,6 +38,8 @@
     <Content Include="assets\res\hud\uf_energy_tick.png" />
     <Content Include="assets\res\hud\uf_health_tick.png" />
     <Content Include="assets\res\hud\UL_UI.png" />
+    <Content Include="assets\res\in-game-menus\drop_btn_ss.png" />
+    <Content Include="assets\res\in-game-menus\inv_menu.png" />
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
     <Content Include="assets\res\level1-dungeon\grunge_tile.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />
@@ -61,6 +63,7 @@
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\AbilityManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\EnergyManager.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\PlayerAbilities.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Player.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />

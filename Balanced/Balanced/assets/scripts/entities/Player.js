@@ -12,8 +12,8 @@ var ENTITIES;
 (function (ENTITIES) {
     var Player = (function (_super) {
         __extends(Player, _super);
-        function Player(gsm, x, y, abilities, energy, key, frame) {
-            var _this = _super.call(this, gsm, x, y, abilities, energy, key, frame) || this;
+        function Player(gsm, x, y, key, frame) {
+            var _this = _super.call(this, gsm, x, y, key, frame) || this;
             _this.maxHealth = 100;
             return _this;
         }

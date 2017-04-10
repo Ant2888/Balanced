@@ -12,6 +12,7 @@
         private blockedLayer: Phaser.TilemapLayer;
         private isOnGround: boolean;
         private keyboard: any;
+        private playerABM: COMBAT.AbilityManager;
 
         //test player
         private player: Phaser.Sprite;
@@ -70,11 +71,34 @@
 
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
-            // end player
 
+            this.player.inputEnabled = true;
+            this.player.events.onInputDown.add(function () {
+                console.log("CLICKING!");
+                var damage = Math.floor(Math.random() * (99)) + 1;
+
+                new FloatingText(this.gsm.game, <FloatingText.Options>{
+                    text: "" + damage,
+                    animation: "smoke",
+                    textOptions: <FloatingText.TextOptions>{
+                        fontSize: 32,
+                        fill: "#FFFFFF",
+                        stroke: "#000000",
+                        strokeThickness: 1,
+                        wordWrap: true,
+                        wordWrapWidth: 200,
+                        font: "Papyrus"
+                    },
+                    x: this.player.x,
+                    y: this.player.y,
+                    timeToLive: 300
+                });
+            }, this);
+            // end player
             var group = this.gsm.game.add.group();
             this.prototypeActionbar = new GUI.ActionBarGraphics(group);
-            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group, new ENTITIES.Player(this.gsm,250,250, null, null, 'tempPlayer'));
+            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group,
+                new ENTITIES.Player(this.gsm, 250, 250, 'tempPlayer'));
 
             this.gsm.getGUIM().addGroup(this.prototypeActionbar);
             this.gsm.getGUIM().addGroup(this.prototypeUnitframe);

@@ -74,18 +74,18 @@
 
             var group = this.gsm.game.add.group();
             this.prototypeActionbar = new GUI.ActionBarGraphics(group);
-            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group, null);
+            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group, new ENTITIES.Player(this.gsm,250,250, null, null, 'tempPlayer'));
 
             this.gsm.getGUIM().addGroup(this.prototypeActionbar);
             this.gsm.getGUIM().addGroup(this.prototypeUnitframe);
 
-            this.setupKeybinds(this.prototypeActionbar);
-                        
+            this.setupKeybinds(this.prototypeActionbar, this.prototypeUnitframe);
+
             
             return true;
         }
 
-        public setupKeybinds(btns: GUI.ActionBarGraphics): void {
+        public setupKeybinds(btns: GUI.ActionBarGraphics , uf: GUI.HealthAndEnergyGraphics): void {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     btns.getAbility1().frame = 1;
@@ -121,6 +121,22 @@
 
                 if (e.keyCode == Phaser.Keyboard.C) {
                     btns.getStats().frame = 1;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.K) {
+                    uf.gainHealth(5);                   
+                }
+
+                if (e.keyCode == Phaser.Keyboard.J) {
+                    uf.loseHealth(5);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.M) {
+                    uf.gainEnergy(5);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.N) {
+                    uf.loseEnergy(5);
                 }
             }
 

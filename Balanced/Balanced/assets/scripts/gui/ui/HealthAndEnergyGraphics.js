@@ -18,13 +18,50 @@ var GUI;
     var HealthAndEnergyGraphics = (function (_super) {
         __extends(HealthAndEnergyGraphics, _super);
         function HealthAndEnergyGraphics(group, player) {
-            return _super.call(this, 204, group) || this;
+            var _this = _super.call(this, 204, group) || this;
+            _this.hb_tickAmount = -1;
+            _this.eb_tickAmount = -1;
+            _this.player = player;
+            return _this;
         }
         HealthAndEnergyGraphics.prototype.initialize = function (gsm) {
             this.gsm = gsm;
             this.buildHealthBar();
             this.buildEnergyBar();
             this.displayOverlay();
+        };
+        HealthAndEnergyGraphics.prototype.gainHealth = function (heal) {
+            for (var i = 0; i < heal; i++) {
+                this.healthTicks.create(this.currHealthTickPos, 7, 'uf_health_tick');
+                this.hb_tickAmount++;
+                this.currHealthTickPos += 4;
+            }
+        };
+        HealthAndEnergyGraphics.prototype.loseHealth = function (dmg) {
+            for (var i = 0; i < dmg; i++) {
+                if (this.player.health > 0) {
+                    this.healthTicks.removeChildAt(this.hb_tickAmount);
+                    this.hb_tickAmount--;
+                    this.currHealthTickPos -= 4;
+                }
+            }
+        };
+        HealthAndEnergyGraphics.prototype.gainEnergy = function (heal) {
+            for (var i = 0; i < heal; i++) {
+                this.energyTicks.create(this.currEnergyTickPos, 43, 'uf_energy_tick');
+                this.eb_tickAmount++;
+                this.currEnergyTickPos += 2;
+            }
+        };
+        HealthAndEnergyGraphics.prototype.loseEnergy = function (dmg) {
+            for (var i = 0; i < dmg; i++) {
+                //put energy limit below
+                //if (this.player.health > 0) {
+                this.energyTicks.removeChildAt(this.eb_tickAmount);
+                this.eb_tickAmount--;
+                this.currEnergyTickPos -= 2;
+                //}
+            }
         };
         HealthAndEnergyGraphics.prototype.displayOverlay = function () {
             this.ul_unitframe = this.gsm.game.add.sprite(0, 0, 'ul_ui');
@@ -36,18 +73,23 @@ var GUI;
             this.healthTicks.fixedToCamera = true;
             this.healthTicks.enableBody = true;
             var tick;
-            for (var i = 132; i < 455; i += 4) {
+            for (var i = 132; i <= 456; i += 4) {
                 tick = this.healthTicks.create(i, 7, 'uf_health_tick');
+                this.currHealthTickPos = i;
+                this.hb_tickAmount++;
             }
+            this.group.add(this.healthTicks);
         };
         HealthAndEnergyGraphics.prototype.buildEnergyBar = function () {
             this.energyTicks = this.gsm.game.add.group();
             this.energyTicks.fixedToCamera = true;
             this.energyTicks.enableBody = true;
-            var tick;
-            for (var i = 132; i < 332; i += 2) {
-                tick = this.energyTicks.create(i, 43, 'uf_energy_tick');
+            for (var i = 132; i <= 336; i += 2) {
+                this.energyTicks.create(i, 43, 'uf_energy_tick');
+                this.currEnergyTickPos = i;
+                this.eb_tickAmount++;
             }
+            this.group.add(this.energyTicks);
         };
         return HealthAndEnergyGraphics;
     }(GUI.GameObject));

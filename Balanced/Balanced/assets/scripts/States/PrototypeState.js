@@ -64,11 +64,84 @@ var States;
             this.gsm.game.camera.follow(this.player);
             // end player
             var group = this.gsm.game.add.group();
-            this.prototypeLevel = new GUI.ActionBarGraphics(group);
-            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group);
-            this.gsm.getGUIM().addGroup(this.prototypeLevel);
+            this.prototypeActionbar = new GUI.ActionBarGraphics(group);
+            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group, new ENTITIES.Player(this.gsm, 250, 250, null, null, 'tempPlayer'));
+            this.gsm.getGUIM().addGroup(this.prototypeActionbar);
             this.gsm.getGUIM().addGroup(this.prototypeUnitframe);
+            this.setupKeybinds(this.prototypeActionbar, this.prototypeUnitframe);
             return true;
+        };
+        PrototypeState.prototype.setupKeybinds = function (btns, uf) {
+            this.gsm.game.input.keyboard.onDownCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.Q) {
+                    btns.getAbility1().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.W) {
+                    btns.getAbility2().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.E) {
+                    btns.getAbility3().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.R) {
+                    btns.getAbility4().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.Z) {
+                    btns.getPotion1().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.X) {
+                    btns.getPotion2().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.I) {
+                    btns.getBag().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.H) {
+                    btns.getTown().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.C) {
+                    btns.getStats().frame = 1;
+                }
+                if (e.keyCode == Phaser.Keyboard.K) {
+                    uf.gainHealth(5);
+                }
+                if (e.keyCode == Phaser.Keyboard.J) {
+                    uf.loseHealth(5);
+                }
+                if (e.keyCode == Phaser.Keyboard.M) {
+                    uf.gainEnergy(5);
+                }
+                if (e.keyCode == Phaser.Keyboard.N) {
+                    uf.loseEnergy(5);
+                }
+            };
+            this.gsm.game.input.keyboard.onUpCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.Q) {
+                    btns.getAbility1().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.W) {
+                    btns.getAbility2().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.E) {
+                    btns.getAbility3().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.R) {
+                    btns.getAbility4().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.Z) {
+                    btns.getPotion1().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.X) {
+                    btns.getPotion2().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.I) {
+                    btns.getBag().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.H) {
+                    btns.getTown().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.C) {
+                    btns.getStats().frame = 0;
+                }
+            };
         };
         PrototypeState.prototype.findObjectsByType = function (type, map, layer) {
             var result = new Array();

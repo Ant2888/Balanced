@@ -91,6 +91,33 @@ var GUI;
             this.ab_ab4_ss.fixedToCamera = true;
             this.group.add(this.ab_ab4_ss);
         };
+        ActionBarGraphics.prototype.getStats = function () {
+            return this.ab_stats_ss;
+        };
+        ActionBarGraphics.prototype.getBag = function () {
+            return this.ab_bag_ss;
+        };
+        ActionBarGraphics.prototype.getTown = function () {
+            return this.ab_town_ss;
+        };
+        ActionBarGraphics.prototype.getPotion1 = function () {
+            return this.ab_p1_ss;
+        };
+        ActionBarGraphics.prototype.getPotion2 = function () {
+            return this.ab_p2_ss;
+        };
+        ActionBarGraphics.prototype.getAbility1 = function () {
+            return this.ab_ab1_ss;
+        };
+        ActionBarGraphics.prototype.getAbility2 = function () {
+            return this.ab_ab2_ss;
+        };
+        ActionBarGraphics.prototype.getAbility3 = function () {
+            return this.ab_ab3_ss;
+        };
+        ActionBarGraphics.prototype.getAbility4 = function () {
+            return this.ab_ab4_ss;
+        };
         ActionBarGraphics.prototype.statsPressed = function () {
             console.log('stats button was pressed');
             //this.gsm.setState(States.PROTOTYPE_STATE);

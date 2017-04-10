@@ -59,6 +59,12 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('ul_ui', 'assets/res/hud/UL_UI.png', UTIL.UL_UI_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
+        rem.addResource(new UTIL.Resource('uf_energy_tick', 'assets/res/hud/uf_energy_tick.png', UTIL.UF_ENERGY_TICK_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 2, 25);
+        }, this);
+        rem.addResource(new UTIL.Resource('uf_health_tick', 'assets/res/hud/uf_health_tick.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 4, 31);
+        }, this);
         // --------------------------------- HUD
 
 

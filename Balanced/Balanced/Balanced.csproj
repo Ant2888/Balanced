@@ -30,7 +30,7 @@
     <Content Include="assets\res\hud\ab_ab3_ss.png" />
     <Content Include="assets\res\hud\ab_ab4_ss.png" />
     <Content Include="assets\res\hud\ab_bag_ss.png" />
-    <Content Include="assets\res\hud\AB_BG.png" />
+    <Content Include="assets\res\hud\ab_bg.png" />
     <Content Include="assets\res\hud\ab_p1_ss.png" />
     <Content Include="assets\res\hud\ab_p2_ss.png" />
     <Content Include="assets\res\hud\ab_stats_ss.png" />

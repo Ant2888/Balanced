@@ -37,7 +37,6 @@ var GUI;
                         this.healthTicks.create(this.currHealthTickPos, 7, 'uf_health_tick');
                         this.hb_tickAmount++;
                         this.currHealthTickPos += 3.23;
-                        console.log(this.currHealthTickPos);
                     }
                 }
                 else {
@@ -46,7 +45,6 @@ var GUI;
                         this.healthTicks.create(this.currHealthTickPos, 7, 'uf_health_tick');
                         this.hb_tickAmount++;
                         this.currHealthTickPos += 3.23;
-                        console.log(this.currHealthTickPos);
                     }
                 }
             }
@@ -58,7 +56,6 @@ var GUI;
                         this.healthTicks.removeChildAt(this.hb_tickAmount);
                         this.hb_tickAmount--;
                         this.currHealthTickPos -= 3.23;
-                        console.log(this.currHealthTickPos);
                     }
                 }
                 else {
@@ -67,7 +64,6 @@ var GUI;
                         this.healthTicks.removeChildAt(this.hb_tickAmount);
                         this.hb_tickAmount--;
                         this.currHealthTickPos -= 3.23;
-                        console.log(this.currHealthTickPos);
                     }
                 }
             }
@@ -136,7 +132,6 @@ var GUI;
                 this.currEnergyTickPos = i;
                 this.eb_tickAmount++;
             }
-            console.log(this.eb_tickAmount);
             this.group.add(this.energyTicks);
         };
         return HealthAndEnergyGraphics;

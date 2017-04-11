@@ -12,11 +12,11 @@
 
         private healthTicks: Phaser.Group;
         private currHealthTickPos: number;
-        private hb_tickAmount: number = -1;
+        public hb_tickAmount: number = -1;
 
         private energyTicks: Phaser.Group;
         private currEnergyTickPos: number;
-        private eb_tickAmount: number = -1;
+        public eb_tickAmount: number = -1;
 
         constructor(group: Phaser.Group, player: ENTITIES.Player) {
             super(204, group);
@@ -39,7 +39,6 @@
                         this.healthTicks.create(this.currHealthTickPos, 7, 'uf_health_tick');
                         this.hb_tickAmount++;
                         this.currHealthTickPos += 3.23;
-                        console.log(this.currHealthTickPos);
                     }
                 } else {
                     var overflowHP = 100 - this.hb_tickAmount;
@@ -48,7 +47,6 @@
                         this.healthTicks.create(this.currHealthTickPos, 7, 'uf_health_tick');
                         this.hb_tickAmount++;
                         this.currHealthTickPos += 3.23;
-                        console.log(this.currHealthTickPos);
                     }
                 }
             }
@@ -61,7 +59,6 @@
                         this.healthTicks.removeChildAt(this.hb_tickAmount);
                         this.hb_tickAmount--;
                         this.currHealthTickPos -= 3.23;
-                        console.log(this.currHealthTickPos);
                     }
                 } else {
                     var underflowHP = this.hb_tickAmount;
@@ -70,7 +67,6 @@
                         this.healthTicks.removeChildAt(this.hb_tickAmount);
                         this.hb_tickAmount--;
                         this.currHealthTickPos -= 3.23;
-                        console.log(this.currHealthTickPos);
                     }
                 }
             }
@@ -133,7 +129,6 @@
                 this.currHealthTickPos = i;
                 this.hb_tickAmount++;
             }
-            
             this.group.add(this.healthTicks);
         }
 
@@ -147,7 +142,6 @@
                 this.currEnergyTickPos = i;
                 this.eb_tickAmount++;
             }
-            console.log(this.eb_tickAmount);
             this.group.add(this.energyTicks);
         }
     }

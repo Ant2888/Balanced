@@ -19,8 +19,10 @@ var States;
         __extends(PrototypeState, _super);
         function PrototypeState(gsm) {
             var _this = _super.call(this, gsm) || this;
+            _this.inAnim = false;
             _this.playerHitBoolean = false;
             _this.isPlayerDead = true;
+            _this.justHit = false;
             return _this;
         }
         PrototypeState.prototype.update = function () {
@@ -34,7 +36,13 @@ var States;
                 this.isPlayerDead = false;
             }
             this.setupKeybinds(this);
+            if (this.inAnim)
+                return;
             if (this.isPlayerDead == true) {
+                if (this.keyboard.up.isDown && this.isOnGround) {
+                    this.player.body.velocity.y = -350;
+                    this.player.frame = 261;
+                }
                 if (this.keyboard.left.isDown) {
                     //Move to the left
                     this.player.body.velocity.x = -250;
@@ -62,6 +70,7 @@ var States;
         PrototypeState.prototype.startup = function () {
             console.log("prototype Level Started.");
             this.playerTakenDamageTimer = this.gsm.game.time.create(false);
+            this.btime = this.gsm.game.time.create(false);
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
             this.map = this.gsm.game.add.tilemap('level1');
@@ -100,7 +109,7 @@ var States;
                     },
                     x: this.player.x,
                     y: this.player.y,
-                    timeToLive: 300
+                    timeToLive: 300,
                 });
             }, this);
             // end player
@@ -108,8 +117,21 @@ var States;
             var group = this.gsm.game.add.group();
             this.prototypeActionbar = new GUI.ActionBarGraphics(group);
             this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group, new ENTITIES.Player(this.gsm, 250, 250, 'tempPlayer'));
+            this.protoBag = new GUI.BagGraphics(group);
+            this.protoCharMenu = new GUI.CharGraphics(group);
+            this.gsm.getGUIM().addGroup(this.protoBag);
             this.gsm.getGUIM().addGroup(this.prototypeActionbar);
             this.gsm.getGUIM().addGroup(this.prototypeUnitframe);
+            this.gsm.getGUIM().addGroup(this.protoCharMenu);
+            this.prototypeActionbar.getBag().onInputDown.add(function (e) {
+                this.protoCharMenu.closeMenu();
+                this.protoBag.flipMenu();
+            }, this);
+            this.prototypeActionbar.getStats().onInputDown.add(function () {
+                this.protoBag.closeMenu();
+                this.protoCharMenu.flipMenu();
+            }, this);
+            this.setupKeybinds(this);
             return true;
         };
         PrototypeState.prototype.createBaddies = function () {
@@ -123,15 +145,51 @@ var States;
                 this.baddies.add(baddie);
             }
         };
-        PrototypeState.prototype.playerHit = function () {
+        PrototypeState.prototype.playerHit = function (player, other) {
+            if (this.inAnim && !this.justHit) {
+                var damage = Math.floor(Math.random() * (80)) + 1;
+                other.damage(damage);
+                new FloatingText(this.gsm.game, {
+                    easing: Phaser.Easing.Sinusoidal.Out,
+                    text: "" + (damage >= 70 ? "CRIT " + damage : damage),
+                    animation: damage >= 70 ? "explode" : this.getRandomEffect(),
+                    textOptions: {
+                        fontSize: 32,
+                        fill: "yellow",
+                        stroke: "#00000",
+                        strokeThickness: 1,
+                        wordWrap: true,
+                        wordWrapWidth: 200,
+                        font: "Papyrus"
+                    },
+                    x: other.x,
+                    y: other.y,
+                    timeToLive: 300
+                });
+                if (other.health <= 0) {
+                    other.destroy();
+                    var baddie = this.gsm.game.add.sprite(other.x + 100, 200, 'baddie');
+                    this.gsm.game.physics.arcade.enable(baddie);
+                    baddie.body.gravity.y = 300;
+                    baddie.body.collideWorldBounds = true;
+                    baddie.health = 100;
+                    this.baddies.add(baddie);
+                }
+                this.justHit = true;
+                this.btime.loop(1000, function () {
+                    this.justHit = false;
+                    this.btime.stop();
+                }, this);
+                this.btime.start();
+            }
             if (this.playerHitBoolean == false && this.isPlayerDead == true) {
                 this.playerHitBoolean = true;
                 var damage = Math.floor(Math.random() * (30)) + 1;
                 this.prototypeUnitframe.loseHealth(damage);
                 new FloatingText(this.gsm.game, {
                     easing: Phaser.Easing.Sinusoidal.Out,
-                    text: "" + damage,
-                    animation: this.getRandomEffect(),
+                    text: "" + (damage >= 25 ? "CRIT " + damage : damage),
+                    animation: damage >= 25 ? "explode" : this.getRandomEffect(),
                     textOptions: {
                         fontSize: 32,
                         fill: "#FF0000",
@@ -164,6 +222,12 @@ var States;
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.prototypeActionbar.getAbility1().frame = 1;
+                    if (data.player.animations.currentAnim.name == 'walkLeft')
+                        data.playAnimState(data.player, 'attackLeft', false, false);
+                    if (data.player.animations.currentAnim.name == 'walkRight')
+                        data.playAnimState(data.player, 'attackRight', false, false);
+                    if (data.player.animations.currentAnim.name == 'idel')
+                        data.playAnimState(data.player, 'attackRight', false, false);
                 }
                 if (e.keyCode == Phaser.Keyboard.W) {
                     data.prototypeActionbar.getAbility2().frame = 1;
@@ -176,18 +240,39 @@ var States;
                 }
                 if (e.keyCode == Phaser.Keyboard.Z) {
                     data.prototypeActionbar.getPotion1().frame = 1;
+                    data.prototypeUnitframe.gainHealth(25);
+                    new FloatingText(data.gsm.game, {
+                        text: "" + 25,
+                        animation: data.getRandomEffect(),
+                        textOptions: {
+                            fontSize: 32,
+                            fill: "#228B22",
+                            stroke: "#000000",
+                            strokeThickness: 1,
+                            wordWrap: true,
+                            wordWrapWidth: 200,
+                            font: "Papyrus"
+                        },
+                        x: data.player.x,
+                        y: data.player.y,
+                        timeToLive: 300
+                    });
                 }
                 if (e.keyCode == Phaser.Keyboard.X) {
                     data.prototypeActionbar.getPotion2().frame = 1;
                 }
                 if (e.keyCode == Phaser.Keyboard.I) {
                     data.prototypeActionbar.getBag().frame = 1;
+                    data.protoCharMenu.closeMenu();
+                    data.protoBag.flipMenu();
                 }
                 if (e.keyCode == Phaser.Keyboard.H) {
                     data.prototypeActionbar.getTown().frame = 1;
                 }
                 if (e.keyCode == Phaser.Keyboard.C) {
                     data.prototypeActionbar.getStats().frame = 1;
+                    data.protoBag.closeMenu();
+                    data.protoCharMenu.flipMenu();
                 }
                 if (e.keyCode == Phaser.Keyboard.K) {
                     data.prototypeUnitframe.gainHealth(50);
@@ -230,6 +315,22 @@ var States;
                 }
                 if (e.keyCode == Phaser.Keyboard.M) {
                     data.prototypeUnitframe.gainEnergy(5);
+                    new FloatingText(data.gsm.game, {
+                        text: "+" + 5 + " Energy",
+                        animation: data.getRandomEffect(),
+                        textOptions: {
+                            fontSize: 32,
+                            fill: "blue",
+                            stroke: "#000000",
+                            strokeThickness: 1,
+                            wordWrap: true,
+                            wordWrapWidth: 200,
+                            font: "Papyrus"
+                        },
+                        x: data.player.x,
+                        y: data.player.y,
+                        timeToLive: 300
+                    });
                 }
                 if (e.keyCode == Phaser.Keyboard.N) {
                     data.prototypeUnitframe.loseEnergy(5);
@@ -282,9 +383,26 @@ var States;
             return this;
         };
         PrototypeState.prototype.getRandomEffect = function () {
-            var effectArray = ['explode', 'smoke', 'physics', 'fade'];
+            var effectArray = ['smoke', 'physics', 'fade'];
             var randomNumber = Math.floor(Math.random() * effectArray.length) + 1;
             return effectArray[randomNumber];
+        };
+        PrototypeState.prototype.playAnimState = function (player, animStateIndex, loop, releasable, timeoutPeriod) {
+            if (loop === void 0) { loop = false; }
+            if (releasable === void 0) { releasable = false; }
+            if (timeoutPeriod === void 0) { timeoutPeriod = 1000; }
+            if (this.inAnim)
+                return;
+            player.animations.stop();
+            player.animations.play(animStateIndex, 15, loop);
+            player.body.velocity.x = 0;
+            if (!releasable)
+                this.inAnim = true;
+            var tf = this.tempFunc.bind(this);
+            setTimeout(tf, 500);
+        };
+        PrototypeState.prototype.tempFunc = function () {
+            this.inAnim = false;
         };
         return PrototypeState;
     }(States.State));

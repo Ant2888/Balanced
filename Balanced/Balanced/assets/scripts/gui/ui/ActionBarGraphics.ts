@@ -15,7 +15,12 @@
         private ab_p2_ss: Phaser.Button;
         private ab_stats_ss: Phaser.Button;       
         private ab_town_ss: Phaser.Button;
-        private ab_bag_ss: Phaser.Button;       
+        private ab_bag_ss: Phaser.Button;   
+
+        private ab_ab1_text: Phaser.Text;
+        private ab_ab2_text: Phaser.Text;
+        private ab_ab3_text: Phaser.Text;
+        private ab_ab4_text: Phaser.Text;    
 
         constructor(group: Phaser.Group) {
             super(203, group);
@@ -39,7 +44,23 @@
             this.setStats(this.statsPressed);
             this.setBag(this.bagPressed);
             this.setTown(this.townPressed);                   
-                        
+
+            this.ab_ab1_text = gsm.game.add.text(470, 662, 'Q', { fontSize: '28px', fill: '#000' });
+            this.ab_ab1_text.fixedToCamera = true;
+            this.group.add(this.ab_ab1_text);
+
+            this.ab_ab2_text = gsm.game.add.text(550, 662, 'W', { fontSize: '28px', fill: '#000' });
+            this.ab_ab2_text.fixedToCamera = true;
+            this.group.add(this.ab_ab2_text);
+
+            this.ab_ab3_text = gsm.game.add.text(640, 662, 'E', { fontSize: '28px', fill: '#000' });
+            this.ab_ab3_text.fixedToCamera = true;
+            this.group.add(this.ab_ab3_text);
+
+            this.ab_ab4_text = gsm.game.add.text(720, 662, 'R', { fontSize: '28px', fill: '#000' });
+            this.ab_ab4_text.fixedToCamera = true;
+            this.group.add(this.ab_ab4_text);
+                 
         }
 
         private setStats(func: any): void {

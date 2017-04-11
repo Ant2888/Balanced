@@ -12,11 +12,11 @@
 
         private healthTicks: Phaser.Group;
         private currHealthTickPos: number;
-        private hb_tickAmount: number = -1;
+        public hb_tickAmount: number = -1;
 
         private energyTicks: Phaser.Group;
         private currEnergyTickPos: number;
-        private eb_tickAmount: number = -1;
+        public eb_tickAmount: number = -1;
 
         constructor(group: Phaser.Group, player: ENTITIES.Player) {
             super(204, group);
@@ -33,43 +33,82 @@
         }
 
         public gainHealth(heal: number) {
-            for (var i = 0; i < heal; i++) {
+            if (this.hb_tickAmount <= 100) {
+                if (100 >= this.hb_tickAmount + heal) {
+                    for (var i = 0; i < heal; i++) {
+                        this.healthTicks.create(this.currHealthTickPos, 7, 'uf_health_tick');
+                        this.hb_tickAmount++;
+                        this.currHealthTickPos += 3.23;
+                    }
+                } else {
+                    var overflowHP = 100 - this.hb_tickAmount;
 
-                this.healthTicks.create(this.currHealthTickPos, 7, 'uf_health_tick');
-                this.hb_tickAmount++;
-                this.currHealthTickPos += 4;
-
+                    for (var i = 0; i < overflowHP; i++) {
+                        this.healthTicks.create(this.currHealthTickPos, 7, 'uf_health_tick');
+                        this.hb_tickAmount++;
+                        this.currHealthTickPos += 3.23;
+                    }
+                }
             }
         }
 
         public loseHealth(dmg: number) {
-            for (var i = 0; i < dmg; i++) {
-                if (this.player.health > 0) {
-                    this.healthTicks.removeChildAt(this.hb_tickAmount);
-                    this.hb_tickAmount--;
-                    this.currHealthTickPos -= 4;
+            if (this.hb_tickAmount > 0) {
+                if (this.hb_tickAmount - dmg > 1) {
+                    for (var i = 0; i < dmg; i++) {
+                        this.healthTicks.removeChildAt(this.hb_tickAmount);
+                        this.hb_tickAmount--;
+                        this.currHealthTickPos -= 3.23;
+                    }
+                } else {
+                    var underflowHP = this.hb_tickAmount;
+
+                    for (var i = 0; i <= underflowHP; i++) {
+                        this.healthTicks.removeChildAt(this.hb_tickAmount);
+                        this.hb_tickAmount--;
+                        this.currHealthTickPos -= 3.23;
+                    }
                 }
             }
         }
 
         public gainEnergy(heal: number) {
-            for (var i = 0; i < heal; i++) {
+            if (this.eb_tickAmount <= 100) {
+                if (100 >= this.eb_tickAmount + heal) {
+                    for (var i = 0; i < heal; i++) {
+                        this.energyTicks.create(this.currEnergyTickPos, 43, 'uf_energy_tick');
+                        this.eb_tickAmount++;
+                        this.currEnergyTickPos += 2;
+                    }
+                } else {
+                    var overflowENG = 100 - this.eb_tickAmount;
 
-                this.energyTicks.create(this.currEnergyTickPos, 43, 'uf_energy_tick');
-                this.eb_tickAmount++;
-                this.currEnergyTickPos += 2;
-
+                    for (var i = 0; i < overflowENG; i++) {
+                        this.energyTicks.create(this.currEnergyTickPos, 43, 'uf_energy_tick');
+                        this.eb_tickAmount++;
+                        this.currEnergyTickPos += 2;
+                    }
+                }
             }
         }
 
         public loseEnergy(dmg: number) {
-            for (var i = 0; i < dmg; i++) {
-                //put energy limit below
-                //if (this.player.health > 0) {
-                    this.energyTicks.removeChildAt(this.eb_tickAmount);
-                    this.eb_tickAmount--;
-                    this.currEnergyTickPos -= 2;
-                //}
+            if (this.eb_tickAmount > 0) {
+                if (this.eb_tickAmount - dmg > 1) {
+                    for (var i = 0; i < dmg; i++) {
+                        this.energyTicks.removeChildAt(this.eb_tickAmount);
+                        this.eb_tickAmount--;
+                        this.currEnergyTickPos -= 2;
+                    }
+                } else {
+                    var underflowENG = this.eb_tickAmount;
+
+                    for (var i = 0; i <= underflowENG; i++) {
+                        this.energyTicks.removeChildAt(this.eb_tickAmount);
+                        this.eb_tickAmount--;
+                        this.currEnergyTickPos -= 2;
+                    }
+                }
             }
         }
 
@@ -85,12 +124,11 @@
             this.healthTicks.enableBody = true;
 
             var tick;
-            for (var i = 132; i <= 456; i += 4) {
+            for (var i = 132; i <= 456; i += 3.23) {
                 tick = this.healthTicks.create(i, 7, 'uf_health_tick');
                 this.currHealthTickPos = i;
                 this.hb_tickAmount++;
             }
-
             this.group.add(this.healthTicks);
         }
 
@@ -98,8 +136,8 @@
             this.energyTicks = this.gsm.game.add.group();
             this.energyTicks.fixedToCamera = true;
             this.energyTicks.enableBody = true;
-                        
-            for (var i = 132; i <= 336; i += 2) {
+
+            for (var i = 132; i <= 332; i += 2) {
                 this.energyTicks.create(i, 43, 'uf_energy_tick');
                 this.currEnergyTickPos = i;
                 this.eb_tickAmount++;

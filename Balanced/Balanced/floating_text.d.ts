@@ -29,8 +29,7 @@ declare module FloatingText {
 		animation: string;
         distance: number;
 
-        easing: Phaser.Easing.Sinusoidal | Phaser.Easing.Quartic | Phaser.Easing.Linear
-        | Phaser.Easing.Cubic | Phaser.Easing.Quintic;
+        easing: (k: number) => number;
 
 		timeToLive: number;
 		fixedToCamera: boolean;

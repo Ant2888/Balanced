@@ -54,7 +54,7 @@ var BalancedGame = (function () {
             this.game.load.image(e.key, e.assetUrl, 2, 25);
         }, this);
         rem.addResource(new UTIL.Resource('uf_health_tick', 'assets/res/hud/uf_health_tick.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 4, 31);
+            this.game.load.image(e.key, e.assetUrl, 3.23, 31);
         }, this);
         // --------------------------------- HUD
         rem.addResource(new UTIL.Resource('logo2', 'assets/res/phaser2.jpg', UTIL.TESTLOGO_ID), true, function (e) {
@@ -109,6 +109,9 @@ var BalancedGame = (function () {
         }, this);
         rem.addResource(new UTIL.Resource('tempPlayer', 'assets/res/level1-dungeon/balancedSprite.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
+        }, this);
+        rem.addResource(new UTIL.Resource('baddie', 'assets/res/level1-dungeon/baddie.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 32, 32);
         }, this);
         // END LEVEL 1 RESOURCES
     };

@@ -40,6 +40,7 @@
     <Content Include="assets\res\hud\UL_UI.png" />
     <Content Include="assets\res\in-game-menus\drop_btn_ss.png" />
     <Content Include="assets\res\in-game-menus\inv_menu.png" />
+    <Content Include="assets\res\level1-dungeon\baddie.png" />
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
     <Content Include="assets\res\level1-dungeon\grunge_tile.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />

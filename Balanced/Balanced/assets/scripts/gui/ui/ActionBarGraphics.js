@@ -36,6 +36,18 @@ var GUI;
             this.setStats(this.statsPressed);
             this.setBag(this.bagPressed);
             this.setTown(this.townPressed);
+            this.ab_ab1_text = gsm.game.add.text(470, 662, 'Q', { fontSize: '28px', fill: '#000' });
+            this.ab_ab1_text.fixedToCamera = true;
+            this.group.add(this.ab_ab1_text);
+            this.ab_ab2_text = gsm.game.add.text(550, 662, 'W', { fontSize: '28px', fill: '#000' });
+            this.ab_ab2_text.fixedToCamera = true;
+            this.group.add(this.ab_ab2_text);
+            this.ab_ab3_text = gsm.game.add.text(640, 662, 'E', { fontSize: '28px', fill: '#000' });
+            this.ab_ab3_text.fixedToCamera = true;
+            this.group.add(this.ab_ab3_text);
+            this.ab_ab4_text = gsm.game.add.text(720, 662, 'R', { fontSize: '28px', fill: '#000' });
+            this.ab_ab4_text.fixedToCamera = true;
+            this.group.add(this.ab_ab4_text);
         };
         ActionBarGraphics.prototype.setStats = function (func) {
             this.ab_stats_ss = this.gsm.game.add.button(825, 605, 'ab_stats_ss', func, this, 0, 0, 1);

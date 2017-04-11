@@ -38,6 +38,8 @@
     <Content Include="assets\res\hud\uf_energy_tick.png" />
     <Content Include="assets\res\hud\uf_health_tick.png" />
     <Content Include="assets\res\hud\UL_UI.png" />
+    <Content Include="assets\res\in-game-menus\char_menu.png" />
+    <Content Include="assets\res\in-game-menus\close_btn_ss.png" />
     <Content Include="assets\res\in-game-menus\drop_btn_ss.png" />
     <Content Include="assets\res\in-game-menus\inv_menu.png" />
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
@@ -71,6 +73,8 @@
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\MainMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\OptionsMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\TestGraphic.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\CharGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\BagGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\HealthAndEnergyGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\HelpMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\MainMenuState.ts" />

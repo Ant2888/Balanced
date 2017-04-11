@@ -67,6 +67,21 @@ class BalancedGame {
         }, this);
         // --------------------------------- HUD
 
+        // --------------------------------- character menus
+        rem.addResource(new UTIL.Resource('inv_menu', 'assets/res/in-game-menus/inv_menu.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('char_menu', 'assets/res/in-game-menus/char_menu.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('drop_btn_ss', 'assets/res/in-game-menus/drop_btn_ss.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 117, 41);
+        }, this);
+        rem.addResource(new UTIL.Resource('close_btn_ss', 'assets/res/in-game-menus/close_btn_ss.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 25, 25);
+        }, this);
+        // --------------------------------- character menus
+
 
         rem.addResource(new UTIL.Resource('logo2', 'assets/res/phaser2.jpg', UTIL.TESTLOGO_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);

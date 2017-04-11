@@ -9,8 +9,6 @@ module States {
         }
 
         public update(): void {
-            var num = this.test.getBox().x;
-            this.test.setBox(num + 1);
         }
 
         public init(): void {

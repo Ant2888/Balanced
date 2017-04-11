@@ -7,6 +7,8 @@
     export class PrototypeState extends State {
         private prototypeActionbar: GUI.ActionBarGraphics;
         private prototypeUnitframe: GUI.HealthAndEnergyGraphics;
+        private protoCharMenu: GUI.CharGraphics;
+        private protoBag: GUI.BagGraphics;
         private map: Phaser.Tilemap;
         private backgroundlayer: Phaser.TilemapLayer;
         private blockedLayer: Phaser.TilemapLayer;
@@ -91,25 +93,41 @@
                     },
                     x: this.player.x,
                     y: this.player.y,
-                    timeToLive: 300
+                    timeToLive: 300,
                 });
             }, this);
             // end player
+
             var group = this.gsm.game.add.group();
             this.prototypeActionbar = new GUI.ActionBarGraphics(group);
             this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group,
                 new ENTITIES.Player(this.gsm, 250, 250, 'tempPlayer'));
+            this.protoBag = new GUI.BagGraphics(group);
+            this.protoCharMenu = new GUI.CharGraphics(group);
 
+            this.gsm.getGUIM().addGroup(this.protoBag);
             this.gsm.getGUIM().addGroup(this.prototypeActionbar);
             this.gsm.getGUIM().addGroup(this.prototypeUnitframe);
+            this.gsm.getGUIM().addGroup(this.protoCharMenu);
 
-            this.setupKeybinds(this.prototypeActionbar, this.prototypeUnitframe);
+            this.prototypeActionbar.getBag().onInputDown.add(function (e) {
+                this.protoCharMenu.closeMenu();
+                this.protoBag.flipMenu();
+            }, this);
+
+            this.prototypeActionbar.getStats().onInputDown.add(function () {
+                this.protoBag.closeMenu();
+                this.protoCharMenu.flipMenu();
+            }, this);
+
+            this.setupKeybinds(this.prototypeActionbar, this.prototypeUnitframe, this.protoBag, this.protoCharMenu);
 
             
             return true;
         }
 
-        public setupKeybinds(btns: GUI.ActionBarGraphics , uf: GUI.HealthAndEnergyGraphics): void {
+        public setupKeybinds(btns: GUI.ActionBarGraphics, uf: GUI.HealthAndEnergyGraphics,
+                    bg: GUI.BagGraphics, pcm: GUI.CharGraphics): void {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     btns.getAbility1().frame = 1;
@@ -136,6 +154,8 @@
                 }
 
                 if (e.keyCode == Phaser.Keyboard.I) {
+                    pcm.closeMenu();
+                    bg.flipMenu();
                     btns.getBag().frame = 1;
                 }
 
@@ -144,6 +164,8 @@
                 }
 
                 if (e.keyCode == Phaser.Keyboard.C) {
+                    bg.closeMenu();
+                    pcm.flipMenu();
                     btns.getStats().frame = 1;
                 }
 

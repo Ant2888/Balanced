@@ -16,14 +16,6 @@ var GUI;
             return _super.call(this, 0, group) || this;
         }
         TestGraphic.prototype.initialize = function (gsm) {
-            this.box = gsm.game.add.sprite(150, 150, 'logo2');
-            this.group.add(this.box);
-        };
-        TestGraphic.prototype.getBox = function () {
-            return this.box;
-        };
-        TestGraphic.prototype.setBox = function (num) {
-            this.box.x = num;
         };
         return TestGraphic;
     }(GUI.GameObject));

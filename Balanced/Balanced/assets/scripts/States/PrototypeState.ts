@@ -241,7 +241,7 @@
 
                     new FloatingText(data.gsm.game, <FloatingText.Options>{
                         text: "" + 50,
-                        animation: this.getRandomEffect(),
+                        animation: data.getRandomEffect(),
                         textOptions: <FloatingText.TextOptions>{
                             fontSize: 32,
                             fill: "#228B22",
@@ -263,7 +263,7 @@
 
                     new FloatingText(data.gsm.game, <FloatingText.Options>{
                         text: "" + 5,
-                        animation: this.getRandomEffect(),
+                        animation: data.getRandomEffect(),
                         textOptions: <FloatingText.TextOptions>{
                             fontSize: 32,
                             fill: "#FF0000",

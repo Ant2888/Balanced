@@ -194,7 +194,7 @@ var States;
                     data.isPlayerDead = true;
                     new FloatingText(data.gsm.game, {
                         text: "" + 50,
-                        animation: this.getRandomEffect(),
+                        animation: data.getRandomEffect(),
                         textOptions: {
                             fontSize: 32,
                             fill: "#228B22",
@@ -213,7 +213,7 @@ var States;
                     data.prototypeUnitframe.loseHealth(5);
                     new FloatingText(data.gsm.game, {
                         text: "" + 5,
-                        animation: this.getRandomEffect(),
+                        animation: data.getRandomEffect(),
                         textOptions: {
                             fontSize: 32,
                             fill: "#FF0000",

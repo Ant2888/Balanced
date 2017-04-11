@@ -16,8 +16,6 @@ var States;
             return _super.call(this, gsm) || this;
         }
         TestState2.prototype.update = function () {
-            var num = this.test.getBox().x;
-            this.test.setBox(num - 1);
         };
         TestState2.prototype.init = function () {
             var group = this.gsm.game.add.group();

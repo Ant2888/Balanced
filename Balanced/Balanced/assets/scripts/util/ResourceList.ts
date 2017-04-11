@@ -8,6 +8,10 @@ declare class UTIL {
     //DEFINE ANY GLOBAL RES' YOU NEED
     static TESTLOGO_ID: number; //This is for the test state logo
 
+    // Level sel id's
+    static LEVEL_SELECT_MENU_ID: number;
+    static TUTORIAL_BTN_ID: number;
+
     // Main menu id's
     static MM_BACKGROUND_ID: number; // Main menu background
 
@@ -51,6 +55,11 @@ declare class UTIL {
     static UF_ENERGY_TICK_ID: number;
     static UF_HEALTH_TICK_ID: number
     static BADDIE_ID: number;
+
+    static CLOSE_BTN_SS_ID: number;
+    static DROP_BTN_SS_ID: number;
+    static INV_MENU_ID: number;
+    static CHAR_MENU_ID: number;
     //--------------- HUD
 }
 
@@ -73,7 +82,13 @@ UTIL.UL_UI_ID = 9;
 UTIL.AB_P1_SS_ID = 10;
 UTIL.AB_P2_SS_ID = 11;
 
+UTIL.CLOSE_BTN_SS_ID = 12;
+UTIL.DROP_BTN_SS_ID = 13;
+UTIL.INV_MENU_ID = 14;
+UTIL.CHAR_MENU_ID = 15;
 
+UTIL.LEVEL_SELECT_MENU_ID = 16;
+UTIL.TUTORIAL_BTN_ID = 17;
 
 //FRANCOIS START AT 100
 

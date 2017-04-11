@@ -57,6 +57,28 @@ var BalancedGame = (function () {
             this.game.load.image(e.key, e.assetUrl, 3.23, 31);
         }, this);
         // --------------------------------- HUD
+        // --------------------------------- character menus
+        rem.addResource(new UTIL.Resource('inv_menu', 'assets/res/in-game-menus/inv_menu.png', UTIL.INV_MENU_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('char_menu', 'assets/res/in-game-menus/char_menu.png', UTIL.CHAR_MENU_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('drop_btn_ss', 'assets/res/in-game-menus/drop_btn_ss.png', UTIL.DROP_BTN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 117, 41);
+        }, this);
+        rem.addResource(new UTIL.Resource('close_btn_ss', 'assets/res/in-game-menus/close_btn_ss.png', UTIL.CLOSE_BTN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 25, 25);
+        }, this);
+        // --------------------------------- character menus
+        // --------------------------------- levelsel menus
+        rem.addResource(new UTIL.Resource('level_select_menu', 'assets/res/levelsel-menu/level_select_menu.png', UTIL.LEVEL_SELECT_MENU_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('tutorial_btn', 'assets/res/levelsel-menu/tutorial_btn.png', UTIL.TUTORIAL_BTN_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        // --------------------------------- levelsel menus
         rem.addResource(new UTIL.Resource('logo2', 'assets/res/phaser2.jpg', UTIL.TESTLOGO_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
@@ -124,6 +146,7 @@ var BalancedGame = (function () {
         States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
         States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
         States.PROTOTYPE_STATE = new States.PrototypeState(this.gsm);
+        States.LEVEL_SELECT_STATE = new States.LevelSelectState(this.gsm);
         // END STATES
         this.gsm.initState();
     };

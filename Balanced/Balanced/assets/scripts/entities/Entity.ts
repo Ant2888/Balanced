@@ -4,7 +4,7 @@
      * Basic entity class
      * @author Anthony
      */
-    export abstract class Entity extends Phaser.Sprite{
+    export class Entity extends Phaser.Sprite{
         
         public gsm: States.GameStateManager;
 
@@ -20,7 +20,7 @@
         protected jump: string;
         //END PLACEHOLDERS
 
-        public static FLINCH_TIME = 500;
+        public static FLINCH_TIME = 1000;
 
         protected onDeathCallback: any[];
         protected onDamageCallback: any[];
@@ -38,7 +38,7 @@
             super(gsm.game, x, y, key, frame);
             this.gsm = gsm;
 
-            this.maxHealth = 100;
+            this.health = 100;
             this.flinching = false;
             this.inAnim = false;
 
@@ -48,6 +48,7 @@
 
             this.animTimer = this.gsm.game.time.create(false);
             this.flinchTimer = this.gsm.game.time.create(false);
+            this.gsm.game.add.existing(this);
         }
 
         public getAbilityManager(): COMBAT.AbilityManager {
@@ -136,7 +137,7 @@
          * @param flinch Should the player flinch? Default: true
          * @param display Should we display the damage on the player? Default: true
          */
-        public dealDamage(damage: number, crit: boolean, display?: boolean,
+        public dealDamage(damage: number, crit: boolean, color = "red", display?: boolean,
             flinch?: boolean, flinchLeft?: boolean): boolean {
 
             if (flinchLeft === undefined || flinchLeft === null)
@@ -152,6 +153,9 @@
             if (!this.alive)
                 return false;
 
+            if (this.flinching)
+                return false;
+
             //Show the damage
             if (display) {
                 new FloatingText(this.gsm.game, <FloatingText.Options>{
@@ -160,7 +164,7 @@
                     animation: crit ? "explode" : this.getRandomEffect(),
                     textOptions: <FloatingText.TextOptions>{
                         fontSize: 32,
-                        fill: "#FF0000",
+                        fill: color,
                         stroke: "#00000",
                         strokeThickness: 1,
                         wordWrap: true,
@@ -206,7 +210,7 @@
             this.flinchTimer.start();
 
             //Play the flinch animation
-            this.playAnimState(flinchLeft ? this.flinchL : this.flinchR, 15, true, false);
+            this.playAnimState(flinchLeft ? this.flinchL : this.flinchR, 15, false, true, true);
 
             return true;
         }
@@ -222,7 +226,10 @@
             if (display === undefined || display === null)
                 display = true;
 
-            this.health += hp;
+            if (this.health + hp >= 100)
+                this.health = 100;
+            else
+                this.health += hp;
 
             if (display) {
                 new FloatingText(this.gsm.game, <FloatingText.Options>{

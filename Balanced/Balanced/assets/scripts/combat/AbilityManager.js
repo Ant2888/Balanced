@@ -5,6 +5,7 @@ var COMBAT;
             this.ent = ent;
             if (energyMan === undefined || energyMan === null)
                 energyMan = new COMBAT.EnergyManager(ent);
+            this.energyMan = energyMan;
             this.gsm = gsm;
         }
         AbilityManager.prototype.getEnergyManager = function () {

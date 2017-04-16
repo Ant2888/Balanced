@@ -14,16 +14,18 @@
         private blockedLayer: Phaser.TilemapLayer;
         private isOnGround: boolean;
         private keyboard: Phaser.CursorKeys;
-        private playerABM: COMBAT.AbilityManager;
-        private inAnim = false;
+
+        //private playerABM: COMBAT.AbilityManager;
+        //private inAnim = false;
 
         private baddies: Phaser.Group;
-        private playerHitBoolean: boolean = false;
-        private isPlayerDead: boolean = true;
-        private playerTakenDamageTimer: Phaser.Timer;
+
+        //private playerHitBoolean: boolean = false;
+        //private isPlayerDead: boolean = true;
+        //private playerTakenDamageTimer: Phaser.Timer;
 
         //test player
-        private player: Phaser.Sprite;
+        private player: ENTITIES.Player;
 
         constructor(gsm: States.GameStateManager) {
             super(gsm);
@@ -36,39 +38,26 @@
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
             this.gsm.game.physics.arcade.overlap(this.player, this.baddies, this.playerHit, null, this);
 
-            if (this.prototypeUnitframe.hb_tickAmount <= 0 && this.isPlayerDead == true) {
-                this.player.animations.play('playerDied');
-                this.player.body.velocity.x = 0;
-                this.isPlayerDead = false;
-            }
-
-
             this.setupKeybinds(this);
 
-            if (this.inAnim)
+            if (!this.player.alive)
                 return;
-
-            if (this.isPlayerDead == true) {
-                if (this.keyboard.up.isDown && this.isOnGround) {
-                    this.player.body.velocity.y = -350;
-                    this.player.frame = 261;
-                }
-                if (this.keyboard.left.isDown) {
-                    //Move to the left
-                    this.player.body.velocity.x = -250;
-                    this.player.animations.play('walkLeft');
-                } else if (this.keyboard.right.isDown) {
-                    //Move to the right
-                    this.player.body.velocity.x = 250;
-                    this.player.animations.play('walkRight');
-                } else if (this.prototypeUnitframe.hb_tickAmount > 0) {
-                    if (this.isOnGround) {
-                        this.player.animations.play("idel");
-                        this.player.body.velocity.x = 0;
-                    } else {
-                        this.player.animations.stop();
-                    }
-                }
+            
+            if (this.keyboard.up.isDown && this.isOnGround) {
+                this.player.body.velocity.y = -350;
+                this.player.frame = 261;
+            }
+            if (this.keyboard.left.isDown) {
+                //Move to the left
+                this.player.body.velocity.x = -250;
+                this.player.playAnimState('walkLeft', 10, true, true);
+            } else if (this.keyboard.right.isDown) {
+                //Move to the right
+                this.player.body.velocity.x = 250;
+                this.player.playAnimState('walkRight', 10, true, true);
+            } else {
+                this.player.playAnimState('idel', 4, true, true);
+                this.player.body.velocity.x = 0;
             }
         }
 
@@ -78,8 +67,6 @@
 
         public startup(): boolean {
             console.log("prototype Level Started.");
-            this.playerTakenDamageTimer = this.gsm.game.time.create(false);
-            this.btime = this.gsm.game.time.create(false);
 
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
@@ -95,7 +82,8 @@
 
             // this is just a demo player not where he will be created just used for testing.
             var result = this.findObjectsByType('playerStart', this.map, 'Object Layer');
-            this.player = this.gsm.game.add.sprite(result[0].x, result[0].y, 'tempPlayer');
+
+            this.player = new ENTITIES.Player(this.gsm, result[0].x, result[0].y, 'tempPlayer');
             this.player.anchor.setTo(0.5, 0.5);
             this.player.frame = 131;
 
@@ -108,35 +96,12 @@
             this.createAnimations();
 
             this.player.inputEnabled = true;
-            this.player.events.onInputDown.add(function () {
-                console.log("CLICKING!");
-                var damage = Math.floor(Math.random() * (99)) + 1;
-
-                new FloatingText(this.gsm.game, <FloatingText.Options>{
-                    text: "" + damage,
-                    animation: this.getRandomEffect(),
-                    textOptions: <FloatingText.TextOptions>{
-                        fontSize: 32,
-                        fill: "#FFFFFF",
-                        stroke: "#000000",
-                        strokeThickness: 1,
-                        wordWrap: true,
-                        wordWrapWidth: 200,
-                        font: "Papyrus"
-                    },
-                    x: this.player.x,
-                    y: this.player.y,
-                    timeToLive: 300,
-                });
-            }, this);
-            // end player
             
             this.createBaddies();
 
             var group = this.gsm.game.add.group();
             this.prototypeActionbar = new GUI.ActionBarGraphics(group);
-            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group,
-                new ENTITIES.Player(this.gsm, 250, 250, 'tempPlayer'));
+            this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.protoBag = new GUI.BagGraphics(group);
             this.protoCharMenu = new GUI.CharGraphics(group);
 
@@ -163,95 +128,39 @@
         public createBaddies() {           
             this.baddies = this.gsm.game.add.group();
             for (var i = 0; i < 5; i++) {
-                var baddie = this.gsm.game.add.sprite(i * (800 / 5), 200, 'baddie');
+                var baddie = new ENTITIES.Baddie(this.gsm, (i * (800 / 5)), 200, 'baddie');
 
                 this.gsm.game.physics.arcade.enable(baddie);
                 baddie.body.gravity.y = 300;
                 baddie.body.collideWorldBounds = true;
-
-                baddie.health = 100;
-
                 this.baddies.add(baddie);
             }
         }
 
-        private justHit = false;
-        private btime: Phaser.Timer;
-
         public playerHit(player: Phaser.Sprite, other: Phaser.Sprite | Phaser.Group) {
 
-            if (this.inAnim && !this.justHit) {
-                var damage = Math.floor(Math.random() * (80)) + 1;
-                (<Phaser.Sprite>other).damage(damage);
+            //check if the player is attacking
+            var boolcurAnim = this.player.animations.currentAnim.name;
 
-                new FloatingText(this.gsm.game, <FloatingText.Options>{
-                    easing: Phaser.Easing.Sinusoidal.Out,
-                    text: "" + (damage >= 70 ? "CRIT "+damage: damage),
-                    animation: damage >= 70 ? "explode": this.getRandomEffect(),
-                    textOptions: <FloatingText.TextOptions>{
-                        fontSize: 32,
-                        fill: "yellow",
-                        stroke: "#00000",
-                        strokeThickness: 1,
-                        wordWrap: true,
-                        wordWrapWidth: 200,
-                        font: "Papyrus"
-                    },
-                    x: other.x,
-                    y: other.y,
-                    timeToLive: 300
-                });
+            if ((boolcurAnim == "attackRight" || boolcurAnim == "attackLeft") && !(<ENTITIES.Entity>other).flinching) {
+                var damage = Math.floor(Math.random() * (80)) + 1;
+                (<ENTITIES.Entity>other).dealDamage(damage, damage >= 55, "yellow", true, true);
 
                 if ((<Phaser.Sprite>other).health <= 0) {
                     (<Phaser.Sprite>other).destroy();
-                    var baddie = this.gsm.game.add.sprite((<Phaser.Sprite>other).x+100, 200, 'baddie');
+                    var baddie = new ENTITIES.Baddie(this.gsm, (<Phaser.Sprite>other).x + 100, 200, 'baddie');
                     this.gsm.game.physics.arcade.enable(baddie);
                     baddie.body.gravity.y = 300;
                     baddie.body.collideWorldBounds = true;
-                    baddie.health = 100;
                     this.baddies.add(baddie);
                 }
 
-                this.justHit = true;
-                this.btime.loop(1000, function () {
-                    this.justHit = false;
-                    this.btime.stop();
-                }, this);
-
-                this.btime.start();
-
             }
 
-            if (this.playerHitBoolean == false && this.isPlayerDead == true) {
-                this.playerHitBoolean = true;
-
+            //check if the enemy is attacking
+            if (this.player.flinching == false && this.player.alive) {
                 var damage = Math.floor(Math.random() * (30)) + 1;
-                this.prototypeUnitframe.loseHealth(damage);
-
-                new FloatingText(this.gsm.game, <FloatingText.Options>{     
-                    easing: Phaser.Easing.Sinusoidal.Out,
-                    text: "" + (damage >= 25 ? "CRIT " + damage : damage),
-                    animation: damage >= 25 ? "explode" : this.getRandomEffect(),
-                    textOptions: <FloatingText.TextOptions>{
-                        fontSize: 32,
-                        fill: "#FF0000",
-                        stroke: "#00000",
-                        strokeThickness: 1,
-                        wordWrap: true,
-                        wordWrapWidth: 200,
-                        font: "Papyrus"
-                    },
-                    x: this.player.x,
-                    y: this.player.y,
-                    timeToLive: 300
-                });
-
-                this.playerTakenDamageTimer.loop(1000, function () {
-                    this.playerHitBoolean = false;
-                    this.playerTakenDamageTimer.stop();
-                }, this);
-
-                this.playerTakenDamageTimer.start();
+                this.player.dealDamage(damage, damage >= 20, "red", true, true);
             }
         }
 
@@ -271,15 +180,12 @@
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.prototypeActionbar.getAbility1().frame = 1;
 
-                    if(data.player.animations.currentAnim.name == 'walkLeft')
-                        data.playAnimState(data.player, 'attackLeft',
-                            false, false);
+                    if (data.player.animations.currentAnim.name == 'walkLeft')
+                        data.player.playAnimState('attackLeft', 11, false, false);
                     if (data.player.animations.currentAnim.name == 'walkRight')
-                        data.playAnimState(data.player, 'attackRight',
-                            false, false);
+                        data.player.playAnimState('attackRight', 11, false, false);
                     if (data.player.animations.currentAnim.name == 'idel')
-                        data.playAnimState(data.player, 'attackRight',
-                            false, false);
+                        data.player.playAnimState('attackLeft', 11, false, false);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.W) {
@@ -296,24 +202,7 @@
 
                 if (e.keyCode == Phaser.Keyboard.Z) {
                     data.prototypeActionbar.getPotion1().frame = 1;
-                    data.prototypeUnitframe.gainHealth(25);
-
-                    new FloatingText(data.gsm.game, <FloatingText.Options>{
-                        text: "" + 25,
-                        animation: data.getRandomEffect(),
-                        textOptions: <FloatingText.TextOptions>{
-                            fontSize: 32,
-                            fill: "#228B22",
-                            stroke: "#000000",
-                            strokeThickness: 1,
-                            wordWrap: true,
-                            wordWrapWidth: 200,
-                            font: "Papyrus"
-                        },
-                        x: data.player.x,
-                        y: data.player.y,
-                        timeToLive: 300
-                    });
+                    data.player.healEntity(25, false);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.X) {
@@ -337,73 +226,19 @@
                 }
 
                 if (e.keyCode == Phaser.Keyboard.K) {
-                    data.prototypeUnitframe.gainHealth(50);
-                    data.isPlayerDead = true;
-
-                    new FloatingText(data.gsm.game, <FloatingText.Options>{
-                        text: "" + 50,
-                        animation: data.getRandomEffect(),
-                        textOptions: <FloatingText.TextOptions>{
-                            fontSize: 32,
-                            fill: "#228B22",
-                            stroke: "#000000",
-                            strokeThickness: 1,
-                            wordWrap: true,
-                            wordWrapWidth: 200,
-                            font: "Papyrus"
-                        },
-                        x: data.player.x,
-                        y: data.player.y,
-                        timeToLive: 300
-                    });
-
+                    data.player.healEntity(50, false);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.J) {
-                    data.prototypeUnitframe.loseHealth(5);
-
-                    new FloatingText(data.gsm.game, <FloatingText.Options>{
-                        text: "" + 5,
-                        animation: data.getRandomEffect(),
-                        textOptions: <FloatingText.TextOptions>{
-                            fontSize: 32,
-                            fill: "#FF0000",
-                            stroke: "#000000",
-                            strokeThickness: 1,
-                            wordWrap: true,
-                            wordWrapWidth: 200,
-                            font: "Papyrus"
-                        },
-                        x: data.player.x,
-                        y: data.player.y,
-                        timeToLive: 300
-                    });
+                    data.player.dealDamage(5, false, "red", true, false);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.M) {
-                    data.prototypeUnitframe.gainEnergy(5);
-
-                    new FloatingText(data.gsm.game, <FloatingText.Options>{
-                        text: "+" + 5+ " Energy",
-                        animation: data.getRandomEffect(),
-                        textOptions: <FloatingText.TextOptions>{
-                            fontSize: 32,
-                            fill: "blue",
-                            stroke: "#000000",
-                            strokeThickness: 1,
-                            wordWrap: true,
-                            wordWrapWidth: 200,
-                            font: "Papyrus"
-                        },
-                        x: data.player.x,
-                        y: data.player.y,
-                        timeToLive: 300
-                    });
-
+                    data.player.getAbilityManager().getEnergyManager().regenEnergy(5);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.N) {
-                    data.prototypeUnitframe.loseEnergy(5);
+                    data.player.getAbilityManager().getEnergyManager().useAbility(5);
                 }
             }
 
@@ -465,28 +300,6 @@
 
         public getType(): any {
             return this;
-        }
-
-        public getRandomEffect(): string {
-            var effectArray = ['smoke', 'physics', 'fade'];
-            var randomNumber = Math.floor(Math.random() * effectArray.length) + 1;
-            return effectArray[randomNumber];
-        }
-
-        public playAnimState(player: any, animStateIndex, loop = false, releasable = false, timeoutPeriod = 1000) {
-            if (this.inAnim)
-                return;
-            player.animations.stop();
-            player.animations.play(animStateIndex, 15, loop);
-            player.body.velocity.x = 0;
-            if (!releasable)
-                this.inAnim = true;
-            var tf = this.tempFunc.bind(this);
-            setTimeout(tf, 500);
-        }
-
-        public tempFunc() {
-            this.inAnim = false;
         }
     }
 }

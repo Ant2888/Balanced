@@ -19,7 +19,7 @@ var ENTITIES;
         function Entity(gsm, x, y, key, frame) {
             var _this = _super.call(this, gsm.game, x, y, key, frame) || this;
             _this.gsm = gsm;
-            _this.maxHealth = 100;
+            _this.health = 100;
             _this.flinching = false;
             _this.inAnim = false;
             _this.onDeathCallback = new Array();
@@ -27,6 +27,7 @@ var ENTITIES;
             _this.onHealCallback = new Array();
             _this.animTimer = _this.gsm.game.time.create(false);
             _this.flinchTimer = _this.gsm.game.time.create(false);
+            _this.gsm.game.add.existing(_this);
             return _this;
         }
         Entity.prototype.getAbilityManager = function () {
@@ -101,7 +102,8 @@ var ENTITIES;
          * @param flinch Should the player flinch? Default: true
          * @param display Should we display the damage on the player? Default: true
          */
-        Entity.prototype.dealDamage = function (damage, crit, display, flinch, flinchLeft) {
+        Entity.prototype.dealDamage = function (damage, crit, color, display, flinch, flinchLeft) {
+            if (color === void 0) { color = "red"; }
             if (flinchLeft === undefined || flinchLeft === null)
                 flinchLeft = false;
             if (flinch === undefined || flinch === null)
@@ -111,6 +113,8 @@ var ENTITIES;
             //Already dead
             if (!this.alive)
                 return false;
+            if (this.flinching)
+                return false;
             //Show the damage
             if (display) {
                 new FloatingText(this.gsm.game, {
@@ -119,7 +123,7 @@ var ENTITIES;
                     animation: crit ? "explode" : this.getRandomEffect(),
                     textOptions: {
                         fontSize: 32,
-                        fill: "#FF0000",
+                        fill: color,
                         stroke: "#00000",
                         strokeThickness: 1,
                         wordWrap: true,
@@ -158,7 +162,7 @@ var ENTITIES;
             }, this);
             this.flinchTimer.start();
             //Play the flinch animation
-            this.playAnimState(flinchLeft ? this.flinchL : this.flinchR, 15, true, false);
+            this.playAnimState(flinchLeft ? this.flinchL : this.flinchR, 15, false, true, true);
             return true;
         };
         /**
@@ -170,7 +174,10 @@ var ENTITIES;
         Entity.prototype.healEntity = function (hp, crit, display) {
             if (display === undefined || display === null)
                 display = true;
-            this.health += hp;
+            if (this.health + hp >= 100)
+                this.health = 100;
+            else
+                this.health += hp;
             if (display) {
                 new FloatingText(this.gsm.game, {
                     easing: Phaser.Easing.Sinusoidal.Out,
@@ -255,7 +262,7 @@ var ENTITIES;
         return Entity;
     }(Phaser.Sprite));
     //END PLACEHOLDERS
-    Entity.FLINCH_TIME = 500;
+    Entity.FLINCH_TIME = 1000;
     ENTITIES.Entity = Entity;
 })(ENTITIES || (ENTITIES = {}));
 //# sourceMappingURL=Entity.js.map

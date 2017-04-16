@@ -11,6 +11,7 @@
             if (energyMan === undefined || energyMan === null)
                 energyMan = new EnergyManager(ent);
 
+            this.energyMan = energyMan;
             this.gsm = gsm;
         }
 

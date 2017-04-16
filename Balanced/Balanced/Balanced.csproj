@@ -69,6 +69,7 @@
     <TypeScriptCompile Include="assets\scripts\combat\AbilityManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\EnergyManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\PlayerAbilities.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\Baddie.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Player.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />

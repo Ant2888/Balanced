@@ -31,10 +31,8 @@ var GUI;
             this.displayOverlay();
             this.player.addOnHealCallback(this.gainHealth, this);
             this.player.addOnDamageCallback(this.loseHealth, this);
-            this.player.getAbilityManager().getEnergyManager()
-                .addOnEnergyGainCallback(this.gainEnergy, this);
-            this.player.getAbilityManager().getEnergyManager()
-                .addOnEnergyLossCallback(this.loseEnergy, this);
+            this.player.getAbilityManager().getEnergyManager().addOnEnergyGainCallback(this.gainEnergy, this);
+            this.player.getAbilityManager().getEnergyManager().addOnEnergyLossCallback(this.loseEnergy, this);
         };
         HealthAndEnergyGraphics.prototype.gainHealth = function (heal) {
             if (this.hb_tickAmount <= 100) {

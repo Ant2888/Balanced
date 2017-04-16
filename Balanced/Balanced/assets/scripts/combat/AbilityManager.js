@@ -1,8 +1,10 @@
 var COMBAT;
 (function (COMBAT) {
     var AbilityManager = (function () {
-        function AbilityManager(ent, energyMan, gsm) {
+        function AbilityManager(ent, gsm, energyMan) {
             this.ent = ent;
+            if (energyMan === undefined || energyMan === null)
+                energyMan = new COMBAT.EnergyManager(ent);
             this.energyMan = energyMan;
             this.gsm = gsm;
         }

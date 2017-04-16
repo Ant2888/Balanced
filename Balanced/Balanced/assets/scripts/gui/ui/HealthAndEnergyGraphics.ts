@@ -1,8 +1,8 @@
 ﻿module GUI {
     /**
-    *This is the prototype state of the game
+    * This will be the unit frame for the player
     *
-    * @author Emerson
+    * @author Emerson, Anthony
     */
     export class HealthAndEnergyGraphics extends GameObject {
         private gsm: States.GameStateManager;
@@ -30,6 +30,10 @@
             this.buildEnergyBar();
             this.displayOverlay();
 
+            this.player.addOnHealCallback(this.gainHealth, this);
+            this.player.addOnDamageCallback(this.loseHealth, this);
+            this.player.getAbilityManager().getEnergyManager().addOnEnergyGainCallback(this.gainEnergy, this);
+            this.player.getAbilityManager().getEnergyManager().addOnEnergyLossCallback(this.loseEnergy, this);
         }
 
         public gainHealth(heal: number) {

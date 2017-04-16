@@ -1,1 +1,0 @@
-//# sourceMappingURL=HealthAndEnergyGraphic.js.map

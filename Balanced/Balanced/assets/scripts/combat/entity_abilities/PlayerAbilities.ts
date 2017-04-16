@@ -1,8 +1,12 @@
 ﻿module COMBAT {
+    /**
+     * Simple ability class for the player
+     * @author Anthony
+     */
     export class PlayerAbilities extends AbilityManager{
 
-        constructor(ent: ENTITIES.Player, energyMan: EnergyManager, gsm: States.GameStateManager) {
-            super(ent, energyMan, gsm);
+        constructor(ent: ENTITIES.Player, gsm: States.GameStateManager, energyMan?: EnergyManager) {
+            super(ent, gsm, energyMan);
         }
 
         public attemptCast(ability: number): boolean {

@@ -30,7 +30,7 @@
     <Content Include="assets\res\hud\ab_ab3_ss.png" />
     <Content Include="assets\res\hud\ab_ab4_ss.png" />
     <Content Include="assets\res\hud\ab_bag_ss.png" />
-    <Content Include="assets\res\hud\AB_BG.png" />
+    <Content Include="assets\res\hud\ab_bg.png" />
     <Content Include="assets\res\hud\ab_p1_ss.png" />
     <Content Include="assets\res\hud\ab_p2_ss.png" />
     <Content Include="assets\res\hud\ab_stats_ss.png" />
@@ -69,6 +69,7 @@
     <TypeScriptCompile Include="assets\scripts\combat\AbilityManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\EnergyManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\PlayerAbilities.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\Baddie.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Player.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />

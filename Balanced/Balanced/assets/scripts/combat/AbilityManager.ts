@@ -5,8 +5,12 @@
         protected energyMan: EnergyManager;
         protected gsm: States.GameStateManager
 
-        constructor(ent: ENTITIES.Entity, energyMan: EnergyManager, gsm: States.GameStateManager) {
+        constructor(ent: ENTITIES.Entity, gsm: States.GameStateManager, energyMan?: EnergyManager) {
             this.ent = ent;
+
+            if (energyMan === undefined || energyMan === null)
+                energyMan = new EnergyManager(ent);
+
             this.energyMan = energyMan;
             this.gsm = gsm;
         }

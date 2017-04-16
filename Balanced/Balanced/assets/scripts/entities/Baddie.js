@@ -11,18 +11,18 @@ var __extends = (this && this.__extends) || (function () {
 var ENTITIES;
 (function (ENTITIES) {
     /**
-     * The Player Entity class. This will represent the main character
+     * This is just a test of the baddie entities
      * @author Anthony
      */
-    var Player = (function (_super) {
-        __extends(Player, _super);
-        function Player(gsm, x, y, key, frame) {
+    var Baddie = (function (_super) {
+        __extends(Baddie, _super);
+        function Baddie(gsm, x, y, key, frame) {
             var _this = _super.call(this, gsm, x, y, key, frame) || this;
             _this.abm = new COMBAT.PlayerAbilities(_this, gsm);
             return _this;
         }
-        return Player;
+        return Baddie;
     }(ENTITIES.Entity));
-    ENTITIES.Player = Player;
+    ENTITIES.Baddie = Baddie;
 })(ENTITIES || (ENTITIES = {}));
-//# sourceMappingURL=Player.js.map
+//# sourceMappingURL=Baddie.js.map

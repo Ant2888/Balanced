@@ -1,9 +1,9 @@
 ﻿module ENTITIES {
     /**
-     * The Player Entity class. This will represent the main character
+     * This is just a test of the baddie entities
      * @author Anthony
      */
-    export class Player extends Entity {
+    export class Baddie extends Entity {
 
 
         constructor(gsm: States.GameStateManager, x: number, y: number, key?: string | Phaser.RenderTexture
@@ -12,7 +12,7 @@
 
             this.abm = new COMBAT.PlayerAbilities(this, gsm);
         }
-        
+
 
     }
 }

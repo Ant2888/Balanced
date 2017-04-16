@@ -1,8 +1,7 @@
 ﻿module GUI {
     /**
-    *This is the help menu gui of the game
-    *
-    * @author Emerson
+    * Level Select Menu
+    * @author Anthony
     */
     export class LevelSelectGraphics extends GameObject {
 

@@ -29,6 +29,9 @@ var ENTITIES;
             _this.flinchTimer = _this.gsm.game.time.create(false);
             return _this;
         }
+        Entity.prototype.getAbilityManager = function () {
+            return this.abm;
+        };
         /**
          * Clears all current callbacks related to the entity.
          */

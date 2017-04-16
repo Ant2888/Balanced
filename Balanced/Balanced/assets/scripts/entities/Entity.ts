@@ -4,9 +4,9 @@
      * Basic entity class
      * @author Anthony
      */
-    export class Entity extends Phaser.Sprite{
+    export abstract class Entity extends Phaser.Sprite{
         
-        protected gsm: States.GameStateManager;
+        public gsm: States.GameStateManager;
 
         //PLACEHOLDERS UNTIL FOUND
         protected attackL: string;
@@ -31,6 +31,8 @@
         public inAnim: boolean;
         public animTimer: Phaser.Timer;
 
+        protected abm: COMBAT.PlayerAbilities;
+
         constructor(gsm: States.GameStateManager, x: number, y: number, key?: string | Phaser.RenderTexture
                 | Phaser.BitmapData | PIXI.Texture, frame?: string | number) {
             super(gsm.game, x, y, key, frame);
@@ -46,6 +48,10 @@
 
             this.animTimer = this.gsm.game.time.create(false);
             this.flinchTimer = this.gsm.game.time.create(false);
+        }
+
+        public getAbilityManager(): COMBAT.AbilityManager {
+            return this.abm;
         }
 
         /**

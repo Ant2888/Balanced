@@ -17,7 +17,9 @@ var ENTITIES;
     var Player = (function (_super) {
         __extends(Player, _super);
         function Player(gsm, x, y, key, frame) {
-            return _super.call(this, gsm, x, y, key, frame) || this;
+            var _this = _super.call(this, gsm, x, y, key, frame) || this;
+            _this.abm = new COMBAT.PlayerAbilities(_this, gsm);
+            return _this;
         }
         return Player;
     }(ENTITIES.Entity));

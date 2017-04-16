@@ -11,9 +11,8 @@ var __extends = (this && this.__extends) || (function () {
 var GUI;
 (function (GUI) {
     /**
-    *This is the help menu gui of the game
-    *
-    * @author Emerson
+    * Level Select Menu
+    * @author Anthony
     */
     var LevelSelectGraphics = (function (_super) {
         __extends(LevelSelectGraphics, _super);

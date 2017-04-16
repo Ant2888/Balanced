@@ -11,13 +11,13 @@ var __extends = (this && this.__extends) || (function () {
 var COMBAT;
 (function (COMBAT) {
     /**
-     * Simple ability class
+     * Simple ability class for the player
      * @author Anthony
      */
     var PlayerAbilities = (function (_super) {
         __extends(PlayerAbilities, _super);
-        function PlayerAbilities(ent, energyMan, gsm) {
-            return _super.call(this, ent, energyMan, gsm) || this;
+        function PlayerAbilities(ent, gsm, energyMan) {
+            return _super.call(this, ent, gsm, energyMan) || this;
         }
         PlayerAbilities.prototype.attemptCast = function (ability) {
             switch (ability) {

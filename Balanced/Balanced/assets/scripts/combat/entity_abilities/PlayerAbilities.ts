@@ -1,4 +1,8 @@
 ﻿module COMBAT {
+    /**
+     * Simple ability class
+     * @author Anthony
+     */
     export class PlayerAbilities extends AbilityManager{
 
         constructor(ent: ENTITIES.Player, energyMan: EnergyManager, gsm: States.GameStateManager) {

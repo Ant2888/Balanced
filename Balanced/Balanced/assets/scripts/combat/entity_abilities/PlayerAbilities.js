@@ -10,6 +10,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var COMBAT;
 (function (COMBAT) {
+    /**
+     * Simple ability class
+     * @author Anthony
+     */
     var PlayerAbilities = (function (_super) {
         __extends(PlayerAbilities, _super);
         function PlayerAbilities(ent, energyMan, gsm) {

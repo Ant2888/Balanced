@@ -10,6 +10,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var ENTITIES;
 (function (ENTITIES) {
+    /**
+     * Basic entity class
+     * @author Anthony
+     */
     var Entity = (function (_super) {
         __extends(Entity, _super);
         function Entity(gsm, x, y, key, frame) {
@@ -17,6 +21,14 @@ var ENTITIES;
             _this.gsm = gsm;
             return _this;
         }
+        /**
+         * Gets a random effect for the FCT
+         */
+        Entity.prototype.getRandomEffect = function () {
+            var effectArray = ['smoke', 'physics', 'fade'];
+            var randomNumber = Math.floor(Math.random() * effectArray.length) + 1;
+            return effectArray[randomNumber];
+        };
         return Entity;
     }(Phaser.Sprite));
     ENTITIES.Entity = Entity;

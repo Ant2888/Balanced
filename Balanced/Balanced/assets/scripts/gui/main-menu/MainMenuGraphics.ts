@@ -53,7 +53,7 @@
 
         private playButtonPressed(): any {
             console.log('play button was pressed');
-            this.gsm.setState(States.LEVEL_SELECT_STATE);
+            this.gsm.setState(States.TOWN_STATE);
         }
 
         private loadButtonPressed(): any {

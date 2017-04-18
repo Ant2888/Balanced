@@ -27,6 +27,9 @@ declare class States {
 
     static LEVEL_SELECT_STATE: States.State;
     static LEVEL_SELECT_STATE_ID: number;
+
+    static TOWN_STATE: States.State;
+    static TOWN_STATE_ID: number;
     
 }
 
@@ -45,3 +48,4 @@ States.OPTIONS_MENU_STATE_ID = 201;
 States.OPTIONS_MENU_STATE_ID = 202;
 
 States.PROTOTYPE_STATE_ID = 203;
+States.TOWN_STATE_ID = 204;

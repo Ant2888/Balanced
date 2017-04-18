@@ -83,11 +83,17 @@ class BalancedGame {
         // --------------------------------- character menus
 
         // --------------------------------- levelsel menus
-        rem.addResource(new UTIL.Resource('level_select_menu', 'assets/res/levelsel-menu/level_select_menu.png', UTIL.LEVEL_SELECT_MENU_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl);
+        rem.addResource(new UTIL.Resource('ls_background', 'assets/res/level-menu/ls_background.png', UTIL.LS_BACKGROUND_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl);
         }, this);
-        rem.addResource(new UTIL.Resource('tutorial_btn', 'assets/res/levelsel-menu/tutorial_btn.png', UTIL.TUTORIAL_BTN_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl);
+        rem.addResource(new UTIL.Resource('ls_level1_btn', 'assets/res/level-menu/ls_level1_btns.png', UTIL.LS_LEVEL1_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 280, 80);
+        }, this);
+        rem.addResource(new UTIL.Resource('ls_level2_btn', 'assets/res/level-menu/ls_level2_btns.png', UTIL.LS_LEVEL2_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 280, 80);
+        }, this);
+        rem.addResource(new UTIL.Resource('ls_level3_btn', 'assets/res/level-menu/ls_level3_btns.png', UTIL.LS_LEVEL3_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 280, 80);
         }, this);
         // --------------------------------- levelsel menus
 
@@ -95,73 +101,77 @@ class BalancedGame {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
 
-        // MAIN MENU RESOURCES
+        // -----------------------------------MAIN MENU RESOURCES
         rem.addResource(new UTIL.Resource('mmBackground', 'assets/res/main-menu/mm_background.png', UTIL.MM_BACKGROUND_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
-
-        // play button
         rem.addResource(new UTIL.Resource('mmPlayButton', 'assets/res/main-menu/mm_play_btns.png', UTIL.MM_PLAYBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
         }, this);
-
-        // load buton
         rem.addResource(new UTIL.Resource('mmLoadButton', 'assets/res/main-menu/mm_load_btns.png', UTIL.MM_LOADBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
         }, this);
-
-        // help button
         rem.addResource(new UTIL.Resource('mmHelpButton', 'assets/res/main-menu/mm_help_btns.png', UTIL.MM_HELPBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
         }, this);
-
-        // options button
         rem.addResource(new UTIL.Resource('mmOptionsButton', 'assets/res/main-menu/mm_options_btns.png', UTIL.MM_HELPBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 330, 80);
         }, this);
-        // END MAIN MENU
+        // -------------------------------------END MAIN MENU
 
-        // OPTIONS MENU RESOURCES
+        // -------------------------------------OPTIONS MENU RESOURCES
         rem.addResource(new UTIL.Resource('omBackground', 'assets/res/options-menu/om_background.png', UTIL.OM_BACKGROUND_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
-
         rem.addResource(new UTIL.Resource('omOkButton', 'assets/res/options-menu/om_ok_btns.png', UTIL.OM_OKBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 150, 80);
         }, this);
-
         rem.addResource(new UTIL.Resource('omCancelButton', 'assets/res/options-menu/om_cancel_btns.png', UTIL.OM_CANCELBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 300, 80);
         }, this);
-        // END OPTIONS MENU
+        // --------------------------------------END OPTIONS MENU
 
-        // HELP MENU RESOURCES
+        // ---------------------------------------HELP MENU RESOURCES
         rem.addResource(new UTIL.Resource('hmBackground', 'assets/res/help-menu/hm_background.png', UTIL.HM_BACKGROUND_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
-
         rem.addResource(new UTIL.Resource('hmOkButton', 'assets/res/help-menu/hm_ok_btns.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 150, 80);
         }, this);
-        // END HELP MENU RESOURCES
+        // ----------------------------------------END HELP MENU RESOURCES
 
-        // LEVEL 1 RESOURCES
+        // ----------------------------------------TOWN RESOURCES
+        rem.addResource(new UTIL.Resource('twn_background', 'assets/res/town/twn_background.png', UTIL.TWN_BACKGROUND_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1280, 720);
+        }, this);
+        rem.addResource(new UTIL.Resource('twn_shop', 'assets/res/town/twn_shop_sprite.png', UTIL.TWN_STORE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 448, 288);
+        }, this);
+        rem.addResource(new UTIL.Resource('twn_inn', 'assets/res/town/twn_inn_sprite.png', UTIL.TWN_INN_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 320, 288);
+        }, this);
+        rem.addResource(new UTIL.Resource('twn_dungeon', 'assets/res/town/twn_dungeon_sprite.png', UTIL.TWN_DUNGEON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 187, 154);
+        }, this);
+        rem.addResource(new UTIL.Resource('twn_hall', 'assets/res/town/twn_hall_sprite.png', UTIL.TWN_HALL_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 224, 352);
+        }, this);
+        // ----------------------------------------TOWN RESOURCES END
+
+        // -----------------------------------------LEVEL 1 RESOURCES
         rem.addResource(new UTIL.Resource('level1', 'assets/res/level1-dungeon/Balanced_level1.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
             this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
         }, this);
-
         rem.addResource(new UTIL.Resource('gameTiles', 'assets/res/level1-dungeon/grunge_tile.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
-
         rem.addResource(new UTIL.Resource('tempPlayer', 'assets/res/level1-dungeon/balancedSprite.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
         }, this);
-
         rem.addResource(new UTIL.Resource('baddie', 'assets/res/level1-dungeon/baddie.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 32, 32);
         }, this);
-        // END LEVEL 1 RESOURCES
+        // -------------------------------------------END LEVEL 1 RESOURCES
 
         }
 
@@ -175,6 +185,7 @@ class BalancedGame {
         States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
         States.PROTOTYPE_STATE = new States.PrototypeState(this.gsm);
         States.LEVEL_SELECT_STATE = new States.LevelSelectState(this.gsm);
+        States.TOWN_STATE = new States.TownState(this.gsm);
         // END STATES
         this.gsm.initState();
     }

@@ -1,7 +1,7 @@
 ﻿module States {
     /**
      * Level Sel state
-     * @author Anthony
+     * @author Anthony, Emerson
      */
     export class LevelSelectState extends State {
         private selMenu: GUI.LevelSelectGraphics;

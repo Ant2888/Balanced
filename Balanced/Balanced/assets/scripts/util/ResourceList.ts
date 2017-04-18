@@ -9,8 +9,10 @@ declare class UTIL {
     static TESTLOGO_ID: number; //This is for the test state logo
 
     // Level sel id's
-    static LEVEL_SELECT_MENU_ID: number;
-    static TUTORIAL_BTN_ID: number;
+    static CLOSE_BTN_SS_ID: number;
+    static DROP_BTN_SS_ID: number;
+    static INV_MENU_ID: number;
+    static CHAR_MENU_ID: number;
 
     // Main menu id's
     static MM_BACKGROUND_ID: number; // Main menu background
@@ -56,10 +58,16 @@ declare class UTIL {
     static UF_HEALTH_TICK_ID: number
     static BADDIE_ID: number;
 
-    static CLOSE_BTN_SS_ID: number;
-    static DROP_BTN_SS_ID: number;
-    static INV_MENU_ID: number;
-    static CHAR_MENU_ID: number;
+    static LS_BACKGROUND_ID: number;
+    static LS_LEVEL1_ID: number;
+    static LS_LEVEL2_ID: number;
+    static LS_LEVEL3_ID: number;
+
+    static TWN_BACKGROUND_ID: number;
+    static TWN_STORE_ID: number;
+    static TWN_INN_ID: number;
+    static TWN_DUNGEON_ID: number;
+    static TWN_HALL_ID: number;
     //--------------- HUD
 }
 
@@ -87,9 +95,6 @@ UTIL.DROP_BTN_SS_ID = 13;
 UTIL.INV_MENU_ID = 14;
 UTIL.CHAR_MENU_ID = 15;
 
-UTIL.LEVEL_SELECT_MENU_ID = 16;
-UTIL.TUTORIAL_BTN_ID = 17;
-
 //FRANCOIS START AT 100
 
 //EMERSON START AT 200
@@ -112,3 +117,14 @@ UTIL.PROTOTYPE_TILESET_ID = 211;
 UTIL.UF_ENERGY_TICK_ID = 212;
 UTIL.UF_HEALTH_TICK_ID = 213;
 UTIL.BADDIE_ID = 214;
+
+UTIL.LS_BACKGROUND_ID = 215;
+UTIL.LS_LEVEL1_ID = 216;
+UTIL.LS_LEVEL2_ID = 217;
+UTIL.LS_LEVEL3_ID = 218;
+
+UTIL.TWN_BACKGROUND_ID = 219;
+UTIL.TWN_STORE_ID = 220;
+UTIL.TWN_INN_ID = 221;
+UTIL.TWN_DUNGEON_ID = 222;
+UTIL.TWN_HALL_ID = 223;

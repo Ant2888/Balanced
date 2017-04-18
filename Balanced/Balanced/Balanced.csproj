@@ -42,11 +42,13 @@
     <Content Include="assets\res\in-game-menus\close_btn_ss.png" />
     <Content Include="assets\res\in-game-menus\drop_btn_ss.png" />
     <Content Include="assets\res\in-game-menus\inv_menu.png" />
+    <Content Include="assets\res\level-menu\ls_background.png" />
+    <Content Include="assets\res\level-menu\ls_level1_btns.png" />
+    <Content Include="assets\res\level-menu\ls_level2_btns.png" />
+    <Content Include="assets\res\level-menu\ls_level3_btns.png" />
     <Content Include="assets\res\level1-dungeon\baddie.png" />
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
     <Content Include="assets\res\level1-dungeon\grunge_tile.png" />
-    <Content Include="assets\res\levelsel-menu\level_select_menu.png" />
-    <Content Include="assets\res\levelsel-menu\tutorial_btn.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />
     <Content Include="assets\res\main-menu\mm_help_btns.png" />
     <Content Include="assets\res\main-menu\mm_load_btns.png" />
@@ -55,6 +57,11 @@
     <Content Include="assets\res\options-menu\om_background.png" />
     <Content Include="assets\res\options-menu\om_cancel_btns.png" />
     <Content Include="assets\res\options-menu\om_ok_btns.png" />
+    <Content Include="assets\res\town\twn_background.png" />
+    <Content Include="assets\res\town\twn_dungeon_sprite.png" />
+    <Content Include="assets\res\town\twn_hall_sprite.png" />
+    <Content Include="assets\res\town\twn_inn_sprite.png" />
+    <Content Include="assets\res\town\twn_shop_sprite.png" />
     <Content Include="assets\scripts\floatingText.js" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
@@ -81,6 +88,7 @@
     <TypeScriptCompile Include="assets\scripts\gui\ui\CharGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\BagGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\HealthAndEnergyGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\TownGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\HelpMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\LevelSelectState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\MainMenuState.ts" />
@@ -89,6 +97,7 @@
     <TypeScriptCompile Include="assets\scripts\gui\ui\ActionBarGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
     <TypeScriptCompile Include="assets\scripts\States\test-states\TestState2.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\TownState.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />
     <TypeScriptCompile Include="assets\scripts\util\ResourceList.ts" />
     <TypeScriptCompile Include="assets\scripts\util\ResourceManager.ts" />
@@ -113,7 +122,10 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="assets\res\level2-dungeon\" />
+    <Folder Include="assets\res\level3-dungeon\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

@@ -12,7 +12,7 @@ var States;
 (function (States) {
     /**
      * Level Sel state
-     * @author Anthony
+     * @author Anthony, Emerson
      */
     var LevelSelectState = (function (_super) {
         __extends(LevelSelectState, _super);

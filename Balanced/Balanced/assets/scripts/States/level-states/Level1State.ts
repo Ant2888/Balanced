@@ -11,35 +11,35 @@
         private bag: GUI.BagGraphics;
 
         private map: Phaser.Tilemap;
-
-        private doorlayer: Phaser.TilemapLayer;
-        private floorlayer: Phaser.TilemapLayer;        
+        
+        private floorlayer: Phaser.TilemapLayer;
         private starislayer: Phaser.TilemapLayer;
         private wallPaperlayer: Phaser.TilemapLayer;
         private backgroundlayer: Phaser.TilemapLayer;
 
         private stairOverlap: boolean;
         private keyboard: Phaser.CursorKeys;
-                
-        private baddies: Phaser.Group;
-                
+
+        private doors: Phaser.Group;
+        private enemies: Phaser.Group;
+
         //test player
         private player: ENTITIES.Player;
         private bm: BALANCE.BalanceManager;
+        private objectLayer: any;
 
         constructor(gsm: States.GameStateManager) {
             super(gsm);
         }
 
-        public update(): void {           
+        public update(): void {
 
-            this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);            
-            this.gsm.game.physics.arcade.collide(this.baddies, this.floorlayer);
+            this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
+            this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
 
+           
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
-            this.gsm.game.physics.arcade.overlap(this.player, this.baddies, this.playerHit, null, this);
-
-            this.setupKeybinds(this);
+            this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.playerHit, null, this);
 
             if (this.player.body.onFloor())
                 this.player.isJumping = false;
@@ -65,6 +65,7 @@
         public init(): void {
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
+
         }
 
         public startup(): boolean {
@@ -73,25 +74,24 @@
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
             this.map = this.gsm.game.add.tilemap('level1');
-            
 
-            this.map.addTilesetImage('grunge_tile', 'grunge_tile'); 
-            this.map.addTilesetImage('castledoors', 'castledoors'); 
-            this.map.addTilesetImage('tiled', 'tiled'); 
+
+            this.map.addTilesetImage('grunge_tile', 'grunge_tile');
+            this.map.addTilesetImage('castledoors', 'castledoors');
+            this.map.addTilesetImage('tiled', 'tiled');
 
             // create layer
             this.backgroundlayer = this.map.createLayer('background');
-            this.wallPaperlayer = this.map.createLayer('wall paper');   
+            this.wallPaperlayer = this.map.createLayer('wall paper');
             this.starislayer = this.map.createLayer('stairs');
             this.floorlayer = this.map.createLayer('floors');
-            this.doorlayer = this.map.createLayer('door');
 
             // collision on blockedLayer           
-            this.map.setCollisionBetween(1, 10000, true, 'floors');
+            this.map.setCollisionBetween(1, 2000, true, 'floors');
 
-                        
-            // this is just a demo player not where he will be created just used for testing.
-            // var result = this.findObjectsByType('playerStart', this.map, 'Object Layer');
+            this.createEnemies();
+            this.createDoors();
+                                  
 
             this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
 
@@ -99,8 +99,8 @@
             this.gsm.game.camera.follow(this.player);
 
             this.player.inputEnabled = true;
-
-            this.createBaddies();
+                        
+            
 
             this.bm = new BALANCE.BalanceManager(this.gsm);
 
@@ -130,35 +130,64 @@
             return true;
         }
 
-        
+        public createEnemies(): void {
+            this.enemies = this.gsm.game.add.group();
 
-        public createBaddies() {
-            this.baddies = this.gsm.game.add.group();
-            for (var i = 0; i < 5; i++) {
-                var baddie = new ENTITIES.Baddie(this.gsm, (i * (800 / 5)), 200, 'baddie');
-
-                var bmd = this.gsm.game.add.bitmapData(baddie.width,5);
-                
-                // draw to the canvas context like normal
-                bmd.ctx.beginPath();
-                bmd.ctx.rect(0, 0, baddie.width, 5);
-                bmd.ctx.fillStyle = 'green';
-                bmd.ctx.fill();
-
-                // use the bitmap data as the texture for the sprite
-                var image = this.gsm.game.add.image(0, -10, bmd);
-
-                                               
-                baddie.addChild(image);
-                
-                this.gsm.game.physics.arcade.enable(baddie);
-                baddie.body.collideWorldBounds = true;
-                this.baddies.add(baddie);
-            }
-            
+            this.objectLayer = this.findObjectsByType('enemy', this.map, 'enemies');
+            this.objectLayer.forEach(function (element) {
+                this.placeEnemies(element, this.enemies);
+            }, this);
         }
 
-        public playerHit(player: Phaser.Sprite, other: Phaser.Sprite | Phaser.Group) {
+        public createDoors(): void {
+            this.doors = this.gsm.game.add.group();            
+            this.objectLayer = this.findObjectsByType('door', this.map, 'enemies');
+
+            this.objectLayer.forEach(function (element) {
+                this.createFromTiledObject(element, this.doors);
+            }, this);
+        }
+
+        public makeSpriteHealthBar(sprite: Phaser.Sprite): void {
+
+            // This the red background of the healthbar
+            var bmd = this.gsm.game.add.bitmapData(sprite.width, 5);
+
+            bmd.ctx.beginPath();
+            bmd.ctx.rect(0, 0, sprite.width, 5);
+            bmd.ctx.fillStyle = 'red';
+            bmd.ctx.fill();
+            var background = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd);
+            sprite.addChildAt(background, 0);
+
+            // This the green background of the healthbar, it will change depending on how much damage is done
+            // It is removed in the updateHealthBar function
+            var bmd2 = this.gsm.game.add.bitmapData(sprite.width, 5);
+
+            bmd2.ctx.beginPath();
+            bmd2.ctx.rect(0, 0, sprite.width, 5);
+            bmd2.ctx.fillStyle = 'green';
+            bmd2.ctx.fill();
+            var health = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd2);
+            sprite.addChildAt(health, 1);
+        }
+
+        public updateHealthBar(sprite: Phaser.Sprite): void {
+            // remove the old green layer to be replaced
+            sprite.removeChildAt(1);
+
+            // rebuild the green bar to the health bars width adjusted to the width
+            var bmd = this.gsm.game.add.bitmapData((sprite.width / 100) * sprite.health, 5);
+
+            bmd.ctx.beginPath();
+            bmd.ctx.rect(0, 0, (sprite.width / 100) * sprite.health, 5);
+            bmd.ctx.fillStyle = 'green';
+            bmd.ctx.fill();
+            var health = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd);
+            sprite.addChildAt(health, 1);
+        }
+
+        public playerHit(player: Phaser.Sprite, other: Phaser.Sprite | Phaser.Group): void {
 
             //check if the player is attacking
             var boolcurAnim = this.player.animations.currentAnim.name;
@@ -166,14 +195,16 @@
             if ((boolcurAnim == ENTITIES.Entity.attackR || boolcurAnim == ENTITIES.Entity.attackL) && !(<ENTITIES.Entity>other).flinching) {
                 var damage = Math.floor(Math.random() * (80)) + 1;
                 (<ENTITIES.Entity>other).dealDamage(damage, damage >= 55, "yellow", true, true);
+                this.updateHealthBar(<ENTITIES.Entity>other);
 
                 if ((<Phaser.Sprite>other).health <= 0) {
                     (<Phaser.Sprite>other).destroy();
-                    var baddie = new ENTITIES.Baddie(this.gsm, (<Phaser.Sprite>other).x + 100, 200, 'baddie');
+                    var baddie = new ENTITIES.Baddie(this.gsm, (<Phaser.Sprite>other).x, (<Phaser.Sprite>other).y - 100, 'baddie');
+                    this.makeSpriteHealthBar(baddie);
                     this.gsm.game.physics.arcade.enable(baddie);
                     baddie.body.gravity.y = 300;
                     baddie.body.collideWorldBounds = true;
-                    this.baddies.add(baddie);
+                    this.enemies.add(baddie);
                 }
 
             }
@@ -182,7 +213,7 @@
             if (this.player.flinching == false && this.player.alive) {
                 var damage = Math.floor(Math.random() * (30)) + 1;
                 this.player.dealDamage(damage, damage >= 20, "red", true, true, ENTITIES.Entity.FLINCH_TIME,
-                    { dx: 100, dy: -40, time: 350 });
+                    { dx: 100, dy: -40, time: 350 });                
             }
         }
 
@@ -260,6 +291,7 @@
                 }
 
                 if (e.keyCode == Phaser.Keyboard.W) {
+                    data.bm.dispatchEvent(new BALANCE.TestEvent(data.gsm), data.player);
                     data.actionbar.getAbility2().frame = 0;
                 }
 
@@ -293,7 +325,7 @@
             }
         }
 
-        public findObjectsByType(type, map, layer) {
+        public findObjectsByType(type, map, layer): any {
             var result = new Array();
             map.objects[layer].forEach(function (element) {
                 if (element.properties.type === type) {
@@ -304,12 +336,31 @@
             return result;
         }
 
+        public placeEnemies(element, group): void {            
+            var baddie = new ENTITIES.Baddie(this.gsm, element.x, element.y, 'baddie');
+            this.makeSpriteHealthBar(baddie);
+
+            this.gsm.game.physics.arcade.enable(baddie);
+            baddie.body.collideWorldBounds = true;
+            this.enemies.add(baddie);
+        }
+
+        public createFromTiledObject(element, group): void {
+            console.log(element.x + '   ' + element.y);
+            var sprite = group.create(element.x, element.y, element.properties.sprite);
+            sprite.anchor.setTo(0, .67);
+            //copy all properties to the sprite
+            Object.keys(element.properties).forEach(function (key) {
+                sprite[key] = element.properties[key];
+            });
+        }
+
         public end(): boolean {
             this.gsm.game.camera.reset();
             this.player.destroy();
-            this.baddies.destroy(true);
+            this.enemies.destroy(true);
             this.map.destroy();
-            return true;            
+            return true;
         }
 
         public getType(): any {

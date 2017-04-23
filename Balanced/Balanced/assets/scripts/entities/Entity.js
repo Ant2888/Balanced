@@ -40,7 +40,7 @@ var ENTITIES;
             return _this;
         }
         Entity.prototype.jump = function (vy) {
-            if (this.stunned)
+            if (this.stunned || !this.alive)
                 return false;
             this.body.velocity.y = vy;
             this.playAnimState(this.facingLeft ? ENTITIES.Entity.jumpL : ENTITIES.Entity.jumpR, 10, false, false, true);
@@ -52,7 +52,7 @@ var ENTITIES;
          * @param dx How to move it.
          */
         Entity.prototype.walk = function (vx) {
-            if (this.stunned)
+            if (this.stunned || !this.alive)
                 return false;
             if (vx == 0) {
                 this.body.velocity.x = 0;

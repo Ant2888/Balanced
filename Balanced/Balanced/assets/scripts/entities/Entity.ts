@@ -87,7 +87,7 @@
         }
 
         public jump(vy: number): boolean {
-            if (this.stunned)
+            if (this.stunned || !this.alive)
                 return false;
 
             this.body.velocity.y = vy;
@@ -103,7 +103,7 @@
          * @param dx How to move it.
          */
         public walk(vx: number): boolean {
-            if (this.stunned)
+            if (this.stunned || !this.alive)
                 return false;
 
             if (vx == 0) {

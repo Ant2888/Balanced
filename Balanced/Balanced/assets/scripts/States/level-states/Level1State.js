@@ -22,10 +22,9 @@ var States;
         }
         Level1State.prototype.update = function () {
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
-            this.gsm.game.physics.arcade.collide(this.baddies, this.floorlayer);
+            this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
-            this.gsm.game.physics.arcade.overlap(this.player, this.baddies, this.playerHit, null, this);
-            this.setupKeybinds(this);
+            this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.playerHit, null, this);
             if (this.player.body.onFloor())
                 this.player.isJumping = false;
             if (!this.player.alive)
@@ -63,16 +62,14 @@ var States;
             this.wallPaperlayer = this.map.createLayer('wall paper');
             this.starislayer = this.map.createLayer('stairs');
             this.floorlayer = this.map.createLayer('floors');
-            this.doorlayer = this.map.createLayer('door');
             // collision on blockedLayer           
-            this.map.setCollisionBetween(1, 10000, true, 'floors');
-            // this is just a demo player not where he will be created just used for testing.
-            // var result = this.findObjectsByType('playerStart', this.map, 'Object Layer');
+            this.map.setCollisionBetween(1, 2000, true, 'floors');
+            this.createEnemies();
+            this.createDoors();
             this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
             this.player.inputEnabled = true;
-            this.createBaddies();
             this.bm = new BALANCE.BalanceManager(this.gsm);
             var group = this.gsm.game.add.group();
             this.actionbar = new GUI.ActionBarGraphics(group);
@@ -94,23 +91,50 @@ var States;
             this.setupKeybinds(this);
             return true;
         };
-        Level1State.prototype.createBaddies = function () {
-            this.baddies = this.gsm.game.add.group();
-            for (var i = 0; i < 5; i++) {
-                var baddie = new ENTITIES.Baddie(this.gsm, (i * (800 / 5)), 200, 'baddie');
-                var bmd = this.gsm.game.add.bitmapData(baddie.width, 5);
-                // draw to the canvas context like normal
-                bmd.ctx.beginPath();
-                bmd.ctx.rect(0, 0, baddie.width, 5);
-                bmd.ctx.fillStyle = 'green';
-                bmd.ctx.fill();
-                // use the bitmap data as the texture for the sprite
-                var image = this.gsm.game.add.image(0, -10, bmd);
-                baddie.addChild(image);
-                this.gsm.game.physics.arcade.enable(baddie);
-                baddie.body.collideWorldBounds = true;
-                this.baddies.add(baddie);
-            }
+        Level1State.prototype.createEnemies = function () {
+            this.enemies = this.gsm.game.add.group();
+            this.objectLayer = this.findObjectsByType('enemy', this.map, 'enemies');
+            this.objectLayer.forEach(function (element) {
+                this.placeEnemies(element, this.enemies);
+            }, this);
+        };
+        Level1State.prototype.createDoors = function () {
+            this.doors = this.gsm.game.add.group();
+            this.objectLayer = this.findObjectsByType('door', this.map, 'enemies');
+            this.objectLayer.forEach(function (element) {
+                this.createFromTiledObject(element, this.doors);
+            }, this);
+        };
+        Level1State.prototype.makeSpriteHealthBar = function (sprite) {
+            // This the red background of the healthbar
+            var bmd = this.gsm.game.add.bitmapData(sprite.width, 5);
+            bmd.ctx.beginPath();
+            bmd.ctx.rect(0, 0, sprite.width, 5);
+            bmd.ctx.fillStyle = 'red';
+            bmd.ctx.fill();
+            var background = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd);
+            sprite.addChildAt(background, 0);
+            // This the green background of the healthbar, it will change depending on how much damage is done
+            // It is removed in the updateHealthBar function
+            var bmd2 = this.gsm.game.add.bitmapData(sprite.width, 5);
+            bmd2.ctx.beginPath();
+            bmd2.ctx.rect(0, 0, sprite.width, 5);
+            bmd2.ctx.fillStyle = 'green';
+            bmd2.ctx.fill();
+            var health = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd2);
+            sprite.addChildAt(health, 1);
+        };
+        Level1State.prototype.updateHealthBar = function (sprite) {
+            // remove the old green layer to be replaced
+            sprite.removeChildAt(1);
+            // rebuild the green bar to the health bars width adjusted to the width
+            var bmd = this.gsm.game.add.bitmapData((sprite.width / 100) * sprite.health, 5);
+            bmd.ctx.beginPath();
+            bmd.ctx.rect(0, 0, (sprite.width / 100) * sprite.health, 5);
+            bmd.ctx.fillStyle = 'green';
+            bmd.ctx.fill();
+            var health = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd);
+            sprite.addChildAt(health, 1);
         };
         Level1State.prototype.playerHit = function (player, other) {
             //check if the player is attacking
@@ -118,13 +142,15 @@ var States;
             if ((boolcurAnim == ENTITIES.Entity.attackR || boolcurAnim == ENTITIES.Entity.attackL) && !other.flinching) {
                 var damage = Math.floor(Math.random() * (80)) + 1;
                 other.dealDamage(damage, damage >= 55, "yellow", true, true);
+                this.updateHealthBar(other);
                 if (other.health <= 0) {
                     other.destroy();
-                    var baddie = new ENTITIES.Baddie(this.gsm, other.x + 100, 200, 'baddie');
+                    var baddie = new ENTITIES.Baddie(this.gsm, other.x, other.y - 100, 'baddie');
+                    this.makeSpriteHealthBar(baddie);
                     this.gsm.game.physics.arcade.enable(baddie);
                     baddie.body.gravity.y = 300;
                     baddie.body.collideWorldBounds = true;
-                    this.baddies.add(baddie);
+                    this.enemies.add(baddie);
                 }
             }
             //check if the enemy is attacking
@@ -189,6 +215,7 @@ var States;
                     data.actionbar.getAbility1().frame = 0;
                 }
                 if (e.keyCode == Phaser.Keyboard.W) {
+                    data.bm.dispatchEvent(new BALANCE.TestEvent(data.gsm), data.player);
                     data.actionbar.getAbility2().frame = 0;
                 }
                 if (e.keyCode == Phaser.Keyboard.E) {
@@ -224,10 +251,26 @@ var States;
             });
             return result;
         };
+        Level1State.prototype.placeEnemies = function (element, group) {
+            var baddie = new ENTITIES.Baddie(this.gsm, element.x, element.y, 'baddie');
+            this.makeSpriteHealthBar(baddie);
+            this.gsm.game.physics.arcade.enable(baddie);
+            baddie.body.collideWorldBounds = true;
+            this.enemies.add(baddie);
+        };
+        Level1State.prototype.createFromTiledObject = function (element, group) {
+            console.log(element.x + '   ' + element.y);
+            var sprite = group.create(element.x, element.y, element.properties.sprite);
+            sprite.anchor.setTo(0, .67);
+            //copy all properties to the sprite
+            Object.keys(element.properties).forEach(function (key) {
+                sprite[key] = element.properties[key];
+            });
+        };
         Level1State.prototype.end = function () {
             this.gsm.game.camera.reset();
             this.player.destroy();
-            this.baddies.destroy(true);
+            this.enemies.destroy(true);
             this.map.destroy();
             return true;
         };

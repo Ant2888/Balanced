@@ -5,6 +5,7 @@ var BALANCE;
      * for a given state. This class should almost never be used
      * continously through states BUT it can be as it will continue
      * to revert events even if it failed to revert one.
+     * AS OF NOW USE REINIT THIS ON A STATE BY STATE BASIS
      *
      * @author Anthony
      */
@@ -24,6 +25,9 @@ var BALANCE;
             }
             else
                 this.allEvents = new Array();
+            this.notif_group = this.gsm.game.add.group();
+            this.notification = new GUI.BalanceEventGraphics(this.notif_group);
+            this.gsm.getGUIM().addGroup(this.notification);
         }
         /**
          * This will apply ALL events to their respective entity.
@@ -67,7 +71,10 @@ var BALANCE;
         BalanceManager.prototype.dispatchEvent = function (event, entity) {
             if (!event.dispatchEvent(entity))
                 return false;
-            this.allEvents.push(new BALANCE.EventDetails(event, entity));
+            var e = new BALANCE.EventDetails(event, entity);
+            e.event.dispatchEvent(e.effected);
+            this.allEvents.push(e);
+            this.notification.announceEvent(e.event);
             return true;
         };
         return BalanceManager;

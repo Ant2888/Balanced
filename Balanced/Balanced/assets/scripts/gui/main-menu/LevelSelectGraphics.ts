@@ -51,6 +51,7 @@
 
         public setCancelButton(func: any): void {
             this.cancelButton = this.gsm.game.add.button(500, 606, 'omCancelButton', func, this, 1, 0, 2);
+            this.group.add(this.cancelButton);
         }
 
         private level1ButtonPressed(): any {

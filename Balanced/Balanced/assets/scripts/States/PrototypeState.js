@@ -26,25 +26,24 @@ var States;
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
             this.gsm.game.physics.arcade.overlap(this.player, this.baddies, this.playerHit, null, this);
             this.setupKeybinds(this);
+            if (this.player.body.onFloor())
+                this.player.isJumping = false;
             if (!this.player.alive)
                 return;
             if (this.keyboard.up.isDown && this.isOnGround) {
-                this.player.body.velocity.y = -350;
-                this.player.frame = 261;
+                this.player.jump(-350);
+                this.player.isJumping = true;
             }
             if (this.keyboard.left.isDown) {
                 //Move to the left
-                this.player.body.velocity.x = -250;
-                this.player.playAnimState('walkLeft', 10, true, true);
+                this.player.walk(-250);
             }
             else if (this.keyboard.right.isDown) {
                 //Move to the right
-                this.player.body.velocity.x = 250;
-                this.player.playAnimState('walkRight', 10, true, true);
+                this.player.walk(250);
             }
             else {
-                this.player.playAnimState('idel', 4, true, true);
-                this.player.body.velocity.x = 0;
+                this.player.walk(0);
             }
         };
         PrototypeState.prototype.init = function () {
@@ -64,16 +63,11 @@ var States;
             // this is just a demo player not where he will be created just used for testing.
             var result = this.findObjectsByType('playerStart', this.map, 'Object Layer');
             this.player = new ENTITIES.Player(this.gsm, result[0].x, result[0].y, 'tempPlayer');
-            this.player.anchor.setTo(0.5, 0.5);
-            this.player.frame = 131;
-            this.gsm.game.physics.arcade.enable(this.player);
-            this.player.body.gravity.y = 500;
-            this.player.body.collideWorldBounds = true;
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
-            this.createAnimations();
             this.player.inputEnabled = true;
             this.createBaddies();
+            this.bm = new BALANCE.BalanceManager(this.gsm);
             var group = this.gsm.game.add.group();
             this.prototypeActionbar = new GUI.ActionBarGraphics(group);
             this.prototypeUnitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
@@ -98,16 +92,14 @@ var States;
             this.baddies = this.gsm.game.add.group();
             for (var i = 0; i < 5; i++) {
                 var baddie = new ENTITIES.Baddie(this.gsm, (i * (800 / 5)), 200, 'baddie');
-                this.gsm.game.physics.arcade.enable(baddie);
                 baddie.body.gravity.y = 300;
-                baddie.body.collideWorldBounds = true;
                 this.baddies.add(baddie);
             }
         };
         PrototypeState.prototype.playerHit = function (player, other) {
             //check if the player is attacking
             var boolcurAnim = this.player.animations.currentAnim.name;
-            if ((boolcurAnim == "attackRight" || boolcurAnim == "attackLeft") && !other.flinching) {
+            if ((boolcurAnim == ENTITIES.Entity.attackR || boolcurAnim == ENTITIES.Entity.attackL) && !other.flinching) {
                 var damage = Math.floor(Math.random() * (80)) + 1;
                 other.dealDamage(damage, damage >= 55, "yellow", true, true);
                 if (other.health <= 0) {
@@ -122,27 +114,17 @@ var States;
             //check if the enemy is attacking
             if (this.player.flinching == false && this.player.alive) {
                 var damage = Math.floor(Math.random() * (30)) + 1;
-                this.player.dealDamage(damage, damage >= 20, "red", true, true);
+                this.player.dealDamage(damage, damage >= 20, "red", true, true, ENTITIES.Entity.FLINCH_TIME, { dx: 100, dy: -40, time: 350 });
             }
-        };
-        PrototypeState.prototype.createAnimations = function () {
-            this.player.animations.add('walkLeft', [117, 118, 119, 120, 121, 122, 123, 124, 125], 10, false);
-            this.player.animations.add('walkRight', [143, 144, 145, 146, 147, 148, 149, 150, 151], 10, false);
-            this.player.animations.add('playerDied', [260, 261, 262, 263, 264], 6, false);
-            this.player.animations.add('idel', [26, 32], 4, true);
-            this.player.animations.add('attackRight', [195, 196, 197, 198, 199, 200, 199, 198, 197, 196, 195], 11, false);
-            this.player.animations.add('attackLeft', [169, 170, 171, 172, 173, 174, 173, 172, 171, 170, 169], 11, false);
         };
         PrototypeState.prototype.setupKeybinds = function (data) {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.prototypeActionbar.getAbility1().frame = 1;
-                    if (data.player.animations.currentAnim.name == 'walkLeft')
-                        data.player.playAnimState('attackLeft', 11, false, false);
-                    if (data.player.animations.currentAnim.name == 'walkRight')
-                        data.player.playAnimState('attackRight', 11, false, false);
-                    if (data.player.animations.currentAnim.name == 'idel')
-                        data.player.playAnimState('attackLeft', 11, false, false);
+                    if (data.player.facingLeft)
+                        data.player.playAnimState(ENTITIES.Entity.attackL, 11, false, false);
+                    else
+                        data.player.playAnimState(ENTITIES.Entity.attackR, 11, false, false);
                 }
                 if (e.keyCode == Phaser.Keyboard.W) {
                     data.prototypeActionbar.getAbility2().frame = 1;
@@ -191,6 +173,7 @@ var States;
                     data.prototypeActionbar.getAbility1().frame = 0;
                 }
                 if (e.keyCode == Phaser.Keyboard.W) {
+                    data.bm.dispatchEvent(new BALANCE.TestEvent(data.gsm), data.player);
                     data.prototypeActionbar.getAbility2().frame = 0;
                 }
                 if (e.keyCode == Phaser.Keyboard.E) {

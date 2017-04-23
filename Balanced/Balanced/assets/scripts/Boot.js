@@ -56,6 +56,9 @@ var BalancedGame = (function () {
         rem.addResource(new UTIL.Resource('uf_health_tick', 'assets/res/hud/uf_health_tick.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl, 3.23, 31);
         }, this);
+        rem.addResource(new UTIL.Resource('balance_notif', 'assets/res/balance-menus/balance_notif.png', UTIL.BALANCE_NOTIF_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 520, 146);
+        }, this);
         // --------------------------------- HUD
         // --------------------------------- character menus
         rem.addResource(new UTIL.Resource('inv_menu', 'assets/res/in-game-menus/inv_menu.png', UTIL.INV_MENU_ID), true, function (e) {
@@ -148,8 +151,8 @@ var BalancedGame = (function () {
         rem.addResource(new UTIL.Resource('gameTiles', 'assets/res/level1-dungeon/grunge_tile.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
-        rem.addResource(new UTIL.Resource('tempPlayer', 'assets/res/level1-dungeon/balancedSprite.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
+        rem.addResource(new UTIL.Resource('tempPlayer', 'assets/res/level1-dungeon/WarriorSprite.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 96, 96);
         }, this);
         rem.addResource(new UTIL.Resource('baddie', 'assets/res/level1-dungeon/baddie.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 32, 32);

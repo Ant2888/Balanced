@@ -10,9 +10,9 @@
             | Phaser.BitmapData | PIXI.Texture, frame?: string | number) {
             super(gsm, x, y, key, frame);
 
-            this.abm = new COMBAT.PlayerAbilities(this, gsm);
+            //this.abm = new COMBAT.PlayerAbilities(this, gsm);
         }
-
-
+        
+        protected createAnimations(): void {}
     }
 }

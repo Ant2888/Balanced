@@ -1,4 +1,7 @@
 ﻿module GUI {
+    /**
+     * @author Anthony
+     */
     export class BagGraphics extends GameObject {
 
         private dropBtn: Phaser.Button;

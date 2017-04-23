@@ -39,7 +39,7 @@ var GUI;
             this.group.add(this.inn);
         };
         TownGraphics.prototype.setDungeonButton = function (func) {
-            this.dungeon = this.gsm.game.add.button(1028, 0, 'twn_dungeon', func, this, 1, 0, 2);
+            this.dungeon = this.gsm.game.add.button(1028, 0, 'twn_dungeon', func, this, 2, 0, 1);
             this.group.add(this.dungeon);
         };
         TownGraphics.prototype.setHallButton = function (func) {

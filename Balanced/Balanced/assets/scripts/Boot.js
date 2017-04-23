@@ -167,7 +167,7 @@ var BalancedGame = (function () {
             this.game.load.spritesheet(e.key, e.assetUrl, 37, 64);
         }, this);
         rem.addResource(new UTIL.Resource('baddie', 'assets/res/level1-dungeon/baddie.png', UTIL.BADDIE_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 32, 32);
+            this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
         }, this);
         // -------------------------------------------END LEVEL 1 RESOURCES
     };

@@ -1,4 +1,8 @@
 ﻿module BALANCE {
+    /**
+     * Details for the Event.
+     * @author Anthony
+     */
     export class EventDetails {
 
         public event: BalanceEvent;

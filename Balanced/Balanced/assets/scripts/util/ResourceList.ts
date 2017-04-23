@@ -68,6 +68,8 @@ declare class UTIL {
     static TWN_INN_ID: number;
     static TWN_DUNGEON_ID: number;
     static TWN_HALL_ID: number;
+    
+    static BALANCE_NOTIF_ID: number;
     //--------------- HUD
 }
 
@@ -94,7 +96,7 @@ UTIL.CLOSE_BTN_SS_ID = 12;
 UTIL.DROP_BTN_SS_ID = 13;
 UTIL.INV_MENU_ID = 14;
 UTIL.CHAR_MENU_ID = 15;
-
+UTIL.BALANCE_NOTIF_ID = 16;
 //FRANCOIS START AT 100
 
 //EMERSON START AT 200

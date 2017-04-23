@@ -1,5 +1,9 @@
 var BALANCE;
 (function (BALANCE) {
+    /**
+     * Details for the Event.
+     * @author Anthony
+     */
     var EventDetails = (function () {
         function EventDetails(event, effected) {
             this.event = event;

@@ -4,6 +4,7 @@
      * for a given state. This class should almost never be used
      * continously through states BUT it can be as it will continue
      * to revert events even if it failed to revert one.
+     * AS OF NOW USE REINIT THIS ON A STATE BY STATE BASIS
      *
      * @author Anthony
      */
@@ -18,6 +19,12 @@
          * All the EventDetails that have occured with this manager in place.
          */
         protected allEvents: EventDetails[];
+
+        /**
+         * The graphic to be displayed in the game.
+         */
+        protected notification: GUI.BalanceEventGraphics;
+        protected notif_group: Phaser.Group;
 
         /**
          * Constructor for the manager. If a previous event list is loaded it will
@@ -35,6 +42,10 @@
             }
             else
                 this.allEvents = new Array();
+            
+            this.notif_group = this.gsm.game.add.group();
+            this.notification = new GUI.BalanceEventGraphics(this.notif_group);
+            this.gsm.getGUIM().addGroup(this.notification);
         }
 
         /**
@@ -88,7 +99,11 @@
             if (!event.dispatchEvent(entity))
                 return false;
 
-            this.allEvents.push(new EventDetails(event, entity));
+            var e = new EventDetails(event, entity);
+
+            e.event.dispatchEvent(e.effected);
+            this.allEvents.push(e);
+            this.notification.announceEvent(e.event);
 
             return true;
         }

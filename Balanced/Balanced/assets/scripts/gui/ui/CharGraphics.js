@@ -10,6 +10,9 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var GUI;
 (function (GUI) {
+    /**
+     * @author Anthony
+     */
     var CharGraphics = (function (_super) {
         __extends(CharGraphics, _super);
         function CharGraphics(group) {

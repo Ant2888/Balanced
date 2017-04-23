@@ -10,6 +10,9 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var GUI;
 (function (GUI) {
+    /**
+     * @author Anthony
+     */
     var BagGraphics = (function (_super) {
         __extends(BagGraphics, _super);
         function BagGraphics(group) {

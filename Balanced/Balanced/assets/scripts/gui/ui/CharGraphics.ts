@@ -1,4 +1,7 @@
 ﻿module GUI {
+    /**
+     * @author Anthony
+     */
     export class CharGraphics extends GameObject {
         
         private char_menu: Phaser.Sprite;

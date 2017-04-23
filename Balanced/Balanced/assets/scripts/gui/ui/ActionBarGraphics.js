@@ -142,29 +142,29 @@ var GUI;
             console.log('town button was pressed');
             this.gsm.setState(States.TOWN_STATE);
         };
-        ActionBarGraphics.prototype.potion1Pressed = function () {
-            console.log('potion1 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        ActionBarGraphics.prototype.potion1Pressed = function (ply) {
+            this.getPotion1().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.POTION_ONE);
         };
         ActionBarGraphics.prototype.potion2Pressed = function () {
             console.log('potion2 button was pressed');
             //this.gsm.setState(States.PROTOTYPE_STATE);
         };
-        ActionBarGraphics.prototype.ability1Pressed = function () {
-            console.log('ability1 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        ActionBarGraphics.prototype.ability1Pressed = function (ply) {
+            this.getAbility1().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_ONE);
         };
-        ActionBarGraphics.prototype.ability2Pressed = function () {
-            console.log('ability2 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        ActionBarGraphics.prototype.ability2Pressed = function (ply) {
+            this.getAbility2().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_TWO);
         };
-        ActionBarGraphics.prototype.ability3Pressed = function () {
-            console.log('ability3 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        ActionBarGraphics.prototype.ability3Pressed = function (ply) {
+            this.getAbility3().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_THREE);
         };
-        ActionBarGraphics.prototype.ability4Pressed = function () {
-            console.log('ability4 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        ActionBarGraphics.prototype.ability4Pressed = function (ply) {
+            this.getAbility4().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_FOUR);
         };
         return ActionBarGraphics;
     }(GUI.GameObject));

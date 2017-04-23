@@ -40,7 +40,7 @@ var ENTITIES;
             return _this;
         }
         Entity.prototype.jump = function (vy) {
-            if (this.stunned)
+            if (this.stunned || !this.alive)
                 return false;
             this.body.velocity.y = vy;
             this.playAnimState(this.facingLeft ? ENTITIES.Entity.jumpL : ENTITIES.Entity.jumpR, 10, false, false, true);
@@ -52,7 +52,7 @@ var ENTITIES;
          * @param dx How to move it.
          */
         Entity.prototype.walk = function (vx) {
-            if (this.stunned)
+            if (this.stunned || !this.alive)
                 return false;
             if (vx == 0) {
                 this.body.velocity.x = 0;
@@ -192,7 +192,7 @@ var ENTITIES;
                         font: "Papyrus"
                     },
                     x: this.x,
-                    y: this.y,
+                    y: this.y - 35,
                     timeToLive: 300
                 });
             }
@@ -254,7 +254,7 @@ var ENTITIES;
             }, this);
             this.flinchTimer.start();
             //Play the flinch animation
-            this.playAnimState(flinchLeft ? Entity.flinchL : Entity.flinchR, 10, false, false, true);
+            this.playAnimState(flinchLeft ? Entity.flinchL : Entity.flinchR, 10, false, false, false);
             return true;
         };
         /**
@@ -285,7 +285,7 @@ var ENTITIES;
                         font: "Papyrus"
                     },
                     x: this.x,
-                    y: this.y,
+                    y: this.y - 35,
                     timeToLive: 300
                 });
             }

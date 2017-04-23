@@ -25,7 +25,7 @@ var States;
             this.gsm.game.physics.arcade.collide(this.baddies, this.floorlayer);
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
             this.gsm.game.physics.arcade.overlap(this.player, this.baddies, this.playerHit, null, this);
-            this.setupKeybinds(this);
+            this.gsm.game.physics.arcade.overlap(this.player.energyWave.bullets, this.baddies, this.player.dealWithOverlap, null, this.player);
             if (this.player.body.onFloor())
                 this.player.isJumping = false;
             if (!this.player.alive)
@@ -130,30 +130,25 @@ var States;
             //check if the enemy is attacking
             if (this.player.flinching == false && this.player.alive) {
                 var damage = Math.floor(Math.random() * (30)) + 1;
-                this.player.dealDamage(damage, damage >= 20, "red", true, true, ENTITIES.Entity.FLINCH_TIME, { dx: 100, dy: -40, time: 350 });
+                this.player.dealDamage(damage, damage >= 20, "red", true, true, ENTITIES.Entity.FLINCH_TIME);
             }
         };
         Level1State.prototype.setupKeybinds = function (data) {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {
-                    data.actionbar.getAbility1().frame = 1;
-                    if (data.player.facingLeft)
-                        data.player.playAnimState(ENTITIES.Entity.attackL, 11, false, false);
-                    else
-                        data.player.playAnimState(ENTITIES.Entity.attackR, 11, false, false);
+                    data.actionbar.ability1Pressed(data.player);
                 }
                 if (e.keyCode == Phaser.Keyboard.W) {
-                    data.actionbar.getAbility2().frame = 1;
+                    data.actionbar.ability2Pressed(data.player);
                 }
                 if (e.keyCode == Phaser.Keyboard.E) {
-                    data.actionbar.getAbility3().frame = 1;
+                    data.actionbar.ability3Pressed(data.player);
                 }
                 if (e.keyCode == Phaser.Keyboard.R) {
-                    data.actionbar.getAbility4().frame = 1;
+                    data.actionbar.ability4Pressed(data.player);
                 }
                 if (e.keyCode == Phaser.Keyboard.Z) {
-                    data.actionbar.getPotion1().frame = 1;
-                    data.player.healEntity(25, false);
+                    data.actionbar.potion1Pressed(data.player);
                 }
                 if (e.keyCode == Phaser.Keyboard.X) {
                     data.actionbar.getPotion2().frame = 1;
@@ -189,6 +184,7 @@ var States;
                     data.actionbar.getAbility1().frame = 0;
                 }
                 if (e.keyCode == Phaser.Keyboard.W) {
+                    //data.bm.dispatchEvent(new BALANCE.TestEvent(data.gsm), data.player);
                     data.actionbar.getAbility2().frame = 0;
                 }
                 if (e.keyCode == Phaser.Keyboard.E) {

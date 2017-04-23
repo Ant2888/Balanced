@@ -9,14 +9,51 @@
         private ent: ENTITIES.Entity;
         public energy: number;
 
+        public static REGEN_RATE = 1000;
+
+        protected gsm: States.GameStateManager;
+        protected regenRate: number;
+        protected rate: number;
+        protected regenTimer: Phaser.Timer;
         protected energyGainedCallbacks: any[];
         protected energyLossedCallbacks: any[];
 
-        constructor(ent: ENTITIES.Entity) {
+        constructor(gsm: States.GameStateManager, ent: ENTITIES.Entity, regenRate?: number,
+            rate?: number) {
+            if (regenRate === undefined || regenRate === null)
+                regenRate = 20;
+
+            if (rate === undefined || rate === null)
+                rate = EnergyManager.REGEN_RATE;
+
+            this.gsm = gsm;
+            this.rate = rate;
+            this.regenRate = regenRate;
             this.ent = ent;
             this.energy = 100;
             this.energyGainedCallbacks = new Array();
             this.energyLossedCallbacks = new Array();
+            this.regenTimer = this.gsm.game.time.create(false);
+            this.restartEnergyRegen();
+        }
+
+        /**
+         * Attempts to stop the current regen and reinitializes the
+         * loop again. Use this if you need to reset the rate.
+         */
+        public restartEnergyRegen(): void {
+            this.regenTimer.stop();
+            this.regenTimer.loop(this.rate, function () {
+                this.regenEnergy(this.regenRate, false);
+            }, this);
+            this.regenTimer.start();
+        }
+
+        /**
+         * Stops the energy regen.
+         */
+        public stopEnergyRegen(): void {
+            this.regenTimer.stop();
         }
 
         /**

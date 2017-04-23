@@ -56,7 +56,7 @@
         public inAnim: boolean;
         public animTimer: Phaser.Timer;
 
-        protected abm: COMBAT.PlayerAbilities;
+        protected abm: COMBAT.AbilityManager;
 
         constructor(gsm: States.GameStateManager, x: number, y: number, key?: string | Phaser.RenderTexture
                 | Phaser.BitmapData | PIXI.Texture, frame?: string | number) {
@@ -87,7 +87,7 @@
         }
 
         public jump(vy: number): boolean {
-            if (this.stunned)
+            if (this.stunned || !this.alive)
                 return false;
 
             this.body.velocity.y = vy;
@@ -103,7 +103,7 @@
          * @param dx How to move it.
          */
         public walk(vx: number): boolean {
-            if (this.stunned)
+            if (this.stunned || !this.alive)
                 return false;
 
             if (vx == 0) {
@@ -274,7 +274,7 @@
                         font: "Papyrus"
                     },
                     x: this.x,
-                    y: this.y,
+                    y: this.y-35,
                     timeToLive: 300
                 });
             }
@@ -351,7 +351,7 @@
             this.flinchTimer.start();
 
             //Play the flinch animation
-            this.playAnimState(flinchLeft ? Entity.flinchL : Entity.flinchR, 10, false, false, true);
+            this.playAnimState(flinchLeft ? Entity.flinchL : Entity.flinchR, 10, false, false, false);
 
             return true;
         }
@@ -387,7 +387,7 @@
                         font: "Papyrus"
                     },
                     x: this.x,
-                    y: this.y,
+                    y: this.y-35,
                     timeToLive: 300
                 });
             }

@@ -5,6 +5,7 @@
     * @author Emerson
     */
     export class ActionBarGraphics extends GameObject {
+
         private gsm: States.GameStateManager;        
         private ab_bg: Phaser.Sprite;
         private ab_ab1_ss: Phaser.Button;
@@ -177,9 +178,9 @@
             this.gsm.setState(States.TOWN_STATE);
         }
 
-        public potion1Pressed(): any {
-            console.log('potion1 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        public potion1Pressed(ply: ENTITIES.Player): any {
+            this.getPotion1().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.POTION_ONE);
         }
 
         public potion2Pressed(): any {
@@ -187,24 +188,25 @@
             //this.gsm.setState(States.PROTOTYPE_STATE);
         }
 
-        public ability1Pressed(): any {
-            console.log('ability1 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        public ability1Pressed(ply: ENTITIES.Player): void {
+            this.getAbility1().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_ONE);
         }
 
-        public ability2Pressed(): any {
-            console.log('ability2 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        public ability2Pressed(ply: ENTITIES.Player): any {
+            this.getAbility2().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_TWO);
         }
 
-        public ability3Pressed(): any {
-            console.log('ability3 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        public ability3Pressed(ply: ENTITIES.Player): any {
+            this.getAbility3().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_THREE);
         }
 
-        public ability4Pressed(): any {
-            console.log('ability4 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        public ability4Pressed(ply: ENTITIES.Player): any {
+            this.getAbility4().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_FOUR);
         }                              
+
     }
 }

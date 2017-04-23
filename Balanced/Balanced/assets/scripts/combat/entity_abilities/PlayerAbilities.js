@@ -19,31 +19,83 @@ var COMBAT;
         function PlayerAbilities(ent, gsm, energyMan) {
             return _super.call(this, ent, gsm, energyMan) || this;
         }
+        PlayerAbilities.prototype.getAttackSpeed = function () {
+            return (this.ent).ATTACK_SPEED;
+        };
+        PlayerAbilities.prototype.setAttackSpeed = function (atkspd) {
+            (this.ent).ATTACK_SPEED = atkspd;
+        };
+        PlayerAbilities.prototype.getPlayer = function () {
+            return (this.ent);
+        };
         PlayerAbilities.prototype.attemptCast = function (ability) {
+            if (!this.ent.alive)
+                return false;
             switch (ability) {
-                case 1:
+                case ENTITIES.Player.ABILITY_ONE:
                     return this.castAbilityOne();
-                case 2:
+                case ENTITIES.Player.ABILITY_TWO:
                     return this.castAbilityTwo();
-                case 3:
+                case ENTITIES.Player.ABILITY_THREE:
                     return this.castAbilityThree();
-                case 4:
+                case ENTITIES.Player.ABILITY_FOUR:
                     return this.castAbilityFour();
+                case ENTITIES.Player.POTION_ONE:
+                    return this.usePotionOne();
                 default:
                     return false;
             }
         };
-        PlayerAbilities.prototype.castAbilityOne = function () {
+        PlayerAbilities.prototype.usePotionOne = function () {
             return false;
+        };
+        PlayerAbilities.prototype.castAbilityOne = function () {
+            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_ONE_COST))
+                return false;
+            if (this.ent.facingLeft)
+                this.ent.playAnimState(ENTITIES.Entity.attackL, this.getAttackSpeed(), false, false, true);
+            else
+                this.ent.playAnimState(ENTITIES.Entity.attackR, this.getAttackSpeed(), false, false, true);
+            return true;
         };
         PlayerAbilities.prototype.castAbilityTwo = function () {
-            return false;
+            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_TWO_COST))
+                return false;
+            if (this.ent.facingLeft)
+                this.ent.playAnimState(ENTITIES.Player.ability2L, this.getAttackSpeed(), false, false, true);
+            else
+                this.ent.playAnimState(ENTITIES.Player.ability2R, this.getAttackSpeed(), false, false, true);
+            var bullet = this.getPlayer().energyWave.bullets.getTop();
+            if (this.ent.facingLeft) {
+                bullet.scale.x *= -1;
+                this.getPlayer().energyWave.fireAngle = 180;
+                this.getPlayer().energyWave.bulletSpeed = -800;
+            }
+            else {
+                bullet.scale.x = Math.abs(bullet.scale.x);
+                this.getPlayer().energyWave.fireAngle = 0;
+                this.getPlayer().energyWave.bulletSpeed = 800;
+            }
+            this.getPlayer().energyWave.fire();
+            return true;
         };
         PlayerAbilities.prototype.castAbilityThree = function () {
-            return false;
+            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_THREE_COST))
+                return false;
+            if (this.ent.facingLeft)
+                this.ent.playAnimState(ENTITIES.Player.ability3L, this.getAttackSpeed(), false, false, true);
+            else
+                this.ent.playAnimState(ENTITIES.Player.ability3R, this.getAttackSpeed(), false, false, true);
+            return true;
         };
         PlayerAbilities.prototype.castAbilityFour = function () {
-            return false;
+            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_FOUR_COST))
+                return false;
+            if (this.ent.facingLeft)
+                this.ent.playAnimState(ENTITIES.Player.ability4L, this.getAttackSpeed(), false, false, true);
+            else
+                this.ent.playAnimState(ENTITIES.Player.ability4R, this.getAttackSpeed(), false, false, true);
+            return true;
         };
         return PlayerAbilities;
     }(COMBAT.AbilityManager));

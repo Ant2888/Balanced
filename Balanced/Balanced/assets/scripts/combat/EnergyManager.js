@@ -6,12 +6,38 @@ var COMBAT;
      * @author Anthony
      */
     var EnergyManager = (function () {
-        function EnergyManager(ent) {
+        function EnergyManager(gsm, ent, regenRate, rate) {
+            if (regenRate === undefined || regenRate === null)
+                regenRate = 20;
+            if (rate === undefined || rate === null)
+                rate = EnergyManager.REGEN_RATE;
+            this.gsm = gsm;
+            this.rate = rate;
+            this.regenRate = regenRate;
             this.ent = ent;
             this.energy = 100;
             this.energyGainedCallbacks = new Array();
             this.energyLossedCallbacks = new Array();
+            this.regenTimer = this.gsm.game.time.create(false);
+            this.restartEnergyRegen();
         }
+        /**
+         * Attempts to stop the current regen and reinitializes the
+         * loop again. Use this if you need to reset the rate.
+         */
+        EnergyManager.prototype.restartEnergyRegen = function () {
+            this.regenTimer.stop();
+            this.regenTimer.loop(this.rate, function () {
+                this.regenEnergy(this.regenRate, false);
+            }, this);
+            this.regenTimer.start();
+        };
+        /**
+         * Stops the energy regen.
+         */
+        EnergyManager.prototype.stopEnergyRegen = function () {
+            this.regenTimer.stop();
+        };
         /**
          * Adds a listener to the manager for when energy is gained
          * @param callback  The function, it will get passed the amount of energy gained, and current energy
@@ -135,6 +161,7 @@ var COMBAT;
         };
         return EnergyManager;
     }());
+    EnergyManager.REGEN_RATE = 1000;
     COMBAT.EnergyManager = EnergyManager;
 })(COMBAT || (COMBAT = {}));
 //# sourceMappingURL=EnergyManager.js.map

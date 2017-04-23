@@ -51,11 +51,12 @@
 
         public setCancelButton(func: any): void {
             this.cancelButton = this.gsm.game.add.button(500, 606, 'omCancelButton', func, this, 1, 0, 2);
+            this.group.add(this.cancelButton);
         }
 
         private level1ButtonPressed(): any {
             console.log('Level 1 selected');
-            this.gsm.setState(States.PROTOTYPE_STATE);
+            this.gsm.setState(States.LEVEL1_STATE);
         }
 
         private level2ButtonPressed(): any {

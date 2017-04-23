@@ -142,10 +142,16 @@ var BalancedGame = (function () {
         }, this);
         // ----------------------------------------TOWN RESOURCES END
         // -----------------------------------------LEVEL 1 RESOURCES
-        rem.addResource(new UTIL.Resource('level1', 'assets/res/level1-dungeon/Balanced_level1.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('level1', 'assets/res/level1-dungeon/level1.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
             this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
         }, this);
-        rem.addResource(new UTIL.Resource('gameTiles', 'assets/res/level1-dungeon/grunge_tile.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('grunge_tile', 'assets/res/level1-dungeon/grunge_tile.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('castledoors', 'assets/res/level1-dungeon/castledoors.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('tiled', 'assets/res/level1-dungeon/tiled.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         rem.addResource(new UTIL.Resource('tempPlayer', 'assets/res/level1-dungeon/balancedSprite.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
@@ -166,6 +172,7 @@ var BalancedGame = (function () {
         States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
         States.PROTOTYPE_STATE = new States.PrototypeState(this.gsm);
         States.LEVEL_SELECT_STATE = new States.LevelSelectState(this.gsm);
+        States.LEVEL1_STATE = new States.Level1State(this.gsm);
         States.TOWN_STATE = new States.TownState(this.gsm);
         // END STATES
         this.gsm.initState();

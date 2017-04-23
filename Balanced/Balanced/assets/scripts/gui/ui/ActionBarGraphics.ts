@@ -174,7 +174,7 @@
 
         public townPressed(): any {
             console.log('town button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+            this.gsm.setState(States.TOWN_STATE);
         }
 
         public potion1Pressed(): any {

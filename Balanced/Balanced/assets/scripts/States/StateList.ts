@@ -25,6 +25,9 @@ declare class States {
     static PROTOTYPE_STATE: States.State;
     static PROTOTYPE_STATE_ID: number;
 
+    static LEVEL1_STATE: States.State;
+    static LEVEL1_STATE_ID: number;
+
     static LEVEL_SELECT_STATE: States.State;
     static LEVEL_SELECT_STATE_ID: number;
 
@@ -38,7 +41,7 @@ declare class States {
 //ANTHONY START AT 0
 States.TEST_STATE_ID = 0;
 States.TEST_STATE2_ID = 1;
-States.LEVEL_SELECT_STATE_ID = 2;
+
 
 //FRANCOIS START AT 100
 
@@ -49,3 +52,5 @@ States.OPTIONS_MENU_STATE_ID = 202;
 
 States.PROTOTYPE_STATE_ID = 203;
 States.TOWN_STATE_ID = 204;
+States.LEVEL_SELECT_STATE_ID = 205;
+States.LEVEL1_STATE_ID = 206;

@@ -140,7 +140,7 @@ var GUI;
         };
         ActionBarGraphics.prototype.townPressed = function () {
             console.log('town button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+            this.gsm.setState(States.TOWN_STATE);
         };
         ActionBarGraphics.prototype.potion1Pressed = function () {
             console.log('potion1 button was pressed');

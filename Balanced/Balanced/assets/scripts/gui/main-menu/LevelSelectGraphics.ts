@@ -56,7 +56,7 @@
 
         private level1ButtonPressed(): any {
             console.log('Level 1 selected');
-            this.gsm.setState(States.PROTOTYPE_STATE);
+            this.gsm.setState(States.LEVEL1_STATE);
         }
 
         private level2ButtonPressed(): any {

@@ -14,6 +14,9 @@ class BalancedGame {
 
     private game: Phaser.Game;
     private gsm: States.GameStateManager;
+    private loadingComplete: boolean;
+
+    private DEBUGGING = false;
 
     preload() {
         //center game
@@ -21,10 +24,12 @@ class BalancedGame {
         this.game.scale.pageAlignVertically = true;
         this.game.scale.refresh();
 
+        this.loadingComplete = false;
+
+        this.game.load.start();
         var rem = new UTIL.ResourceManager();
 
         //PUT ALL RESOURCES YOU NEED LOADED DOWN HERE
-
         // --------------------------------- AUDIO
         rem.addResource(new UTIL.Resource('dark_loop', 'assets/res/audio/dark_loop.ogg', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
@@ -141,7 +146,6 @@ class BalancedGame {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);
         // --------------------------------- AUDIO
-
         // --------------------------------- HUD
         rem.addResource(new UTIL.Resource('ab_ab1_ss', 'assets/res/hud/ab_ab1_ss.png', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 75, 75);
@@ -305,26 +309,89 @@ class BalancedGame {
         }, this);
         // -------------------------------------------END LEVEL 1 RESOURCES
 
-        }
+        // -------------------------------------------START SPALSH SCREEN
+        rem.addResource(new UTIL.Resource('balanced_logo', 'assets/res/boot/Balanced Logo.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('phaser_logo', 'assets/res/boot/Phaser Logo.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('ss_background', 'assets/res/boot/mm_background_only.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1280, 720);
+        }, this);
+        // -------------------------------------------END SPALSH SCREEN
 
-    create() {        
-        this.gsm = new States.GameStateManager(this.game);
-        // START STATES
-        States.TEST_STATE = new States.TestState(this.gsm);
-        States.TEST_STATE2 = new States.TestState2(this.gsm);
-        States.MAIN_MENU_STATE = new States.MainMenuState(this.gsm);
-        States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
-        States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
-        States.PROTOTYPE_STATE = new States.PrototypeState(this.gsm);
-        States.LEVEL_SELECT_STATE = new States.LevelSelectState(this.gsm);
-        States.LEVEL1_STATE = new States.Level1State(this.gsm);
-        States.TOWN_STATE = new States.TownState(this.gsm);        
-        // END STATES
-        this.gsm.initState();
+
+    }
+
+    create() {
+        var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY + 300, 'Loading....', { fill: '#ffffff' });
+        text.anchor.setTo(0.5, 0.5);
+
+        this.game.load.onLoadStart.add(function () {
+            text.setText("Loading ...");
+        }, this);
+
+        this.game.load.onFileComplete.add(function (progress, cacheKey, success, totalLoaded, totalFiles) {
+            text.setText("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles);
+        }, this);
+
+        this.game.load.onLoadComplete.add(function () {
+            text.setText("Load Complete");
+
+            this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
+
+            var phaserLogo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'phaser_logo');
+            phaserLogo.anchor.setTo(0.5, 0.5);
+            phaserLogo.alpha = 0;
+
+            var balancedLogo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'balanced_logo');
+            balancedLogo.anchor.setTo(0.5, 0.5);
+            balancedLogo.alpha = 0;
+
+            var t1 = this.game.add.tween(phaserLogo).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, false, 0, 0, true);
+
+
+            var t2 = this.game.add.tween(balancedLogo).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, false, 0, 0, true);
+
+            t1.chain(t2);
+
+            if (!this.DEBUGGING) {
+                t1.start();
+            } else {
+                this.loadingComplete = true;
+            }
+
+            t2.onComplete.add(function (e) {
+                this.loadingComplete = true;
+            }, this);
+        }, this);
+
+
     }
 
     update() {
-        this.gsm.update();
+        if (this.gsm != undefined || this.gsm != null) {
+            this.gsm.update();
+        }
+
+        if (this.loadingComplete) {
+            this.loadingComplete = false;
+
+            this.gsm = new States.GameStateManager(this.game);
+            // START STATES
+            States.TEST_STATE = new States.TestState(this.gsm);
+            States.TEST_STATE2 = new States.TestState2(this.gsm);
+            States.MAIN_MENU_STATE = new States.MainMenuState(this.gsm);
+            States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
+            States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
+            States.PROTOTYPE_STATE = new States.PrototypeState(this.gsm);
+            States.LEVEL_SELECT_STATE = new States.LevelSelectState(this.gsm);
+            States.LEVEL1_STATE = new States.Level1State(this.gsm);
+            States.TOWN_STATE = new States.TownState(this.gsm);
+            // END STATES
+            this.gsm.initState();
+        }
     }
 
 }

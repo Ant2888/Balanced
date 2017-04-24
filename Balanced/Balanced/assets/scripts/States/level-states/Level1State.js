@@ -107,7 +107,7 @@ var States;
             this.actionbar = new GUI.ActionBarGraphics(group);
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group);
-            this.charMenu = new GUI.CharGraphics(group);
+            this.charMenu = new GUI.CharGraphics(group, this.player);
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);
             this.gsm.getGUIM().addGroup(this.bag);

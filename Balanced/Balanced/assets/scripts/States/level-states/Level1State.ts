@@ -50,11 +50,11 @@
 
             if (!this.player.alive)
                 return;
-
+                        
             if (this.player.y >= 1314) {
                 this.player.y = 1240;
             }
-            
+
             if (this.stairOverlap != null && !(this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
                 this.player.body.allowGravity = false;
                 this.player.body.velocity.x = 0;
@@ -77,6 +77,7 @@
 
             }
 
+            
             if (this.stairOverlap == null) {
                 this.player.body.allowGravity = true;
             }
@@ -146,7 +147,7 @@
             this.actionbar = new GUI.ActionBarGraphics(group);
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group);
-            this.charMenu = new GUI.CharGraphics(group);
+            this.charMenu = new GUI.CharGraphics(group, this.player);
 
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);

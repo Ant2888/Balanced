@@ -11,13 +11,13 @@
         private bag: GUI.BagGraphics;
 
         private map: Phaser.Tilemap;
-        
+
         private floorlayer: Phaser.TilemapLayer;
         private starislayer: Phaser.TilemapLayer;
         private wallPaperlayer: Phaser.TilemapLayer;
         private backgroundlayer: Phaser.TilemapLayer;
 
-        private stairOverlap: boolean;
+        private stairOverlap: any;
         private keyboard: Phaser.CursorKeys;
 
         private doors: Phaser.Group;
@@ -37,7 +37,7 @@
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
             this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
 
-           
+
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
             this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.playerHit, null, this);
             this.gsm.game.physics.arcade.overlap(this.player.energyWave.bullets,
@@ -49,10 +49,38 @@
             if (!this.player.alive)
                 return;
 
+           
+            if (this.stairOverlap != null && !(this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
+                this.player.body.allowGravity = false;
+                this.player.body.velocity.x = 0;
+                this.player.body.velocity.y = 0;
+
+
+            } else if (this.stairOverlap != null && (this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
+                if (this.keyboard.down.isDown) {
+                    this.player.jump(450);
+                }
+                if (this.keyboard.left.isDown) {
+                    this.player.walk(-250);
+                }
+                if (this.keyboard.right.isDown) {
+                    this.player.walk(250);
+                }
+                if (this.keyboard.up.isDown) {
+                    this.player.jump(-450);
+                }
+
+            }
+
+            if (this.stairOverlap == null) {
+                this.player.body.allowGravity = true;
+            }
+
             if (this.keyboard.up.isDown && !this.player.isJumping) {
                 this.player.jump(-650);
                 this.player.isJumping = true;
-            }
+            }                       
+
             if (this.keyboard.left.isDown) {
                 //Move to the left
                 this.player.walk(-250);
@@ -62,6 +90,8 @@
             } else {
                 this.player.walk(0);
             }
+
+            this.stairOverlap = this.map.getTileWorldXY(this.player.x, this.player.y, this.map.tileWidth, this.map.tileHeight, "stairs");
         }
 
         public init(): void {
@@ -93,7 +123,6 @@
 
             this.createEnemies();
             this.createDoors();
-                                  
 
             this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
 
@@ -101,8 +130,8 @@
             this.gsm.game.camera.follow(this.player);
 
             this.player.inputEnabled = true;
-                        
-            
+
+
 
             this.bm = new BALANCE.BalanceManager(this.gsm);
 
@@ -142,7 +171,7 @@
         }
 
         public createDoors(): void {
-            this.doors = this.gsm.game.add.group();            
+            this.doors = this.gsm.game.add.group();
             this.objectLayer = this.findObjectsByType('door', this.map, 'enemies');
 
             this.objectLayer.forEach(function (element) {
@@ -291,7 +320,7 @@
             return result;
         }
 
-        public placeEnemies(element, group): void {            
+        public placeEnemies(element, group): void {
             var baddie = new ENTITIES.Baddie(this.gsm, element.x, element.y, 'baddie');
             baddie.makeHealthBar();
 

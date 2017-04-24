@@ -31,6 +31,28 @@ var States;
                 this.player.isJumping = false;
             if (!this.player.alive)
                 return;
+            if (this.stairOverlap != null && !(this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
+                this.player.body.allowGravity = false;
+                this.player.body.velocity.x = 0;
+                this.player.body.velocity.y = 0;
+            }
+            else if (this.stairOverlap != null && (this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
+                if (this.keyboard.down.isDown) {
+                    this.player.jump(450);
+                }
+                if (this.keyboard.left.isDown) {
+                    this.player.walk(-250);
+                }
+                if (this.keyboard.right.isDown) {
+                    this.player.walk(250);
+                }
+                if (this.keyboard.up.isDown) {
+                    this.player.jump(-450);
+                }
+            }
+            if (this.stairOverlap == null) {
+                this.player.body.allowGravity = true;
+            }
             if (this.keyboard.up.isDown && !this.player.isJumping) {
                 this.player.jump(-650);
                 this.player.isJumping = true;
@@ -46,6 +68,7 @@ var States;
             else {
                 this.player.walk(0);
             }
+            this.stairOverlap = this.map.getTileWorldXY(this.player.x, this.player.y, this.map.tileWidth, this.map.tileHeight, "stairs");
         };
         Level1State.prototype.init = function () {
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);

@@ -36,10 +36,12 @@
 
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
             this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
+            this.gsm.game.physics.arcade.collide(this.player.energyWave.bullets, this.floorlayer,
+                function (e) { e.kill()});
 
            
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
-            this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.playerHit, null, this);
+            this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.player.dealWithOverlap, null, this.player);
             this.gsm.game.physics.arcade.overlap(this.player.energyWave.bullets,
                 this.enemies, this.player.dealWithOverlap, null, this.player);
 
@@ -150,6 +152,7 @@
             }, this);
         }
 
+/*
         public playerHit(player: Phaser.Sprite, other: Phaser.Sprite | Phaser.Group): void {
 
             //check if the player is attacking
@@ -177,7 +180,7 @@
                 this.player.dealDamage(damage, damage >= 20, "red", true, true, ENTITIES.Entity.FLINCH_TIME);
             }
         }
-
+*/
         public setupKeybinds(data: any): void {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
 

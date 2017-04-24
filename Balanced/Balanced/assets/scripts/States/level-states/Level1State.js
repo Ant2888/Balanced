@@ -23,8 +23,9 @@ var States;
         Level1State.prototype.update = function () {
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
             this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
+            this.gsm.game.physics.arcade.collide(this.player.energyWave.bullets, this.floorlayer, function (e) { e.kill(); });
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
-            this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.playerHit, null, this);
+            this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.player.dealWithOverlap, null, this.player);
             this.gsm.game.physics.arcade.overlap(this.player.energyWave.bullets, this.enemies, this.player.dealWithOverlap, null, this.player);
             if (this.player.body.onFloor())
                 this.player.isJumping = false;
@@ -106,28 +107,35 @@ var States;
                 this.createFromTiledObject(element, this.doors);
             }, this);
         };
-        Level1State.prototype.playerHit = function (player, other) {
-            //check if the player is attacking
-            var boolcurAnim = this.player.animations.currentAnim.name;
-            if ((boolcurAnim == ENTITIES.Entity.attackR || boolcurAnim == ENTITIES.Entity.attackL) && !other.flinching) {
-                var damage = Math.floor(Math.random() * (80)) + 1;
-                other.dealDamage(damage, damage >= 55, "yellow", true, true);
-                if (other.health <= 0) {
-                    other.destroy();
-                    var baddie = new ENTITIES.Baddie(this.gsm, other.x, other.y - 100, 'baddie');
-                    baddie.makeHealthBar();
-                    this.gsm.game.physics.arcade.enable(baddie);
-                    baddie.body.gravity.y = 300;
-                    baddie.body.collideWorldBounds = true;
-                    this.enemies.add(baddie);
+        /*
+                public playerHit(player: Phaser.Sprite, other: Phaser.Sprite | Phaser.Group): void {
+        
+                    //check if the player is attacking
+                    var boolcurAnim = this.player.animations.currentAnim.name;
+        
+                    if ((boolcurAnim == ENTITIES.Entity.attackR || boolcurAnim == ENTITIES.Entity.attackL) && !(<ENTITIES.Entity>other).flinching) {
+                        var damage = Math.floor(Math.random() * (80)) + 1;
+                        (<ENTITIES.Entity>other).dealDamage(damage, damage >= 55, "yellow", true, true);
+        
+                        if ((<Phaser.Sprite>other).health <= 0) {
+                            (<Phaser.Sprite>other).destroy();
+                            var baddie = new ENTITIES.Baddie(this.gsm, (<Phaser.Sprite>other).x, (<Phaser.Sprite>other).y - 100, 'baddie');
+                            baddie.makeHealthBar();
+                            this.gsm.game.physics.arcade.enable(baddie);
+                            baddie.body.gravity.y = 300;
+                            baddie.body.collideWorldBounds = true;
+                            this.enemies.add(baddie);
+                        }
+        
+                    }
+        
+                    //check if the enemy is attacking
+                    if (this.player.flinching == false && this.player.alive) {
+                        var damage = Math.floor(Math.random() * (30)) + 1;
+                        this.player.dealDamage(damage, damage >= 20, "red", true, true, ENTITIES.Entity.FLINCH_TIME);
+                    }
                 }
-            }
-            //check if the enemy is attacking
-            if (this.player.flinching == false && this.player.alive) {
-                var damage = Math.floor(Math.random() * (30)) + 1;
-                this.player.dealDamage(damage, damage >= 20, "red", true, true, ENTITIES.Entity.FLINCH_TIME);
-            }
-        };
+        */
         Level1State.prototype.setupKeybinds = function (data) {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {

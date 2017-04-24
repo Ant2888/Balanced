@@ -1,20 +1,6 @@
 ﻿module ENTITIES {
 
     /**
-     * Simple knockback struct
-     */
-    interface KnockBack {
-        //how far back should the player go
-        dx?: number,
-        //how far up/down should the player go
-        dy?: number,
-        //how long should it take to get there
-        time?: number,
-        //how long are they stunned? 0 for no stunning
-        stunTime?: number
-    }
-
-    /**
      * Basic entity class
      * @author Anthony, Emerson
      */
@@ -56,6 +42,8 @@
         public inAnim: boolean;
         public animTimer: Phaser.Timer;
 
+        protected flicker: Phaser.Timer;
+
         protected abm: COMBAT.AbilityManager;
 
         constructor(gsm: States.GameStateManager, x: number, y: number, key?: string | Phaser.RenderTexture
@@ -63,6 +51,7 @@
             super(gsm.game, x, y, key, frame);
             this.gsm = gsm;
 
+            this.maxHealth = 100;
             this.health = 100;
             this.flinching = false;
             this.stunned = false;
@@ -77,6 +66,7 @@
             this.animTimer = this.gsm.game.time.create(false);
             this.flinchTimer = this.gsm.game.time.create(false);
             this.stunTimer = this.gsm.game.time.create(false);
+            this.flicker = this.gsm.game.time.create(false);
             this.gsm.game.add.existing(this);
 
             this.createAnimations();
@@ -117,10 +107,10 @@
             this.removeChildAt(1);
 
             // rebuild the green bar to the health bars width adjusted to the width
-            var bmd = this.gsm.game.add.bitmapData((this.width / 100) * this.health, 5);
+            var bmd = this.gsm.game.add.bitmapData((this.width / this.maxHealth) * this.health, 5);
 
             bmd.ctx.beginPath();
-            bmd.ctx.rect(0, 0, (this.width / 100) * this.health, 5);
+            bmd.ctx.rect(0, 0, (this.width / this.maxHealth) * this.health, 5);
             bmd.ctx.fillStyle = 'green';
             bmd.ctx.fill();
             var health = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd);
@@ -281,7 +271,7 @@
          * @param flinchLeft Should the player flinchLeft? Default: true
          */
         public dealDamage(damage: number, crit: boolean, color = "red", display?: boolean,
-            flinch?: boolean, flinchTime?: number, knockBack?: KnockBack, flinchLeft?: boolean): boolean {
+            flinch?: boolean, flinchTime?: number, knockBack?: COMBAT.KnockBack, flinchLeft?: boolean): boolean {
 
             if (flinchTime === undefined || flinchTime === null)
                 flinchTime = Player.FLINCH_TIME;
@@ -388,12 +378,21 @@
                 return true;
 
             //Deal with flinching
+
+
             this.flinching = true;
             this.flinchTimer.loop(flinchTime, function () {
                 this.flinching = false;
                 this.flinchTimer.stop();
+                this.flicker.stop();
+                this.tint = 0xFFFFFF;
             }, this);
             this.flinchTimer.start();
+
+            this.flicker.loop(120, function () {
+                this.tint ^= 0xFFFF;
+            }, this);
+            this.flicker.start();
 
             //Play the flinch animation
             this.playAnimState(flinchLeft ? Entity.flinchL : Entity.flinchR, 10, false, false, false);
@@ -412,8 +411,8 @@
             if (display === undefined || display === null)
                 display = true;
 
-            if (this.health + hp >= 100)
-                this.health = 100;
+            if (this.health + hp >= this.maxHealth)
+                this.health = this.maxHealth;
             else
                 this.health += hp;
 
@@ -506,6 +505,11 @@
             }, this);
         }
 
+        public randomValWithRandomness(val: number, rnd: number): number {
+            return Math.floor(Math.random() * ((val + rnd) -
+                (val - rnd) + 1) + (val - rnd));
+        }
+
         /**
          * Gets a random effect for the FCT
          */
@@ -514,6 +518,8 @@
             var randomNumber = Math.floor(Math.random() * effectArray.length) + 1;
             return effectArray[randomNumber];
         }
+
+        public abstract dealWithOverlap(first: Phaser.Sprite, second: Phaser.Sprite | Phaser.Group);
 
         protected abstract createAnimations(): void;
     }

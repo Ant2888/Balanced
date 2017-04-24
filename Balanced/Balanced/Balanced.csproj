@@ -78,9 +78,11 @@
     <TypeScriptCompile Include="assets\scripts\balance\buffs\TestEvent.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\EventDetails.ts" />
     <TypeScriptCompile Include="assets\scripts\Boot.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\Ability.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\AbilityManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\EnergyManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\PlayerAbilities.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\KnockBack.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Baddie.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Player.ts" />

@@ -44,10 +44,21 @@ var ENTITIES;
             return _this;
         }
         Player.prototype.recalcModifiers = function () {
-            this.ab1_mod = this.ATTACK * 1.0;
-            this.ab2_mod = this.ATTACK * .75;
-            this.ab3_mod = this.ATTACK * .75;
-            this.ab4_mod = this.ATTACK * 1.35;
+            this.ab1_mod = {
+                dmg: this.ATTACK * 1.0, flinchTime: ENTITIES.Entity.FLINCH_TIME, stunTime: 0,
+                knockback: { dx: 10, dy: -10, time: 300 }
+            };
+            this.ab2_mod = {
+                dmg: this.ATTACK * .75
+            };
+            this.ab3_mod = {
+                dmg: this.ATTACK * .75, flinchTime: 0, stunTime: 0,
+                knockback: { dx: 10, dy: -10, time: 300, stunTime: 100 }
+            };
+            this.ab4_mod = {
+                dmg: this.ATTACK * 1.75, flinchTime: this.ab1_mod.flinchTime || ENTITIES.Entity.FLINCH_TIME, stunTime: 1500,
+                knockback: { dx: 115, dy: -125, time: 500, stunTime: 1250 }
+            };
         };
         Player.prototype.createAnimations = function () {
             this.animations.add(Player.ability2L, [66, 67, 68, 69, 70, 71], 15, false);
@@ -75,19 +86,58 @@ var ENTITIES;
             if (me instanceof Phaser.Bullet) {
                 this.bulletLogic(me, other);
             }
+            if (other instanceof Phaser.Group) {
+                other.forEach(function (e) { this.doAttackLogic(e); }, this);
+            }
+            else {
+                this.doAttackLogic(other);
+            }
+        };
+        Player.prototype.doAttackLogic = function (mob) {
+            switch (this.animations.currentAnim.name) {
+                case ENTITIES.Entity.idleL:
+                case ENTITIES.Entity.idleR:
+                    mob.dealWithOverlap(this, mob);
+                    break;
+                case ENTITIES.Entity.attackL:
+                case ENTITIES.Entity.attackR:
+                    mob.dealWithOverlap(this, mob);
+                    this.doAbilityDamage(mob, this.ab1_mod);
+                    break;
+                case Player.ability2L:
+                case Player.ability2R:
+                    mob.dealWithOverlap(this, mob);
+                    //Bullet case so ignore this
+                    break;
+                case Player.ability3L:
+                case Player.ability3R:
+                    mob.dealWithOverlap(this, mob);
+                    this.ab3(mob);
+                    break;
+                case Player.ability4L:
+                case Player.ability4R:
+                    mob.dealWithOverlap(this, mob);
+                    this.doAbilityDamage(mob, this.ab4_mod);
+                    break;
+            }
+        };
+        Player.prototype.ab3 = function (mob) {
+            var mod = this.ab3_mod;
+            var damage = this.randomValWithRandomness(mod.dmg, this.RANDOMNESS);
+            mod.knockback.dx = Math.abs(mod.knockback.dx) * (this.facingLeft ? -1 : 1);
+            mob.dealDamage(damage, damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, false, 0, mod.knockback, this.facingLeft);
+            mob.dealDamage(Math.floor(damage * .75), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, false, 0, mod.knockback, this.facingLeft);
+            mob.dealDamage(Math.floor(damage * .33), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 1000, mod.knockback, this.facingLeft);
+        };
+        Player.prototype.doAbilityDamage = function (mob, mod) {
+            var damage = this.randomValWithRandomness(mod.dmg, this.RANDOMNESS);
+            mod.knockback.dx = Math.abs(mod.knockback.dx) * (this.facingLeft ? -1 : 1);
+            mob.dealDamage(damage, damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, mod.flinchTime > 0, mod.flinchTime, mod.knockback, this.facingLeft);
         };
         Player.prototype.bulletLogic = function (me, other) {
-            var damage = this.randomValWithRandomness(this.ab2_mod);
-            other.dealDamage(damage, damage > (this.ab2_mod + (this.RANDOMNESS) / 2), 'yellow', true, true, 300, { dx: (me.scale.x < 0 ? -1 : 1) * 10, dy: -10, stunTime: 200, time: 300 }, me.scale.x < 0);
-            // DELETE THIS LINE BELOW HERE
-            if (other.health <= 0)
-                other.destroy();
-            // DELETE ABOVE HERE
+            var damage = this.randomValWithRandomness(this.ab2_mod.dmg, this.RANDOMNESS);
+            other.dealDamage(damage, damage > (this.ab2_mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 300, { dx: (this.facingLeft ? -1 : 1) * 10, dy: -10, stunTime: 200, time: 300 }, this.facingLeft);
             me.kill();
-        };
-        Player.prototype.randomValWithRandomness = function (val) {
-            return Math.floor(Math.random() * ((val + this.RANDOMNESS) -
-                (val - this.RANDOMNESS) + 1) + (val - this.RANDOMNESS));
         };
         return Player;
     }(ENTITIES.Entity));

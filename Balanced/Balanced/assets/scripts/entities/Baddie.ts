@@ -11,6 +11,14 @@
             super(gsm, x, y, key, frame);
 
             //this.abm = new COMBAT.PlayerAbilities(this, gsm);
+            this.addOnDeathCallBack(function () { this.kill() }, this);
+        }
+
+        public dealWithOverlap(player: Phaser.Sprite, me: Phaser.Sprite | Phaser.Group): void {
+            if (!this.stunned) {
+                var damage = this.randomValWithRandomness(15, 15);
+                (<Player>player).dealDamage(damage, damage > (damage + 7.5), 'red', true, true, 1000, {}, this.facingLeft);
+            }
         }
         
         protected createAnimations(): void {}

@@ -1,4 +1,5 @@
 ﻿module ENTITIES {
+
     /**
      * The Player Entity class. This will represent the main character
      * @author Anthony
@@ -14,10 +15,10 @@
         public RANDOMNESS = 20;
 
         // modifiers
-        public ab1_mod: number;
-        public ab2_mod: number;
-        public ab3_mod: number;
-        public ab4_mod: number;
+        public ab1_mod: COMBAT.Ability;
+        public ab2_mod: COMBAT.Ability;
+        public ab3_mod: COMBAT.Ability;
+        public ab4_mod: COMBAT.Ability;
         // end mods
 
         public static ability2L = 'ab2L';
@@ -26,7 +27,6 @@
         public static ability3R = 'ab3R';
         public static ability4L = 'ab4L';
         public static ability4R = 'ab4R';
-
 
         public static ABILITY_ONE = 1;
         public static ABILITY_TWO = 2;
@@ -64,10 +64,25 @@
         }
 
         public recalcModifiers(): void {
-            this.ab1_mod = this.ATTACK * 1.0;
-            this.ab2_mod = this.ATTACK * .75;
-            this.ab3_mod = this.ATTACK * .75;
-            this.ab4_mod = this.ATTACK * 1.35;
+            this.ab1_mod = {
+                dmg: this.ATTACK * 1.0, flinchTime: Entity.FLINCH_TIME, stunTime: 0,
+                knockback: { dx:  10, dy: -10, time: 300 }
+            };
+
+            this.ab2_mod = {
+                dmg: this.ATTACK * .75
+            };
+
+            this.ab3_mod = {
+                dmg: this.ATTACK * .75, flinchTime: 0, stunTime: 0,
+                knockback: { dx: 10, dy: -10, time: 300, stunTime: 100 }
+            };
+
+            this.ab4_mod = {
+                dmg: this.ATTACK * 1.75, flinchTime: this.ab1_mod.flinchTime || Entity.FLINCH_TIME, stunTime: 1500,
+                knockback: { dx: 115, dy: -125, time: 500, stunTime: 1250 }
+            };
+
         }
 
         protected createAnimations(): void {
@@ -106,24 +121,70 @@
                 this.bulletLogic(me, <Entity>other);
             }
 
+            if (other instanceof Phaser.Group) {
+                (<Phaser.Group>other).forEach(function (e) { this.doAttackLogic(<Entity>e) }, this);
+            } else {
+                this.doAttackLogic(<Entity>other);
+            }
+        }
 
+        private doAttackLogic(mob: Entity): void {
+            switch (this.animations.currentAnim.name) {
+                case Entity.idleL:
+                case Entity.idleR:
+                    mob.dealWithOverlap(this, mob);
+                    break;
+                case Entity.attackL:
+                case Entity.attackR:
+                    mob.dealWithOverlap(this, mob);
+                    this.doAbilityDamage(mob, this.ab1_mod);
+                    break;
+                case Player.ability2L:
+                case Player.ability2R:
+                    mob.dealWithOverlap(this, mob);
+                    //Bullet case so ignore this
+                    break;
+                case Player.ability3L:
+                case Player.ability3R:
+                    mob.dealWithOverlap(this, mob);
+                    this.ab3(mob);
+                    break;
+                case Player.ability4L:
+                case Player.ability4R:
+                    mob.dealWithOverlap(this, mob);
+                    this.doAbilityDamage(mob, this.ab4_mod);
+                    break;
+            }
+        }
+
+        private ab3(mob: Entity): void {
+            var mod = this.ab3_mod;
+            var damage = this.randomValWithRandomness(mod.dmg, this.RANDOMNESS);
+            mod.knockback.dx = Math.abs(mod.knockback.dx) * (this.facingLeft ? -1 : 1);
+            mob.dealDamage(damage, damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, false, 0,
+                mod.knockback, this.facingLeft);
+            mob.dealDamage(Math.floor(damage * .75), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, false, 0,
+                mod.knockback, this.facingLeft);
+            mob.dealDamage(Math.floor(damage * .33), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 1000, 
+                mod.knockback, this.facingLeft);
+        }
+
+        private doAbilityDamage(mob: Entity, mod: COMBAT.Ability): void {
+            var damage = this.randomValWithRandomness(mod.dmg, this.RANDOMNESS);
+
+            mod.knockback.dx = Math.abs(mod.knockback.dx)*(this.facingLeft ? -1 : 1);
+            mob.dealDamage(damage, damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, mod.flinchTime > 0,
+                mod.flinchTime, mod.knockback, this.facingLeft);
         }
 
         private bulletLogic(me: Phaser.Bullet, other: Entity): void {
+            var damage = this.randomValWithRandomness(this.ab2_mod.dmg, this.RANDOMNESS);
 
-            var damage = this.randomValWithRandomness(this.ab2_mod);
-            other.dealDamage(damage, damage > (this.ab2_mod + (this.RANDOMNESS) / 2), 'yellow', true, true, 300,
-                { dx: (me.scale.x < 0?-1:1)*10, dy: -10, stunTime: 200, time: 300}, me.scale.x < 0);
-            // DELETE THIS LINE BELOW HERE
-            if (other.health <= 0)
-                other.destroy();
-            // DELETE ABOVE HERE
+            other.dealDamage(damage, damage > (this.ab2_mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 300,
+                { dx: (this.facingLeft ? -1 : 1) * 10, dy: -10, stunTime: 200, time: 300 }, this.facingLeft);
+
             me.kill();
         }
 
-        public randomValWithRandomness(val: number): number {
-            return Math.floor(Math.random() * ((val + this.RANDOMNESS) -
-                (val - this.RANDOMNESS) + 1) + (val - this.RANDOMNESS));
-        }
     }
 }

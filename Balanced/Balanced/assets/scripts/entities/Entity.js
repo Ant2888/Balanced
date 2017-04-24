@@ -19,6 +19,7 @@ var ENTITIES;
         function Entity(gsm, x, y, key, frame) {
             var _this = _super.call(this, gsm.game, x, y, key, frame) || this;
             _this.gsm = gsm;
+            _this.maxHealth = 100;
             _this.health = 100;
             _this.flinching = false;
             _this.stunned = false;
@@ -31,6 +32,7 @@ var ENTITIES;
             _this.animTimer = _this.gsm.game.time.create(false);
             _this.flinchTimer = _this.gsm.game.time.create(false);
             _this.stunTimer = _this.gsm.game.time.create(false);
+            _this.flicker = _this.gsm.game.time.create(false);
             _this.gsm.game.add.existing(_this);
             _this.createAnimations();
             _this.anchor.setTo(0.5, 0.5);
@@ -64,9 +66,9 @@ var ENTITIES;
             // remove the old green layer to be replaced
             this.removeChildAt(1);
             // rebuild the green bar to the health bars width adjusted to the width
-            var bmd = this.gsm.game.add.bitmapData((this.width / 100) * this.health, 5);
+            var bmd = this.gsm.game.add.bitmapData((this.width / this.maxHealth) * this.health, 5);
             bmd.ctx.beginPath();
-            bmd.ctx.rect(0, 0, (this.width / 100) * this.health, 5);
+            bmd.ctx.rect(0, 0, (this.width / this.maxHealth) * this.health, 5);
             bmd.ctx.fillStyle = 'green';
             bmd.ctx.fill();
             var health = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd);
@@ -288,8 +290,14 @@ var ENTITIES;
             this.flinchTimer.loop(flinchTime, function () {
                 this.flinching = false;
                 this.flinchTimer.stop();
+                this.flicker.stop();
+                this.tint = 0xFFFFFF;
             }, this);
             this.flinchTimer.start();
+            this.flicker.loop(120, function () {
+                this.tint ^= 0xFFFF;
+            }, this);
+            this.flicker.start();
             //Play the flinch animation
             this.playAnimState(flinchLeft ? Entity.flinchL : Entity.flinchR, 10, false, false, false);
             return true;
@@ -303,8 +311,8 @@ var ENTITIES;
         Entity.prototype.healEntity = function (hp, crit, display) {
             if (display === undefined || display === null)
                 display = true;
-            if (this.health + hp >= 100)
-                this.health = 100;
+            if (this.health + hp >= this.maxHealth)
+                this.health = this.maxHealth;
             else
                 this.health += hp;
             if (display) {
@@ -382,6 +390,10 @@ var ENTITIES;
                 this.inAnim = false;
                 this.events.onAnimationComplete.removeAll();
             }, this);
+        };
+        Entity.prototype.randomValWithRandomness = function (val, rnd) {
+            return Math.floor(Math.random() * ((val + rnd) -
+                (val - rnd) + 1) + (val - rnd));
         };
         /**
          * Gets a random effect for the FCT

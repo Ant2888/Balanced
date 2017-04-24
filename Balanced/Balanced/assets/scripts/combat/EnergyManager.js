@@ -8,7 +8,7 @@ var COMBAT;
     var EnergyManager = (function () {
         function EnergyManager(gsm, ent, regenRate, rate) {
             if (regenRate === undefined || regenRate === null)
-                regenRate = 20;
+                regenRate = 1;
             if (rate === undefined || rate === null)
                 rate = EnergyManager.REGEN_RATE;
             this.gsm = gsm;
@@ -161,7 +161,7 @@ var COMBAT;
         };
         return EnergyManager;
     }());
-    EnergyManager.REGEN_RATE = 1000;
+    EnergyManager.REGEN_RATE = 50;
     COMBAT.EnergyManager = EnergyManager;
 })(COMBAT || (COMBAT = {}));
 //# sourceMappingURL=EnergyManager.js.map

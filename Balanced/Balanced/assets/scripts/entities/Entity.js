@@ -12,7 +12,7 @@ var ENTITIES;
 (function (ENTITIES) {
     /**
      * Basic entity class
-     * @author Anthony
+     * @author Anthony, Emerson
      */
     var Entity = (function (_super) {
         __extends(Entity, _super);
@@ -39,6 +39,43 @@ var ENTITIES;
             _this.body.collideWorldBounds = true;
             return _this;
         }
+        Entity.prototype.makeHealthBar = function () {
+            // This the red background of the healthbar
+            var bmd = this.gsm.game.add.bitmapData(this.width, 5);
+            bmd.ctx.beginPath();
+            bmd.ctx.rect(0, 0, this.width, 5);
+            bmd.ctx.fillStyle = 'red';
+            bmd.ctx.fill();
+            var background = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd);
+            this.addChildAt(background, 0);
+            // This the green background of the healthbar, it will change depending on how much damage is done
+            // It is removed in the updateHealthBar function
+            var bmd2 = this.gsm.game.add.bitmapData(this.width, 5);
+            bmd2.ctx.beginPath();
+            bmd2.ctx.rect(0, 0, this.width, 5);
+            bmd2.ctx.fillStyle = 'green';
+            bmd2.ctx.fill();
+            var health = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd2);
+            this.addChildAt(health, 1);
+            this.addOnHealCallback(function () { this.updateHealthBar(); }, this);
+            this.addOnDamageCallback(function () { this.updateHealthBar(); }, this);
+        };
+        Entity.prototype.updateHealthBar = function () {
+            // remove the old green layer to be replaced
+            this.removeChildAt(1);
+            // rebuild the green bar to the health bars width adjusted to the width
+            var bmd = this.gsm.game.add.bitmapData((this.width / 100) * this.health, 5);
+            bmd.ctx.beginPath();
+            bmd.ctx.rect(0, 0, (this.width / 100) * this.health, 5);
+            bmd.ctx.fillStyle = 'green';
+            bmd.ctx.fill();
+            var health = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd);
+            this.addChildAt(health, 1);
+        };
+        /**
+         * Makes the entity jump.
+         * @param vy
+         */
         Entity.prototype.jump = function (vy) {
             if (this.stunned || !this.alive)
                 return false;

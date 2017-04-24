@@ -113,7 +113,7 @@
 
             var damage = this.randomValWithRandomness(this.ab2_mod);
             other.dealDamage(damage, damage > (this.ab2_mod + (this.RANDOMNESS) / 2), 'yellow', true, true, 300,
-                {dx: (this.facingLeft?-1:1)*10, dy: -10, stunTime: 200, time: 300}, me.scale.x < 0);
+                { dx: (me.scale.x < 0?-1:1)*10, dy: -10, stunTime: 200, time: 300}, me.scale.x < 0);
             // DELETE THIS LINE BELOW HERE
             if (other.health <= 0)
                 other.destroy();

@@ -9,7 +9,7 @@
         private ent: ENTITIES.Entity;
         public energy: number;
 
-        public static REGEN_RATE = 1000;
+        public static REGEN_RATE = 50;
 
         protected gsm: States.GameStateManager;
         protected regenRate: number;
@@ -21,7 +21,7 @@
         constructor(gsm: States.GameStateManager, ent: ENTITIES.Entity, regenRate?: number,
             rate?: number) {
             if (regenRate === undefined || regenRate === null)
-                regenRate = 20;
+                regenRate = 1;
 
             if (rate === undefined || rate === null)
                 rate = EnergyManager.REGEN_RATE;

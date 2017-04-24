@@ -150,45 +150,6 @@
             }, this);
         }
 
-        public makeSpriteHealthBar(sprite: Phaser.Sprite): void {
-
-            // This the red background of the healthbar
-            var bmd = this.gsm.game.add.bitmapData(sprite.width, 5);
-
-            bmd.ctx.beginPath();
-            bmd.ctx.rect(0, 0, sprite.width, 5);
-            bmd.ctx.fillStyle = 'red';
-            bmd.ctx.fill();
-            var background = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd);
-            sprite.addChildAt(background, 0);
-
-            // This the green background of the healthbar, it will change depending on how much damage is done
-            // It is removed in the updateHealthBar function
-            var bmd2 = this.gsm.game.add.bitmapData(sprite.width, 5);
-
-            bmd2.ctx.beginPath();
-            bmd2.ctx.rect(0, 0, sprite.width, 5);
-            bmd2.ctx.fillStyle = 'green';
-            bmd2.ctx.fill();
-            var health = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd2);
-            sprite.addChildAt(health, 1);
-        }
-
-        public updateHealthBar(sprite: Phaser.Sprite): void {
-            // remove the old green layer to be replaced
-            sprite.removeChildAt(1);
-
-            // rebuild the green bar to the health bars width adjusted to the width
-            var bmd = this.gsm.game.add.bitmapData((sprite.width / 100) * sprite.health, 5);
-
-            bmd.ctx.beginPath();
-            bmd.ctx.rect(0, 0, (sprite.width / 100) * sprite.health, 5);
-            bmd.ctx.fillStyle = 'green';
-            bmd.ctx.fill();
-            var health = this.gsm.game.add.image(-(sprite.width / 2), -(sprite.height / 2) - 15, bmd);
-            sprite.addChildAt(health, 1);
-        }
-
         public playerHit(player: Phaser.Sprite, other: Phaser.Sprite | Phaser.Group): void {
 
             //check if the player is attacking
@@ -197,12 +158,11 @@
             if ((boolcurAnim == ENTITIES.Entity.attackR || boolcurAnim == ENTITIES.Entity.attackL) && !(<ENTITIES.Entity>other).flinching) {
                 var damage = Math.floor(Math.random() * (80)) + 1;
                 (<ENTITIES.Entity>other).dealDamage(damage, damage >= 55, "yellow", true, true);
-                this.updateHealthBar(<ENTITIES.Entity>other);
 
                 if ((<Phaser.Sprite>other).health <= 0) {
                     (<Phaser.Sprite>other).destroy();
                     var baddie = new ENTITIES.Baddie(this.gsm, (<Phaser.Sprite>other).x, (<Phaser.Sprite>other).y - 100, 'baddie');
-                    this.makeSpriteHealthBar(baddie);
+                    baddie.makeHealthBar();
                     this.gsm.game.physics.arcade.enable(baddie);
                     baddie.body.gravity.y = 300;
                     baddie.body.collideWorldBounds = true;
@@ -333,7 +293,7 @@
 
         public placeEnemies(element, group): void {            
             var baddie = new ENTITIES.Baddie(this.gsm, element.x, element.y, 'baddie');
-            this.makeSpriteHealthBar(baddie);
+            baddie.makeHealthBar();
 
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;

@@ -134,6 +134,9 @@
          */
         public regenEnergy(regenRate: number, display?: boolean): void {
 
+            if (!this.ent.alive)
+                return;
+
             if (display === undefined || display === null)
                 display = true;
 

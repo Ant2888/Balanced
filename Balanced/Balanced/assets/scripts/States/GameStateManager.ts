@@ -10,6 +10,8 @@ module States {
      */
     export class GameStateManager {
         public game: Phaser.Game;
+        public musicBox: UTIL.JukeBox;
+
         protected state: States.State;
         protected guiM: GUI.GUIManager;
 
@@ -21,6 +23,7 @@ module States {
          */
         constructor(game: Phaser.Game) {
             this.game = game;
+            this.musicBox = new UTIL.JukeBox(this);
         }
 
         //helper to place the initial states and managers
@@ -94,7 +97,7 @@ module States {
             if (this.state.end() == false) {
                 //TODO: ERROUT
             }
-
+            
             this.game.input.destroy();
         }
 

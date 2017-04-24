@@ -22,6 +22,7 @@ var States;
         }
         Level1State.prototype.update = function () {
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
+            this.gsm.game.physics.arcade['TILE_BIAS'] = 40;
             this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
             this.gsm.game.physics.arcade.collide(this.player.energyWave.bullets, this.floorlayer, function (e) { e.kill(); });
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
@@ -31,6 +32,9 @@ var States;
                 this.player.isJumping = false;
             if (!this.player.alive)
                 return;
+            if (this.player.y >= 1314) {
+                this.player.y = 1240;
+            }
             if (this.stairOverlap != null && !(this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
                 this.player.body.allowGravity = false;
                 this.player.body.velocity.x = 0;
@@ -73,9 +77,10 @@ var States;
         Level1State.prototype.init = function () {
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
+            this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
         };
         Level1State.prototype.startup = function () {
-            console.log("Level 1 Started.");
+            this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
             this.map = this.gsm.game.add.tilemap('level1');
@@ -88,10 +93,12 @@ var States;
             this.starislayer = this.map.createLayer('stairs');
             this.floorlayer = this.map.createLayer('floors');
             // collision on blockedLayer           
-            this.map.setCollisionBetween(1, 2000, true, 'floors');
+            this.map.setCollisionBetween(1, 100, true, 'floors');
             this.createEnemies();
             this.createDoors();
             this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
+            this.player.loadEntitySounds(this.gsm.musicBox);
+            this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour'); }, this);
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
             this.player.inputEnabled = true;

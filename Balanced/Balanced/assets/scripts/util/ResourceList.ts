@@ -70,8 +70,18 @@ declare class UTIL {
     static TWN_HALL_ID: number;
     
     static BALANCE_NOTIF_ID: number;
+
+
+
+    static SFX: number;
+    static MENU_SFX: number;
+    static MUSIC: number;
+
     //--------------- HUD
 }
+UTIL.SFX = .1;
+UTIL.MENU_SFX = .1;
+UTIL.MUSIC = .3;
 
 //GIVE THE GLOBAL VAR THE VALUE
 

@@ -13,7 +13,7 @@ var States;
     /**
     *This is the options menu of the game
     *
-    * @author Emerson
+    * @author Emerson, Anthony
     */
     var OptionsMenuState = (function (_super) {
         __extends(OptionsMenuState, _super);
@@ -23,12 +23,25 @@ var States;
         OptionsMenuState.prototype.update = function () {
         };
         OptionsMenuState.prototype.init = function () {
+            this.gsm.musicBox.addSound('Hover', UTIL.MENU_SFX);
+            this.gsm.musicBox.addSound('Unhover', UTIL.MENU_SFX);
+            this.gsm.musicBox.addSound('ClickDown', UTIL.MENU_SFX);
+            this.gsm.musicBox.addSound('ClickLetGo', UTIL.MENU_SFX);
             var group = this.gsm.game.add.group();
             this.optionsMenu = new GUI.OptionsMenuGraphics(group);
             this.gsm.getGUIM().addGroup(this.optionsMenu);
         };
         OptionsMenuState.prototype.startup = function () {
-            console.log("Options Menu Started.");
+            var btn1 = this.optionsMenu.getCancelButton();
+            btn1.setDownSound(this.gsm.musicBox.findSound('ClickDown'));
+            btn1.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
+            btn1.setOutSound(this.gsm.musicBox.findSound('Unhover'));
+            btn1.setOverSound(this.gsm.musicBox.findSound('Hover'));
+            var btn2 = this.optionsMenu.getOkButton();
+            btn2.setDownSound(this.gsm.musicBox.findSound('ClickDown'));
+            btn2.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
+            btn2.setOutSound(this.gsm.musicBox.findSound('Unhover'));
+            btn2.setOverSound(this.gsm.musicBox.findSound('Hover'));
             return true;
         };
         OptionsMenuState.prototype.end = function () {

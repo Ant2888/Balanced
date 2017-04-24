@@ -23,6 +23,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\res\app.css" />
+    <Content Include="assets\res\audio\Bag_Close.mp3" />
+    <Content Include="assets\res\audio\Bag_Open.mp3" />
+    <Content Include="assets\res\audio\Button.mp3" />
+    <Content Include="assets\res\audio\ClickDown.mp3" />
+    <Content Include="assets\res\audio\ClickLetGo.mp3" />
+    <Content Include="assets\res\audio\CloseMenu.mp3" />
+    <Content Include="assets\res\audio\Door_Open.mp3" />
+    <Content Include="assets\res\audio\Drinking.mp3" />
+    <Content Include="assets\res\audio\Fall1.mp3" />
+    <Content Include="assets\res\audio\final_hour.mp3" />
+    <Content Include="assets\res\audio\Footsteps.mp3" />
+    <Content Include="assets\res\audio\Hover.mp3" />
+    <Content Include="assets\res\audio\Jump1.mp3" />
+    <Content Include="assets\res\audio\Need_Energy.mp3" />
+    <Content Include="assets\res\audio\OgreAttack1.mp3" />
+    <Content Include="assets\res\audio\OgreAttack2.mp3" />
+    <Content Include="assets\res\audio\OgreAttack3.mp3" />
+    <Content Include="assets\res\audio\OgreAttack4.mp3" />
+    <Content Include="assets\res\audio\OgreDeath1.mp3" />
+    <Content Include="assets\res\audio\OgreDeath2.mp3" />
+    <Content Include="assets\res\audio\OgreDeath3.mp3" />
+    <Content Include="assets\res\audio\OgreHurt2.mp3" />
+    <Content Include="assets\res\audio\OgreHurt3.mp3" />
+    <Content Include="assets\res\audio\OgreHurt4.mp3" />
+    <Content Include="assets\res\audio\OgreHurt5.mp3" />
+    <Content Include="assets\res\audio\OpenMenu.mp3" />
+    <Content Include="assets\res\audio\Pause.mp3" />
+    <Content Include="assets\res\audio\PlayerDeath.mp3" />
+    <Content Include="assets\res\audio\PlayerHurt1.mp3" />
+    <Content Include="assets\res\audio\PlayerHurt2.mp3" />
+    <Content Include="assets\res\audio\PlayerHurt3.mp3" />
+    <Content Include="assets\res\audio\Regular_Hit.mp3" />
+    <Content Include="assets\res\audio\Spell_not_Ready.mp3" />
+    <Content Include="assets\res\audio\Three_Attack.mp3" />
+    <Content Include="assets\res\audio\Unhover.mp3" />
+    <Content Include="assets\res\audio\Whirlwind.mp3" />
     <Content Include="assets\res\balance-menus\balance_notif.png" />
     <Content Include="assets\res\help-menu\hm_background.png" />
     <Content Include="assets\res\help-menu\hm_ok_btns.png" />
@@ -107,6 +143,7 @@
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
     <TypeScriptCompile Include="assets\scripts\States\test-states\TestState2.ts" />
     <TypeScriptCompile Include="assets\scripts\States\TownState.ts" />
+    <TypeScriptCompile Include="assets\scripts\util\JukeBox.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />
     <TypeScriptCompile Include="assets\scripts\util\ResourceList.ts" />
     <TypeScriptCompile Include="assets\scripts\util\ResourceManager.ts" />
@@ -123,6 +160,8 @@
     <Content Include="tslint.json" />
     <Content Include="typings.json" />
     <Content Include="assets\res\level1-dungeon\level1.json" />
+    <Content Include="assets\res\audio\dark_intro.ogg" />
+    <Content Include="assets\res\audio\dark_loop.ogg" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

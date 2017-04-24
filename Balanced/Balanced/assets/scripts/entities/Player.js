@@ -41,6 +41,14 @@ var ENTITIES;
             _this.energyWave.fireRate = 250;
             _this.energyWave.trackSprite(_this, 0, 0, true);
             _this.recalcModifiers();
+            _this.addOnDeathCallBack(function () {
+                this.gsm.musicBox.playByID('PlayerDeath', undefined, undefined, UTIL.SFX, false, false);
+            }, _this);
+            _this.addOnDamageCallback(function () {
+                var val = this.randomValWithRandomness(2, 1);
+                this.gsm.musicBox.randomPlayByID(val == 3 ? 'PlayerHurt3' :
+                    (val == 2 ? 'PlayerHurt2' : 'PlayerHurt1'), 70, undefined, undefined, UTIL.SFX, false, false);
+            }, _this);
             return _this;
         }
         Player.prototype.recalcModifiers = function () {
@@ -138,6 +146,24 @@ var ENTITIES;
             var damage = this.randomValWithRandomness(this.ab2_mod.dmg, this.RANDOMNESS);
             other.dealDamage(damage, damage > (this.ab2_mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 300, { dx: (this.facingLeft ? -1 : 1) * 10, dy: -10, stunTime: 200, time: 300 }, this.facingLeft);
             me.kill();
+        };
+        Player.prototype.loadEntitySounds = function (box) {
+            box.addSound('PlayerDeath');
+            box.addSound('PlayerHurt1');
+            box.addSound('PlayerHurt2');
+            box.addSound('PlayerHurt3');
+            box.addSound('Regular_Hit');
+            box.addSound('Spell_not_Ready');
+            box.addSound('Three_Attack');
+            box.addSound('Whirlwind');
+            box.addSound('Need_Energy');
+            box.addSound('Jump1');
+            box.addSound('Fall1');
+            box.addSound('Footsteps');
+            box.addSound('Drinking');
+            box.addSound('Bag_Open');
+            box.addSound('Bag_Close');
+            box.addSound('OpenMenu');
         };
         return Player;
     }(ENTITIES.Entity));

@@ -76,6 +76,8 @@
             this.body.collideWorldBounds = true;
         }
 
+        public abstract loadEntitySounds(box: UTIL.JukeBox): void;
+
         public makeHealthBar(): void {
             // This the red background of the healthbar
             var bmd = this.gsm.game.add.bitmapData(this.width, 5);
@@ -162,6 +164,7 @@
                 } else {
                     this.playAnimState(ENTITIES.Entity.walkL, 10, true, true);
                 }
+                
 
                 this.facingLeft = true;
                 return true;
@@ -175,7 +178,7 @@
                 } else {
                     this.playAnimState(ENTITIES.Entity.walkR, 10, true, true);
                 }
-
+                
                 this.facingLeft = false;
                 return true;
             }

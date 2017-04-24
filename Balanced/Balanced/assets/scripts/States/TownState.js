@@ -18,15 +18,20 @@ var States;
         TownState.prototype.update = function () {
         };
         TownState.prototype.init = function () {
+            this.gsm.musicBox.addSound('dark_loop');
             var group = this.gsm.game.add.group();
             this.townGraphics = new GUI.TownGraphics(group);
             this.gsm.getGUIM().addGroup(this.townGraphics);
         };
         TownState.prototype.startup = function () {
+            this.gsm.musicBox.playByID('dark_loop', undefined, undefined, .2, true, false);
             console.log("Town state started");
             return true;
         };
-        TownState.prototype.end = function () { return true; };
+        TownState.prototype.end = function () {
+            this.gsm.musicBox.stopByID('dark_loop');
+            return true;
+        };
         TownState.prototype.getType = function () {
             return this;
         };

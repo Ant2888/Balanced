@@ -25,6 +25,123 @@ class BalancedGame {
 
         //PUT ALL RESOURCES YOU NEED LOADED DOWN HERE
 
+        // --------------------------------- AUDIO
+        rem.addResource(new UTIL.Resource('dark_loop', 'assets/res/audio/dark_loop.ogg', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('dark_intro', 'assets/res/audio/dark_intro.ogg', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('final_hour', 'assets/res/audio/final_hour.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Bag_Close', 'assets/res/audio/Bag_Close.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Bag_Open', 'assets/res/audio/Bag_Open.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Button', 'assets/res/audio/Button.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('ClickDown', 'assets/res/audio/ClickDown.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('ClickLetGo', 'assets/res/audio/ClickLetGo.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('CloseMenu', 'assets/res/audio/CloseMenu.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Door_Open', 'assets/res/audio/Door_Open.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Drinking', 'assets/res/audio/Drinking.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Fall1', 'assets/res/audio/Fall1.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Footsteps', 'assets/res/audio/Footsteps.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Hover', 'assets/res/audio/Hover.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Jump1', 'assets/res/audio/Jump1.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Need_Energy', 'assets/res/audio/Need_Energy.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreAttack1', 'assets/res/audio/OgreAttack1.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreAttack2', 'assets/res/audio/OgreAttack2.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreAttack3', 'assets/res/audio/OgreAttack3.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreAttack4', 'assets/res/audio/OgreAttack4.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreDeath1', 'assets/res/audio/OgreDeath1.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreDeath2', 'assets/res/audio/OgreDeath2.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreDeath3', 'assets/res/audio/OgreDeath3.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreHurt2', 'assets/res/audio/OgreHurt2.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreHurt3', 'assets/res/audio/OgreHurt3.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreHurt4', 'assets/res/audio/OgreHurt4.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OgreHurt5', 'assets/res/audio/OgreHurt5.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('OpenMenu', 'assets/res/audio/OpenMenu.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Pause', 'assets/res/audio/Pause.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('PlayerDeath', 'assets/res/audio/PlayerDeath.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('PlayerHurt1', 'assets/res/audio/PlayerHurt1.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('PlayerHurt2', 'assets/res/audio/PlayerHurt2.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('PlayerHurt3', 'assets/res/audio/PlayerHurt3.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Regular_Hit', 'assets/res/audio/Regular_Hit.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Spell_not_Ready', 'assets/res/audio/Spell_not_Ready.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Three_Attack', 'assets/res/audio/Three_Attack.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Unhover', 'assets/res/audio/Unhover.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('Whirlwind', 'assets/res/audio/Whirlwind.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
+        // --------------------------------- AUDIO
+
         // --------------------------------- HUD
         rem.addResource(new UTIL.Resource('ab_ab1_ss', 'assets/res/hud/ab_ab1_ss.png', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 75, 75);

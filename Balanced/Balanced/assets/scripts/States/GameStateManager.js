@@ -17,6 +17,7 @@ var States;
          */
         function GameStateManager(game) {
             this.game = game;
+            this.musicBox = new UTIL.JukeBox(this);
         }
         //helper to place the initial states and managers
         GameStateManager.prototype.initState = function () {

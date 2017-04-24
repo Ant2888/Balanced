@@ -25,10 +25,11 @@ var ENTITIES;
         Baddie.prototype.dealWithOverlap = function (player, me) {
             if (!this.stunned) {
                 var damage = this.randomValWithRandomness(15, 15);
-                player.dealDamage(damage, damage > (damage + 7.5), 'red', true, true, 1000, {}, this.facingLeft);
+                player.dealDamage(damage, damage > (damage + 7.5), 'red', true, true, 1000, {}, player.facingLeft);
             }
         };
         Baddie.prototype.createAnimations = function () { };
+        Baddie.prototype.loadEntitySounds = function (box) { };
         return Baddie;
     }(ENTITIES.Entity));
     ENTITIES.Baddie = Baddie;

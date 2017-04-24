@@ -102,6 +102,8 @@ var COMBAT;
          * @param regenRate
          */
         EnergyManager.prototype.regenEnergy = function (regenRate, display) {
+            if (!this.ent.alive)
+                return;
             if (display === undefined || display === null)
                 display = true;
             if (display) {

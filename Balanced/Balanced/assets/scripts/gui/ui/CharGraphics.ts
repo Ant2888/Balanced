@@ -40,8 +40,11 @@
         }
 
         public flipMenu(): void {
-            this.char_menu.exists = !this.char_menu.exists;
-            this.closeBtn.exists = !this.closeBtn.exists;
+            if (this.char_menu.exists)
+                this.closeMenu();
+            else {
+                this.openMenu();
+            }
         }
     }
 }

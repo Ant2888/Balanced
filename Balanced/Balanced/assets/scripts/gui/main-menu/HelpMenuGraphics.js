@@ -29,9 +29,9 @@ var GUI;
         // initializes the buttons
         HelpMenuGraphics.prototype.setOkButton = function (func) {
             this.okButton = this.gsm.game.add.button(570, 550, 'hmOkButton', func, this, 1, 0, 2);
+            this.group.add(this.okButton);
         };
         HelpMenuGraphics.prototype.okButtonPressed = function () {
-            console.log('ok button was pressed');
             this.gsm.setState(States.MAIN_MENU_STATE);
         };
         // getters

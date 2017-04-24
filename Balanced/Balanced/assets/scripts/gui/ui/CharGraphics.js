@@ -41,8 +41,11 @@ var GUI;
                 this.closeBtn.exists = false;
         };
         CharGraphics.prototype.flipMenu = function () {
-            this.char_menu.exists = !this.char_menu.exists;
-            this.closeBtn.exists = !this.closeBtn.exists;
+            if (this.char_menu.exists)
+                this.closeMenu();
+            else {
+                this.openMenu();
+            }
         };
         return CharGraphics;
     }(GUI.GameObject));

@@ -24,6 +24,9 @@
   <ItemGroup>
     <Content Include="assets\res\app.css" />
     <Content Include="assets\res\balance-menus\balance_notif.png" />
+    <Content Include="assets\res\boot\Balanced Logo.png" />
+    <Content Include="assets\res\boot\mm_background_only.png" />
+    <Content Include="assets\res\boot\Phaser Logo.png" />
     <Content Include="assets\res\help-menu\hm_background.png" />
     <Content Include="assets\res\help-menu\hm_ok_btns.png" />
     <Content Include="assets\res\hud\ab_ab1_ss.png" />

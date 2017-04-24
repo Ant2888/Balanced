@@ -22,6 +22,7 @@ var States;
         }
         Level1State.prototype.update = function () {
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
+            this.gsm.game.physics.arcade['TILE_BIAS'] = 40;
             this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
             this.gsm.game.physics.arcade.collide(this.player.energyWave.bullets, this.floorlayer, function (e) { e.kill(); });
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
@@ -31,6 +32,9 @@ var States;
                 this.player.isJumping = false;
             if (!this.player.alive)
                 return;
+            if (this.player.y >= 1314) {
+                this.player.y = 1240;
+            }
             if (this.stairOverlap != null && !(this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
                 this.player.body.allowGravity = false;
                 this.player.body.velocity.x = 0;
@@ -100,7 +104,7 @@ var States;
             this.actionbar = new GUI.ActionBarGraphics(group);
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group);
-            this.charMenu = new GUI.CharGraphics(group);
+            this.charMenu = new GUI.CharGraphics(group, this.player);
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);
             this.gsm.getGUIM().addGroup(this.bag);

@@ -28,8 +28,12 @@ var States;
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
             this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.player.dealWithOverlap, null, this.player);
             this.gsm.game.physics.arcade.overlap(this.player.energyWave.bullets, this.enemies, this.player.dealWithOverlap, null, this.player);
-            if (this.player.body.onFloor())
+            if (this.player.body.onFloor()) {
                 this.player.isJumping = false;
+            }
+            else {
+                this.player.isJumping = true;
+            }
             if (!this.player.alive)
                 return;
             if (this.player.y >= 1314) {
@@ -132,40 +136,11 @@ var States;
         };
         Level1State.prototype.createDoors = function () {
             this.doors = this.gsm.game.add.group();
-            this.objectLayer = this.findObjectsByType('door', this.map, 'enemies');
+            this.objectLayer = this.findObjectsByType('door', this.map, 'doors');
             this.objectLayer.forEach(function (element) {
                 this.createFromTiledObject(element, this.doors);
             }, this);
         };
-        /*
-                public playerHit(player: Phaser.Sprite, other: Phaser.Sprite | Phaser.Group): void {
-        
-                    //check if the player is attacking
-                    var boolcurAnim = this.player.animations.currentAnim.name;
-        
-                    if ((boolcurAnim == ENTITIES.Entity.attackR || boolcurAnim == ENTITIES.Entity.attackL) && !(<ENTITIES.Entity>other).flinching) {
-                        var damage = Math.floor(Math.random() * (80)) + 1;
-                        (<ENTITIES.Entity>other).dealDamage(damage, damage >= 55, "yellow", true, true);
-        
-                        if ((<Phaser.Sprite>other).health <= 0) {
-                            (<Phaser.Sprite>other).destroy();
-                            var baddie = new ENTITIES.Baddie(this.gsm, (<Phaser.Sprite>other).x, (<Phaser.Sprite>other).y - 100, 'baddie');
-                            baddie.makeHealthBar();
-                            this.gsm.game.physics.arcade.enable(baddie);
-                            baddie.body.gravity.y = 300;
-                            baddie.body.collideWorldBounds = true;
-                            this.enemies.add(baddie);
-                        }
-        
-                    }
-        
-                    //check if the enemy is attacking
-                    if (this.player.flinching == false && this.player.alive) {
-                        var damage = Math.floor(Math.random() * (30)) + 1;
-                        this.player.dealDamage(damage, damage >= 20, "red", true, true, ENTITIES.Entity.FLINCH_TIME);
-                    }
-                }
-        */
         Level1State.prototype.setupKeybinds = function (data) {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {
@@ -184,7 +159,7 @@ var States;
                     data.actionbar.potion1Pressed(data.player);
                 }
                 if (e.keyCode == Phaser.Keyboard.X) {
-                    data.actionbar.getPotion2().frame = 1;
+                    data.actionbar.potion2Pressed(data.player);
                 }
                 if (e.keyCode == Phaser.Keyboard.I) {
                     data.actionbar.getBag().frame = 1;
@@ -261,7 +236,6 @@ var States;
             this.enemies.add(baddie);
         };
         Level1State.prototype.createFromTiledObject = function (element, group) {
-            console.log(element.x + '   ' + element.y);
             var sprite = group.create(element.x, element.y, element.properties.sprite);
             sprite.anchor.setTo(0, .67);
             //copy all properties to the sprite

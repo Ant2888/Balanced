@@ -33,6 +33,7 @@
         public static ABILITY_THREE = 3;
         public static ABILITY_FOUR = 4;
         public static POTION_ONE = 5;
+        public static POTION_TWO = 6;
 
         public ABILITY_ONE_COST = 5;
         public ABILITY_TWO_COST = 30;

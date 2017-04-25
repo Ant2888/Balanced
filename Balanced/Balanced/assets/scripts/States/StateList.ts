@@ -21,12 +21,15 @@ declare class States {
 
     static HELP_MENU_STATE: States.State;
     static HELP_MENU_STATE_ID: number;
-
-    static PROTOTYPE_STATE: States.State;
-    static PROTOTYPE_STATE_ID: number;
-
+    
     static LEVEL1_STATE: States.State;
     static LEVEL1_STATE_ID: number;
+
+    static LEVEL2_STATE: States.State;
+    static LEVEL2_STATE_ID: number;
+
+    static LEVEL3_STATE: States.State;
+    static LEVEL3_STATE_ID: number;
 
     static LEVEL_SELECT_STATE: States.State;
     static LEVEL_SELECT_STATE_ID: number;
@@ -50,7 +53,9 @@ States.MAIN_MENU_STATE_ID = 200;
 States.OPTIONS_MENU_STATE_ID = 201;
 States.OPTIONS_MENU_STATE_ID = 202;
 
-States.PROTOTYPE_STATE_ID = 203;
+
 States.TOWN_STATE_ID = 204;
 States.LEVEL_SELECT_STATE_ID = 205;
 States.LEVEL1_STATE_ID = 206;
+States.LEVEL2_STATE_ID = 207;
+States.LEVEL3_STATE_ID = 208;

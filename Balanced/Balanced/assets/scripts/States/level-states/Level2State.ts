@@ -4,7 +4,7 @@
     *
     * @author Emerson, Anthony
     */
-    export class Level1State extends State {
+    export class Level2State extends State {
         private actionbar: GUI.ActionBarGraphics;
         private unitframe: GUI.HealthAndEnergyGraphics;
         private charMenu: GUI.CharGraphics;
@@ -117,7 +117,7 @@
 
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
-            this.map = this.gsm.game.add.tilemap('level1');
+            this.map = this.gsm.game.add.tilemap('level2');
 
 
             this.map.addTilesetImage('grunge_tile', 'grunge_tile');
@@ -136,7 +136,7 @@
             this.createEnemies();
             this.createDoors();
 
-            this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
+            this.player = new ENTITIES.Player(this.gsm, 16 * 64, 16 * 64, 'tempPlayer');
             this.player.loadEntitySounds(this.gsm.musicBox);
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour') }, this);
 

@@ -179,6 +179,7 @@ var ENTITIES;
     Player.ABILITY_THREE = 3;
     Player.ABILITY_FOUR = 4;
     Player.POTION_ONE = 5;
+    Player.POTION_TWO = 6;
     ENTITIES.Player = Player;
 })(ENTITIES || (ENTITIES = {}));
 //# sourceMappingURL=Player.js.map

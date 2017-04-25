@@ -182,6 +182,15 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('balance_notif', 'assets/res/balance-menus/balance_notif.png', UTIL.BALANCE_NOTIF_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl, 520, 146);
         }, this);
+        rem.addResource(new UTIL.Resource('dd_twn_btn', 'assets/res/hud/dd_twn_btn.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 120, 35);
+        }, this);
+        rem.addResource(new UTIL.Resource('dd_menu_btn', 'assets/res/hud/dd_menu_btn.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 120, 35);
+        }, this);
+        rem.addResource(new UTIL.Resource('dd_background', 'assets/res/hud/dead_dialog.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl);
+        }, this);
         // --------------------------------- HUD
 
         // --------------------------------- character menus
@@ -197,6 +206,7 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('close_btn_ss', 'assets/res/in-game-menus/close_btn_ss.png', UTIL.CLOSE_BTN_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 25, 25);
         }, this);
+
         // --------------------------------- character menus
 
         // --------------------------------- levelsel menus

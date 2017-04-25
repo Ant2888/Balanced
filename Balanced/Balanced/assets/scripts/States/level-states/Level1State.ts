@@ -5,6 +5,7 @@
     * @author Emerson, Anthony
     */
     export class Level1State extends State {
+
         private actionbar: GUI.ActionBarGraphics;
         private unitframe: GUI.HealthAndEnergyGraphics;
         private charMenu: GUI.CharGraphics;
@@ -117,6 +118,7 @@
         }
 
         public startup(): boolean {
+            
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
 
             // setup the tilemap
@@ -141,6 +143,7 @@
             this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
             this.createEnemies();
 
+            
             this.player.loadEntitySounds(this.gsm.musicBox);
             (<ENTITIES.Ogre>this.enemies.getTop()).loadEntitySounds(this.gsm.musicBox);
 
@@ -150,13 +153,11 @@
             this.gsm.game.camera.follow(this.player);
 
             this.player.inputEnabled = true;
-
-
-
+            
             this.bm = new BALANCE.BalanceManager(this.gsm);
 
             var group = this.gsm.game.add.group();
-            this.actionbar = new GUI.ActionBarGraphics(group);
+            this.actionbar = new GUI.ActionBarGraphics(group, this.player);
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group);
             this.charMenu = new GUI.CharGraphics(group, this.player);
@@ -179,7 +180,7 @@
             this.setupKeybinds(this);
 
             return true;
-        }
+        }                
 
         public createEnemies(): void {
             this.enemies = this.gsm.game.add.group();
@@ -233,7 +234,7 @@
                 }
 
                 if (e.keyCode == Phaser.Keyboard.H) {
-                    data.actionbar.getTown().frame = 1;
+                    data.actionbar.getTown().frame = 1;                    
                 }
 
                 if (e.keyCode == Phaser.Keyboard.C) {
@@ -262,7 +263,7 @@
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
 
                 if (e.keyCode == Phaser.Keyboard.O) {
-                    data.player.invincible != data.player.invincible
+                    data.player.invincible = data.player.invincible ? false : true;
                 }
 
                 if (e.keyCode == Phaser.Keyboard.Q) {
@@ -297,10 +298,23 @@
 
                 if (e.keyCode == Phaser.Keyboard.H) {
                     data.actionbar.getTown().frame = 0;
+                    data.gsm.setState(States.TOWN_STATE);                    
                 }
 
                 if (e.keyCode == Phaser.Keyboard.C) {
                     data.actionbar.getStats().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.V) {
+                    data.gsm.setState(States.LEVEL1_STATE);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.B) {
+                    data.gsm.setState(States.LEVEL2_STATE);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.G) {
+                    data.gsm.setState(States.LEVEL3_STATE);
                 }
             }
         }

@@ -112,7 +112,7 @@ var States;
             this.player.inputEnabled = true;
             this.bm = new BALANCE.BalanceManager(this.gsm);
             var group = this.gsm.game.add.group();
-            this.actionbar = new GUI.ActionBarGraphics(group);
+            this.actionbar = new GUI.ActionBarGraphics(group, this.player);
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group);
             this.charMenu = new GUI.CharGraphics(group, this.player);
@@ -193,7 +193,7 @@ var States;
             };
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.O) {
-                    data.player.invincible != data.player.invincible;
+                    data.player.invincible = data.player.invincible ? false : true;
                 }
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.actionbar.getAbility1().frame = 0;
@@ -219,9 +219,19 @@ var States;
                 }
                 if (e.keyCode == Phaser.Keyboard.H) {
                     data.actionbar.getTown().frame = 0;
+                    data.gsm.setState(States.TOWN_STATE);
                 }
                 if (e.keyCode == Phaser.Keyboard.C) {
                     data.actionbar.getStats().frame = 0;
+                }
+                if (e.keyCode == Phaser.Keyboard.V) {
+                    data.gsm.setState(States.LEVEL1_STATE);
+                }
+                if (e.keyCode == Phaser.Keyboard.B) {
+                    data.gsm.setState(States.LEVEL2_STATE);
+                }
+                if (e.keyCode == Phaser.Keyboard.G) {
+                    data.gsm.setState(States.LEVEL3_STATE);
                 }
             };
         };

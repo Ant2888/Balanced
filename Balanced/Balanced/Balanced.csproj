@@ -75,6 +75,9 @@
     <Content Include="assets\res\hud\ab_p2_ss.png" />
     <Content Include="assets\res\hud\ab_stats_ss.png" />
     <Content Include="assets\res\hud\ab_town_ss.png" />
+    <Content Include="assets\res\hud\dd_menu_btn.png" />
+    <Content Include="assets\res\hud\dd_twn_btn.png" />
+    <Content Include="assets\res\hud\dead_dialog.png" />
     <Content Include="assets\res\hud\UL_UI.png" />
     <Content Include="assets\res\in-game-menus\char_menu.png" />
     <Content Include="assets\res\in-game-menus\close_btn_ss.png" />

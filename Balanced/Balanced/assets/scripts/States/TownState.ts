@@ -21,7 +21,26 @@ module States {
         public startup(): boolean {
             this.gsm.musicBox.playByID('dark_loop', undefined, undefined, .2, true, false);
             console.log("Town state started");
+            this.setupKeybinds(this);
             return true;
+        }
+
+        public setupKeybinds(data: this): void {
+
+            this.gsm.game.input.keyboard.onUpCallback = function (e) {
+
+                if (e.keyCode == Phaser.Keyboard.V) {
+                    data.gsm.setState(States.LEVEL1_STATE);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.B) {
+                    data.gsm.setState(States.LEVEL2_STATE);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.H) {
+                    data.gsm.setState(States.LEVEL3_STATE);
+                }
+            }
         }
 
         public end(): boolean {

@@ -51,7 +51,21 @@ var States;
             btn4.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
             btn4.setOutSound(this.gsm.musicBox.findSound('Unhover'));
             btn4.setOverSound(this.gsm.musicBox.findSound('Hover'));
+            this.setupKeybinds(this);
             return true;
+        };
+        LevelSelectState.prototype.setupKeybinds = function (data) {
+            this.gsm.game.input.keyboard.onUpCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.V) {
+                    data.gsm.setState(States.LEVEL1_STATE);
+                }
+                if (e.keyCode == Phaser.Keyboard.B) {
+                    data.gsm.setState(States.LEVEL2_STATE);
+                }
+                if (e.keyCode == Phaser.Keyboard.G) {
+                    data.gsm.setState(States.LEVEL3_STATE);
+                }
+            };
         };
         LevelSelectState.prototype.end = function () {
             this.gsm.musicBox.stopAll();

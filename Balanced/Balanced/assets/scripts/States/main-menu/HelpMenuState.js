@@ -37,7 +37,21 @@ var States;
             btn.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
             btn.setOutSound(this.gsm.musicBox.findSound('Unhover'));
             btn.setOverSound(this.gsm.musicBox.findSound('Hover'));
+            this.setupKeybinds(this);
             return true;
+        };
+        HelpMenuState.prototype.setupKeybinds = function (data) {
+            this.gsm.game.input.keyboard.onUpCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.V) {
+                    data.gsm.setState(States.LEVEL1_STATE);
+                }
+                if (e.keyCode == Phaser.Keyboard.B) {
+                    data.gsm.setState(States.LEVEL2_STATE);
+                }
+                if (e.keyCode == Phaser.Keyboard.G) {
+                    data.gsm.setState(States.LEVEL3_STATE);
+                }
+            };
         };
         HelpMenuState.prototype.end = function () {
             return true;

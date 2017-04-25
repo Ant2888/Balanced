@@ -73,7 +73,7 @@
 
         public checkCondition(): void {
             if (this.shouldSee()) {
-                //this.elevate();
+                this.elevate();
             }
         }
 

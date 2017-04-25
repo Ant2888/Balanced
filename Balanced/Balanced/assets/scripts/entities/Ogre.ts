@@ -5,7 +5,8 @@
     export class Ogre extends Entity {
 
         public static ABILITY_ONE = 1;
-        public ABILITY_ONE_COST = 75;
+        public ABILITY_ONE_COST = 50;
+        public ab1_mod: COMBAT.Ability;
 
         //AI STUFF
         public WONDER_RANGE = 64 * 1;
@@ -13,6 +14,8 @@
         public VISION_Y = 64 * 3;
         public WALK_INTERVAL = [1000, 4000];
         public WALK_SPEED = 150;
+        public ATTACK_DISTANCE = 95;
+        public GCD = 1200;
         //END AI
 
         public player: ENTITIES.Player;
@@ -47,10 +50,35 @@
             }, this);
 
             this.stateLogic = new FSM.OgreStateSystem(this.gsm, this, this.player);
+
+            this.ab1_mod = {
+                dmg: this.ATTACK * .25, flinchTime: Entity.FLINCH_TIME + 200,
+                knockback: { dx: 25, dy: -25, time: 500 }
+            };
         }
 
         public dealWithOverlap(player: Phaser.Sprite, me: Phaser.Sprite | Phaser.Group): void {
+            this.doLogic(<Player>player);
+        }
 
+        private doLogic(player: Player): void {
+            switch (this.animations.currentAnim.name) {
+                case Entity.attackR:
+                case Entity.attackL:
+                    this.tryAttack(player);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private tryAttack(player: Player): void {
+            var mod = this.ab1_mod;
+            var damage = this.randomValWithRandomness(mod.dmg, this.RANDOMNESS);
+            mod.knockback.dx = Math.abs(mod.knockback.dx) * (this.facingLeft ? -1 : 1);
+
+            player.dealDamage(damage, damage > (mod.dmg + (this.RANDOMNESS / 2)), 'red', true, mod.flinchTime > 0,
+                mod.flinchTime, mod.knockback, this.facingLeft);
         }
 
         protected createAnimations(): void {
@@ -63,11 +91,11 @@
             this.animations.add(Entity.idleL, [0], 1, false);
             this.animations.add(Entity.idleR, [2], 1, false);
 
-            this.animations.add(Entity.flinchL, [35, 36, 37], 10, false);
-            this.animations.add(Entity.flinchR, [42, 43, 44], 10, false);
+            this.animations.add(Entity.flinchR, [35, 36, 37], 10, false);
+            this.animations.add(Entity.flinchL, [42, 43, 44], 10, false);
 
-            this.animations.add(Entity.attackR, [77, 78, 79, 80, 81, 82], 15, false);
-            this.animations.add(Entity.attackL, [66, 67, 68, 69, 70, 71], 15, false);
+            this.animations.add(Entity.attackR, [70, 71, 72, 73, 74], 15, false);
+            this.animations.add(Entity.attackL, [63, 64, 65, 66, 67], 15, false);
 
             this.animations.add(Entity.jumpL, [21, 22, 23], 15, false);
             this.animations.add(Entity.jumpR, [28, 29, 30], 15, false);

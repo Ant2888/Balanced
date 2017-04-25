@@ -15,10 +15,40 @@ var FSM;
         function FollowPlayerState(sys, gsm) {
             return _super.call(this, sys, gsm) || this;
         }
-        FollowPlayerState.prototype.deElevate = function () { };
-        FollowPlayerState.prototype.elevate = function () { };
-        FollowPlayerState.prototype.doLogic = function () { };
-        FollowPlayerState.prototype.checkCondition = function () { };
+        FollowPlayerState.prototype.deElevate = function () {
+            this.system.curState = this.system.wonder;
+        };
+        FollowPlayerState.prototype.elevate = function () {
+            this.system.curState = this.system.attack;
+        };
+        FollowPlayerState.prototype.doLogic = function () {
+            var ogre = this.system.ai;
+            var ms = (ogre.x > this.system.player.x ? -1 : 1) * ogre.WALK_SPEED;
+            ogre.walk(ms);
+        };
+        FollowPlayerState.prototype.checkCondition = function () {
+            if (this.shouldAttack()) {
+                this.system.ai.walk(0);
+                this.elevate();
+            }
+            /*else if (this.shouldFollow) {
+                this.system.ai.walk(0);
+                this.deElevate();
+            }*/
+        };
+        FollowPlayerState.prototype.shouldFollow = function () {
+            var ogre = this.system.ai;
+            return !((this.system.player.x > (ogre.x + ogre.WONDER_RANGE)) ||
+                (this.system.player.x < (ogre.x - ogre.WONDER_RANGE)))
+                && ((this.system.player.y > (ogre.y + ogre.WONDER_RANGE)) ||
+                    (this.system.player.y < (ogre.y - ogre.WONDER_RANGE)));
+        };
+        FollowPlayerState.prototype.shouldAttack = function () {
+            var ogre = this.system.ai;
+            var dx = Math.abs(ogre.x - this.system.player.x);
+            var dy = Math.abs(ogre.y - this.system.player.y);
+            return (dx <= ogre.ATTACK_DISTANCE) && (dy <= ogre.ATTACK_DISTANCE);
+        };
         return FollowPlayerState;
     }(FSM.FiniteState));
     FSM.FollowPlayerState = FollowPlayerState;

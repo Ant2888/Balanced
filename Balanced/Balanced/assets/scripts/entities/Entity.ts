@@ -34,6 +34,7 @@
 
         public facingLeft: boolean;
         public isJumping: boolean;
+        public invincible: boolean; 
 
         public static FLINCH_TIME = 1000;
 
@@ -65,6 +66,7 @@
             this.inAnim = false;
             this.facingLeft = false;
             this.isJumping = false;
+            this.invincible = false;
 
             this.onDeathCallback = new Array();
             this.onDamageCallback = new Array();
@@ -282,6 +284,9 @@
          */
         public dealDamage(damage: number, crit: boolean, color = "red", display?: boolean,
             flinch?: boolean, flinchTime?: number, knockBack?: COMBAT.KnockBack, flinchLeft?: boolean): boolean {
+
+            if (damage < 0 || this.invincible)
+                return false;
 
             if (flinchTime === undefined || flinchTime === null)
                 flinchTime = Player.FLINCH_TIME;

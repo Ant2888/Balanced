@@ -121,6 +121,9 @@ var ENTITIES;
                     mob.dealWithOverlap(this, mob);
                     this.doAbilityDamage(mob, this.ab4_mod);
                     break;
+                default:
+                    mob.dealWithOverlap(this, mob);
+                    break;
             }
         };
         Player.prototype.ab3 = function (mob) {

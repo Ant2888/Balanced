@@ -32,6 +32,7 @@ var ENTITIES;
             _this.inAnim = false;
             _this.facingLeft = false;
             _this.isJumping = false;
+            _this.invincible = false;
             _this.onDeathCallback = new Array();
             _this.onDamageCallback = new Array();
             _this.onHealCallback = new Array();
@@ -207,6 +208,8 @@ var ENTITIES;
          */
         Entity.prototype.dealDamage = function (damage, crit, color, display, flinch, flinchTime, knockBack, flinchLeft) {
             if (color === void 0) { color = "red"; }
+            if (damage < 0 || this.invincible)
+                return false;
             if (flinchTime === undefined || flinchTime === null)
                 flinchTime = ENTITIES.Player.FLINCH_TIME;
             if (flinchLeft === undefined || flinchLeft === null)

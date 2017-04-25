@@ -26,13 +26,19 @@ var COMBAT;
             return this.ent;
         };
         OgreAbilities.prototype.castAbilityOne = function () {
+            var _this = this;
             if (!this.energyMan.useAbility(this.getOgre().ABILITY_ONE_COST)) {
                 return false;
             }
+            var ogre = this.ent;
+            this.ent.facingLeft = ogre.player.x < ogre.x;
             if (this.ent.facingLeft)
-                this.ent.playAnimState(ENTITIES.Entity.attackL, this.getOgre().ATTACK_SPEED, false, false, true);
+                this.ent.playAnimState(ENTITIES.Entity.attackL, 10, false, false, true);
             else
-                this.ent.playAnimState(ENTITIES.Entity.attackR, this.getOgre().ATTACK_SPEED, false, false, true);
+                this.ent.playAnimState(ENTITIES.Entity.attackR, 10, false, false, true);
+            this.ent.animations.currentAnim.onComplete.add(function () {
+                _this.ent.playAnimState(_this.ent.facingLeft ? ENTITIES.Entity.idleL : ENTITIES.Entity.idleR, 1, true, true, true);
+            }, this);
             return true;
         };
         return OgreAbilities;

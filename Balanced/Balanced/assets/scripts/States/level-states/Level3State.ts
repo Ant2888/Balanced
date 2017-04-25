@@ -51,6 +51,11 @@
             } else {
                 this.player.isJumping = true;
             }
+            
+            this.enemies.forEachAlive((e) => {
+                var _e = <ENTITIES.Ogre>e;
+                _e.stateLogic.updateSystem();
+            }, this);
 
             if (!this.player.alive)
                 return;
@@ -133,10 +138,10 @@
             // collision on blockedLayer           
             this.map.setCollisionBetween(1, 100, true, 'floors');
 
-            this.createEnemies();
             this.createDoors();
-
             this.player = new ENTITIES.Player(this.gsm, 12 * 64, 11 * 64, 'tempPlayer');
+            this.createEnemies();
+
             this.player.loadEntitySounds(this.gsm.musicBox);
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour') }, this);
 
@@ -195,6 +200,9 @@
 
         public setupKeybinds(data: this): void {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.O) {
+                    data.player.invincible != data.player.invincible
+                }
 
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.actionbar.ability1Pressed(data.player);
@@ -307,7 +315,7 @@
         }
 
         public placeEnemies(element, group): void {
-            var baddie = new ENTITIES.Baddie(this.gsm, element.x, element.y, 'baddie');
+            var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
             baddie.makeHealthBar();
 
             this.gsm.game.physics.arcade.enable(baddie);

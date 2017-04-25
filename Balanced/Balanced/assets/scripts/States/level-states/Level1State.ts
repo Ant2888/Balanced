@@ -261,6 +261,10 @@
 
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
 
+                if (e.keyCode == Phaser.Keyboard.O) {
+                    data.player.invincible != data.player.invincible
+                }
+
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.actionbar.getAbility1().frame = 0;
 

@@ -22,11 +22,19 @@
                 return false;
             }
 
+            var ogre = <ENTITIES.Ogre>this.ent;
+            this.ent.facingLeft = ogre.player.x < ogre.x;
+
             if (this.ent.facingLeft)
-                this.ent.playAnimState(ENTITIES.Entity.attackL, this.getOgre().ATTACK_SPEED, false, false, true);
+                this.ent.playAnimState(ENTITIES.Entity.attackL, 10, false, false, true);
             else
-                this.ent.playAnimState(ENTITIES.Entity.attackR, this.getOgre().ATTACK_SPEED, false, false, true);
-            
+                this.ent.playAnimState(ENTITIES.Entity.attackR, 10, false, false, true);
+
+            this.ent.animations.currentAnim.onComplete.add(() => {
+                this.ent.playAnimState(this.ent.facingLeft ? ENTITIES.Entity.idleL : ENTITIES.Entity.idleR,
+                    1, true, true, true);
+            }, this);
+
             return true;
         }
     }

@@ -68,7 +68,7 @@ var FSM;
         };
         WonderState.prototype.checkCondition = function () {
             if (this.shouldSee()) {
-                //this.elevate();
+                this.elevate();
             }
         };
         WonderState.prototype.shouldSee = function () {

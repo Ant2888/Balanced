@@ -13,7 +13,7 @@ var GUI;
     /**
     *This is the prototype state of the game
     *
-    * @author Emerson
+    * @author Emerson, Anthony
     */
     var ActionBarGraphics = (function (_super) {
         __extends(ActionBarGraphics, _super);

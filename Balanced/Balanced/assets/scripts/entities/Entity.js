@@ -18,6 +18,12 @@ var ENTITIES;
         __extends(Entity, _super);
         function Entity(gsm, x, y, key, frame) {
             var _this = _super.call(this, gsm.game, x, y, key, frame) || this;
+            // STATS
+            _this.ATTACK_SPEED = 12;
+            _this.DEFENCE = 25;
+            _this.ATTACK = 45;
+            // END STATS
+            _this.RANDOMNESS = 20;
             _this.gsm = gsm;
             _this.maxHealth = 100;
             _this.health = 100;

@@ -16,8 +16,6 @@ class BalancedGame {
     private gsm: States.GameStateManager;
     private loadingComplete: boolean;
 
-    private DEBUGGING = false;
-
     preload() {
         //center game
         this.game.scale.pageAlignHorizontally = true;
@@ -307,6 +305,9 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('baddie', 'assets/res/level1-dungeon/baddie.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
         }, this);
+        rem.addResource(new UTIL.Resource('ogre', 'assets/res/level1-dungeon/ogre.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 96, 96);
+        }, this);
         // -------------------------------------------END LEVEL 1 RESOURCES
 
         // -------------------------------------------START SPALSH SCREEN
@@ -337,6 +338,9 @@ class BalancedGame {
         }, this);
 
         this.game.load.onLoadComplete.add(function () {
+
+            var DEBUGGING = true;
+
             text.setText("Load Complete");
 
             this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
@@ -356,7 +360,7 @@ class BalancedGame {
 
             t1.chain(t2);
 
-            if (!this.DEBUGGING) {
+            if (!DEBUGGING) {
                 t1.start();
             } else {
                 this.loadingComplete = true;

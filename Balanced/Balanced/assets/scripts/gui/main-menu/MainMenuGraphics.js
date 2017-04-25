@@ -48,6 +48,7 @@ var GUI;
         };
         MainMenuGraphics.prototype.playButtonPressed = function () {
             console.log('play button was pressed');
+            this.gsm.musicBox.stopByID('dark_intro');
             this.gsm.setState(States.TOWN_STATE);
         };
         MainMenuGraphics.prototype.loadButtonPressed = function () {

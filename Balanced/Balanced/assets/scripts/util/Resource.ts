@@ -5,6 +5,7 @@
      * @author Anthony
      */
     export class Resource {
+
         /**
          * The unique identifier of the resource.
          */

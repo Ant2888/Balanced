@@ -2,7 +2,7 @@
     /**
     *This is the prototype state of the game
     *
-    * @author Emerson
+    * @author Emerson, Anthony
     */
     export class ActionBarGraphics extends GameObject {
 

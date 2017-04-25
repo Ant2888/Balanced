@@ -90,6 +90,7 @@
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
     <Content Include="assets\res\level1-dungeon\castledoors.png" />
     <Content Include="assets\res\level1-dungeon\grunge_tile.png" />
+    <Content Include="assets\res\level1-dungeon\ogre.png" />
     <Content Include="assets\res\level1-dungeon\tiled.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />
     <Content Include="assets\res\main-menu\mm_help_btns.png" />
@@ -120,11 +121,19 @@
     <TypeScriptCompile Include="assets\scripts\combat\Ability.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\AbilityManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\EnergyManager.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\OgreAbilities.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\PlayerAbilities.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\KnockBack.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Baddie.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\Ogre.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Player.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\FiniteState.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre\AttackPlayerState.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre\FollowPlayerState.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre\OgreStateSystem.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre\WonderState.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\StateSystem.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\HelpMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\LevelSelectGraphics.ts" />

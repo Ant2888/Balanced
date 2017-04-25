@@ -57,7 +57,6 @@
         }
 
         public end(): boolean {
-            this.gsm.musicBox.stopByID('dark_intro');   
             return true;
         }
 

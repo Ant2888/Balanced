@@ -32,6 +32,8 @@ var UTIL;
             return true;
         };
         JukeBox.prototype.addSound = function (id, volume, loop, connect) {
+            if (this.jukeMap[id] !== undefined && this.jukeMap[id] !== null)
+                return;
             this.jukeMap[id] = this.gsm.game.add.audio(id, volume, loop, connect);
         };
         JukeBox.prototype.findSound = function (id) {

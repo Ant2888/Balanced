@@ -30,6 +30,13 @@ var States;
             this.gsm.game.physics.arcade.overlap(this.player.energyWave.bullets, this.enemies, this.player.dealWithOverlap, null, this.player);
             if (this.player.body.onFloor())
                 this.player.isJumping = false;
+            else {
+                this.player.isJumping = true;
+            }
+            this.enemies.forEachAlive(function (e) {
+                var _e = e;
+                _e.stateLogic.updateSystem();
+            }, this);
             if (!this.player.alive)
                 return;
             if (this.player.y >= 1314) {
@@ -94,10 +101,11 @@ var States;
             this.floorlayer = this.map.createLayer('floors');
             // collision on blockedLayer           
             this.map.setCollisionBetween(1, 100, true, 'floors');
-            this.createEnemies();
             this.createDoors();
             this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
+            this.createEnemies();
             this.player.loadEntitySounds(this.gsm.musicBox);
+            this.enemies.getTop().loadEntitySounds(this.gsm.musicBox);
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour'); }, this);
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
@@ -254,7 +262,8 @@ var States;
             return result;
         };
         Level1State.prototype.placeEnemies = function (element, group) {
-            var baddie = new ENTITIES.Baddie(this.gsm, element.x, element.y, 'baddie');
+            var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
+            baddie.body.bounce.y = .2;
             baddie.makeHealthBar();
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;
@@ -270,6 +279,7 @@ var States;
             });
         };
         Level1State.prototype.end = function () {
+            this.gsm.musicBox.stopByID('final_hour');
             this.gsm.game.camera.reset();
             this.player.destroy();
             this.enemies.destroy(true);

@@ -43,7 +43,7 @@
         }
 
         public usePotionOne(): boolean {
-            this.gsm.musicBox.playByID('Drinking', undefined, undefined, .3, false, false);
+            this.gsm.musicBox.playByID('Drinking', undefined, undefined, UTIL.SFX, false, false);
             this.ent.healEntity(25, false, true);
             return true;
         }

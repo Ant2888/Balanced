@@ -57,7 +57,6 @@ var States;
             return true;
         };
         MainMenuState.prototype.end = function () {
-            this.gsm.musicBox.stopByID('dark_intro');
             return true;
         };
         MainMenuState.prototype.getType = function () {

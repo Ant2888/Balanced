@@ -6,13 +6,6 @@
      */
     export class Player extends Entity {
 
-        // STATS
-        public ATTACK_SPEED = 12;
-        public DEFENCE = 25;
-        public ATTACK = 45;
-        // END STATS
-
-        public RANDOMNESS = 20;
 
         // modifiers
         public ab1_mod: COMBAT.Ability;
@@ -175,7 +168,7 @@
                 mod.knockback, this.facingLeft);
             mob.dealDamage(Math.floor(damage * .75), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, false, 0,
                 mod.knockback, this.facingLeft);
-            mob.dealDamage(Math.floor(damage * .33), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 1000, 
+            mob.dealDamage(Math.floor(damage * .50), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 1000, 
                 mod.knockback, this.facingLeft);
         }
 

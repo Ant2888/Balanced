@@ -43,6 +43,9 @@
         }
 
         public addSound(id: string, volume?: number, loop?: boolean, connect?: boolean): void {
+            if (this.jukeMap[id] !== undefined && this.jukeMap[id] !== null)
+                return;
+
             this.jukeMap[id] = this.gsm.game.add.audio(id, volume, loop, connect);
         }
 

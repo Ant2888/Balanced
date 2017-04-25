@@ -18,12 +18,6 @@ var ENTITIES;
         __extends(Player, _super);
         function Player(gsm, x, y, key, frame) {
             var _this = _super.call(this, gsm, x, y, key, frame) || this;
-            // STATS
-            _this.ATTACK_SPEED = 12;
-            _this.DEFENCE = 25;
-            _this.ATTACK = 45;
-            // END STATS
-            _this.RANDOMNESS = 20;
             _this.ABILITY_ONE_COST = 5;
             _this.ABILITY_TWO_COST = 30;
             _this.ABILITY_THREE_COST = 45;
@@ -135,7 +129,7 @@ var ENTITIES;
             mod.knockback.dx = Math.abs(mod.knockback.dx) * (this.facingLeft ? -1 : 1);
             mob.dealDamage(damage, damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, false, 0, mod.knockback, this.facingLeft);
             mob.dealDamage(Math.floor(damage * .75), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, false, 0, mod.knockback, this.facingLeft);
-            mob.dealDamage(Math.floor(damage * .33), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 1000, mod.knockback, this.facingLeft);
+            mob.dealDamage(Math.floor(damage * .50), damage > (mod.dmg + (this.RANDOMNESS / 2)), 'yellow', true, true, 1000, mod.knockback, this.facingLeft);
         };
         Player.prototype.doAbilityDamage = function (mob, mod) {
             var damage = this.randomValWithRandomness(mod.dmg, this.RANDOMNESS);

@@ -7,7 +7,6 @@
  */
 var BalancedGame = (function () {
     function BalancedGame() {
-        this.DEBUGGING = false;
         this.game = new Phaser.Game(1280, 720, Phaser.AUTO, 'content', { preload: this.preload, create: this.create, update: this.update });
     }
     BalancedGame.prototype.preload = function () {
@@ -288,6 +287,9 @@ var BalancedGame = (function () {
         rem.addResource(new UTIL.Resource('baddie', 'assets/res/level1-dungeon/baddie.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
         }, this);
+        rem.addResource(new UTIL.Resource('ogre', 'assets/res/level1-dungeon/ogre.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 96, 96);
+        }, this);
         // -------------------------------------------END LEVEL 1 RESOURCES
         // -------------------------------------------START SPALSH SCREEN
         rem.addResource(new UTIL.Resource('balanced_logo', 'assets/res/boot/Balanced Logo.png', UTIL.BADDIE_ID), true, function (e) {
@@ -311,6 +313,7 @@ var BalancedGame = (function () {
             text.setText("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles);
         }, this);
         this.game.load.onLoadComplete.add(function () {
+            var DEBUGGING = true;
             text.setText("Load Complete");
             this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
             var phaserLogo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'phaser_logo');
@@ -322,7 +325,7 @@ var BalancedGame = (function () {
             var t1 = this.game.add.tween(phaserLogo).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, false, 0, 0, true);
             var t2 = this.game.add.tween(balancedLogo).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, false, 0, 0, true);
             t1.chain(t2);
-            if (!this.DEBUGGING) {
+            if (!DEBUGGING) {
                 t1.start();
             }
             else {

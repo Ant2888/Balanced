@@ -8,6 +8,13 @@
         
         public gsm: States.GameStateManager;
 
+        // STATS
+        public ATTACK_SPEED = 12;
+        public DEFENCE = 25;
+        public ATTACK = 45;
+        // END STATS
+
+        public RANDOMNESS = 20;
         //PLACEHOLDERS UNTIL FOUND
         public static attackL = 'attackL';
         public static attackR = 'attackR';
@@ -126,7 +133,7 @@
         public jump(vy: number): boolean {
             if (this.stunned || !this.alive)
                 return false;
-
+            
             this.body.velocity.y = vy;
             this.playAnimState(this.facingLeft ? ENTITIES.Entity.jumpL : ENTITIES.Entity.jumpR,
                 10, false, false, true);

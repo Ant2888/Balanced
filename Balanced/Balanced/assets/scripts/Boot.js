@@ -157,7 +157,7 @@ var BalancedGame = (function () {
             this.game.load.spritesheet(e.key, e.assetUrl, 42.5, 43);
         }, this);
         rem.addResource(new UTIL.Resource('ab_p2_ss', 'assets/res/hud/ab_p2_ss.png', UTIL.AB_P2_SS_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl);
+            this.game.load.spritesheet(e.key, e.assetUrl, 42.5, 43);
         }, this);
         rem.addResource(new UTIL.Resource('ab_stats_ss', 'assets/res/hud/ab_stats_ss.png', UTIL.AB_STATS_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 35, 36);
@@ -167,12 +167,6 @@ var BalancedGame = (function () {
         }, this);
         rem.addResource(new UTIL.Resource('ul_ui', 'assets/res/hud/UL_UI.png', UTIL.UL_UI_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
-        }, this);
-        rem.addResource(new UTIL.Resource('uf_energy_tick', 'assets/res/hud/uf_energy_tick.png', UTIL.UF_ENERGY_TICK_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 2, 25);
-        }, this);
-        rem.addResource(new UTIL.Resource('uf_health_tick', 'assets/res/hud/uf_health_tick.png', UTIL.UF_HEALTH_TICK_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 3.23, 31);
         }, this);
         rem.addResource(new UTIL.Resource('balance_notif', 'assets/res/balance-menus/balance_notif.png', UTIL.BALANCE_NOTIF_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl, 520, 146);
@@ -262,11 +256,17 @@ var BalancedGame = (function () {
             this.game.load.spritesheet(e.key, e.assetUrl, 224, 352);
         }, this);
         // ----------------------------------------TOWN RESOURCES END
-        // -----------------------------------------LEVEL 1 RESOURCES
+        // -----------------------------------------LEVEL s RESOURCES
         rem.addResource(new UTIL.Resource('protolvl', 'assets/res/level1-dungeon/Balanced_level1.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
             this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
         }, this);
         rem.addResource(new UTIL.Resource('level1', 'assets/res/level1-dungeon/level1.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
+            this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
+        }, this);
+        rem.addResource(new UTIL.Resource('level2', 'assets/res/level1-dungeon/level2.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
+            this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
+        }, this);
+        rem.addResource(new UTIL.Resource('level3', 'assets/res/level1-dungeon/level3.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
             this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
         }, this);
         rem.addResource(new UTIL.Resource('grunge_tile', 'assets/res/level1-dungeon/grunge_tile.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
@@ -290,7 +290,6 @@ var BalancedGame = (function () {
         rem.addResource(new UTIL.Resource('ogre', 'assets/res/level1-dungeon/ogre.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 96, 96);
         }, this);
-        // -------------------------------------------END LEVEL 1 RESOURCES
         // -------------------------------------------START SPALSH SCREEN
         rem.addResource(new UTIL.Resource('balanced_logo', 'assets/res/boot/Balanced Logo.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
@@ -349,9 +348,10 @@ var BalancedGame = (function () {
             States.MAIN_MENU_STATE = new States.MainMenuState(this.gsm);
             States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
             States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
-            States.PROTOTYPE_STATE = new States.PrototypeState(this.gsm);
             States.LEVEL_SELECT_STATE = new States.LevelSelectState(this.gsm);
             States.LEVEL1_STATE = new States.Level1State(this.gsm);
+            States.LEVEL2_STATE = new States.Level2State(this.gsm);
+            States.LEVEL3_STATE = new States.Level3State(this.gsm);
             States.TOWN_STATE = new States.TownState(this.gsm);
             // END STATES
             this.gsm.initState();

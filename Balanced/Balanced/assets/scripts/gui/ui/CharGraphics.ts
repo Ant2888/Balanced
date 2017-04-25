@@ -35,8 +35,7 @@
             this.player_hp = this.gsm.game.add.text(gsm.game.width - 115, 180, this.player.maxHealth + '', { fill: 'yellow', font: 'papyrus', fontSize: '32px', fontStyle: 'bold' });
             this.player_hp.fixedToCamera = true;
             this.player_energy = this.gsm.game.add.text(gsm.game.width - 115, 210, '100', { fill: 'yellow', font: 'papyrus', fontSize: '32px', fontStyle: 'bold' });
-            this.player_energy.fixedToCamera = true;
-                       
+            this.player_energy.fixedToCamera = true;    
 
             this.closeBtn = this.gsm.game.add.button(gsm.game.width - 63, 108, 'close_btn_ss', this.closeMenu, this, 2, 0, 1);
             this.closeBtn.anchor.setTo(.5, .5);

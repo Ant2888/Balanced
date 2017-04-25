@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="15" tilewidth="64" tileheight="64" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="15" tilewidth="64" tileheight="64" nextobjectid="9">
  <tileset firstgid="1" name="grunge_tile" tilewidth="64" tileheight="64" tilecount="35" columns="7">
   <image source="grunge_tile.png" width="448" height="320"/>
  </tileset>
  <tileset firstgid="36" name="tiled" tilewidth="64" tileheight="64" tilecount="256" columns="16">
   <image source="tiled.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="292" name="castledoors" tilewidth="64" tileheight="64" tilecount="6" columns="2">
+ <tileset firstgid="292" name="castledoors" tilewidth="128" tileheight="192" tilecount="1" columns="1">
   <image source="castledoors.png" width="128" height="192"/>
+ </tileset>
+ <tileset firstgid="293" name="baddie" tilewidth="64" tileheight="64" tilecount="4" columns="4">
+  <image source="baddie.png" width="256" height="64"/>
  </tileset>
  <layer name="background" width="24" height="15">
   <data encoding="csv">
@@ -85,23 +88,34 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="doors" width="24" height="15">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,292,293,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,294,295,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,296,297,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
+ <objectgroup name="doors">
+  <object id="1" gid="292" x="704.022" y="768" width="128" height="192"/>
+ </objectgroup>
+ <objectgroup name="enemies">
+  <object id="3" gid="294" x="256" y="384" width="64" height="64">
+   <properties>
+    <property name="type" value="enemy"/>
+   </properties>
+  </object>
+  <object id="4" gid="294" x="769.333" y="188" width="64" height="64">
+   <properties>
+    <property name="type" value="enemy"/>
+   </properties>
+  </object>
+  <object id="5" gid="294" x="1145.33" y="370.667" width="64" height="64">
+   <properties>
+    <property name="type" value="enemy"/>
+   </properties>
+  </object>
+  <object id="7" gid="294" x="1286.67" y="753.333" width="64" height="64">
+   <properties>
+    <property name="type" value="enemy"/>
+   </properties>
+  </object>
+  <object id="8" gid="294" x="238.667" y="760" width="64" height="64">
+   <properties>
+    <property name="type" value="enemy"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

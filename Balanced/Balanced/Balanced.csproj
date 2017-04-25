@@ -145,12 +145,13 @@
     <TypeScriptCompile Include="assets\scripts\gui\ui\BagGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\HealthAndEnergyGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\TownGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\level-states\Level3State.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\level-states\Level2State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level1State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\HelpMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\LevelSelectState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\MainMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\OptionsMenuState.ts" />
-    <TypeScriptCompile Include="assets\scripts\States\PrototypeState.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\ActionBarGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
     <TypeScriptCompile Include="assets\scripts\States\test-states\TestState2.ts" />
@@ -174,6 +175,8 @@
     <Content Include="assets\res\level1-dungeon\level1.json" />
     <Content Include="assets\res\audio\dark_intro.ogg" />
     <Content Include="assets\res\audio\dark_loop.ogg" />
+    <Content Include="assets\res\level1-dungeon\level2.json" />
+    <Content Include="assets\res\level1-dungeon\level3.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -181,10 +184,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="assets\res\level2-dungeon\" />
-    <Folder Include="assets\res\level3-dungeon\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>

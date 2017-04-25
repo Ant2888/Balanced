@@ -25,7 +25,11 @@
 
         protected pot1Timer: Phaser.Timer;
         protected remTimer: number;
-        protected textHolder: Phaser.Text;
+        protected textHolder: Phaser.Text;             
+
+        protected pot2Timer: Phaser.Timer;
+        protected remTimer2: number;
+        protected textHolder2: Phaser.Text;
 
         constructor(group: Phaser.Group) {
             super(203, group);
@@ -68,6 +72,9 @@
 
             this.remTimer = 0;
             this.pot1Timer = this.gsm.game.time.create(false);
+
+            this.remTimer2 = 0;
+            this.pot2Timer = this.gsm.game.time.create(false);
         }
 
         private setStats(func: any): void {
@@ -219,9 +226,38 @@
             return true;
         }
 
-        public potion2Pressed(): boolean {
-            console.log('potion2 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        public potion2Pressed(ply: ENTITIES.Player): boolean {            
+            if (!ply.alive)
+                return false;
+
+            if (this.remTimer2 != 0)
+                return false;
+
+            this.getPotion2().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.POTION_TWO);
+
+            this.remTimer2 = 10000;
+
+            this.textHolder2 = this.gsm.game.add.text(402, 635, '10.0',
+                { fill: 'white', font: 'papyrus', fontSize: '16px', fontStyle: 'bold' });
+            this.textHolder2.fixedToCamera = true;
+
+            this.pot2Timer.loop(50, function () {
+                if (this.remTimer2 <= 0) {
+                    this.remTimer2 = 0;
+                    this.textHolder2.destroy();
+                    this.pot2Timer.stop();
+                } else {
+                    var disp = this.remTimer2 / 1000;
+                    disp *= 10;
+                    disp = Math.floor(disp); //simple XX.X format
+                    disp /= 10;
+                    this.textHolder2.text = (disp + '');
+                    this.remTimer2 -= 50;
+                }
+            }, this);
+            this.pot2Timer.start();
+
             return true;
         }
 

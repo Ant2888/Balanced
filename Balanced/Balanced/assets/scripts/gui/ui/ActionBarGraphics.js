@@ -50,6 +50,8 @@ var GUI;
             this.group.add(this.ab_ab4_text);
             this.remTimer = 0;
             this.pot1Timer = this.gsm.game.time.create(false);
+            this.remTimer2 = 0;
+            this.pot2Timer = this.gsm.game.time.create(false);
         };
         ActionBarGraphics.prototype.setStats = function (func) {
             this.ab_stats_ss = this.gsm.game.add.button(825, 605, 'ab_stats_ss', func, this, 0, 0, 1);
@@ -172,9 +174,32 @@ var GUI;
             this.pot1Timer.start();
             return true;
         };
-        ActionBarGraphics.prototype.potion2Pressed = function () {
-            console.log('potion2 button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+        ActionBarGraphics.prototype.potion2Pressed = function (ply) {
+            if (!ply.alive)
+                return false;
+            if (this.remTimer2 != 0)
+                return false;
+            this.getPotion2().frame = 1;
+            ply.getAbilityManager().attemptCast(ENTITIES.Player.POTION_TWO);
+            this.remTimer2 = 10000;
+            this.textHolder2 = this.gsm.game.add.text(402, 635, '10.0', { fill: 'white', font: 'papyrus', fontSize: '16px', fontStyle: 'bold' });
+            this.textHolder2.fixedToCamera = true;
+            this.pot2Timer.loop(50, function () {
+                if (this.remTimer2 <= 0) {
+                    this.remTimer2 = 0;
+                    this.textHolder2.destroy();
+                    this.pot2Timer.stop();
+                }
+                else {
+                    var disp = this.remTimer2 / 1000;
+                    disp *= 10;
+                    disp = Math.floor(disp); //simple XX.X format
+                    disp /= 10;
+                    this.textHolder2.text = (disp + '');
+                    this.remTimer2 -= 50;
+                }
+            }, this);
+            this.pot2Timer.start();
             return true;
         };
         ActionBarGraphics.prototype.ability1Pressed = function (ply) {

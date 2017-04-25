@@ -52,11 +52,11 @@ var GUI;
         };
         LevelSelectGraphics.prototype.level2ButtonPressed = function () {
             console.log('Level 2 selected');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+            this.gsm.setState(States.LEVEL2_STATE);
         };
         LevelSelectGraphics.prototype.level3ButtonPressed = function () {
             console.log('Level 3 selected');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
+            this.gsm.setState(States.LEVEL3_STATE);
         };
         LevelSelectGraphics.prototype.cancelButtonPressed = function () {
             console.log('cancel button was pressed');

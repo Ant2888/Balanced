@@ -42,6 +42,8 @@ var COMBAT;
                     return this.castAbilityFour();
                 case ENTITIES.Player.POTION_ONE:
                     return this.usePotionOne();
+                case ENTITIES.Player.POTION_TWO:
+                    return this.usePotionTwo();
                 default:
                     return false;
             }
@@ -49,6 +51,11 @@ var COMBAT;
         PlayerAbilities.prototype.usePotionOne = function () {
             this.gsm.musicBox.playByID('Drinking', undefined, undefined, UTIL.SFX, false, false);
             this.ent.healEntity(25, false, true);
+            return true;
+        };
+        PlayerAbilities.prototype.usePotionTwo = function () {
+            this.gsm.musicBox.playByID('Drinking', undefined, undefined, UTIL.SFX, false, false);
+            this.energyMan.regenEnergy(25, true);
             return true;
         };
         PlayerAbilities.prototype.castAbilityOne = function () {

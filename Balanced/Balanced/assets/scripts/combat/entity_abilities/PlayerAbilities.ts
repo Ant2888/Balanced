@@ -37,6 +37,8 @@
                     return this.castAbilityFour();
                 case ENTITIES.Player.POTION_ONE:
                     return this.usePotionOne();
+                case ENTITIES.Player.POTION_TWO:
+                    return this.usePotionTwo();
                 default:
                     return false;
             }
@@ -45,6 +47,12 @@
         public usePotionOne(): boolean {
             this.gsm.musicBox.playByID('Drinking', undefined, undefined, UTIL.SFX, false, false);
             this.ent.healEntity(25, false, true);
+            return true;
+        }
+
+        public usePotionTwo(): boolean {
+            this.gsm.musicBox.playByID('Drinking', undefined, undefined, UTIL.SFX, false, false);
+            this.energyMan.regenEnergy(25, true);
             return true;
         }
 

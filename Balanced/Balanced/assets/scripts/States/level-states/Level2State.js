@@ -15,12 +15,12 @@ var States;
     *
     * @author Emerson, Anthony
     */
-    var Level1State = (function (_super) {
-        __extends(Level1State, _super);
-        function Level1State(gsm) {
+    var Level2State = (function (_super) {
+        __extends(Level2State, _super);
+        function Level2State(gsm) {
             return _super.call(this, gsm) || this;
         }
-        Level1State.prototype.update = function () {
+        Level2State.prototype.update = function () {
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
             this.gsm.game.physics.arcade['TILE_BIAS'] = 40;
             this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
@@ -34,10 +34,6 @@ var States;
             else {
                 this.player.isJumping = true;
             }
-            this.enemies.forEachAlive(function (e) {
-                var _e = e;
-                _e.stateLogic.updateSystem();
-            }, this);
             if (!this.player.alive)
                 return;
             if (this.player.y >= 1314) {
@@ -82,16 +78,16 @@ var States;
             }
             this.stairOverlap = this.map.getTileWorldXY(this.player.x, this.player.y, this.map.tileWidth, this.map.tileHeight, "stairs");
         };
-        Level1State.prototype.init = function () {
+        Level2State.prototype.init = function () {
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
         };
-        Level1State.prototype.startup = function () {
+        Level2State.prototype.startup = function () {
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
-            this.map = this.gsm.game.add.tilemap('level1');
+            this.map = this.gsm.game.add.tilemap('level2');
             this.map.addTilesetImage('grunge_tile', 'grunge_tile');
             this.map.addTilesetImage('castledoors', 'castledoors');
             this.map.addTilesetImage('tiled', 'tiled');
@@ -102,11 +98,10 @@ var States;
             this.floorlayer = this.map.createLayer('floors');
             // collision on blockedLayer           
             this.map.setCollisionBetween(1, 100, true, 'floors');
-            this.createDoors();
-            this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
             this.createEnemies();
+            this.createDoors();
+            this.player = new ENTITIES.Player(this.gsm, 16 * 64, 16 * 64, 'tempPlayer');
             this.player.loadEntitySounds(this.gsm.musicBox);
-            this.enemies.getTop().loadEntitySounds(this.gsm.musicBox);
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour'); }, this);
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
@@ -132,21 +127,21 @@ var States;
             this.setupKeybinds(this);
             return true;
         };
-        Level1State.prototype.createEnemies = function () {
+        Level2State.prototype.createEnemies = function () {
             this.enemies = this.gsm.game.add.group();
             this.objectLayer = this.findObjectsByType('enemy', this.map, 'enemies');
             this.objectLayer.forEach(function (element) {
                 this.placeEnemies(element, this.enemies);
             }, this);
         };
-        Level1State.prototype.createDoors = function () {
+        Level2State.prototype.createDoors = function () {
             this.doors = this.gsm.game.add.group();
             this.objectLayer = this.findObjectsByType('door', this.map, 'doors');
             this.objectLayer.forEach(function (element) {
                 this.createFromTiledObject(element, this.doors);
             }, this);
         };
-        Level1State.prototype.setupKeybinds = function (data) {
+        Level2State.prototype.setupKeybinds = function (data) {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.actionbar.ability1Pressed(data.player);
@@ -223,7 +218,7 @@ var States;
                 }
             };
         };
-        Level1State.prototype.findObjectsByType = function (type, map, layer) {
+        Level2State.prototype.findObjectsByType = function (type, map, layer) {
             var result = new Array();
             map.objects[layer].forEach(function (element) {
                 if (element.properties.type === type) {
@@ -233,15 +228,14 @@ var States;
             });
             return result;
         };
-        Level1State.prototype.placeEnemies = function (element, group) {
-            var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
-            baddie.body.bounce.y = .2;
+        Level2State.prototype.placeEnemies = function (element, group) {
+            var baddie = new ENTITIES.Baddie(this.gsm, element.x, element.y, 'baddie');
             baddie.makeHealthBar();
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;
             this.enemies.add(baddie);
         };
-        Level1State.prototype.createFromTiledObject = function (element, group) {
+        Level2State.prototype.createFromTiledObject = function (element, group) {
             var sprite = group.create(element.x, element.y, element.properties.sprite);
             sprite.anchor.setTo(0, .67);
             //copy all properties to the sprite
@@ -249,19 +243,18 @@ var States;
                 sprite[key] = element.properties[key];
             });
         };
-        Level1State.prototype.end = function () {
-            this.gsm.musicBox.stopByID('final_hour');
+        Level2State.prototype.end = function () {
             this.gsm.game.camera.reset();
             this.player.destroy();
             this.enemies.destroy(true);
             this.map.destroy();
             return true;
         };
-        Level1State.prototype.getType = function () {
+        Level2State.prototype.getType = function () {
             return this;
         };
-        return Level1State;
+        return Level2State;
     }(States.State));
-    States.Level1State = Level1State;
+    States.Level2State = Level2State;
 })(States || (States = {}));
-//# sourceMappingURL=Level1State.js.map
+//# sourceMappingURL=Level2State.js.map

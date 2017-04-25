@@ -321,7 +321,7 @@ var BalancedGame = (function () {
             text.setText("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles);
         }, this);
         this.game.load.onLoadComplete.add(function () {
-            var DEBUGGING = true;
+            var DEBUGGING = false;
             text.setText("Load Complete");
             this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
             var phaserLogo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'phaser_logo');

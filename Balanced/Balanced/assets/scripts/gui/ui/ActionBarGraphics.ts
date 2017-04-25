@@ -6,7 +6,9 @@
     */
     export class ActionBarGraphics extends GameObject {
 
-        private gsm: States.GameStateManager;        
+        private gsm: States.GameStateManager;
+        private player: ENTITIES.Player;
+               
         private ab_bg: Phaser.Sprite;
         private ab_ab1_ss: Phaser.Button;
         private ab_ab2_ss: Phaser.Button;
@@ -17,6 +19,10 @@
         private ab_stats_ss: Phaser.Button;       
         private ab_town_ss: Phaser.Button;
         private ab_bag_ss: Phaser.Button;   
+
+        private dd_background: Phaser.Sprite;
+        private dd_menu_btn: Phaser.Button;
+        private dd_twn_btn: Phaser.Button;
 
         private ab_ab1_text: Phaser.Text;
         private ab_ab2_text: Phaser.Text;
@@ -31,12 +37,17 @@
         protected remTimer2: number;
         protected textHolder2: Phaser.Text;
 
-        constructor(group: Phaser.Group) {
+        constructor(group: Phaser.Group, player: ENTITIES.Player) {            
             super(203, group);
+            this.player = player;
         }
 
         public initialize(gsm: States.GameStateManager): void {
             this.gsm = gsm;
+
+            this.player.addOnDeathCallBack(function () {
+                this.displayDeathDialog();
+            }, this);
 
             this.ab_bg = gsm.game.add.sprite(gsm.game.width / 2, 630, 'ab_bg');
             this.ab_bg.anchor.setTo(.5, .5);
@@ -140,6 +151,27 @@
             this.group.add(this.ab_ab4_ss);
         }
 
+        public displayDeathDialog(): void {
+            this.dd_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'dd_background');
+            this.dd_background.anchor.setTo(.5, .5);
+            this.dd_background.fixedToCamera = true;
+            this.group.add(this.dd_background);
+
+            this.dd_menu_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 50, (this.gsm.game.height / 2) + 50, 'dd_menu_btn', function () {
+                this.gsm.setState(States.MAIN_MENU_STATE);
+            }, this, 1, 0, 2);
+            this.dd_menu_btn.anchor.setTo(.5, .5);
+            this.dd_menu_btn.fixedToCamera = true;
+            this.group.add(this.dd_menu_btn);
+
+            this.dd_twn_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 200, (this.gsm.game.height / 2) + 50, 'dd_twn_btn', function () {
+                this.gsm.setState(States.TOWN_STATE);
+            }, this, 1, 0, 2);
+            this.dd_twn_btn.anchor.setTo(.5, .5);
+            this.dd_twn_btn.fixedToCamera = true;
+            this.group.add(this.dd_twn_btn);
+        }
+
         public getStats(): Phaser.Button {
             return this.ab_stats_ss;
         }
@@ -178,12 +210,10 @@
 
         public statsPressed(): any {
             console.log('stats button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
         }
 
         public bagPressed(): any {
             console.log('bag button was pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
         }
 
         public townPressed(): any {

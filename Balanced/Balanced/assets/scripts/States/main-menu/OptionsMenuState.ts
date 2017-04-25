@@ -40,8 +40,28 @@
             btn2.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
             btn2.setOutSound(this.gsm.musicBox.findSound('Unhover'));
             btn2.setOverSound(this.gsm.musicBox.findSound('Hover'));
+
+            this.setupKeybinds(this);
             return true;
         }
+
+        public setupKeybinds(data: this): void {           
+
+            this.gsm.game.input.keyboard.onUpCallback = function (e) {                
+
+                if (e.keyCode == Phaser.Keyboard.V) {
+                    data.gsm.setState(States.LEVEL1_STATE);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.B) {
+                    data.gsm.setState(States.LEVEL2_STATE);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.H) {
+                    data.gsm.setState(States.LEVEL3_STATE);
+                }
+            }
+        } 
 
         public end(): boolean {           
             return true;
@@ -49,6 +69,6 @@
 
         public getType(): any {
             return this;
-        }                     
+        }                    
     }
 }

@@ -150,7 +150,7 @@
             this.bm = new BALANCE.BalanceManager(this.gsm);
 
             var group = this.gsm.game.add.group();
-            this.actionbar = new GUI.ActionBarGraphics(group);
+            this.actionbar = new GUI.ActionBarGraphics(group, this.player);
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group);
             this.charMenu = new GUI.CharGraphics(group, this.player);
@@ -287,10 +287,23 @@
 
                 if (e.keyCode == Phaser.Keyboard.H) {
                     data.actionbar.getTown().frame = 0;
+                    data.gsm.setState(States.TOWN_STATE);  
                 }
 
                 if (e.keyCode == Phaser.Keyboard.C) {
                     data.actionbar.getStats().frame = 0;
+                }
+
+                if (e.keyCode == Phaser.Keyboard.V) {
+                    data.gsm.setState(States.LEVEL1_STATE);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.B) {
+                    data.gsm.setState(States.LEVEL2_STATE);
+                }
+
+                if (e.keyCode == Phaser.Keyboard.H) {
+                    data.gsm.setState(States.LEVEL3_STATE);
                 }
             }
         }

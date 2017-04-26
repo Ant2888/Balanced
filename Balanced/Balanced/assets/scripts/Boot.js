@@ -7,7 +7,7 @@
  */
 var BalancedGame = (function () {
     function BalancedGame() {
-        this.game = new Phaser.Game(1280, 720, Phaser.AUTO, 'content', { preload: this.preload, create: this.create, update: this.update });
+        this.game = new Phaser.Game(1280, 720, Phaser.GRAPHICS, 'content', { preload: this.preload, create: this.create, update: this.update, render: this.render });
     }
     BalancedGame.prototype.preload = function () {
         //center game
@@ -312,6 +312,7 @@ var BalancedGame = (function () {
         // -------------------------------------------END SPALSH SCREEN
     };
     BalancedGame.prototype.create = function () {
+        this.game.time.advancedTiming = true;
         var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY + 300, 'Loading....', { fill: '#ffffff' });
         text.anchor.setTo(0.5, 0.5);
         this.game.load.onLoadStart.add(function () {
@@ -321,7 +322,7 @@ var BalancedGame = (function () {
             text.setText("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles);
         }, this);
         this.game.load.onLoadComplete.add(function () {
-            var DEBUGGING = true;
+            var DEBUGGING = false;
             text.setText("Load Complete");
             this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
             var phaserLogo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'phaser_logo');
@@ -365,6 +366,9 @@ var BalancedGame = (function () {
             // END STATES
             this.gsm.initState();
         }
+    };
+    BalancedGame.prototype.render = function () {
+        this.game.debug.text(this.game.time.fps + '', 1258, 14, "#00ff00");
     };
     return BalancedGame;
 }());

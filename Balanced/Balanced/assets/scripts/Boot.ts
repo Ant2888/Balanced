@@ -9,7 +9,7 @@
 class BalancedGame {
 
     constructor() {
-        this.game = new Phaser.Game(1280, 720, Phaser.AUTO, 'content', { preload: this.preload, create: this.create, update: this.update });
+        this.game = new Phaser.Game(1280, 720, Phaser.GRAPHICS, 'content', { preload: this.preload, create: this.create, update: this.update, render: this.render });
     }
 
     private game: Phaser.Game;
@@ -22,7 +22,8 @@ class BalancedGame {
         this.game.scale.pageAlignVertically = true;
         this.game.scale.refresh();
 
-        this.loadingComplete = false;               
+        this.loadingComplete = false;            
+        
 
         this.game.load.start();
 
@@ -336,6 +337,8 @@ class BalancedGame {
     }
 
     create() {
+        this.game.time.advancedTiming = true;
+
         var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY + 300, 'Loading....', { fill: '#ffffff' });
         text.anchor.setTo(0.5, 0.5);
 
@@ -349,7 +352,7 @@ class BalancedGame {
 
         this.game.load.onLoadComplete.add(function () {
 
-            var DEBUGGING = true;
+            var DEBUGGING = false;
 
             text.setText("Load Complete");
 
@@ -385,6 +388,7 @@ class BalancedGame {
     }
 
     update() {
+          
         if (this.gsm != undefined || this.gsm != null) {
             this.gsm.update();
         }
@@ -409,6 +413,10 @@ class BalancedGame {
         }
     }
 
+    render() {        
+        this.game.debug.text(this.game.time.fps + '', 1258, 14, "#00ff00");
+    }
+    
 }
 // When the window is loaded completely this will be executed.
 window.onload = () => {

@@ -115,9 +115,12 @@
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
+
+            
         }
 
         public startup(): boolean {
+
             
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
 
@@ -135,6 +138,11 @@
             this.wallPaperlayer = this.map.createLayer('wall paper');
             this.starislayer = this.map.createLayer('stairs');
             this.floorlayer = this.map.createLayer('floors');
+
+            this.backgroundlayer.renderSettings.enableScrollDelta = true;
+            this.wallPaperlayer.renderSettings.enableScrollDelta = true;
+            this.starislayer.renderSettings.enableScrollDelta = true;
+            this.floorlayer.renderSettings.enableScrollDelta = true;
 
             // collision on blockedLayer           
             this.map.setCollisionBetween(1, 100, true, 'floors');
@@ -355,6 +363,10 @@
             this.player.destroy();
             this.enemies.destroy(true);
             this.map.destroy();
+            this.floorlayer.destroy();
+            this.wallPaperlayer.destroy();
+            this.backgroundlayer.destroy();
+            this.starislayer.destroy();
             return true;
         }
 

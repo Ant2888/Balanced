@@ -165,6 +165,9 @@ var BalancedGame = (function () {
         rem.addResource(new UTIL.Resource('ab_town_ss', 'assets/res/hud/ab_town_ss.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 45, 40);
         }, this);
+        rem.addResource(new UTIL.Resource('ab_options_ss', 'assets/res/hud/ab_options_ss.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 35, 38);
+        }, this);
         rem.addResource(new UTIL.Resource('ul_ui', 'assets/res/hud/UL_UI.png', UTIL.UL_UI_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
@@ -310,6 +313,29 @@ var BalancedGame = (function () {
             this.game.load.image(e.key, e.assetUrl, 1280, 720);
         }, this);
         // -------------------------------------------END SPALSH SCREEN
+        // -------------------------------------------TUTORIAL SCREEN
+        rem.addResource(new UTIL.Resource('pm_background', 'assets/res/tutorial/pm_background.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 350, 350);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_help_btn', 'assets/res/tutorial/pm_help_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_mainmenu_btn', 'assets/res/tutorial/pm_mainmenu_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_options_btn', 'assets/res/tutorial/pm_options_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_resume_btn', 'assets/res/tutorial/pm_resume_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_no_btn', 'assets/res/tutorial/tut_no_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_yes_btn', 'assets/res/tutorial/tut_yes_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        // -------------------------------------------END TUTORIAL SCREEN
     };
     BalancedGame.prototype.create = function () {
         this.game.time.advancedTiming = true;

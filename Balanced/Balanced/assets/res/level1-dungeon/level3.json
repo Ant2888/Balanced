@@ -56,11 +56,13 @@
                  "name":"",
                  "properties":
                     {
+                     "id":"both",
                      "sprite":"castledoors",
                      "type":"door"
                     },
                  "propertytypes":
                     {
+                     "id":"string",
                      "sprite":"string",
                      "type":"string"
                     },

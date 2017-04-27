@@ -129,6 +129,7 @@ var States;
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group);
             this.charMenu = new GUI.CharGraphics(group, this.player);
+            this.pauseMenu = new GUI.PauseMenuGraphics(group);
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);
             this.gsm.getGUIM().addGroup(this.bag);
@@ -205,6 +206,9 @@ var States;
                 }
             };
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.ESC) {
+                    //data.pauseMenu.displayPauseMenuDialog();
+                }
                 if (e.keyCode == Phaser.Keyboard.O) {
                     data.player.invincible = data.player.invincible ? false : true;
                 }
@@ -262,6 +266,7 @@ var States;
             var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
             baddie.body.bounce.y = .2;
             baddie.makeHealthBar();
+            baddie.makeEnergyBar();
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;
             this.enemies.add(baddie);

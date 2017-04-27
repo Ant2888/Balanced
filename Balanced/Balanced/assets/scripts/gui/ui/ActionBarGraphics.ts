@@ -18,7 +18,8 @@
         private ab_p2_ss: Phaser.Button;
         private ab_stats_ss: Phaser.Button;       
         private ab_town_ss: Phaser.Button;
-        private ab_bag_ss: Phaser.Button;   
+        private ab_bag_ss: Phaser.Button; 
+        private ab_options_ss: Phaser.Button;   
 
         private dd_background: Phaser.Sprite;
         private dd_menu_btn: Phaser.Button;
@@ -63,7 +64,8 @@
             this.setPotion2(this.potion2Pressed);
             this.setStats(this.statsPressed);
             this.setBag(this.bagPressed);
-            this.setTown(this.townPressed);                   
+            this.setTown(this.townPressed);  
+            this.setOptions(this.optionsPressed);
 
             this.ab_ab1_text = gsm.game.add.text(470, 662, 'Q', { fontSize: '28px', fill: '#000' });
             this.ab_ab1_text.fixedToCamera = true;
@@ -107,6 +109,13 @@
             this.ab_town_ss.anchor.setTo(.5, .5);
             this.ab_town_ss.fixedToCamera = true;
             this.group.add(this.ab_town_ss);
+        }
+
+        private setOptions(func: any): void {
+            this.ab_options_ss = this.gsm.game.add.button(885, 652, 'ab_options_ss', func, this, 0, 0, 1);
+            this.ab_options_ss.anchor.setTo(.5, .5);
+            this.ab_options_ss.fixedToCamera = true;
+            this.group.add(this.ab_options_ss);
         }
         
         private setPotion1(func: any): void {
@@ -160,6 +169,7 @@
             this.dd_menu_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 50, (this.gsm.game.height / 2) + 50, 'dd_menu_btn', function () {
                 this.gsm.setState(States.MAIN_MENU_STATE);
             }, this, 1, 0, 2);
+
             this.dd_menu_btn.anchor.setTo(.5, .5);
             this.dd_menu_btn.fixedToCamera = true;
             this.group.add(this.dd_menu_btn);
@@ -167,6 +177,7 @@
             this.dd_twn_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 200, (this.gsm.game.height / 2) + 50, 'dd_twn_btn', function () {
                 this.gsm.setState(States.TOWN_STATE);
             }, this, 1, 0, 2);
+
             this.dd_twn_btn.anchor.setTo(.5, .5);
             this.dd_twn_btn.fixedToCamera = true;
             this.group.add(this.dd_twn_btn);
@@ -219,6 +230,11 @@
         public townPressed(): any {
             console.log('town button was pressed');
             this.gsm.setState(States.TOWN_STATE);
+        }
+
+        public optionsPressed(): any {
+            console.log('pause menu button was pressed');
+            
         }
 
         public potion1Pressed(): boolean {

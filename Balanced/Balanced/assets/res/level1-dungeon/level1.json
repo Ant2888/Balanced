@@ -498,11 +498,13 @@
                  "name":"",
                  "properties":
                     {
+                     "id":"exit",
                      "sprite":"castledoors",
                      "type":"door"
                     },
                  "propertytypes":
                     {
+                     "id":"string",
                      "sprite":"string",
                      "type":"string"
                     },
@@ -520,11 +522,13 @@
                  "name":"",
                  "properties":
                     {
+                     "id":"enter",
                      "sprite":"castledoors",
                      "type":"door"
                     },
                  "propertytypes":
                     {
+                     "id":"string",
                      "sprite":"string",
                      "type":"string"
                     },

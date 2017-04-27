@@ -22,13 +22,13 @@ class BalancedGame {
         this.game.scale.pageAlignVertically = true;
         this.game.scale.refresh();
 
-        this.loadingComplete = false;            
-        
+        this.loadingComplete = false;
+
 
         this.game.load.start();
 
         var rem = new UTIL.ResourceManager();
-        
+
         //PUT ALL RESOURCES YOU NEED LOADED DOWN HERE
         // --------------------------------- AUDIO
         rem.addResource(new UTIL.Resource('dark_loop', 'assets/res/audio/dark_loop.ogg', UTIL.AB_AB1_SS_ID), true, function (e) {
@@ -177,9 +177,12 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('ab_town_ss', 'assets/res/hud/ab_town_ss.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 45, 40);
         }, this);
+        rem.addResource(new UTIL.Resource('ab_options_ss', 'assets/res/hud/ab_options_ss.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 35, 38);
+        }, this);
         rem.addResource(new UTIL.Resource('ul_ui', 'assets/res/hud/UL_UI.png', UTIL.UL_UI_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
-        }, this);        
+        }, this);
         rem.addResource(new UTIL.Resource('balance_notif', 'assets/res/balance-menus/balance_notif.png', UTIL.BALANCE_NOTIF_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl, 520, 146);
         }, this);
@@ -333,6 +336,30 @@ class BalancedGame {
         }, this);
         // -------------------------------------------END SPALSH SCREEN
 
+        // -------------------------------------------TUTORIAL SCREEN
+        rem.addResource(new UTIL.Resource('pm_background', 'assets/res/tutorial/pm_background.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 350, 350);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_help_btn', 'assets/res/tutorial/pm_help_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_mainmenu_btn', 'assets/res/tutorial/pm_mainmenu_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_options_btn', 'assets/res/tutorial/pm_options_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_resume_btn', 'assets/res/tutorial/pm_resume_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_no_btn', 'assets/res/tutorial/tut_no_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_yes_btn', 'assets/res/tutorial/tut_yes_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 150, 50);
+        }, this);
+        // -------------------------------------------END TUTORIAL SCREEN
+
 
     }
 
@@ -388,7 +415,7 @@ class BalancedGame {
     }
 
     update() {
-          
+
         if (this.gsm != undefined || this.gsm != null) {
             this.gsm.update();
         }
@@ -402,7 +429,7 @@ class BalancedGame {
             States.TEST_STATE2 = new States.TestState2(this.gsm);
             States.MAIN_MENU_STATE = new States.MainMenuState(this.gsm);
             States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
-            States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);            
+            States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
             States.LEVEL_SELECT_STATE = new States.LevelSelectState(this.gsm);
             States.LEVEL1_STATE = new States.Level1State(this.gsm);
             States.LEVEL2_STATE = new States.Level2State(this.gsm);
@@ -413,12 +440,12 @@ class BalancedGame {
         }
     }
 
-    render() {        
+    render() {
         this.game.debug.text(this.game.time.fps + '', 1258, 14, "#00ff00");
         if (this.gsm)
             this.gsm.render();
     }
-    
+
 }
 // When the window is loaded completely this will be executed.
 window.onload = () => {

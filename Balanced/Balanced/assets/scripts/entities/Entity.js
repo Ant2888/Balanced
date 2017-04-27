@@ -60,28 +60,45 @@ var ENTITIES;
             var background = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd);
             this.addChildAt(background, 0);
             // This the green background of the healthbar, it will change depending on how much damage is done
-            // It is removed in the updateHealthBar function
             var bmd2 = this.gsm.game.add.bitmapData(this.width, 5);
             bmd2.ctx.beginPath();
             bmd2.ctx.rect(0, 0, this.width, 5);
             bmd2.ctx.fillStyle = 'green';
             bmd2.ctx.fill();
-            var health = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd2);
-            this.addChildAt(health, 1);
+            this.healthBar = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd2);
+            this.addChildAt(this.healthBar, 1);
             this.addOnHealCallback(function () { this.updateHealthBar(); }, this);
             this.addOnDamageCallback(function () { this.updateHealthBar(); }, this);
         };
         Entity.prototype.updateHealthBar = function () {
-            // remove the old green layer to be replaced
-            this.removeChildAt(1);
-            // rebuild the green bar to the health bars width adjusted to the width
-            var bmd = this.gsm.game.add.bitmapData((this.width / this.maxHealth) * this.health, 5);
+            if (this.health >= 0 && this.health <= 100) {
+                this.healthBar.width = ((this.width / this.maxHealth) * this.health);
+            }
+        };
+        Entity.prototype.makeEnergyBar = function () {
+            // This the red background of the healthbar
+            var bmd = this.gsm.game.add.bitmapData(this.width, 5);
             bmd.ctx.beginPath();
-            bmd.ctx.rect(0, 0, (this.width / this.maxHealth) * this.health, 5);
-            bmd.ctx.fillStyle = 'green';
+            bmd.ctx.rect(0, 0, this.width, 5);
+            bmd.ctx.fillStyle = 'gray';
             bmd.ctx.fill();
-            var health = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 15, bmd);
-            this.addChildAt(health, 1);
+            var background = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 10, bmd);
+            this.addChildAt(background, 0);
+            // This the green background of the healthbar, it will change depending on how much damage is done
+            var bmd2 = this.gsm.game.add.bitmapData(this.width, 5);
+            bmd2.ctx.beginPath();
+            bmd2.ctx.rect(0, 0, this.width, 5);
+            bmd2.ctx.fillStyle = 'yellow';
+            bmd2.ctx.fill();
+            this.energyBar = this.gsm.game.add.image(-(this.width / 2), -(this.height / 2) - 10, bmd2);
+            this.addChildAt(this.energyBar, 1);
+            this.getAbilityManager().getEnergyManager().addOnEnergyGainCallback(this.updateEnergyBar, this);
+            this.getAbilityManager().getEnergyManager().addOnEnergyLossCallback(this.updateEnergyBar, this);
+        };
+        Entity.prototype.updateEnergyBar = function () {
+            if (this.getAbilityManager().getEnergyManager().energy >= 0 && this.getAbilityManager().getEnergyManager().energy <= 100) {
+                this.energyBar.width = ((this.width / 100) * this.getAbilityManager().getEnergyManager().energy);
+            }
         };
         /**
          * Makes the entity jump.

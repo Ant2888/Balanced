@@ -244,11 +244,15 @@
  <objectgroup name="doors">
   <object id="60" gid="296" x="3328.33" y="1343.33" width="128" height="192">
    <properties>
+    <property name="id" value="exit"/>
+    <property name="sprite" value="castledoors"/>
     <property name="type" value="door"/>
    </properties>
   </object>
   <object id="61" gid="296" x="192" y="320.833" width="128" height="192">
    <properties>
+    <property name="id" value="enter"/>
+    <property name="sprite" value="castledoors"/>
     <property name="type" value="door"/>
    </properties>
   </object>

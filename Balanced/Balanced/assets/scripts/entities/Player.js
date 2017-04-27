@@ -18,10 +18,6 @@ var ENTITIES;
         __extends(Player, _super);
         function Player(gsm, x, y, key, frame) {
             var _this = _super.call(this, gsm, x, y, key, frame) || this;
-            _this.ABILITY_ONE_COST = 5;
-            _this.ABILITY_TWO_COST = 30;
-            _this.ABILITY_THREE_COST = 45;
-            _this.ABILITY_FOUR_COST = 80;
             _this.WAVE_ATK = 'wave_attk';
             _this.abm = new COMBAT.PlayerAbilities(_this, gsm);
             _this.energyWave = _this.gsm.game.add.weapon(15, _this.WAVE_ATK);
@@ -57,16 +53,18 @@ var ENTITIES;
         Player.prototype.recalcModifiers = function () {
             this.ab1_mod = {
                 dmg: this.ATTACK * 1.0, flinchTime: ENTITIES.Entity.FLINCH_TIME, stunTime: 0,
-                knockback: { dx: 10, dy: -10, time: 300 }
+                knockback: { dx: 10, dy: -10, time: 300 }, energyCost: 5
             };
             this.ab2_mod = {
-                dmg: this.ATTACK * .75
+                dmg: this.ATTACK * .75, energyCost: 30
             };
             this.ab3_mod = {
+                energyCost: 45,
                 dmg: this.ATTACK * .75, flinchTime: 0, stunTime: 0,
                 knockback: { dx: 10, dy: -10, time: 300, stunTime: 100 }
             };
             this.ab4_mod = {
+                energyCost: 80,
                 dmg: this.ATTACK * 1.75, flinchTime: this.ab1_mod.flinchTime || ENTITIES.Entity.FLINCH_TIME, stunTime: 1500,
                 knockback: { dx: 115, dy: -125, time: 500, stunTime: 1250 }
             };
@@ -173,6 +171,7 @@ var ENTITIES;
         };
         return Player;
     }(ENTITIES.Entity));
+    Player.allCurrentEvent = [];
     // end mods
     Player.ability2L = 'ab2L';
     Player.ability2R = 'ab2R';

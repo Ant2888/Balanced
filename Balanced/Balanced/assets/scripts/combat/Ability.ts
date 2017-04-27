@@ -7,6 +7,7 @@
         dmg?: number,
         flinchTime?: number,
         stunTime?: number,
-        knockback?: KnockBack;
+        knockback?: KnockBack,
+        energyCost?: number
     }
 }

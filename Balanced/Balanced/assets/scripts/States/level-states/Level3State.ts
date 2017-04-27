@@ -175,6 +175,8 @@
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
         }
 
+        public testTimer: Phaser.Timer;
+
         public startup(): boolean {
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
 
@@ -256,6 +258,18 @@
             }, this);
 
             this.setupKeybinds(this);
+
+            var test = BALANCE.EventMatrix.Matrix
+
+            this.testTimer = this.gsm.game.time.create(false);
+            this.testTimer.loop(Math.floor(Math.random() * (45000 - 20000 + 1)) + 20000, () => {
+                var rndEvent = Object.keys(BALANCE.EventMatrix.Matrix);
+                //this just generate a random key
+                rndEvent = BALANCE.EventMatrix.Matrix[rndEvent[rndEvent.length * Math.random() << 0]];
+                this.bm.matrix.eventToApply = rndEvent;
+                this.bm.dispatchEvent(this.bm.matrix, this.player);
+            }, this);
+            this.testTimer.start();
 
             return true;
         }
@@ -457,7 +471,10 @@
         }
 
         public end(): boolean {
+            this.testTimer.stop();
+            this.testTimer.destroy();
             this.gsm.musicBox.stopByID('final_hour');
+            this.doors.destroy(true);
             this.gsm.game.camera.reset();
             this.player.destroy(true);
             this.enemies.destroy(true);

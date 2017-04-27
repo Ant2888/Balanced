@@ -319,7 +319,10 @@
         public dealDamage(damage: number, crit: boolean, color = "red", display?: boolean,
             flinch?: boolean, flinchTime?: number, knockBack?: COMBAT.KnockBack, flinchLeft?: boolean): boolean {
 
-            if (damage < 0 || this.invincible)
+            if (damage < 0)
+                damage = 0;
+
+            if (this.invincible)
                 return false;
 
             if (flinchTime === undefined || flinchTime === null)

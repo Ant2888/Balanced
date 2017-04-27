@@ -117,6 +117,7 @@
     <Content Include="assets\res\tutorial\tut_no_btn.png" />
     <Content Include="assets\res\tutorial\tut_yes_btn.png" />
     <Content Include="assets\scripts\floatingText.js" />
+    <TypeScriptCompile Include="assets\scripts\balance\buffs\EventMatrix.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\PauseMenuGraphics.ts" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />

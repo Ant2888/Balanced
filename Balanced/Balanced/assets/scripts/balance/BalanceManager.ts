@@ -10,6 +10,8 @@
      */
     export class BalanceManager {
 
+        public matrix: BALANCE.EventMatrix;
+
         /**
          * Current instance of the GSM
          */
@@ -46,6 +48,7 @@
             this.notif_group = this.gsm.game.add.group();
             this.notification = new GUI.BalanceEventGraphics(this.notif_group);
             this.gsm.getGUIM().addGroup(this.notification);
+            this.matrix = new EventMatrix(this.gsm);
         }
 
         /**
@@ -95,15 +98,23 @@
          * @param event The event to apply.
          * @param entity The entity to apply the event to.
          */
-        public dispatchEvent(event: BalanceEvent, entity: ENTITIES.Entity): boolean {
+        public dispatchEvent(event: BalanceEvent, entity: ENTITIES.Entity, revert?: boolean, notify?: boolean): boolean {
+            if (revert === undefined || revert === null)
+                revert = false;
+
+            if (notify === undefined || notify === null)
+                notify = true;
+
             if (!event.dispatchEvent(entity))
                 return false;
 
             var e = new EventDetails(event, entity);
 
-            e.event.dispatchEvent(e.effected);
+            revert ? e.event.attemptRevert(e.effected) : e.event.dispatchEvent(e.effected);
             this.allEvents.push(e);
-            this.notification.announceEvent(e.event);
+
+            if(notify)
+                this.notification.announceEvent(e.event);
 
             return true;
         }

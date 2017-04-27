@@ -57,7 +57,7 @@
         }
 
         public castAbilityOne(): boolean {
-            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_ONE_COST)) {
+            if (!this.energyMan.useAbility(this.getPlayer().ab1_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
@@ -79,7 +79,7 @@
         }
 
         public castAbilityTwo(): boolean {
-            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_TWO_COST)) {
+            if (!this.energyMan.useAbility(this.getPlayer().ab2_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
@@ -115,7 +115,7 @@
         }
 
         public castAbilityThree(): boolean {
-            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_THREE_COST)) {
+            if (!this.energyMan.useAbility(this.getPlayer().ab3_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
@@ -137,7 +137,7 @@
         }
 
         public castAbilityFour(): boolean {
-            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_FOUR_COST)) {
+            if (!this.energyMan.useAbility(this.getPlayer().ab4_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }

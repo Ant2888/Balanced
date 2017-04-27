@@ -50,6 +50,7 @@ var GUI;
             this.group.add(this.pm_options_btn);
             //main menu
             this.pm_mainmenu_btn = this.gsm.game.add.button((this.gsm.game.width / 2), (this.gsm.game.height / 2) + 60, 'pm_mainmenu_btn', function () {
+                this.gsm.game.paused = false;
                 this.gsm.setState(States.MAIN_MENU_STATE);
             }, this, 1, 0, 2);
             this.pm_mainmenu_btn.anchor.setTo(.5, .5);

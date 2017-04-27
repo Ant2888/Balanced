@@ -35,8 +35,8 @@
 
             this.curText = this.gsm.game.add.text(466 + 30, -146 + 50,
                 event.getNotifText(), {
-                    fill: 'red', font: 'papyrus', fontSize: '14px',
-                    stroke: 'black', strokeThickness: 4});
+                    fill: 'yellow', font: 'papyrus', fontSize: '20px',
+                    stroke: 'black', strokeThickness: 2});
             this.curText.fixedToCamera = true;
 
             this.tweenInOut();

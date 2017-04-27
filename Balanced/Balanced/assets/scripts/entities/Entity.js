@@ -227,7 +227,9 @@ var ENTITIES;
          */
         Entity.prototype.dealDamage = function (damage, crit, color, display, flinch, flinchTime, knockBack, flinchLeft) {
             if (color === void 0) { color = "red"; }
-            if (damage < 0 || this.invincible)
+            if (damage < 0)
+                damage = 0;
+            if (this.invincible)
                 return false;
             if (flinchTime === undefined || flinchTime === null)
                 flinchTime = ENTITIES.Player.FLINCH_TIME;

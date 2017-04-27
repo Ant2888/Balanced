@@ -28,6 +28,7 @@ var BALANCE;
             this.notif_group = this.gsm.game.add.group();
             this.notification = new GUI.BalanceEventGraphics(this.notif_group);
             this.gsm.getGUIM().addGroup(this.notification);
+            this.matrix = new BALANCE.EventMatrix(this.gsm);
         }
         /**
          * This will apply ALL events to their respective entity.
@@ -68,13 +69,18 @@ var BALANCE;
          * @param event The event to apply.
          * @param entity The entity to apply the event to.
          */
-        BalanceManager.prototype.dispatchEvent = function (event, entity) {
+        BalanceManager.prototype.dispatchEvent = function (event, entity, revert, notify) {
+            if (revert === undefined || revert === null)
+                revert = false;
+            if (notify === undefined || notify === null)
+                notify = true;
             if (!event.dispatchEvent(entity))
                 return false;
             var e = new BALANCE.EventDetails(event, entity);
-            e.event.dispatchEvent(e.effected);
+            revert ? e.event.attemptRevert(e.effected) : e.event.dispatchEvent(e.effected);
             this.allEvents.push(e);
-            this.notification.announceEvent(e.event);
+            if (notify)
+                this.notification.announceEvent(e.event);
             return true;
         };
         return BalanceManager;

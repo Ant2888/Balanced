@@ -6,6 +6,7 @@
      */
     export class Player extends Entity {
 
+        public static allCurrentEvent = [];
 
         // modifiers
         public ab1_mod: COMBAT.Ability;
@@ -27,11 +28,6 @@
         public static ABILITY_FOUR = 4;
         public static POTION_ONE = 5;
         public static POTION_TWO = 6;
-
-        public ABILITY_ONE_COST = 5;
-        public ABILITY_TWO_COST = 30;
-        public ABILITY_THREE_COST = 45;
-        public ABILITY_FOUR_COST = 80;
 
         public overHeadText: Phaser.Text;
 
@@ -91,23 +87,25 @@
 
             this.addChild(this.overHeadText);
         }
-
+        
         public recalcModifiers(): void {
             this.ab1_mod = {
                 dmg: this.ATTACK * 1.0, flinchTime: Entity.FLINCH_TIME, stunTime: 0,
-                knockback: { dx:  10, dy: -10, time: 300 }
+                knockback: { dx: 10, dy: -10, time: 300 }, energyCost: 5
             };
 
             this.ab2_mod = {
-                dmg: this.ATTACK * .75
+                dmg: this.ATTACK * .75, energyCost: 30
             };
 
             this.ab3_mod = {
+                energyCost: 45,
                 dmg: this.ATTACK * .75, flinchTime: 0, stunTime: 0,
                 knockback: { dx: 10, dy: -10, time: 300, stunTime: 100 }
             };
 
             this.ab4_mod = {
+                energyCost: 80,
                 dmg: this.ATTACK * 1.75, flinchTime: this.ab1_mod.flinchTime || Entity.FLINCH_TIME, stunTime: 1500,
                 knockback: { dx: 115, dy: -125, time: 500, stunTime: 1250 }
             };

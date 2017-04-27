@@ -17,7 +17,6 @@ var ENTITIES;
         __extends(Ogre, _super);
         function Ogre(gsm, x, y, player, key, frame) {
             var _this = _super.call(this, gsm, x, y, key, frame) || this;
-            _this.ABILITY_ONE_COST = 50;
             //AI STUFF
             _this.WONDER_RANGE = 64 * 1;
             _this.VISION_X = 64 * 3;
@@ -49,7 +48,7 @@ var ENTITIES;
             _this.stateLogic = new FSM.OgreStateSystem(_this.gsm, _this, _this.player);
             _this.ab1_mod = {
                 dmg: _this.ATTACK * .25, flinchTime: ENTITIES.Entity.FLINCH_TIME + 200,
-                knockback: { dx: 25, dy: -25, time: 500 }
+                knockback: { dx: 25, dy: -25, time: 500 }, energyCost: 60
             };
             return _this;
         }

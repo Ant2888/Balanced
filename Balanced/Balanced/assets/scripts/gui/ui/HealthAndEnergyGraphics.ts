@@ -45,7 +45,7 @@
         }
 
         public buildEnergyText(): void {
-            this.energyText = this.gsm.game.add.text(248, 41, this.player.health+'', { fill: '#000000', font: 'papyrus', fontSize: '18px', fontStyle: 'bold' });
+            this.energyText = this.gsm.game.add.text(244, 41, this.player.health+'', { fill: '#000000', font: 'papyrus', fontSize: '18px', fontStyle: 'bold' });
             this.group.add(this.energyText);
             this.energyText.fixedToCamera = true;
         }

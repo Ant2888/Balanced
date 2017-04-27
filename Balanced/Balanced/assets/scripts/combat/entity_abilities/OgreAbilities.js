@@ -26,7 +26,7 @@ var COMBAT;
             return this.ent;
         };
         OgreAbilities.prototype.castAbilityOne = function () {
-            if (!this.energyMan.useAbility(this.getOgre().ABILITY_ONE_COST)) {
+            if (!this.energyMan.useAbility(this.getOgre().ab1_mod.energyCost)) {
                 return false;
             }
             var ogre = this.ent;

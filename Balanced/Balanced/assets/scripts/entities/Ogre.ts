@@ -5,7 +5,6 @@
     export class Ogre extends Entity {
 
         public static ABILITY_ONE = 1;
-        public ABILITY_ONE_COST = 50;
         public ab1_mod: COMBAT.Ability;
 
         //AI STUFF
@@ -59,7 +58,7 @@
 
             this.ab1_mod = {
                 dmg: this.ATTACK * .25, flinchTime: Entity.FLINCH_TIME + 200,
-                knockback: { dx: 25, dy: -25, time: 500 }
+                knockback: { dx: 25, dy: -25, time: 500 }, energyCost: 60
             };
         }
 

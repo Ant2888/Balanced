@@ -59,7 +59,7 @@ var COMBAT;
             return true;
         };
         PlayerAbilities.prototype.castAbilityOne = function () {
-            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_ONE_COST)) {
+            if (!this.energyMan.useAbility(this.getPlayer().ab1_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
@@ -75,7 +75,7 @@ var COMBAT;
             return true;
         };
         PlayerAbilities.prototype.castAbilityTwo = function () {
-            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_TWO_COST)) {
+            if (!this.energyMan.useAbility(this.getPlayer().ab2_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
@@ -103,7 +103,7 @@ var COMBAT;
             return true;
         };
         PlayerAbilities.prototype.castAbilityThree = function () {
-            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_THREE_COST)) {
+            if (!this.energyMan.useAbility(this.getPlayer().ab3_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
@@ -119,7 +119,7 @@ var COMBAT;
             return true;
         };
         PlayerAbilities.prototype.castAbilityFour = function () {
-            if (!this.energyMan.useAbility(this.getPlayer().ABILITY_FOUR_COST)) {
+            if (!this.energyMan.useAbility(this.getPlayer().ab4_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }

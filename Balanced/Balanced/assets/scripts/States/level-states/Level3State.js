@@ -137,6 +137,7 @@ var States;
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
         };
         Level3State.prototype.startup = function () {
+            var _this = this;
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
@@ -196,6 +197,16 @@ var States;
                 this.charMenu.flipMenu();
             }, this);
             this.setupKeybinds(this);
+            var test = BALANCE.EventMatrix.Matrix;
+            this.testTimer = this.gsm.game.time.create(false);
+            this.testTimer.loop(Math.floor(Math.random() * (45000 - 20000 + 1)) + 20000, function () {
+                var rndEvent = Object.keys(BALANCE.EventMatrix.Matrix);
+                //this just generate a random key
+                rndEvent = BALANCE.EventMatrix.Matrix[rndEvent[rndEvent.length * Math.random() << 0]];
+                _this.bm.matrix.eventToApply = rndEvent;
+                _this.bm.dispatchEvent(_this.bm.matrix, _this.player);
+            }, this);
+            this.testTimer.start();
             return true;
         };
         Level3State.prototype.createEnemies = function () {
@@ -352,7 +363,10 @@ var States;
             });
         };
         Level3State.prototype.end = function () {
+            this.testTimer.stop();
+            this.testTimer.destroy();
             this.gsm.musicBox.stopByID('final_hour');
+            this.doors.destroy(true);
             this.gsm.game.camera.reset();
             this.player.destroy(true);
             this.enemies.destroy(true);

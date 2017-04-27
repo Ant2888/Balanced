@@ -213,6 +213,10 @@ var States;
             var test = BALANCE.EventMatrix.Matrix;
             this.testTimer = this.gsm.game.time.create(false);
             this.testTimer.loop(Math.floor(Math.random() * (45000 - 20000 + 1)) + 20000, function () {
+                if (_this.gsm.game.paused)
+                    return;
+                if (!_this.player.alive)
+                    return;
                 var rndEvent = Object.keys(BALANCE.EventMatrix.Matrix);
                 //this just generate a random key
                 rndEvent = BALANCE.EventMatrix.Matrix[rndEvent[rndEvent.length * Math.random() << 0]];

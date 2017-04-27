@@ -79,10 +79,10 @@
 
         private tryAttack(player: Player): void {
             var mod = this.ab1_mod;
-            var damage = this.randomValWithRandomness(mod.dmg, this.RANDOMNESS);
+            var damage = this.randomValWithRandomness(mod.dmg+7, this.RANDOMNESS);
             mod.knockback.dx = Math.abs(mod.knockback.dx) * (this.facingLeft ? -1 : 1);
 
-            player.dealDamage(damage, damage > (mod.dmg + (this.RANDOMNESS / 2)), 'red', true, mod.flinchTime > 0,
+            player.dealDamage(damage, damage > (mod.dmg+7 + (this.RANDOMNESS / 2)), 'red', true, mod.flinchTime > 0,
                 mod.flinchTime, mod.knockback, this.facingLeft);
         }
 

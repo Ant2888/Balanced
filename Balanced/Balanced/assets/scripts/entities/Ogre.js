@@ -67,9 +67,9 @@ var ENTITIES;
         };
         Ogre.prototype.tryAttack = function (player) {
             var mod = this.ab1_mod;
-            var damage = this.randomValWithRandomness(mod.dmg, this.RANDOMNESS);
+            var damage = this.randomValWithRandomness(mod.dmg + 7, this.RANDOMNESS);
             mod.knockback.dx = Math.abs(mod.knockback.dx) * (this.facingLeft ? -1 : 1);
-            player.dealDamage(damage, damage > (mod.dmg + (this.RANDOMNESS / 2)), 'red', true, mod.flinchTime > 0, mod.flinchTime, mod.knockback, this.facingLeft);
+            player.dealDamage(damage, damage > (mod.dmg + 7 + (this.RANDOMNESS / 2)), 'red', true, mod.flinchTime > 0, mod.flinchTime, mod.knockback, this.facingLeft);
         };
         Ogre.prototype.createAnimations = function () {
             this.animations.add(ENTITIES.Entity.walkL, [7, 8, 9, 10, 11, 12, 13], 15, false);

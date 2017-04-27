@@ -1,6 +1,6 @@
 ﻿module GUI {
     /**
-     * @author Anthony
+     * @author Anthony, Emerson
      */
     export class BagGraphics extends GameObject {
 
@@ -8,13 +8,16 @@
         private inv_menu: Phaser.Sprite;
         private closeBtn: Phaser.Button;
         private gsm: States.GameStateManager;
+        private player: ENTITIES.Player;
 
-        constructor(group: Phaser.Group) {
+        constructor(group: Phaser.Group, player: ENTITIES.Player) {
             super(0, group);
+            this.player = player;
         }
 
         public initialize(gsm: States.GameStateManager): void {
             this.gsm = gsm;
+            
 
             this.inv_menu = this.gsm.game.add.sprite(gsm.game.width - 200, 270, 'inv_menu');
             this.inv_menu.anchor.setTo(.5, .5);
@@ -35,7 +38,7 @@
         }
 
         public openMenu(): void {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return;
 
             this.inv_menu.exists = true;
@@ -44,7 +47,7 @@
         }
 
         public closeMenu(): void {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return;
 
             if (this.inv_menu.exists)

@@ -45,7 +45,7 @@
         }
 
         public openMenu(): void {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return;
 
             this.char_menu.exists = true;
@@ -59,7 +59,7 @@
         }
 
         public closeMenu(): void {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return;
 
             if (this.char_menu.exists)

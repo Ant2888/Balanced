@@ -12,6 +12,7 @@
         private unitframe: GUI.HealthAndEnergyGraphics;
         private charMenu: GUI.CharGraphics;
         private bag: GUI.BagGraphics;
+        private pauseMenu: GUI.PauseMenuGraphics;
 
         private map: Phaser.Tilemap;
 
@@ -240,10 +241,8 @@
             entDoor.body.gravity.y = -1200;
 
             this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
-
             this.createEnemies();
 
-            
             this.player.loadEntitySounds(this.gsm.musicBox);
             (<ENTITIES.Ogre>this.enemies.getTop()).loadEntitySounds(this.gsm.musicBox);
 
@@ -261,11 +260,13 @@
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group);
             this.charMenu = new GUI.CharGraphics(group, this.player);
+            this.pauseMenu = new GUI.PauseMenuGraphics(group);
 
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);
             this.gsm.getGUIM().addGroup(this.bag);
             this.gsm.getGUIM().addGroup(this.charMenu);
+            this.gsm.getGUIM().addGroup(this.pauseMenu);
 
             this.actionbar.getBag().onInputDown.add(function (e) {
                 this.charMenu.closeMenu();
@@ -395,6 +396,10 @@
 
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
 
+                if (e.keyCode == Phaser.Keyboard.ESC) {  
+                    data.pauseMenu.togglePauseMenuDialog();  
+                }
+
                 if (e.keyCode == Phaser.Keyboard.O) {
                     data.player.invincible = data.player.invincible ? false : true;
                 }
@@ -467,6 +472,7 @@
             var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
             baddie.body.bounce.y = .2;
             baddie.makeHealthBar();
+            baddie.makeEnergyBar();
 
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;

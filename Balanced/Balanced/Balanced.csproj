@@ -72,6 +72,7 @@
     <Content Include="assets\res\hud\ab_ab4_ss.png" />
     <Content Include="assets\res\hud\ab_bag_ss.png" />
     <Content Include="assets\res\hud\ab_bg.png" />
+    <Content Include="assets\res\hud\ab_options_ss.png" />
     <Content Include="assets\res\hud\ab_p1_ss.png" />
     <Content Include="assets\res\hud\ab_p2_ss.png" />
     <Content Include="assets\res\hud\ab_stats_ss.png" />
@@ -108,7 +109,15 @@
     <Content Include="assets\res\town\twn_inn_sprite.png" />
     <Content Include="assets\res\town\twn_shop_sprite.png" />
     <Content Include="assets\res\level1-dungeon\WarriorSprite.png" />
+    <Content Include="assets\res\tutorial\pm_background.png" />
+    <Content Include="assets\res\tutorial\pm_help_btn.png" />
+    <Content Include="assets\res\tutorial\pm_mainmenu_btn.png" />
+    <Content Include="assets\res\tutorial\pm_options_btn.png" />
+    <Content Include="assets\res\tutorial\pm_resume_btn.png" />
+    <Content Include="assets\res\tutorial\tut_no_btn.png" />
+    <Content Include="assets\res\tutorial\tut_yes_btn.png" />
     <Content Include="assets\scripts\floatingText.js" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\PauseMenuGraphics.ts" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
     <Content Include="assets\res\phaser2.jpg" />

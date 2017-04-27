@@ -89,7 +89,13 @@
 </data>
  </layer>
  <objectgroup name="doors">
-  <object id="1" gid="292" x="704.022" y="768" width="128" height="192"/>
+  <object id="1" gid="292" x="704.022" y="768" width="128" height="192">
+   <properties>
+    <property name="id" value="both"/>
+    <property name="sprite" value="castledoors"/>
+    <property name="type" value="door"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="enemies">
   <object id="3" gid="294" x="256" y="384" width="64" height="64">

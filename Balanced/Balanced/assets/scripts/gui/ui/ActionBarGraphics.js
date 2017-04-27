@@ -41,6 +41,7 @@ var GUI;
             this.setStats(this.statsPressed);
             this.setBag(this.bagPressed);
             this.setTown(this.townPressed);
+            this.setOptions(this.optionsPressed);
             this.ab_ab1_text = gsm.game.add.text(470, 662, 'Q', { fontSize: '28px', fill: '#000' });
             this.ab_ab1_text.fixedToCamera = true;
             this.group.add(this.ab_ab1_text);
@@ -75,6 +76,12 @@ var GUI;
             this.ab_town_ss.anchor.setTo(.5, .5);
             this.ab_town_ss.fixedToCamera = true;
             this.group.add(this.ab_town_ss);
+        };
+        ActionBarGraphics.prototype.setOptions = function (func) {
+            this.ab_options_ss = this.gsm.game.add.button(885, 652, 'ab_options_ss', func, this, 0, 0, 1);
+            this.ab_options_ss.anchor.setTo(.5, .5);
+            this.ab_options_ss.fixedToCamera = true;
+            this.group.add(this.ab_options_ss);
         };
         ActionBarGraphics.prototype.setPotion1 = function (func) {
             this.ab_p1_ss = this.gsm.game.add.button(374, 611, 'ab_p1_ss', func, this, 0, 0, 1);
@@ -166,6 +173,9 @@ var GUI;
         ActionBarGraphics.prototype.townPressed = function () {
             console.log('town button was pressed');
             this.gsm.setState(States.TOWN_STATE);
+        };
+        ActionBarGraphics.prototype.optionsPressed = function () {
+            console.log('pause menu button was pressed');
         };
         ActionBarGraphics.prototype.potion1Pressed = function () {
             if (!this.player.alive)

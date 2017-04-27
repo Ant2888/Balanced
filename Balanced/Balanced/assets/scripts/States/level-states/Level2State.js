@@ -20,6 +20,14 @@ var States;
         function Level2State(gsm) {
             return _super.call(this, gsm) || this;
         }
+        Level2State.prototype.render = function () {
+            var _this = this;
+            if (States.Level1State.DEBUG) {
+                this.gsm.game.debug.body(this.player);
+                this.gsm.game.debug.bodyInfo(this.player, 100, 110);
+                this.enemies.forEachAlive(function (e) { _this.gsm.game.debug.body(e); }, this);
+            }
+        };
         Level2State.prototype.update = function () {
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
             this.gsm.game.physics.arcade['TILE_BIAS'] = 40;
@@ -40,6 +48,25 @@ var States;
             }, this);
             if (!this.player.alive)
                 return;
+            //check if the doors are around
+            this.gsm.game.physics.arcade.overlap(this.player, this.doors, this.doDoorLogic, null, this);
+            //find the doors
+            var exitDoor;
+            var entDoor;
+            this.doors.forEach(function (e) {
+                if (e.doorType == 'exit') {
+                    exitDoor = e;
+                }
+                else {
+                    entDoor = e;
+                }
+            }, this);
+            //not overlapping doors
+            if ((this.gsm.game.time.now > entDoor.lastOverlapped)
+                && (this.gsm.game.time.now > exitDoor.lastOverlapped)) {
+                this.player.overHeadText.text = '';
+                this.player.overHeadText.clearColors();
+            }
             if (this.player.y >= 1314) {
                 this.player.y = 1240;
             }
@@ -82,13 +109,48 @@ var States;
             }
             this.stairOverlap = this.map.getTileWorldXY(this.player.x, this.player.y, this.map.tileWidth, this.map.tileHeight, "stairs");
         };
+        //does door logic stuff
+        Level2State.prototype.doDoorLogic = function (player, doors) {
+            var door = doors;
+            if (doors instanceof Phaser.Group) {
+                //grab the colliding door
+                door = doors.getTop();
+            }
+            door.doorType == 'exit' ? this.doExitLogic(door) : this.doEnterLogic(door);
+        };
+        Level2State.prototype.doExitLogic = function (door) {
+            this.player.overHeadText.clearColors();
+            door.lastOverlapped = this.gsm.game.time.now + 2000;
+            var alive = 0;
+            this.enemies.forEachAlive(function (e) { alive++; }, this);
+            if (alive > 0) {
+                this.player.overHeadText.text = ENTITIES.Player.EXIT_DOOR_NF + ' Remaining: ' + alive;
+                this.player.overHeadText.addColor('red', ENTITIES.Player.EXIT_NF_COLOR_IND[0]);
+                this.player.overHeadText.addColor('red', ENTITIES.Player.EXIT_NF_COLOR_IND[1]);
+                this.player.overHeadText.addColor('red', ENTITIES.Player.EXIT_NF_COLOR_IND[2]);
+                this.player.overHeadText.addColor('white', ENTITIES.Player.EXIT_NF_COLOR_IND[2] + 1);
+                this.player.overHeadText.addColor('red', ENTITIES.Player.EXIT_NF_COLOR_IND2);
+            }
+            else {
+                this.player.overHeadText.text = ENTITIES.Player.EXIT_DOOR_COMPLETE;
+                this.player.overHeadText.addColor('yellow', ENTITIES.Player.EXIT_C_COLOR_IND);
+                this.player.overHeadText.addColor('white', ENTITIES.Player.EXIT_C_COLOR_IND + 1);
+            }
+        };
+        Level2State.prototype.doEnterLogic = function (door) {
+            door.lastOverlapped = this.gsm.game.time.now + 200;
+            this.player.overHeadText.clearColors();
+            this.player.overHeadText.text = ENTITIES.Player.ENTER_DOOR;
+            this.player.overHeadText.addColor('yellow', ENTITIES.Player.ENTER_COLOR_IND);
+            this.player.overHeadText.addColor('white', ENTITIES.Player.ENTER_COLOR_IND + 1);
+        };
         Level2State.prototype.init = function () {
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
-            this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
+            this.gsm.musicBox.addSound('moonlight', UTIL.MUSIC);
         };
         Level2State.prototype.startup = function () {
-            this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
+            this.gsm.musicBox.playByID('moonlight', undefined, undefined, UTIL.MUSIC, true, false);
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
             this.map = this.gsm.game.add.tilemap('level2');
@@ -107,10 +169,22 @@ var States;
             // collision on blockedLayer           
             this.map.setCollisionBetween(1, 100, true, 'floors');
             this.createDoors();
+            var exitDoor = this.doors.getBottom();
+            var entDoor = this.doors.getTop();
+            exitDoor.doorType = 'exit';
+            exitDoor.lastOverlapped = 0;
+            entDoor.doorType = 'enter';
+            entDoor.lastOverlapped = 0;
+            this.gsm.game.physics.arcade.enable(exitDoor);
+            this.gsm.game.physics.arcade.enable(entDoor);
+            exitDoor.enableBody = true;
+            entDoor.enableBody = true;
+            exitDoor.body.gravity.y = -1200;
+            entDoor.body.gravity.y = -1200;
             this.player = new ENTITIES.Player(this.gsm, 16 * 64, 16 * 64, 'tempPlayer');
             this.createEnemies();
             this.player.loadEntitySounds(this.gsm.musicBox);
-            this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour'); }, this);
+            this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('moonlight'); }, this);
             this.backgroundlayer.resizeWorld();
             this.gsm.game.camera.follow(this.player);
             this.player.inputEnabled = true;
@@ -149,8 +223,35 @@ var States;
                 this.createFromTiledObject(element, this.doors);
             }, this);
         };
+        Level2State.prototype.enterKeyPressed = function () {
+            //find the doors
+            var exitDoor;
+            var entDoor;
+            this.doors.forEach(function (e) {
+                if (e.doorType == 'exit') {
+                    exitDoor = e;
+                }
+                else {
+                    entDoor = e;
+                }
+            }, this);
+            if (this.gsm.game.time.now < entDoor.lastOverlapped) {
+                this.player.overHeadText.text = '';
+                this.player.overHeadText.clearColors();
+                this.gsm.setState(States.TOWN_STATE);
+            }
+            else if (this.gsm.game.time.now < exitDoor.lastOverlapped) {
+                var amount = 0;
+                this.enemies.forEachAlive(function (e) { amount++; }, this);
+                if (amount == 0)
+                    this.gsm.setState(States.LEVEL3_STATE);
+            }
+        };
         Level2State.prototype.setupKeybinds = function (data) {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
+                if (e.keyCode == Phaser.Keyboard.F) {
+                    data.enterKeyPressed();
+                }
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.actionbar.ability1Pressed();
                 }
@@ -265,6 +366,7 @@ var States;
             });
         };
         Level2State.prototype.end = function () {
+            this.gsm.musicBox.stopByID('moonlight');
             this.gsm.game.camera.reset();
             this.player.destroy(true);
             this.enemies.destroy(true);

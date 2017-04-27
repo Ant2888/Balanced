@@ -31,6 +31,9 @@ class BalancedGame {
         
         //PUT ALL RESOURCES YOU NEED LOADED DOWN HERE
         // --------------------------------- AUDIO
+        rem.addResource(new UTIL.Resource('moonlight', 'assets/res/audio/moonlight.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
         rem.addResource(new UTIL.Resource('dark_loop', 'assets/res/audio/dark_loop.ogg', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);

@@ -114,7 +114,7 @@ var ENTITIES;
             else if (vx < 0) {
                 this.body.velocity.x = vx;
                 if (this.isJumping) {
-                    this.frame = this.jumpL_lastFrame;
+                    //this.frame = this.jumpL_lastFrame;
                 }
                 else {
                     this.playAnimState(ENTITIES.Entity.walkL, 10, true, true);
@@ -125,7 +125,7 @@ var ENTITIES;
             else {
                 this.body.velocity.x = vx;
                 if (this.isJumping) {
-                    this.frame = this.jumpR_lastFrame;
+                    //this.frame = this.jumpR_lastFrame;
                 }
                 else {
                     this.playAnimState(ENTITIES.Entity.walkR, 10, true, true);

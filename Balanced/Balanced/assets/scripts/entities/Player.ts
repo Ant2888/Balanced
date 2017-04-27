@@ -33,11 +33,21 @@
         public ABILITY_THREE_COST = 45;
         public ABILITY_FOUR_COST = 80;
 
-        protected overHeadText: Phaser.Text;
+        public overHeadText: Phaser.Text;
+
         protected WAVE_ATK = 'wave_attk';
         public energyWave: Phaser.Weapon;
 
+        public static ENTER_DOOR = "Press \'F\' to go to Town.";
+        public static ENTER_COLOR_IND = 7;
 
+        public static EXIT_DOOR_COMPLETE = 'Press \'F\' to go to Next Level!'
+        public static EXIT_C_COLOR_IND = 7;
+
+        public static EXIT_DOOR_NF = 'You must kill ALL remaining enemies!';
+        public static EXIT_NF_COLOR_IND = [14, 15, 16];
+        public static EXIT_NF_COLOR_IND2 = 36;
+        
         constructor(gsm: States.GameStateManager, x: number, y: number, key?: string | Phaser.RenderTexture
             | Phaser.BitmapData | PIXI.Texture, frame?: string | number) {
             super(gsm, x, y, key, frame);
@@ -72,14 +82,14 @@
                     (val == 2 ? 'PlayerHurt2' : 'PlayerHurt1'), 70,
                     undefined, undefined, UTIL.SFX, false, false);
             }, this);
-        }
 
-        public genOverHeadText(text: string): void {
-            
-        }
+            this.overHeadText = this.gsm.game.add.text(0, -18, '', {
+                fill: 'white', font: 'papyrus', fontSize: '14px',
+                stroke: 'black', strokeThickness: 2
+            });
+            this.overHeadText.anchor.setTo(.5, .5);
 
-        public doDoorLogic(): void {
-
+            this.addChild(this.overHeadText);
         }
 
         public recalcModifiers(): void {

@@ -179,7 +179,7 @@
                 this.body.velocity.x = vx;
 
                 if (this.isJumping) {
-                    this.frame = this.jumpL_lastFrame;
+                    //this.frame = this.jumpL_lastFrame;
                 } else {
                     this.playAnimState(ENTITIES.Entity.walkL, 10, true, true);
                 }
@@ -193,7 +193,7 @@
                 this.body.velocity.x = vx;
 
                 if (this.isJumping) {
-                    this.frame = this.jumpR_lastFrame;
+                    //this.frame = this.jumpR_lastFrame;
                 } else {
                     this.playAnimState(ENTITIES.Entity.walkR, 10, true, true);
                 }

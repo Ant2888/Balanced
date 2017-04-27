@@ -46,12 +46,14 @@ var ENTITIES;
                 this.gsm.musicBox.randomPlayByID(val == 3 ? 'PlayerHurt3' :
                     (val == 2 ? 'PlayerHurt2' : 'PlayerHurt1'), 70, undefined, undefined, UTIL.SFX, false, false);
             }, _this);
+            _this.overHeadText = _this.gsm.game.add.text(0, -18, '', {
+                fill: 'white', font: 'papyrus', fontSize: '14px',
+                stroke: 'black', strokeThickness: 2
+            });
+            _this.overHeadText.anchor.setTo(.5, .5);
+            _this.addChild(_this.overHeadText);
             return _this;
         }
-        Player.prototype.genOverHeadText = function (text) {
-        };
-        Player.prototype.doDoorLogic = function () {
-        };
         Player.prototype.recalcModifiers = function () {
             this.ab1_mod = {
                 dmg: this.ATTACK * 1.0, flinchTime: ENTITIES.Entity.FLINCH_TIME, stunTime: 0,
@@ -184,6 +186,13 @@ var ENTITIES;
     Player.ABILITY_FOUR = 4;
     Player.POTION_ONE = 5;
     Player.POTION_TWO = 6;
+    Player.ENTER_DOOR = "Press \'F\' to go to Town.";
+    Player.ENTER_COLOR_IND = 7;
+    Player.EXIT_DOOR_COMPLETE = 'Press \'F\' to go to Next Level!';
+    Player.EXIT_C_COLOR_IND = 7;
+    Player.EXIT_DOOR_NF = 'You must kill ALL remaining enemies!';
+    Player.EXIT_NF_COLOR_IND = [14, 15, 16];
+    Player.EXIT_NF_COLOR_IND2 = 36;
     ENTITIES.Player = Player;
 })(ENTITIES || (ENTITIES = {}));
 //# sourceMappingURL=Player.js.map

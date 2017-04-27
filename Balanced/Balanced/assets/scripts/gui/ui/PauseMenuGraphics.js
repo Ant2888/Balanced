@@ -17,8 +17,10 @@ var GUI;
     */
     var PauseMenuGraphics = (function (_super) {
         __extends(PauseMenuGraphics, _super);
-        function PauseMenuGraphics(group) {
-            return _super.call(this, 205, group) || this;
+        function PauseMenuGraphics(group, player) {
+            var _this = _super.call(this, 205, group) || this;
+            _this.player = player;
+            return _this;
         }
         PauseMenuGraphics.prototype.initialize = function (gsm) {
             this.gsm = gsm;
@@ -74,7 +76,6 @@ var GUI;
             this.mainmenu = !this.mainmenu;
             this.help = !this.help;
             this.gsm.game.paused = !this.gsm.game.paused;
-            console.log(this.gsm.game.paused);
         };
         return PauseMenuGraphics;
     }(GUI.GameObject));

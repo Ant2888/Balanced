@@ -258,9 +258,9 @@
             var group = this.gsm.game.add.group();
             this.actionbar = new GUI.ActionBarGraphics(group, this.player);
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
-            this.bag = new GUI.BagGraphics(group);
+            this.bag = new GUI.BagGraphics(group, this.player);
             this.charMenu = new GUI.CharGraphics(group, this.player);
-            this.pauseMenu = new GUI.PauseMenuGraphics(group);
+            this.pauseMenu = new GUI.PauseMenuGraphics(group, this.player);
 
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);
@@ -279,6 +279,8 @@
             }, this);
 
             this.setupKeybinds(this);
+
+            
 
             return true;
         }                
@@ -396,7 +398,10 @@
 
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
 
-                if (e.keyCode == Phaser.Keyboard.ESC) {  
+                if (e.keyCode == Phaser.Keyboard.ESC) { 
+                    if (!data.player.alive)
+                        return false; 
+
                     data.pauseMenu.togglePauseMenuDialog();  
                 }
 
@@ -436,6 +441,8 @@
 
                 if (e.keyCode == Phaser.Keyboard.H) {
                     data.actionbar.getTown().frame = 0;
+                    if (data.gsm.game.paused || !data.player.alive)
+                        return false;
                     data.gsm.setState(States.TOWN_STATE);                    
                 }
 

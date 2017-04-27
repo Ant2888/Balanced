@@ -220,21 +220,21 @@
         }
 
         public statsPressed(): any {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             console.log('stats button was pressed');
         }
 
         public bagPressed(): any {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             console.log('bag button was pressed');
         }
 
         public townPressed(): any {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             console.log('town button was pressed');
@@ -242,14 +242,14 @@
         }
 
         public optionsPressed(): any {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             console.log('pause menu button was pressed');
         }
 
         public potion1Pressed(): boolean {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             if (!this.player.alive)
@@ -287,7 +287,7 @@
         }
 
         public potion2Pressed(): boolean {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;         
 
             if (!this.player.alive)
@@ -325,7 +325,7 @@
         }
 
         public ability1Pressed(): boolean {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             this.getAbility1().frame = 1;
@@ -333,7 +333,7 @@
         }
 
         public ability2Pressed(): boolean {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             this.getAbility2().frame = 1;
@@ -341,7 +341,7 @@
         }
 
         public ability3Pressed(): boolean {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             this.getAbility3().frame = 1;
@@ -349,7 +349,7 @@
         }
 
         public ability4Pressed(): boolean {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return false;
 
             this.getAbility4().frame = 1;

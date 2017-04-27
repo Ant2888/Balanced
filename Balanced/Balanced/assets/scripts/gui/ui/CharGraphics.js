@@ -41,7 +41,7 @@ var GUI;
             this.closeMenu();
         };
         CharGraphics.prototype.openMenu = function () {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return;
             this.char_menu.exists = true;
             this.closeBtn.exists = true;
@@ -51,7 +51,7 @@ var GUI;
             this.player_energy.exists = true;
         };
         CharGraphics.prototype.closeMenu = function () {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return;
             if (this.char_menu.exists)
                 this.char_menu.exists = false;

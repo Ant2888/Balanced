@@ -11,12 +11,14 @@ var __extends = (this && this.__extends) || (function () {
 var GUI;
 (function (GUI) {
     /**
-     * @author Anthony
+     * @author Anthony, Emerson
      */
     var BagGraphics = (function (_super) {
         __extends(BagGraphics, _super);
-        function BagGraphics(group) {
-            return _super.call(this, 0, group) || this;
+        function BagGraphics(group, player) {
+            var _this = _super.call(this, 0, group) || this;
+            _this.player = player;
+            return _this;
         }
         BagGraphics.prototype.initialize = function (gsm) {
             this.gsm = gsm;
@@ -35,14 +37,14 @@ var GUI;
             this.closeMenu();
         };
         BagGraphics.prototype.openMenu = function () {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return;
             this.inv_menu.exists = true;
             this.closeBtn.exists = true;
             this.dropBtn.exists = true;
         };
         BagGraphics.prototype.closeMenu = function () {
-            if (this.gsm.game.paused)
+            if (this.gsm.game.paused || !this.player.alive)
                 return;
             if (this.inv_menu.exists)
                 this.inv_menu.exists = false;

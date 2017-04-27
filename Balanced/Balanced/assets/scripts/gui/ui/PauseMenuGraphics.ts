@@ -22,9 +22,11 @@
         private isPaused: boolean;
 
         private gsm: States.GameStateManager;
+        private player: ENTITIES.Player;
 
-        constructor(group: Phaser.Group) {
+        constructor(group: Phaser.Group, player: ENTITIES.Player) {
             super(205, group);
+            this.player = player;
         }
 
         public initialize(gsm: States.GameStateManager): void {
@@ -102,7 +104,6 @@
 
            
             this.gsm.game.paused = !this.gsm.game.paused;
-            console.log(this.gsm.game.paused);
         }
 
     }

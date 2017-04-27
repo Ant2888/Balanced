@@ -48,7 +48,7 @@
             var dx = Math.abs(ogre.x - this.system.player.x);
             var dy = Math.abs(ogre.y - this.system.player.y);
 
-            return (dx <= ogre.ATTACK_DISTANCE) && (dy <= ogre.ATTACK_DISTANCE);
+            return (dx <= ogre.ATTACK_DISTANCE) && (dy <= (ogre.ATTACK_DISTANCE+20));
         }
     }
 

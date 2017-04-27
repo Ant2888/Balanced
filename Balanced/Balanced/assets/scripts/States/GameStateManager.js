@@ -91,6 +91,9 @@ var States;
             this.state.update();
             //TODO: DO POST STATE CLIENT UPDATING HERE
         };
+        GameStateManager.prototype.render = function () {
+            this.state.render();
+        };
         /**
          * Getter for GUIM
          */

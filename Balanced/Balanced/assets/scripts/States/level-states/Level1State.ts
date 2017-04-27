@@ -6,6 +6,8 @@
     */
     export class Level1State extends State {
 
+        private static DEBUG = true;
+
         private actionbar: GUI.ActionBarGraphics;
         private unitframe: GUI.HealthAndEnergyGraphics;
         private charMenu: GUI.CharGraphics;
@@ -115,12 +117,18 @@
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
-
             
         }
 
-        public startup(): boolean {
+        public render(): void {
+            if (Level1State.DEBUG) {
+                this.gsm.game.debug.body(this.player);
+                this.gsm.game.debug.bodyInfo(this.player, 100, 110);
+                this.enemies.forEachAlive(e => { this.gsm.game.debug.body(e) }, this);
+            }
+        }
 
+        public startup(): boolean {
             
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
 
@@ -149,6 +157,7 @@
 
             this.createDoors();
             this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
+
             this.createEnemies();
 
             
@@ -360,7 +369,7 @@
         public end(): boolean {
             this.gsm.musicBox.stopByID('final_hour');
             this.gsm.game.camera.reset();
-            this.player.destroy();
+            this.player.destroy(true);
             this.enemies.destroy(true);
             this.map.destroy();
             this.floorlayer.destroy();

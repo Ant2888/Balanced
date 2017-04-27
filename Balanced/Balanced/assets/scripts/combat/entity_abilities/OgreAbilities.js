@@ -26,19 +26,20 @@ var COMBAT;
             return this.ent;
         };
         OgreAbilities.prototype.castAbilityOne = function () {
-            var _this = this;
             if (!this.energyMan.useAbility(this.getOgre().ABILITY_ONE_COST)) {
                 return false;
             }
             var ogre = this.ent;
             this.ent.facingLeft = ogre.player.x < ogre.x;
+            ogre.body.setSize(ogre.attackSize.width, ogre.attackSize.height, ogre.attackSize.wOffset, ogre.attackSize.hOffset);
             if (this.ent.facingLeft)
-                this.ent.playAnimState(ENTITIES.Entity.attackL, 10, false, false, true);
+                this.ent.playAnimState(ENTITIES.Entity.attackL, 15, false, false, true);
             else
-                this.ent.playAnimState(ENTITIES.Entity.attackR, 10, false, false, true);
+                this.ent.playAnimState(ENTITIES.Entity.attackR, 15, false, false, true);
             this.ent.animations.currentAnim.onComplete.add(function () {
-                _this.ent.playAnimState(_this.ent.facingLeft ? ENTITIES.Entity.idleL : ENTITIES.Entity.idleR, 1, true, true, true);
-            }, this);
+                this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
+                this.playAnimState(this.facingLeft ? ENTITIES.Entity.idleL : ENTITIES.Entity.idleR, 1, true, true, true);
+            }, this.ent);
             return true;
         };
         return OgreAbilities;

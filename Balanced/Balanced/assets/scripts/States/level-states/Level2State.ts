@@ -352,7 +352,7 @@
 
         public end(): boolean {
             this.gsm.game.camera.reset();
-            this.player.destroy();
+            this.player.destroy(true);
             this.enemies.destroy(true);
             this.map.destroy();
             this.floorlayer.destroy();

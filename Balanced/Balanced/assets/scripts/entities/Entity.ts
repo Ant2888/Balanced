@@ -42,6 +42,9 @@
         protected onDamageCallback: any[];
         protected onHealCallback: any[];
 
+        public attackSize: COMBAT.HitBox;
+        public hitSize: COMBAT.HitBox;
+
         public curTween: Phaser.Tween;
         public stunned: boolean;
         public stunTimer: Phaser.Timer;
@@ -78,6 +81,9 @@
             this.flicker = this.gsm.game.time.create(false);
             this.gsm.game.add.existing(this);
 
+            this.attackSize = { width: this.width, height: this.height, wOffset: 0, hOffset: 0 };
+            this.hitSize = { width: this.width, height: this.height, wOffset: 0, hOffset: 0 };
+
             this.createAnimations();
             this.anchor.setTo(0.5, 0.5);
             this.gsm.game.physics.arcade.enable(this);
@@ -85,8 +91,12 @@
             this.body.collideWorldBounds = true;
         }
 
+        public abstract dealWithOverlap(first: Phaser.Sprite, second: Phaser.Sprite | Phaser.Group);
+
         public abstract loadEntitySounds(box: UTIL.JukeBox): void;
 
+        protected abstract createAnimations(): void;
+        
         public makeHealthBar(): void {
             // This the red background of the healthbar
             var bmd = this.gsm.game.add.bitmapData(this.width, 5);
@@ -533,9 +543,5 @@
             var randomNumber = Math.floor(Math.random() * effectArray.length) + 1;
             return effectArray[randomNumber];
         }
-
-        public abstract dealWithOverlap(first: Phaser.Sprite, second: Phaser.Sprite | Phaser.Group);
-
-        protected abstract createAnimations(): void;
     }
 }

@@ -7,6 +7,8 @@ var FSM;
             this.gsm = gsm;
         }
         StateSystem.prototype.updateSystem = function () {
+            if (this.isDumb)
+                return;
             this.curState.checkCondition();
             this.curState.doLogic();
         };

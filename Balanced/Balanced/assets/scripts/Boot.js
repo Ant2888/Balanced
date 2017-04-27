@@ -322,7 +322,7 @@ var BalancedGame = (function () {
             text.setText("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles);
         }, this);
         this.game.load.onLoadComplete.add(function () {
-            var DEBUGGING = false;
+            var DEBUGGING = true;
             text.setText("Load Complete");
             this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
             var phaserLogo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'phaser_logo');
@@ -369,6 +369,8 @@ var BalancedGame = (function () {
     };
     BalancedGame.prototype.render = function () {
         this.game.debug.text(this.game.time.fps + '', 1258, 14, "#00ff00");
+        if (this.gsm)
+            this.gsm.render();
     };
     return BalancedGame;
 }());

@@ -55,5 +55,12 @@ module States {
          * bind a context to.
          */
         public abstract getType(): any;
+
+        /**
+         * You can choose to include this in your state or not
+         */
+        public render(): void {
+
+        }
     }
 }

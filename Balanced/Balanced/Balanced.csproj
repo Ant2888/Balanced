@@ -124,6 +124,7 @@
     <TypeScriptCompile Include="assets\scripts\combat\EnergyManager.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\OgreAbilities.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\PlayerAbilities.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\HitBox.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\KnockBack.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Baddie.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\Entity.ts" />

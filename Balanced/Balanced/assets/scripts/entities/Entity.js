@@ -41,6 +41,8 @@ var ENTITIES;
             _this.stunTimer = _this.gsm.game.time.create(false);
             _this.flicker = _this.gsm.game.time.create(false);
             _this.gsm.game.add.existing(_this);
+            _this.attackSize = { width: _this.width, height: _this.height, wOffset: 0, hOffset: 0 };
+            _this.hitSize = { width: _this.width, height: _this.height, wOffset: 0, hOffset: 0 };
             _this.createAnimations();
             _this.anchor.setTo(0.5, 0.5);
             _this.gsm.game.physics.arcade.enable(_this);

@@ -34,6 +34,9 @@ var ENTITIES;
             _this.energyWave.bulletGravity.y = -_this.gsm.game.physics.arcade.gravity.y;
             _this.energyWave.fireRate = 250;
             _this.energyWave.trackSprite(_this, 0, 0, true);
+            _this.hitSize = { width: 64 - 26, height: 64 - 16, wOffset: 13, hOffset: 16 };
+            _this.attackSize = { width: 64 + 10, height: 64, wOffset: -5, hOffset: 0 };
+            _this.body.setSize(_this.hitSize.width, _this.hitSize.height, _this.hitSize.wOffset, _this.hitSize.hOffset);
             _this.recalcModifiers();
             _this.addOnDeathCallBack(function () {
                 this.gsm.musicBox.playByID('PlayerDeath', undefined, undefined, UTIL.SFX, false, false);

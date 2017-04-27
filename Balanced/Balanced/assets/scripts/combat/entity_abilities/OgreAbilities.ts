@@ -25,15 +25,21 @@
             var ogre = <ENTITIES.Ogre>this.ent;
             this.ent.facingLeft = ogre.player.x < ogre.x;
 
-            if (this.ent.facingLeft)
-                this.ent.playAnimState(ENTITIES.Entity.attackL, 10, false, false, true);
-            else
-                this.ent.playAnimState(ENTITIES.Entity.attackR, 10, false, false, true);
+            ogre.body.setSize(ogre.attackSize.width, ogre.attackSize.height,
+                ogre.attackSize.wOffset, ogre.attackSize.hOffset);
 
-            this.ent.animations.currentAnim.onComplete.add(() => {
-                this.ent.playAnimState(this.ent.facingLeft ? ENTITIES.Entity.idleL : ENTITIES.Entity.idleR,
+            if (this.ent.facingLeft)
+                this.ent.playAnimState(ENTITIES.Entity.attackL, 15, false, false, true);
+            else
+                this.ent.playAnimState(ENTITIES.Entity.attackR, 15, false, false, true);
+
+            this.ent.animations.currentAnim.onComplete.add(function () {
+                this.body.setSize(this.hitSize.width, this.hitSize.height,
+                    this.hitSize.wOffset, this.hitSize.hOffset);
+
+                this.playAnimState(this.facingLeft ? ENTITIES.Entity.idleL : ENTITIES.Entity.idleR,
                     1, true, true, true);
-            }, this);
+            }, <ENTITIES.Ogre>this.ent);
 
             return true;
         }

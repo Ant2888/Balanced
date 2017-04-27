@@ -2,7 +2,7 @@
 
     export class AttackPlayerState extends FiniteState {
 
-        public EPSILON = 5;
+        public EPSILON = 10;
         public gcd_up: boolean
         
         constructor(sys: OgreStateSystem, gsm: States.GameStateManager) {

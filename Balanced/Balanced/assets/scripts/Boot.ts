@@ -352,7 +352,7 @@ class BalancedGame {
 
         this.game.load.onLoadComplete.add(function () {
 
-            var DEBUGGING = false;
+            var DEBUGGING = true;
 
             text.setText("Load Complete");
 
@@ -415,6 +415,8 @@ class BalancedGame {
 
     render() {        
         this.game.debug.text(this.game.time.fps + '', 1258, 14, "#00ff00");
+        if (this.gsm)
+            this.gsm.render();
     }
     
 }

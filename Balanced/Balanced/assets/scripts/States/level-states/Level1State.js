@@ -87,6 +87,14 @@ var States;
             this.gsm.game.physics.arcade.gravity.y = 1200;
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
         };
+        Level1State.prototype.render = function () {
+            var _this = this;
+            if (Level1State.DEBUG) {
+                this.gsm.game.debug.body(this.player);
+                this.gsm.game.debug.bodyInfo(this.player, 100, 110);
+                this.enemies.forEachAlive(function (e) { _this.gsm.game.debug.body(e); }, this);
+            }
+        };
         Level1State.prototype.startup = function () {
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
             // setup the tilemap
@@ -269,7 +277,7 @@ var States;
         Level1State.prototype.end = function () {
             this.gsm.musicBox.stopByID('final_hour');
             this.gsm.game.camera.reset();
-            this.player.destroy();
+            this.player.destroy(true);
             this.enemies.destroy(true);
             this.map.destroy();
             this.floorlayer.destroy();
@@ -283,6 +291,7 @@ var States;
         };
         return Level1State;
     }(States.State));
+    Level1State.DEBUG = true;
     States.Level1State = Level1State;
 })(States || (States = {}));
 //# sourceMappingURL=Level1State.js.map

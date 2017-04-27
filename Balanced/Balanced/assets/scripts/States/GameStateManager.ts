@@ -113,6 +113,10 @@ module States {
         }
 
 
+        public render(): void {
+            this.state.render();
+        }
+
 
         /**
          * Getter for GUIM

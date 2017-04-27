@@ -23,12 +23,15 @@ var ENTITIES;
             _this.VISION_X = 64 * 3;
             _this.VISION_Y = 64 * 3;
             _this.WALK_INTERVAL = [1000, 4000];
-            _this.WALK_SPEED = 150;
-            _this.ATTACK_DISTANCE = 95;
+            _this.WALK_SPEED = 125;
+            _this.ATTACK_DISTANCE = 60;
             _this.GCD = 1200;
             _this.player = player;
             _this.startPosition = new Phaser.Point(x, y);
             _this.abm = new COMBAT.OgreAbilities(_this, gsm);
+            _this.attackSize = { width: 96 - 4, height: 96 - 26, wOffset: 2, hOffset: 26 };
+            _this.hitSize = { width: 96 - 16, height: 96 - 30, wOffset: 8, hOffset: 30 };
+            _this.body.setSize(_this.hitSize.width, _this.hitSize.height, _this.hitSize.wOffset, _this.hitSize.hOffset);
             _this.addOnDeathCallBack(function () {
                 var _this = this;
                 var val = this.randomValWithRandomness(2, 1);

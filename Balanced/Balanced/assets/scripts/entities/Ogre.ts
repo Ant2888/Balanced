@@ -13,8 +13,8 @@
         public VISION_X = 64 * 3;
         public VISION_Y = 64 * 3;
         public WALK_INTERVAL = [1000, 4000];
-        public WALK_SPEED = 150;
-        public ATTACK_DISTANCE = 95;
+        public WALK_SPEED = 125;
+        public ATTACK_DISTANCE = 60;
         public GCD = 1200;
         //END AI
 
@@ -30,6 +30,12 @@
             this.player = player;
             this.startPosition = new Phaser.Point(x, y);
             this.abm = new COMBAT.OgreAbilities(this, gsm);
+
+            this.attackSize = { width: 96 - 4, height: 96 - 26, wOffset: 2, hOffset: 26 };
+            this.hitSize = { width: 96 - 16, height: 96 - 30, wOffset: 8, hOffset: 30  };
+
+            this.body.setSize(this.hitSize.width, this.hitSize.height,
+                this.hitSize.wOffset, this.hitSize.hOffset);
 
             this.addOnDeathCallBack(function () {
                 var val = this.randomValWithRandomness(2, 1);

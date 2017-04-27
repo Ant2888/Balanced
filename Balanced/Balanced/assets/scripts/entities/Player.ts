@@ -54,6 +54,12 @@
             this.energyWave.fireRate = 250;
             this.energyWave.trackSprite(this, 0, 0, true);
 
+            this.hitSize = { width: 64 - 26, height: 64 - 16, wOffset: 13, hOffset: 16 };
+            this.attackSize = { width: 64 + 10, height: 64, wOffset: -5, hOffset: 0 };
+
+            this.body.setSize(this.hitSize.width, this.hitSize.height,
+                this.hitSize.wOffset, this.hitSize.hOffset);
+
             this.recalcModifiers();
             this.addOnDeathCallBack(function () {
                 this.gsm.musicBox.playByID('PlayerDeath', undefined, undefined, UTIL.SFX, false, false);
@@ -124,7 +130,7 @@
             if (me instanceof Phaser.Bullet) {
                 this.bulletLogic(me, <Entity>other);
             }
-
+            
             if (other instanceof Phaser.Group) {
                 (<Phaser.Group>other).forEach(function (e) { this.doAttackLogic(<Entity>e) }, this);
             } else {

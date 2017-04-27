@@ -63,10 +63,14 @@ var COMBAT;
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
+            this.getPlayer().body.setSize(this.getPlayer().attackSize.width, this.getPlayer().attackSize.height, this.getPlayer().attackSize.wOffset, this.getPlayer().attackSize.hOffset);
             if (this.ent.facingLeft)
                 this.ent.playAnimState(ENTITIES.Entity.attackL, this.getAttackSpeed(), false, false, true);
             else
                 this.ent.playAnimState(ENTITIES.Entity.attackR, this.getAttackSpeed(), false, false, true);
+            this.ent.animations.currentAnim.onComplete.add(function () {
+                this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
+            }, this.getPlayer());
             this.gsm.musicBox.playByID('Regular_Hit', undefined, undefined, UTIL.SFX, false, false);
             return true;
         };
@@ -75,6 +79,7 @@ var COMBAT;
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
+            this.getPlayer().body.setSize(this.getPlayer().attackSize.width, this.getPlayer().attackSize.height, this.getPlayer().attackSize.wOffset, this.getPlayer().attackSize.hOffset);
             if (this.ent.facingLeft)
                 this.ent.playAnimState(ENTITIES.Player.ability2L, this.getAttackSpeed(), false, false, true);
             else
@@ -91,6 +96,9 @@ var COMBAT;
                 this.getPlayer().energyWave.bulletSpeed = 800;
             }
             this.getPlayer().energyWave.fire();
+            this.ent.animations.currentAnim.onComplete.add(function () {
+                this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
+            }, this.getPlayer());
             this.gsm.musicBox.playByID('Regular_Hit', undefined, undefined, UTIL.SFX, false);
             return true;
         };
@@ -99,10 +107,14 @@ var COMBAT;
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
+            this.getPlayer().body.setSize(this.getPlayer().attackSize.width, this.getPlayer().attackSize.height, this.getPlayer().attackSize.wOffset, this.getPlayer().attackSize.hOffset);
             if (this.ent.facingLeft)
                 this.ent.playAnimState(ENTITIES.Player.ability3L, this.getAttackSpeed(), false, false, true);
             else
                 this.ent.playAnimState(ENTITIES.Player.ability3R, this.getAttackSpeed(), false, false, true);
+            this.ent.animations.currentAnim.onComplete.add(function () {
+                this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
+            }, this.getPlayer());
             this.gsm.musicBox.playByID('Three_Attack', undefined, undefined, UTIL.SFX, false);
             return true;
         };
@@ -111,10 +123,14 @@ var COMBAT;
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
             }
+            this.getPlayer().body.setSize(this.getPlayer().attackSize.width, this.getPlayer().attackSize.height, this.getPlayer().attackSize.wOffset, this.getPlayer().attackSize.hOffset);
             if (this.ent.facingLeft)
                 this.ent.playAnimState(ENTITIES.Player.ability4L, this.getAttackSpeed(), false, false, true);
             else
                 this.ent.playAnimState(ENTITIES.Player.ability4R, this.getAttackSpeed(), false, false, true);
+            this.ent.animations.currentAnim.onComplete.add(function () {
+                this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
+            }, this.getPlayer());
             this.gsm.musicBox.playByID('Whirlwind', undefined, undefined, UTIL.SFX, false);
             return true;
         };

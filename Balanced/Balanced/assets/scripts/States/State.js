@@ -13,6 +13,11 @@ var States;
         function State(gsm) {
             this.gsm = gsm;
         }
+        /**
+         * You can choose to include this in your state or not
+         */
+        State.prototype.render = function () {
+        };
         return State;
     }());
     States.State = State;

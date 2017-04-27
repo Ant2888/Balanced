@@ -5,6 +5,7 @@
         public ai: ENTITIES.Entity;
         public player: ENTITIES.Entity;
         public gsm: States.GameStateManager;
+        public isDumb: boolean;
 
         constructor(gsm: States.GameStateManager, ai: ENTITIES.Entity,
             player: ENTITIES.Player) {
@@ -14,6 +15,9 @@
         }
 
         public updateSystem(): void {
+            if (this.isDumb)
+                return;
+
             this.curState.checkCondition();
             this.curState.doLogic();
         }

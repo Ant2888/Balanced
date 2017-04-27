@@ -14,7 +14,7 @@ var FSM;
         __extends(AttackPlayerState, _super);
         function AttackPlayerState(sys, gsm) {
             var _this = _super.call(this, sys, gsm) || this;
-            _this.EPSILON = 5;
+            _this.EPSILON = 10;
             _this.gcd_up = true;
             return _this;
         }

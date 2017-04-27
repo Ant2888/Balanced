@@ -155,6 +155,7 @@
             this.getAbilityManager().getEnergyManager().addOnEnergyGainCallback(this.updateEnergyBar, this);
             this.getAbilityManager().getEnergyManager().addOnEnergyLossCallback(this.updateEnergyBar, this);            
         }
+
         public updateEnergyBar(): void {
             if (this.getAbilityManager().getEnergyManager().energy >= 0 && this.getAbilityManager().getEnergyManager().energy <= 100) {
                 this.energyBar.width = ((this.width / 100) * this.getAbilityManager().getEnergyManager().energy);   

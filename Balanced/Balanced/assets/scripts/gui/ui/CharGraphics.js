@@ -41,6 +41,8 @@ var GUI;
             this.closeMenu();
         };
         CharGraphics.prototype.openMenu = function () {
+            if (this.gsm.game.paused)
+                return;
             this.char_menu.exists = true;
             this.closeBtn.exists = true;
             this.player_atk.exists = true;
@@ -49,6 +51,8 @@ var GUI;
             this.player_energy.exists = true;
         };
         CharGraphics.prototype.closeMenu = function () {
+            if (this.gsm.game.paused)
+                return;
             if (this.char_menu.exists)
                 this.char_menu.exists = false;
             if (this.closeBtn.exists)

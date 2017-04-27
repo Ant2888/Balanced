@@ -453,6 +453,7 @@
         public placeEnemies(element, group): void {
             var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
             baddie.makeHealthBar();
+            baddie.makeEnergyBar();
 
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;

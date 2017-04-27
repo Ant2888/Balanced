@@ -149,11 +149,10 @@
         private doExitLogic(door: any) {
             this.player.overHeadText.clearColors();
 
-            door.lastOverlapped = this.gsm.game.time.now + 2000;
-
             var alive = 0;
             this.enemies.forEachAlive(e => { alive++ }, this);
             if (alive > 0) {
+                door.lastOverlapped = this.gsm.game.time.now + 2000;
                 this.player.overHeadText.text = ENTITIES.Player.EXIT_DOOR_NF + ' Remaining: ' + alive;
                 this.player.overHeadText.addColor('red', ENTITIES.Player.EXIT_NF_COLOR_IND[0]);
                 this.player.overHeadText.addColor('red', ENTITIES.Player.EXIT_NF_COLOR_IND[1]);
@@ -161,6 +160,7 @@
                 this.player.overHeadText.addColor('white', ENTITIES.Player.EXIT_NF_COLOR_IND[2] + 1);
                 this.player.overHeadText.addColor('red', ENTITIES.Player.EXIT_NF_COLOR_IND2);
             } else {
+                door.lastOverlapped = this.gsm.game.time.now + 200;
                 this.player.overHeadText.text = ENTITIES.Player.ENTER_DOOR;
                 this.player.overHeadText.addColor('yellow', ENTITIES.Player.ENTER_COLOR_IND);
                 this.player.overHeadText.addColor('white', ENTITIES.Player.ENTER_COLOR_IND + 1);
@@ -429,6 +429,7 @@
         public placeEnemies(element, group): void {
             var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
             baddie.makeHealthBar();
+            baddie.makeEnergyBar();
 
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;

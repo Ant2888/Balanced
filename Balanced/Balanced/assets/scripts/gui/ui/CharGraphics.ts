@@ -45,6 +45,9 @@
         }
 
         public openMenu(): void {
+            if (this.gsm.game.paused)
+                return;
+
             this.char_menu.exists = true;
             this.closeBtn.exists = true;
 
@@ -56,6 +59,9 @@
         }
 
         public closeMenu(): void {
+            if (this.gsm.game.paused)
+                return;
+
             if (this.char_menu.exists)
                 this.char_menu.exists = false;
 

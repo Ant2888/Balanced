@@ -26,7 +26,7 @@
             this.closeBtn.fixedToCamera = true;
             this.group.add(this.closeBtn);   
 
-            this.dropBtn = this.gsm.game.add.button(gsm.game.width - 63, 108, 'drop_btn_ss', null, this, 1,0,2);
+            this.dropBtn = this.gsm.game.add.button(gsm.game.width - 200, 430, 'drop_btn_ss', null, this, 1,0,2);
             this.dropBtn.anchor.setTo(.5, .5);
             this.dropBtn.fixedToCamera = true;
             this.group.add(this.dropBtn);   
@@ -35,12 +35,18 @@
         }
 
         public openMenu(): void {
+            if (this.gsm.game.paused)
+                return;
+
             this.inv_menu.exists = true;
             this.closeBtn.exists = true;
             this.dropBtn.exists = true;
         }
 
         public closeMenu(): void {
+            if (this.gsm.game.paused)
+                return;
+
             if (this.inv_menu.exists)
                 this.inv_menu.exists = false;
             if (this.closeBtn.exists)
@@ -50,8 +56,12 @@
         }
 
         public flipMenu(): void {
-            this.inv_menu.exists = !this.inv_menu.exists;
-            this.closeBtn.exists = !this.closeBtn.exists;
+            if (this.inv_menu.exists) {
+                this.closeMenu();
+            }
+            else {
+                this.openMenu();
+            }
         }
 
     }

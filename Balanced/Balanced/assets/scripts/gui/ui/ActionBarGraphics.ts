@@ -18,8 +18,8 @@
         private ab_p2_ss: Phaser.Button;
         private ab_stats_ss: Phaser.Button;       
         private ab_town_ss: Phaser.Button;
-        private ab_bag_ss: Phaser.Button; 
-        private ab_options_ss: Phaser.Button;   
+        private ab_bag_ss: Phaser.Button;
+        private ab_options_ss: Phaser.Button;
 
         private dd_background: Phaser.Sprite;
         private dd_menu_btn: Phaser.Button;
@@ -220,24 +220,38 @@
         }
 
         public statsPressed(): any {
+            if (this.gsm.game.paused)
+                return false;
+
             console.log('stats button was pressed');
         }
 
         public bagPressed(): any {
+            if (this.gsm.game.paused)
+                return false;
+
             console.log('bag button was pressed');
         }
 
         public townPressed(): any {
+            if (this.gsm.game.paused)
+                return false;
+
             console.log('town button was pressed');
             this.gsm.setState(States.TOWN_STATE);
         }
 
         public optionsPressed(): any {
+            if (this.gsm.game.paused)
+                return false;
+
             console.log('pause menu button was pressed');
-            
         }
 
         public potion1Pressed(): boolean {
+            if (this.gsm.game.paused)
+                return false;
+
             if (!this.player.alive)
                 return false;
 
@@ -272,7 +286,10 @@
             return true;
         }
 
-        public potion2Pressed(): boolean {            
+        public potion2Pressed(): boolean {
+            if (this.gsm.game.paused)
+                return false;         
+
             if (!this.player.alive)
                 return false;
 
@@ -308,21 +325,33 @@
         }
 
         public ability1Pressed(): boolean {
+            if (this.gsm.game.paused)
+                return false;
+
             this.getAbility1().frame = 1;
             return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_ONE);
         }
 
         public ability2Pressed(): boolean {
+            if (this.gsm.game.paused)
+                return false;
+
             this.getAbility2().frame = 1;
             return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_TWO);
         }
 
         public ability3Pressed(): boolean {
+            if (this.gsm.game.paused)
+                return false;
+
             this.getAbility3().frame = 1;
             return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_THREE);
         }
 
         public ability4Pressed(): boolean {
+            if (this.gsm.game.paused)
+                return false;
+
             this.getAbility4().frame = 1;
             return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_FOUR)
         }                              

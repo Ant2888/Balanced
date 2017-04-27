@@ -165,19 +165,29 @@ var GUI;
             return this.ab_ab4_ss;
         };
         ActionBarGraphics.prototype.statsPressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             console.log('stats button was pressed');
         };
         ActionBarGraphics.prototype.bagPressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             console.log('bag button was pressed');
         };
         ActionBarGraphics.prototype.townPressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             console.log('town button was pressed');
             this.gsm.setState(States.TOWN_STATE);
         };
         ActionBarGraphics.prototype.optionsPressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             console.log('pause menu button was pressed');
         };
         ActionBarGraphics.prototype.potion1Pressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             if (!this.player.alive)
                 return false;
             if (this.remTimer != 0)
@@ -206,6 +216,8 @@ var GUI;
             return true;
         };
         ActionBarGraphics.prototype.potion2Pressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             if (!this.player.alive)
                 return false;
             if (this.remTimer2 != 0)
@@ -234,18 +246,26 @@ var GUI;
             return true;
         };
         ActionBarGraphics.prototype.ability1Pressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             this.getAbility1().frame = 1;
             return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_ONE);
         };
         ActionBarGraphics.prototype.ability2Pressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             this.getAbility2().frame = 1;
             return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_TWO);
         };
         ActionBarGraphics.prototype.ability3Pressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             this.getAbility3().frame = 1;
             return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_THREE);
         };
         ActionBarGraphics.prototype.ability4Pressed = function () {
+            if (this.gsm.game.paused)
+                return false;
             this.getAbility4().frame = 1;
             return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_FOUR);
         };

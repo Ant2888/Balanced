@@ -134,6 +134,7 @@ var States;
             this.gsm.getGUIM().addGroup(this.unitframe);
             this.gsm.getGUIM().addGroup(this.bag);
             this.gsm.getGUIM().addGroup(this.charMenu);
+            this.gsm.getGUIM().addGroup(this.pauseMenu);
             this.actionbar.getBag().onInputDown.add(function (e) {
                 this.charMenu.closeMenu();
                 this.bag.flipMenu();
@@ -207,7 +208,7 @@ var States;
             };
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.ESC) {
-                    //data.pauseMenu.displayPauseMenuDialog();
+                    data.pauseMenu.togglePauseMenuDialog();
                 }
                 if (e.keyCode == Phaser.Keyboard.O) {
                     data.player.invincible = data.player.invincible ? false : true;

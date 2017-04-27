@@ -33,6 +33,7 @@
         public ABILITY_THREE_COST = 45;
         public ABILITY_FOUR_COST = 80;
 
+        protected overHeadText: Phaser.Text;
         protected WAVE_ATK = 'wave_attk';
         public energyWave: Phaser.Weapon;
 
@@ -71,6 +72,14 @@
                     (val == 2 ? 'PlayerHurt2' : 'PlayerHurt1'), 70,
                     undefined, undefined, UTIL.SFX, false, false);
             }, this);
+        }
+
+        public genOverHeadText(text: string): void {
+            
+        }
+
+        public doDoorLogic(): void {
+
         }
 
         public recalcModifiers(): void {

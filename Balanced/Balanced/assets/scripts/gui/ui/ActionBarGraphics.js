@@ -167,13 +167,13 @@ var GUI;
             console.log('town button was pressed');
             this.gsm.setState(States.TOWN_STATE);
         };
-        ActionBarGraphics.prototype.potion1Pressed = function (ply) {
-            if (!ply.alive)
+        ActionBarGraphics.prototype.potion1Pressed = function () {
+            if (!this.player.alive)
                 return false;
             if (this.remTimer != 0)
                 return false;
             this.getPotion1().frame = 1;
-            ply.getAbilityManager().attemptCast(ENTITIES.Player.POTION_ONE);
+            this.player.getAbilityManager().attemptCast(ENTITIES.Player.POTION_ONE);
             this.remTimer = 10000;
             this.textHolder = this.gsm.game.add.text(362, 600, '10.0', { fill: 'white', font: 'papyrus', fontSize: '16px', fontStyle: 'bold' });
             this.textHolder.fixedToCamera = true;
@@ -195,13 +195,13 @@ var GUI;
             this.pot1Timer.start();
             return true;
         };
-        ActionBarGraphics.prototype.potion2Pressed = function (ply) {
-            if (!ply.alive)
+        ActionBarGraphics.prototype.potion2Pressed = function () {
+            if (!this.player.alive)
                 return false;
             if (this.remTimer2 != 0)
                 return false;
             this.getPotion2().frame = 1;
-            ply.getAbilityManager().attemptCast(ENTITIES.Player.POTION_TWO);
+            this.player.getAbilityManager().attemptCast(ENTITIES.Player.POTION_TWO);
             this.remTimer2 = 10000;
             this.textHolder2 = this.gsm.game.add.text(402, 635, '10.0', { fill: 'white', font: 'papyrus', fontSize: '16px', fontStyle: 'bold' });
             this.textHolder2.fixedToCamera = true;
@@ -223,21 +223,21 @@ var GUI;
             this.pot2Timer.start();
             return true;
         };
-        ActionBarGraphics.prototype.ability1Pressed = function (ply) {
+        ActionBarGraphics.prototype.ability1Pressed = function () {
             this.getAbility1().frame = 1;
-            return ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_ONE);
+            return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_ONE);
         };
-        ActionBarGraphics.prototype.ability2Pressed = function (ply) {
+        ActionBarGraphics.prototype.ability2Pressed = function () {
             this.getAbility2().frame = 1;
-            return ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_TWO);
+            return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_TWO);
         };
-        ActionBarGraphics.prototype.ability3Pressed = function (ply) {
+        ActionBarGraphics.prototype.ability3Pressed = function () {
             this.getAbility3().frame = 1;
-            return ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_THREE);
+            return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_THREE);
         };
-        ActionBarGraphics.prototype.ability4Pressed = function (ply) {
+        ActionBarGraphics.prototype.ability4Pressed = function () {
             this.getAbility4().frame = 1;
-            return ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_FOUR);
+            return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_FOUR);
         };
         return ActionBarGraphics;
     }(GUI.GameObject));

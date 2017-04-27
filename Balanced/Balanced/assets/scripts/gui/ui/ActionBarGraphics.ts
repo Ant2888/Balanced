@@ -221,15 +221,15 @@
             this.gsm.setState(States.TOWN_STATE);
         }
 
-        public potion1Pressed(ply: ENTITIES.Player): boolean {
-            if (!ply.alive)
+        public potion1Pressed(): boolean {
+            if (!this.player.alive)
                 return false;
 
             if (this.remTimer != 0)
                 return false;
 
             this.getPotion1().frame = 1;
-            ply.getAbilityManager().attemptCast(ENTITIES.Player.POTION_ONE);
+            this.player.getAbilityManager().attemptCast(ENTITIES.Player.POTION_ONE);
 
             this.remTimer = 10000;
 
@@ -256,15 +256,15 @@
             return true;
         }
 
-        public potion2Pressed(ply: ENTITIES.Player): boolean {            
-            if (!ply.alive)
+        public potion2Pressed(): boolean {            
+            if (!this.player.alive)
                 return false;
 
             if (this.remTimer2 != 0)
                 return false;
 
             this.getPotion2().frame = 1;
-            ply.getAbilityManager().attemptCast(ENTITIES.Player.POTION_TWO);
+            this.player.getAbilityManager().attemptCast(ENTITIES.Player.POTION_TWO);
 
             this.remTimer2 = 10000;
 
@@ -291,24 +291,24 @@
             return true;
         }
 
-        public ability1Pressed(ply: ENTITIES.Player): boolean {
+        public ability1Pressed(): boolean {
             this.getAbility1().frame = 1;
-            return ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_ONE);
+            return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_ONE);
         }
 
-        public ability2Pressed(ply: ENTITIES.Player): boolean {
+        public ability2Pressed(): boolean {
             this.getAbility2().frame = 1;
-            return ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_TWO);
+            return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_TWO);
         }
 
-        public ability3Pressed(ply: ENTITIES.Player): boolean {
+        public ability3Pressed(): boolean {
             this.getAbility3().frame = 1;
-            return ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_THREE);
+            return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_THREE);
         }
 
-        public ability4Pressed(ply: ENTITIES.Player): boolean {
+        public ability4Pressed(): boolean {
             this.getAbility4().frame = 1;
-            return ply.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_FOUR)
+            return this.player.getAbilityManager().attemptCast(ENTITIES.Player.ABILITY_FOUR)
         }                              
 
     }

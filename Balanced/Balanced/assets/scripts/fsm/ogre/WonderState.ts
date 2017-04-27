@@ -72,7 +72,7 @@
         }
 
         public checkCondition(): void {
-            if (this.shouldSee()) {
+            if (this.shouldSee() || (this.system.ai.health < this.system.ai.maxHealth)) {
                 this.elevate();
             }
         }

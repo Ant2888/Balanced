@@ -48,6 +48,10 @@ var ENTITIES;
             }, _this);
             return _this;
         }
+        Player.prototype.genOverHeadText = function (text) {
+        };
+        Player.prototype.doDoorLogic = function () {
+        };
         Player.prototype.recalcModifiers = function () {
             this.ab1_mod = {
                 dmg: this.ATTACK * 1.0, flinchTime: ENTITIES.Entity.FLINCH_TIME, stunTime: 0,

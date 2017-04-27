@@ -30,7 +30,7 @@ var ENTITIES;
             _this.startPosition = new Phaser.Point(x, y);
             _this.abm = new COMBAT.OgreAbilities(_this, gsm);
             _this.attackSize = { width: 96 - 4, height: 96 - 26, wOffset: 2, hOffset: 26 };
-            _this.hitSize = { width: 96 - 16, height: 96 - 30, wOffset: 8, hOffset: 30 };
+            _this.hitSize = { width: 96 - 16, height: 96 - 32, wOffset: 8, hOffset: 32 };
             _this.body.setSize(_this.hitSize.width, _this.hitSize.height, _this.hitSize.wOffset, _this.hitSize.hOffset);
             _this.addOnDeathCallBack(function () {
                 var _this = this;

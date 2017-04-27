@@ -67,7 +67,7 @@ var FSM;
             temp.start();
         };
         WonderState.prototype.checkCondition = function () {
-            if (this.shouldSee()) {
+            if (this.shouldSee() || (this.system.ai.health < this.system.ai.maxHealth)) {
                 this.elevate();
             }
         };

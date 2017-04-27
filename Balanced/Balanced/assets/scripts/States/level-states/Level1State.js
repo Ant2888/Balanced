@@ -161,22 +161,22 @@ var States;
         Level1State.prototype.setupKeybinds = function (data) {
             this.gsm.game.input.keyboard.onDownCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.Q) {
-                    data.actionbar.ability1Pressed(data.player);
+                    data.actionbar.ability1Pressed();
                 }
                 if (e.keyCode == Phaser.Keyboard.W) {
-                    data.actionbar.ability2Pressed(data.player);
+                    data.actionbar.ability2Pressed();
                 }
                 if (e.keyCode == Phaser.Keyboard.E) {
-                    data.actionbar.ability3Pressed(data.player);
+                    data.actionbar.ability3Pressed();
                 }
                 if (e.keyCode == Phaser.Keyboard.R) {
-                    data.actionbar.ability4Pressed(data.player);
+                    data.actionbar.ability4Pressed();
                 }
                 if (e.keyCode == Phaser.Keyboard.Z) {
-                    data.actionbar.potion1Pressed(data.player);
+                    data.actionbar.potion1Pressed();
                 }
                 if (e.keyCode == Phaser.Keyboard.X) {
-                    data.actionbar.potion2Pressed(data.player);
+                    data.actionbar.potion2Pressed();
                 }
                 if (e.keyCode == Phaser.Keyboard.I) {
                     data.actionbar.getBag().frame = 1;

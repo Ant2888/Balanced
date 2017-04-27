@@ -36,6 +36,9 @@ declare class States {
 
     static TOWN_STATE: States.State;
     static TOWN_STATE_ID: number;
+
+    static TOWN_TUTORIAL_STATE: States.State;
+    static TOWN_TUTORIAL_STATE_ID: number;
     
 }
 
@@ -59,3 +62,5 @@ States.LEVEL_SELECT_STATE_ID = 205;
 States.LEVEL1_STATE_ID = 206;
 States.LEVEL2_STATE_ID = 207;
 States.LEVEL3_STATE_ID = 208;
+
+States.TOWN_TUTORIAL_STATE_ID = 209;

@@ -338,6 +338,18 @@ var BalancedGame = (function () {
         rem.addResource(new UTIL.Resource('tut_yes_btn', 'assets/res/tutorial/tut_yes_btn.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
         }, this);
+        rem.addResource(new UTIL.Resource('tut_background', 'assets/res/tutorial/tut_background.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 350, 200);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_screen1', 'assets/res/tutorial/tut_screen1.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1280, 720);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_screen2', 'assets/res/tutorial/tut_screen2.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1280, 720);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_next_btn', 'assets/res/tutorial/tut_next_btns.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
+        }, this);
         // -------------------------------------------END TUTORIAL SCREEN
     };
     BalancedGame.prototype.create = function () {
@@ -351,7 +363,7 @@ var BalancedGame = (function () {
             text.setText("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles);
         }, this);
         this.game.load.onLoadComplete.add(function () {
-            var DEBUGGING = true;
+            var DEBUGGING = false;
             text.setText("Load Complete");
             this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
             var phaserLogo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'phaser_logo');
@@ -392,6 +404,7 @@ var BalancedGame = (function () {
             States.LEVEL2_STATE = new States.Level2State(this.gsm);
             States.LEVEL3_STATE = new States.Level3State(this.gsm);
             States.TOWN_STATE = new States.TownState(this.gsm);
+            States.TOWN_TUTORIAL_STATE = new States.TownTutorialState(this.gsm);
             // END STATES
             this.gsm.initState();
         }

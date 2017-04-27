@@ -114,17 +114,21 @@
     <Content Include="assets\res\tutorial\pm_mainmenu_btn.png" />
     <Content Include="assets\res\tutorial\pm_options_btn.png" />
     <Content Include="assets\res\tutorial\pm_resume_btn.png" />
+    <Content Include="assets\res\tutorial\tut_background.png" />
+    <Content Include="assets\res\tutorial\tut_next_btns.png" />
     <Content Include="assets\res\tutorial\tut_no_btn.png" />
+    <Content Include="assets\res\tutorial\tut_screen1.png" />
+    <Content Include="assets\res\tutorial\tut_screen2.png" />
     <Content Include="assets\res\tutorial\tut_yes_btn.png" />
     <Content Include="assets\scripts\floatingText.js" />
-    <TypeScriptCompile Include="assets\scripts\balance\buffs\EventMatrix.ts" />
-    <TypeScriptCompile Include="assets\scripts\gui\ui\PauseMenuGraphics.ts" />
     <Content Include="index.html" />
     <Content Include="assets\scripts\phaser.js" />
     <Content Include="assets\res\phaser2.jpg" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="assets\scripts\balance\buffs\EventMatrix.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\DialogGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\BalanceEvent.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\BalanceManager.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\buffs\TestEvent.ts" />
@@ -158,6 +162,7 @@
     <TypeScriptCompile Include="assets\scripts\gui\ui\BagGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\HealthAndEnergyGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\TownGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\TownTutorialGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level3State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level2State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level1State.ts" />
@@ -169,6 +174,8 @@
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
     <TypeScriptCompile Include="assets\scripts\States\test-states\TestState2.ts" />
     <TypeScriptCompile Include="assets\scripts\States\TownState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\tutorial\DungeonTutorialState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\tutorial\TownTutorialState.ts" />
     <TypeScriptCompile Include="assets\scripts\util\JukeBox.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />
     <TypeScriptCompile Include="assets\scripts\util\ResourceList.ts" />

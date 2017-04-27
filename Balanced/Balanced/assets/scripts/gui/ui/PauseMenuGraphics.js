@@ -15,14 +15,14 @@ var GUI;
     *
     * @author Emerson
     */
-    var PauseMenuGraphics = (function (_super) {
-        __extends(PauseMenuGraphics, _super);
-        function PauseMenuGraphics(group, player) {
+    var DialogGraphics = (function (_super) {
+        __extends(DialogGraphics, _super);
+        function DialogGraphics(group, player) {
             var _this = _super.call(this, 205, group) || this;
             _this.player = player;
             return _this;
         }
-        PauseMenuGraphics.prototype.initialize = function (gsm) {
+        DialogGraphics.prototype.initialize = function (gsm) {
             this.gsm = gsm;
             this.background = false;
             this.resume = false;
@@ -65,7 +65,7 @@ var GUI;
             this.togglePauseMenuDialog();
             this.gsm.game.paused = false;
         };
-        PauseMenuGraphics.prototype.togglePauseMenuDialog = function () {
+        DialogGraphics.prototype.togglePauseMenuDialog = function () {
             this.pm_background.exists = this.background;
             this.pm_resume_btn.exists = this.resume;
             this.pm_options_btn.exists = this.options;
@@ -78,8 +78,10 @@ var GUI;
             this.help = !this.help;
             this.gsm.game.paused = !this.gsm.game.paused;
         };
-        return PauseMenuGraphics;
+        DialogGraphics.prototype.createBackground = function () {
+        };
+        return DialogGraphics;
     }(GUI.GameObject));
-    GUI.PauseMenuGraphics = PauseMenuGraphics;
+    GUI.DialogGraphics = DialogGraphics;
 })(GUI || (GUI = {}));
 //# sourceMappingURL=PauseMenuGraphics.js.map

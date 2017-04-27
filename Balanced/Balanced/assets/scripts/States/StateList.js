@@ -12,4 +12,5 @@ States.LEVEL_SELECT_STATE_ID = 205;
 States.LEVEL1_STATE_ID = 206;
 States.LEVEL2_STATE_ID = 207;
 States.LEVEL3_STATE_ID = 208;
+States.TOWN_TUTORIAL_STATE_ID = 209;
 //# sourceMappingURL=StateList.js.map

@@ -9,7 +9,7 @@
         private unitframe: GUI.HealthAndEnergyGraphics;
         private charMenu: GUI.CharGraphics;
         private bag: GUI.BagGraphics;
-        private pauseMenu: GUI.PauseMenuGraphics;
+        private dialogs: GUI.DialogGraphics;
 
         private map: Phaser.Tilemap;
 
@@ -237,13 +237,13 @@
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group, this.player);
             this.charMenu = new GUI.CharGraphics(group, this.player);
-            this.pauseMenu = new GUI.PauseMenuGraphics(group, this.player);
+            this.dialogs = new GUI.DialogGraphics(group, this.player);
 
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);
             this.gsm.getGUIM().addGroup(this.bag);
             this.gsm.getGUIM().addGroup(this.charMenu);
-            this.gsm.getGUIM().addGroup(this.pauseMenu);
+            this.gsm.getGUIM().addGroup(this.dialogs);
 
             this.actionbar.getBag().onInputDown.add(function (e) {
                 this.charMenu.closeMenu();
@@ -329,8 +329,6 @@
 
                 if (e.keyCode == Phaser.Keyboard.I) {
                     data.actionbar.getBag().frame = 1;
-                    data.charMenu.closeMenu();
-                    data.bag.flipMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.H) {
@@ -339,8 +337,6 @@
 
                 if (e.keyCode == Phaser.Keyboard.C) {
                     data.actionbar.getStats().frame = 1;
-                    data.bag.closeMenu();
-                    data.charMenu.flipMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.K) {
@@ -362,9 +358,7 @@
 
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
                 if (e.keyCode == Phaser.Keyboard.ESC) {
-                    if (!data.player.alive)
-                        return false; 
-                    data.pauseMenu.togglePauseMenuDialog();
+                    data.dialogs.togglePauseMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.O) {
@@ -373,11 +367,9 @@
 
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.actionbar.getAbility1().frame = 0;
-
                 }
 
                 if (e.keyCode == Phaser.Keyboard.W) {
-                    //data.bm.dispatchEvent(new BALANCE.TestEvent(data.gsm), data.player);
                     data.actionbar.getAbility2().frame = 0;
                 }
 
@@ -399,6 +391,8 @@
 
                 if (e.keyCode == Phaser.Keyboard.I) {
                     data.actionbar.getBag().frame = 0;
+                    data.charMenu.closeMenu();
+                    data.bag.flipMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.H) {
@@ -410,17 +404,25 @@
 
                 if (e.keyCode == Phaser.Keyboard.C) {
                     data.actionbar.getStats().frame = 0;
+                    data.bag.closeMenu();
+                    data.charMenu.flipMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.V) {
+                    if (data.gsm.game.paused || !data.player.alive)
+                        return false;
                     data.gsm.setState(States.LEVEL1_STATE);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.B) {
+                    if (data.gsm.game.paused || !data.player.alive)
+                        return false;
                     data.gsm.setState(States.LEVEL2_STATE);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.G) {
+                    if (data.gsm.game.paused || !data.player.alive)
+                        return false;
                     data.gsm.setState(States.LEVEL3_STATE);
                 }
             }

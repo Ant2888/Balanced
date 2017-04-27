@@ -24,9 +24,6 @@ var GUI;
         }
         ActionBarGraphics.prototype.initialize = function (gsm) {
             this.gsm = gsm;
-            this.player.addOnDeathCallBack(function () {
-                this.displayDeathDialog();
-            }, this);
             this.ab_bg = gsm.game.add.sprite(gsm.game.width / 2, 630, 'ab_bg');
             this.ab_bg.anchor.setTo(.5, .5);
             this.ab_bg.fixedToCamera = true;
@@ -119,24 +116,6 @@ var GUI;
             this.ab_ab4_ss.fixedToCamera = true;
             this.group.add(this.ab_ab4_ss);
         };
-        ActionBarGraphics.prototype.displayDeathDialog = function () {
-            this.dd_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'dd_background');
-            this.dd_background.anchor.setTo(.5, .5);
-            this.dd_background.fixedToCamera = true;
-            this.group.add(this.dd_background);
-            this.dd_menu_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 50, (this.gsm.game.height / 2) + 50, 'dd_menu_btn', function () {
-                this.gsm.setState(States.MAIN_MENU_STATE);
-            }, this, 1, 0, 2);
-            this.dd_menu_btn.anchor.setTo(.5, .5);
-            this.dd_menu_btn.fixedToCamera = true;
-            this.group.add(this.dd_menu_btn);
-            this.dd_twn_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 200, (this.gsm.game.height / 2) + 50, 'dd_twn_btn', function () {
-                this.gsm.setState(States.TOWN_STATE);
-            }, this, 1, 0, 2);
-            this.dd_twn_btn.anchor.setTo(.5, .5);
-            this.dd_twn_btn.fixedToCamera = true;
-            this.group.add(this.dd_twn_btn);
-        };
         ActionBarGraphics.prototype.getStats = function () {
             return this.ab_stats_ss;
         };
@@ -181,8 +160,6 @@ var GUI;
             this.gsm.setState(States.TOWN_STATE);
         };
         ActionBarGraphics.prototype.optionsPressed = function () {
-            if (this.gsm.game.paused || !this.player.alive)
-                return false;
             console.log('pause menu button was pressed');
         };
         ActionBarGraphics.prototype.potion1Pressed = function () {

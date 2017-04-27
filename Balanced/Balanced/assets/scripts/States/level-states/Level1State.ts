@@ -12,7 +12,7 @@
         private unitframe: GUI.HealthAndEnergyGraphics;
         private charMenu: GUI.CharGraphics;
         private bag: GUI.BagGraphics;
-        private pauseMenu: GUI.PauseMenuGraphics;
+        private dialogs: GUI.DialogGraphics;
 
         private map: Phaser.Tilemap;
 
@@ -43,7 +43,7 @@
 
             this.gsm.game.physics.arcade.collide(this.enemies, this.floorlayer);
             this.gsm.game.physics.arcade.collide(this.player.energyWave.bullets, this.floorlayer,
-                function (e) { e.kill()});
+                function (e) { e.kill() });
 
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
             this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.player.dealWithOverlap, null, this.player);
@@ -116,7 +116,7 @@
                 }
 
             }
-            
+
             if (this.stairOverlap == null) {
                 this.player.body.allowGravity = true;
             }
@@ -124,9 +124,9 @@
             if (this.keyboard.up.isDown && !this.player.isJumping) {
                 this.player.jump(-650);
 
-                
+
                 this.player.isJumping = true;
-            }                       
+            }
 
             if (this.keyboard.left.isDown) {
                 //Move to the left
@@ -153,7 +153,7 @@
         }
 
         private doExitLogic(door: any) {
-            this.player.overHeadText.clearColors(); 
+            this.player.overHeadText.clearColors();
 
             door.lastOverlapped = this.gsm.game.time.now + 2000;
 
@@ -169,7 +169,7 @@
             } else {
                 this.player.overHeadText.text = ENTITIES.Player.EXIT_DOOR_COMPLETE;
                 this.player.overHeadText.addColor('yellow', ENTITIES.Player.EXIT_C_COLOR_IND);
-                this.player.overHeadText.addColor('white', ENTITIES.Player.EXIT_C_COLOR_IND+1);
+                this.player.overHeadText.addColor('white', ENTITIES.Player.EXIT_C_COLOR_IND + 1);
             }
         }
 
@@ -178,14 +178,14 @@
             this.player.overHeadText.clearColors();
             this.player.overHeadText.text = ENTITIES.Player.ENTER_DOOR;
             this.player.overHeadText.addColor('yellow', ENTITIES.Player.ENTER_COLOR_IND);
-            this.player.overHeadText.addColor('white', ENTITIES.Player.ENTER_COLOR_IND+1);
+            this.player.overHeadText.addColor('white', ENTITIES.Player.ENTER_COLOR_IND + 1);
         }
 
         public init(): void {
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
-            
+
         }
 
         public render(): void {
@@ -197,7 +197,7 @@
         }
 
         public startup(): boolean {
-            
+
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
 
             // setup the tilemap
@@ -252,7 +252,7 @@
             this.gsm.game.camera.follow(this.player);
 
             this.player.inputEnabled = true;
-            
+
             this.bm = new BALANCE.BalanceManager(this.gsm);
 
             var group = this.gsm.game.add.group();
@@ -260,13 +260,13 @@
             this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
             this.bag = new GUI.BagGraphics(group, this.player);
             this.charMenu = new GUI.CharGraphics(group, this.player);
-            this.pauseMenu = new GUI.PauseMenuGraphics(group, this.player);
+            this.dialogs = new GUI.DialogGraphics(group, this.player);
 
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);
             this.gsm.getGUIM().addGroup(this.bag);
             this.gsm.getGUIM().addGroup(this.charMenu);
-            this.gsm.getGUIM().addGroup(this.pauseMenu);
+            this.gsm.getGUIM().addGroup(this.dialogs);
 
             this.actionbar.getBag().onInputDown.add(function (e) {
                 this.charMenu.closeMenu();
@@ -280,10 +280,8 @@
 
             this.setupKeybinds(this);
 
-            
-
             return true;
-        }                
+        }
 
         public createEnemies(): void {
             this.enemies = this.gsm.game.add.group();
@@ -326,10 +324,10 @@
                 var amount = 0;
                 this.enemies.forEachAlive(e => { amount++ }, this);
 
-                if(amount == 0)
+                if (amount == 0)
                     this.gsm.setState(States.LEVEL2_STATE);
             }
-            
+
         }
 
         public setupKeybinds(data: this): void {
@@ -365,18 +363,14 @@
 
                 if (e.keyCode == Phaser.Keyboard.I) {
                     data.actionbar.getBag().frame = 1;
-                    data.charMenu.closeMenu();
-                    data.bag.flipMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.H) {
-                    data.actionbar.getTown().frame = 1;                    
+                    data.actionbar.getTown().frame = 1;
                 }
 
                 if (e.keyCode == Phaser.Keyboard.C) {
                     data.actionbar.getStats().frame = 1;
-                    data.bag.closeMenu();
-                    data.charMenu.flipMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.K) {
@@ -398,11 +392,8 @@
 
             this.gsm.game.input.keyboard.onUpCallback = function (e) {
 
-                if (e.keyCode == Phaser.Keyboard.ESC) { 
-                    if (!data.player.alive)
-                        return false; 
-
-                    data.pauseMenu.togglePauseMenuDialog();  
+                if (e.keyCode == Phaser.Keyboard.ESC) {
+                    data.dialogs.togglePauseMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.O) {
@@ -411,11 +402,9 @@
 
                 if (e.keyCode == Phaser.Keyboard.Q) {
                     data.actionbar.getAbility1().frame = 0;
-
                 }
 
                 if (e.keyCode == Phaser.Keyboard.W) {
-                    //data.bm.dispatchEvent(new BALANCE.TestEvent(data.gsm), data.player);
                     data.actionbar.getAbility2().frame = 0;
                 }
 
@@ -437,28 +426,38 @@
 
                 if (e.keyCode == Phaser.Keyboard.I) {
                     data.actionbar.getBag().frame = 0;
+                    data.charMenu.closeMenu();
+                    data.bag.flipMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.H) {
                     data.actionbar.getTown().frame = 0;
                     if (data.gsm.game.paused || !data.player.alive)
                         return false;
-                    data.gsm.setState(States.TOWN_STATE);                    
+                    data.gsm.setState(States.TOWN_STATE);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.C) {
                     data.actionbar.getStats().frame = 0;
+                    data.bag.closeMenu();
+                    data.charMenu.flipMenu();
                 }
 
                 if (e.keyCode == Phaser.Keyboard.V) {
+                    if (data.gsm.game.paused || !data.player.alive)
+                        return false;
                     data.gsm.setState(States.LEVEL1_STATE);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.B) {
+                    if (data.gsm.game.paused || !data.player.alive)
+                        return false;
                     data.gsm.setState(States.LEVEL2_STATE);
                 }
 
                 if (e.keyCode == Phaser.Keyboard.G) {
+                    if (data.gsm.game.paused || !data.player.alive)
+                        return false;
                     data.gsm.setState(States.LEVEL3_STATE);
                 }
             }

@@ -13,7 +13,9 @@ var States;
     var TownState = (function (_super) {
         __extends(TownState, _super);
         function TownState(gsm) {
-            return _super.call(this, gsm) || this;
+            var _this = _super.call(this, gsm) || this;
+            _this.ShowTutDialogOnce = true;
+            return _this;
         }
         TownState.prototype.update = function () {
         };
@@ -21,12 +23,18 @@ var States;
             this.gsm.musicBox.addSound('dark_loop');
             var group = this.gsm.game.add.group();
             this.townGraphics = new GUI.TownGraphics(group);
+            this.dialogs = new GUI.DialogGraphics(group, null);
             this.gsm.getGUIM().addGroup(this.townGraphics);
+            this.gsm.getGUIM().addGroup(this.dialogs);
         };
         TownState.prototype.startup = function () {
             this.gsm.musicBox.playByID('dark_loop', undefined, undefined, .2, true, false);
             console.log("Town state started");
             this.setupKeybinds(this);
+            if (this.ShowTutDialogOnce) {
+                this.dialogs.tutorialMenu();
+                this.ShowTutDialogOnce = false;
+            }
             return true;
         };
         TownState.prototype.setupKeybinds = function (data) {
@@ -37,7 +45,7 @@ var States;
                 if (e.keyCode == Phaser.Keyboard.B) {
                     data.gsm.setState(States.LEVEL2_STATE);
                 }
-                if (e.keyCode == Phaser.Keyboard.H) {
+                if (e.keyCode == Phaser.Keyboard.G) {
                     data.gsm.setState(States.LEVEL3_STATE);
                 }
             };

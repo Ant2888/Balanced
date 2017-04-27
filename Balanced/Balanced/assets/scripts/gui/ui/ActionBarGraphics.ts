@@ -44,11 +44,7 @@
         }
 
         public initialize(gsm: States.GameStateManager): void {
-            this.gsm = gsm;
-
-            this.player.addOnDeathCallBack(function () {
-                this.displayDeathDialog();
-            }, this);
+            this.gsm = gsm;            
 
             this.ab_bg = gsm.game.add.sprite(gsm.game.width / 2, 630, 'ab_bg');
             this.ab_bg.anchor.setTo(.5, .5);
@@ -158,30 +154,7 @@
             this.ab_ab4_ss.anchor.setTo(.5, .5);
             this.ab_ab4_ss.fixedToCamera = true;
             this.group.add(this.ab_ab4_ss);
-        }
-
-        public displayDeathDialog(): void {
-            this.dd_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'dd_background');
-            this.dd_background.anchor.setTo(.5, .5);
-            this.dd_background.fixedToCamera = true;
-            this.group.add(this.dd_background);
-
-            this.dd_menu_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 50, (this.gsm.game.height / 2) + 50, 'dd_menu_btn', function () {
-                this.gsm.setState(States.MAIN_MENU_STATE);
-            }, this, 1, 0, 2);
-
-            this.dd_menu_btn.anchor.setTo(.5, .5);
-            this.dd_menu_btn.fixedToCamera = true;
-            this.group.add(this.dd_menu_btn);
-
-            this.dd_twn_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 200, (this.gsm.game.height / 2) + 50, 'dd_twn_btn', function () {
-                this.gsm.setState(States.TOWN_STATE);
-            }, this, 1, 0, 2);
-
-            this.dd_twn_btn.anchor.setTo(.5, .5);
-            this.dd_twn_btn.fixedToCamera = true;
-            this.group.add(this.dd_twn_btn);
-        }
+        }        
 
         public getStats(): Phaser.Button {
             return this.ab_stats_ss;
@@ -222,29 +195,24 @@
         public statsPressed(): any {
             if (this.gsm.game.paused || !this.player.alive)
                 return false;
-
             console.log('stats button was pressed');
         }
 
         public bagPressed(): any {
             if (this.gsm.game.paused || !this.player.alive)
                 return false;
-
             console.log('bag button was pressed');
         }
 
         public townPressed(): any {
             if (this.gsm.game.paused || !this.player.alive)
                 return false;
-
             console.log('town button was pressed');
             this.gsm.setState(States.TOWN_STATE);
         }
 
         public optionsPressed(): any {
-            if (this.gsm.game.paused || !this.player.alive)
-                return false;
-
+            
             console.log('pause menu button was pressed');
         }
 

@@ -212,7 +212,7 @@ var States;
             this.setupKeybinds(this);
             var test = BALANCE.EventMatrix.Matrix;
             this.testTimer = this.gsm.game.time.create(false);
-            this.testTimer.loop(Math.floor(Math.random() * (45000 - 20000 + 1)) + 20000, function () {
+            this.testTimer.loop(Math.floor(Math.random() * (30000 - 15000 + 1)) + 15000, function () {
                 if (_this.gsm.game.paused)
                     return;
                 if (!_this.player.alive)

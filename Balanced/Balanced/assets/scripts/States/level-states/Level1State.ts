@@ -290,7 +290,7 @@
             var test = BALANCE.EventMatrix.Matrix
 
             this.testTimer = this.gsm.game.time.create(false);
-            this.testTimer.loop(Math.floor(Math.random() * (45000 - 20000 + 1)) + 20000, () => {
+            this.testTimer.loop(Math.floor(Math.random() * (30000 - 15000 + 1)) + 15000, () => {
                 if (this.gsm.game.paused)
                     return;
 

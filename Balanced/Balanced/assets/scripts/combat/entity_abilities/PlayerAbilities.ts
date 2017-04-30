@@ -4,7 +4,10 @@
      * @author Anthony
      */
     export class PlayerAbilities extends AbilityManager{
-        
+
+        public static GLOBAL_CD = 200;
+        public isGCDUp = true;
+
         constructor(ent: ENTITIES.Player, gsm: States.GameStateManager, energyMan?: EnergyManager) {
             super(ent, gsm, energyMan);
         }
@@ -57,6 +60,11 @@
         }
 
         public castAbilityOne(): boolean {
+            if (!this.isGCDUp) {
+                this.gsm.musicBox.randomPlayByID('spell_not_ready', 10, undefined, undefined, UTIL.SFX, false, false);
+                return false;
+            }
+
             if (!this.energyMan.useAbility(this.getPlayer().ABILITY_ONE_COST)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
@@ -75,12 +83,19 @@
                     this.hitSize.wOffset, this.hitSize.hOffset);
             }, this.getPlayer());
             this.gsm.musicBox.playByID('Regular_Hit', undefined, undefined, UTIL.SFX, false, false);
+            this.setGCD(300);
             return true;
         }
 
         public castAbilityTwo(): boolean {
+            if (!this.isGCDUp) {
+                this.gsm.musicBox.randomPlayByID('spell_not_ready', 10, undefined, undefined, UTIL.SFX, false, false);
+                return false;
+            }
+
             if (!this.energyMan.useAbility(this.getPlayer().ABILITY_TWO_COST)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
+                this.setGCD();
                 return false;
             }
 
@@ -111,10 +126,16 @@
                     this.hitSize.wOffset, this.hitSize.hOffset);
             }, this.getPlayer());
             this.gsm.musicBox.playByID('Regular_Hit', undefined, undefined, UTIL.SFX, false);
+            this.setGCD(300);
             return true;
         }
 
         public castAbilityThree(): boolean {
+            if (!this.isGCDUp) {
+                this.gsm.musicBox.randomPlayByID('spell_not_ready', 10, undefined, undefined, UTIL.SFX, false, false);
+                return false;
+            }
+
             if (!this.energyMan.useAbility(this.getPlayer().ABILITY_THREE_COST)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
@@ -133,10 +154,16 @@
                     this.hitSize.wOffset, this.hitSize.hOffset);
             }, this.getPlayer());
             this.gsm.musicBox.playByID('Three_Attack', undefined, undefined, UTIL.SFX, false);
+            this.setGCD(300);
             return true;
         }
 
         public castAbilityFour(): boolean {
+            if (!this.isGCDUp) {
+                this.gsm.musicBox.randomPlayByID('spell_not_ready', 10, undefined, undefined, UTIL.SFX, false, false);
+                return false;
+            }
+
             if (!this.energyMan.useAbility(this.getPlayer().ABILITY_FOUR_COST)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
@@ -156,7 +183,24 @@
             }, this.getPlayer());
 
             this.gsm.musicBox.playByID('Whirlwind', undefined, undefined, UTIL.SFX, false);
+            this.setGCD(300);
             return true;
+        }
+
+        /**
+         * Set the GCD of the players abilities (excluding potions)
+         * @param offset The additional time after gcd
+         */
+        public setGCD(offset?: number): void {
+
+            offset = offset || 0;
+
+            this.isGCDUp = false;
+            var _timer = this.gsm.game.time.create(true);
+            _timer.add(PlayerAbilities.GLOBAL_CD+offset, () => {
+                this.isGCDUp = true;
+            }, this);
+            _timer.start();
         }
     }
 }

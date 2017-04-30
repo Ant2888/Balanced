@@ -159,7 +159,7 @@ var ENTITIES;
             box.addSound('PlayerHurt2');
             box.addSound('PlayerHurt3');
             box.addSound('Regular_Hit');
-            box.addSound('Spell_not_Ready');
+            box.addSound('spell_not_ready');
             box.addSound('Three_Attack');
             box.addSound('Whirlwind');
             box.addSound('Need_Energy');

@@ -79,6 +79,7 @@ var States;
             if (this.state.end() == false) {
                 //TODO: ERROUT
             }
+            //Destroys all inputs registered
             this.game.input.destroy();
         };
         /**

@@ -136,7 +136,7 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('Regular_Hit', 'assets/res/audio/Regular_Hit.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);
-        rem.addResource(new UTIL.Resource('Spell_not_Ready', 'assets/res/audio/Spell_not_Ready.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('spell_not_ready', 'assets/res/audio/spell_not_ready.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);
         rem.addResource(new UTIL.Resource('Three_Attack', 'assets/res/audio/Three_Attack.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {

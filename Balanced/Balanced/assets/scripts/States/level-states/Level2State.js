@@ -20,14 +20,6 @@ var States;
         function Level2State(gsm) {
             return _super.call(this, gsm) || this;
         }
-        Level2State.prototype.render = function () {
-            var _this = this;
-            if (States.Level1State.DEBUG) {
-                this.gsm.game.debug.body(this.player);
-                this.gsm.game.debug.bodyInfo(this.player, 100, 110);
-                this.enemies.forEachAlive(function (e) { _this.gsm.game.debug.body(e); }, this);
-            }
-        };
         Level2State.prototype.update = function () {
             this.gsm.game.physics.arcade.collide(this.player, this.floorlayer);
             this.gsm.game.physics.arcade['TILE_BIAS'] = 40;
@@ -145,12 +137,10 @@ var States;
             this.player.overHeadText.addColor('white', ENTITIES.Player.ENTER_COLOR_IND + 1);
         };
         Level2State.prototype.init = function () {
-            this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
-            this.gsm.game.physics.arcade.gravity.y = 1200;
+            _super.prototype.init.call(this);
             this.gsm.musicBox.addSound('moonlight', UTIL.MUSIC);
         };
         Level2State.prototype.startup = function () {
-            var _this = this;
             this.gsm.musicBox.playByID('moonlight', undefined, undefined, UTIL.MUSIC, true, false);
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
@@ -182,48 +172,13 @@ var States;
             entDoor.enableBody = true;
             exitDoor.body.gravity.y = -1200;
             entDoor.body.gravity.y = -1200;
-            this.player = new ENTITIES.Player(this.gsm, 16 * 64, 16 * 64, 'tempPlayer');
+            _super.prototype.startup.call(this);
+            this.player.x = 16 * 64;
+            this.player.y = 16 * 64;
             this.createEnemies();
-            this.player.loadEntitySounds(this.gsm.musicBox);
+            this.enemies.getTop().loadEntitySounds(this.gsm.musicBox);
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('moonlight'); }, this);
             this.backgroundlayer.resizeWorld();
-            this.gsm.game.camera.follow(this.player);
-            this.player.inputEnabled = true;
-            this.bm = new BALANCE.BalanceManager(this.gsm);
-            var group = this.gsm.game.add.group();
-            this.actionbar = new GUI.ActionBarGraphics(group, this.player);
-            this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
-            this.bag = new GUI.BagGraphics(group, this.player);
-            this.charMenu = new GUI.CharGraphics(group, this.player);
-            this.dialogs = new GUI.DialogGraphics(group, this.player);
-            this.gsm.getGUIM().addGroup(this.actionbar);
-            this.gsm.getGUIM().addGroup(this.unitframe);
-            this.gsm.getGUIM().addGroup(this.bag);
-            this.gsm.getGUIM().addGroup(this.charMenu);
-            this.gsm.getGUIM().addGroup(this.dialogs);
-            this.actionbar.getBag().onInputDown.add(function (e) {
-                this.charMenu.closeMenu();
-                this.bag.flipMenu();
-            }, this);
-            this.actionbar.getStats().onInputDown.add(function () {
-                this.bag.closeMenu();
-                this.charMenu.flipMenu();
-            }, this);
-            this.setupKeybinds(this);
-            var test = BALANCE.EventMatrix.Matrix;
-            this.testTimer = this.gsm.game.time.create(false);
-            this.testTimer.loop(Math.floor(Math.random() * (30000 - 15000 + 1)) + 15000, function () {
-                if (_this.gsm.game.paused)
-                    return;
-                if (!_this.player.alive)
-                    return;
-                var rndEvent = Object.keys(BALANCE.EventMatrix.Matrix);
-                //this just generate a random key
-                rndEvent = BALANCE.EventMatrix.Matrix[rndEvent[rndEvent.length * Math.random() << 0]];
-                _this.bm.matrix.eventToApply = rndEvent;
-                _this.bm.dispatchEvent(_this.bm.matrix, _this.player);
-            }, this);
-            this.testTimer.start();
             return true;
         };
         Level2State.prototype.createEnemies = function () {
@@ -264,119 +219,6 @@ var States;
                     this.gsm.setState(States.LEVEL3_STATE);
             }
         };
-        Level2State.prototype.setupKeybinds = function (data) {
-            this.gsm.game.input.keyboard.onDownCallback = function (e) {
-                if (e.keyCode == Phaser.Keyboard.F) {
-                    data.enterKeyPressed();
-                }
-                if (e.keyCode == Phaser.Keyboard.Q) {
-                    data.actionbar.ability1Pressed();
-                }
-                if (e.keyCode == Phaser.Keyboard.W) {
-                    data.actionbar.ability2Pressed();
-                }
-                if (e.keyCode == Phaser.Keyboard.E) {
-                    data.actionbar.ability3Pressed();
-                }
-                if (e.keyCode == Phaser.Keyboard.R) {
-                    data.actionbar.ability4Pressed();
-                }
-                if (e.keyCode == Phaser.Keyboard.Z) {
-                    data.actionbar.potion1Pressed();
-                }
-                if (e.keyCode == Phaser.Keyboard.X) {
-                    data.actionbar.potion2Pressed();
-                }
-                if (e.keyCode == Phaser.Keyboard.I) {
-                    data.actionbar.getBag().frame = 1;
-                }
-                if (e.keyCode == Phaser.Keyboard.H) {
-                    data.actionbar.getTown().frame = 1;
-                }
-                if (e.keyCode == Phaser.Keyboard.C) {
-                    data.actionbar.getStats().frame = 1;
-                }
-                if (e.keyCode == Phaser.Keyboard.K) {
-                    data.player.healEntity(50, false);
-                }
-                if (e.keyCode == Phaser.Keyboard.J) {
-                    data.player.dealDamage(5, false, "red", true, false);
-                }
-                if (e.keyCode == Phaser.Keyboard.M) {
-                    data.player.getAbilityManager().getEnergyManager().regenEnergy(5);
-                }
-                if (e.keyCode == Phaser.Keyboard.N) {
-                    data.player.getAbilityManager().getEnergyManager().useAbility(5);
-                }
-            };
-            this.gsm.game.input.keyboard.onUpCallback = function (e) {
-                if (e.keyCode == Phaser.Keyboard.ESC) {
-                    data.dialogs.togglePauseMenu();
-                }
-                if (e.keyCode == Phaser.Keyboard.O) {
-                    data.player.invincible = data.player.invincible ? false : true;
-                }
-                if (e.keyCode == Phaser.Keyboard.Q) {
-                    data.actionbar.getAbility1().frame = 0;
-                }
-                if (e.keyCode == Phaser.Keyboard.W) {
-                    data.actionbar.getAbility2().frame = 0;
-                }
-                if (e.keyCode == Phaser.Keyboard.E) {
-                    data.actionbar.getAbility3().frame = 0;
-                }
-                if (e.keyCode == Phaser.Keyboard.R) {
-                    data.actionbar.getAbility4().frame = 0;
-                }
-                if (e.keyCode == Phaser.Keyboard.Z) {
-                    data.actionbar.getPotion1().frame = 0;
-                }
-                if (e.keyCode == Phaser.Keyboard.X) {
-                    data.actionbar.getPotion2().frame = 0;
-                }
-                if (e.keyCode == Phaser.Keyboard.I) {
-                    data.actionbar.getBag().frame = 0;
-                    data.charMenu.closeMenu();
-                    data.bag.flipMenu();
-                }
-                if (e.keyCode == Phaser.Keyboard.H) {
-                    data.actionbar.getTown().frame = 0;
-                    if (data.gsm.game.paused || !data.player.alive)
-                        return false;
-                    data.gsm.setState(States.TOWN_STATE);
-                }
-                if (e.keyCode == Phaser.Keyboard.C) {
-                    data.actionbar.getStats().frame = 0;
-                    data.bag.closeMenu();
-                    data.charMenu.flipMenu();
-                }
-                if (e.keyCode == Phaser.Keyboard.V) {
-                    if (data.gsm.game.paused || !data.player.alive)
-                        return false;
-                    data.gsm.setState(States.LEVEL1_STATE);
-                }
-                if (e.keyCode == Phaser.Keyboard.B) {
-                    if (data.gsm.game.paused || !data.player.alive)
-                        return false;
-                    data.gsm.setState(States.LEVEL2_STATE);
-                }
-                if (e.keyCode == Phaser.Keyboard.G) {
-                    if (data.gsm.game.paused || !data.player.alive)
-                        return false;
-                    data.gsm.setState(States.LEVEL3_STATE);
-                }
-            };
-        };
-        Level2State.prototype.findObjectsByType = function (type, map, layer) {
-            var result = new Array();
-            map.objects[layer].forEach(function (element) {
-                if (element.properties.type === type) {
-                    element.y -= map.tileHeight;
-                    result.push(element);
-                }
-            });
-            return result;
-        };
         Level2State.prototype.placeEnemies = function (element, group) {
             var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
             baddie.makeHealthBar();
@@ -385,22 +227,10 @@ var States;
             baddie.body.collideWorldBounds = true;
             this.enemies.add(baddie);
         };
-        Level2State.prototype.createFromTiledObject = function (element, group) {
-            var sprite = group.create(element.x, element.y, element.properties.sprite);
-            sprite.anchor.setTo(0, .67);
-            //copy all properties to the sprite
-            Object.keys(element.properties).forEach(function (key) {
-                sprite[key] = element.properties[key];
-            });
-        };
         Level2State.prototype.end = function () {
-            this.testTimer.stop();
-            this.testTimer.destroy();
-            this.doors.destroy(true);
+            _super.prototype.end.call(this);
             this.gsm.musicBox.stopByID('moonlight');
-            this.gsm.game.camera.reset();
-            this.player.destroy(true);
-            this.enemies.destroy(true);
+            this.doors.destroy(true);
             this.map.destroy();
             this.floorlayer.destroy();
             this.wallPaperlayer.destroy();
@@ -408,11 +238,14 @@ var States;
             this.starislayer.destroy();
             return true;
         };
+        Level2State.prototype.defineCustomKeys = function () {
+            //don't do anything
+        };
         Level2State.prototype.getType = function () {
             return this;
         };
         return Level2State;
-    }(States.State));
+    }(States.LevelState));
     States.Level2State = Level2State;
 })(States || (States = {}));
 //# sourceMappingURL=Level2State.js.map

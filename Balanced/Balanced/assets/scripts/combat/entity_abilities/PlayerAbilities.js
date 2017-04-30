@@ -17,7 +17,9 @@ var COMBAT;
     var PlayerAbilities = (function (_super) {
         __extends(PlayerAbilities, _super);
         function PlayerAbilities(ent, gsm, energyMan) {
-            return _super.call(this, ent, gsm, energyMan) || this;
+            var _this = _super.call(this, ent, gsm, energyMan) || this;
+            _this.isGCDUp = true;
+            return _this;
         }
         PlayerAbilities.prototype.getAttackSpeed = function () {
             return (this.ent).ATTACK_SPEED;
@@ -59,6 +61,10 @@ var COMBAT;
             return true;
         };
         PlayerAbilities.prototype.castAbilityOne = function () {
+            if (!this.isGCDUp) {
+                this.gsm.musicBox.randomPlayByID('spell_not_ready', 10, undefined, undefined, UTIL.SFX, false, false);
+                return false;
+            }
             if (!this.energyMan.useAbility(this.getPlayer().ab1_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
@@ -72,11 +78,17 @@ var COMBAT;
                 this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
             }, this.getPlayer());
             this.gsm.musicBox.playByID('Regular_Hit', undefined, undefined, UTIL.SFX, false, false);
+            this.setGCD(300);
             return true;
         };
         PlayerAbilities.prototype.castAbilityTwo = function () {
+            if (!this.isGCDUp) {
+                this.gsm.musicBox.randomPlayByID('spell_not_ready', 10, undefined, undefined, UTIL.SFX, false, false);
+                return false;
+            }
             if (!this.energyMan.useAbility(this.getPlayer().ab2_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
+                this.setGCD();
                 return false;
             }
             this.getPlayer().body.setSize(this.getPlayer().attackSize.width, this.getPlayer().attackSize.height, this.getPlayer().attackSize.wOffset, this.getPlayer().attackSize.hOffset);
@@ -100,9 +112,14 @@ var COMBAT;
                 this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
             }, this.getPlayer());
             this.gsm.musicBox.playByID('Regular_Hit', undefined, undefined, UTIL.SFX, false);
+            this.setGCD(300);
             return true;
         };
         PlayerAbilities.prototype.castAbilityThree = function () {
+            if (!this.isGCDUp) {
+                this.gsm.musicBox.randomPlayByID('spell_not_ready', 10, undefined, undefined, UTIL.SFX, false, false);
+                return false;
+            }
             if (!this.energyMan.useAbility(this.getPlayer().ab3_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
@@ -116,9 +133,14 @@ var COMBAT;
                 this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
             }, this.getPlayer());
             this.gsm.musicBox.playByID('Three_Attack', undefined, undefined, UTIL.SFX, false);
+            this.setGCD(300);
             return true;
         };
         PlayerAbilities.prototype.castAbilityFour = function () {
+            if (!this.isGCDUp) {
+                this.gsm.musicBox.randomPlayByID('spell_not_ready', 10, undefined, undefined, UTIL.SFX, false, false);
+                return false;
+            }
             if (!this.energyMan.useAbility(this.getPlayer().ab4_mod.energyCost)) {
                 this.gsm.musicBox.randomPlayByID('Need_Energy', 20, undefined, undefined, UTIL.SFX, false, false);
                 return false;
@@ -132,10 +154,26 @@ var COMBAT;
                 this.body.setSize(this.hitSize.width, this.hitSize.height, this.hitSize.wOffset, this.hitSize.hOffset);
             }, this.getPlayer());
             this.gsm.musicBox.playByID('Whirlwind', undefined, undefined, UTIL.SFX, false);
+            this.setGCD(300);
             return true;
+        };
+        /**
+         * Set the GCD of the players abilities (excluding potions)
+         * @param offset The additional time after gcd
+         */
+        PlayerAbilities.prototype.setGCD = function (offset) {
+            var _this = this;
+            offset = offset || 0;
+            this.isGCDUp = false;
+            var _timer = this.gsm.game.time.create(true);
+            _timer.add(PlayerAbilities.GLOBAL_CD + offset, function () {
+                _this.isGCDUp = true;
+            }, this);
+            _timer.start();
         };
         return PlayerAbilities;
     }(COMBAT.AbilityManager));
+    PlayerAbilities.GLOBAL_CD = 200;
     COMBAT.PlayerAbilities = PlayerAbilities;
 })(COMBAT || (COMBAT = {}));
 //# sourceMappingURL=PlayerAbilities.js.map

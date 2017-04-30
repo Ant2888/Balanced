@@ -4,13 +4,7 @@
     *
     * @author Emerson, Anthony
     */
-    export class Level3State extends State {
-        private actionbar: GUI.ActionBarGraphics;
-        private unitframe: GUI.HealthAndEnergyGraphics;
-        private charMenu: GUI.CharGraphics;
-        private bag: GUI.BagGraphics;
-        private dialogs: GUI.DialogGraphics;
-
+    export class Level3State extends LevelState {
         private map: Phaser.Tilemap;
 
         private floorlayer: Phaser.TilemapLayer;
@@ -19,26 +13,13 @@
         private backgroundlayer: Phaser.TilemapLayer;
 
         private stairOverlap: any;
-        private keyboard: Phaser.CursorKeys;
 
         private doors: Phaser.Group;
-        private enemies: Phaser.Group;
 
-        //test player
-        private player: ENTITIES.Player;
-        private bm: BALANCE.BalanceManager;
         private objectLayer: any;
 
         constructor(gsm: States.GameStateManager) {
             super(gsm);
-        }
-
-        public render(): void {
-            if (Level1State.DEBUG) {
-                this.gsm.game.debug.body(this.player);
-                this.gsm.game.debug.bodyInfo(this.player, 100, 110);
-                this.enemies.forEachAlive(e => { this.gsm.game.debug.body(e) }, this);
-            }
         }
 
         public update(): void {
@@ -170,12 +151,9 @@
 
 
         public init(): void {
-            this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
-            this.gsm.game.physics.arcade.gravity.y = 1200;
+            super.init();
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
         }
-
-        public testTimer: Phaser.Timer;
 
         public startup(): boolean {
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
@@ -219,64 +197,17 @@
             exitDoor.body.gravity.y = -1200;
             entDoor.body.gravity.y = -1200;
 
-            this.player = new ENTITIES.Player(this.gsm, 12 * 64, 11 * 64, 'tempPlayer');
+            super.startup();
+            this.player.x = 12 * 64;
+            this.player.y = 11 * 64;
+
             this.createEnemies();
 
-            this.player.loadEntitySounds(this.gsm.musicBox);
+            (<ENTITIES.Ogre>this.enemies.getTop()).loadEntitySounds(this.gsm.musicBox);
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour') }, this);
 
             this.backgroundlayer.resizeWorld();
-            this.gsm.game.camera.follow(this.player);
-
-            this.player.inputEnabled = true;
-
-
-
-            this.bm = new BALANCE.BalanceManager(this.gsm);
-
-            var group = this.gsm.game.add.group();
-            this.actionbar = new GUI.ActionBarGraphics(group, this.player);
-            this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
-            this.bag = new GUI.BagGraphics(group, this.player);
-            this.charMenu = new GUI.CharGraphics(group, this.player);
-            this.dialogs = new GUI.DialogGraphics(group, this.player);
-
-            this.gsm.getGUIM().addGroup(this.actionbar);
-            this.gsm.getGUIM().addGroup(this.unitframe);
-            this.gsm.getGUIM().addGroup(this.bag);
-            this.gsm.getGUIM().addGroup(this.charMenu);
-            this.gsm.getGUIM().addGroup(this.dialogs);
-
-            this.actionbar.getBag().onInputDown.add(function (e) {
-                this.charMenu.closeMenu();
-                this.bag.flipMenu();
-            }, this);
-
-            this.actionbar.getStats().onInputDown.add(function () {
-                this.bag.closeMenu();
-                this.charMenu.flipMenu();
-            }, this);
-
-            this.setupKeybinds(this);
-
-            var test = BALANCE.EventMatrix.Matrix
-
-            this.testTimer = this.gsm.game.time.create(false);
-            this.testTimer.loop(Math.floor(Math.random() * (30000 - 15000 + 1)) + 15000, () => {
-                if (this.gsm.game.paused)
-                    return;
-
-                if (!this.player.alive)
-                    return;
-
-                var rndEvent = Object.keys(BALANCE.EventMatrix.Matrix);
-                //this just generate a random key
-                rndEvent = BALANCE.EventMatrix.Matrix[rndEvent[rndEvent.length * Math.random() << 0]];
-                this.bm.matrix.eventToApply = rndEvent;
-                this.bm.dispatchEvent(this.bm.matrix, this.player);
-            }, this);
-            this.testTimer.start();
-
+            
             return true;
         }
 
@@ -315,150 +246,7 @@
             }
 
         }
-
-        public setupKeybinds(data: this): void {
-            this.gsm.game.input.keyboard.onDownCallback = function (e) {
-
-                if (e.keyCode == Phaser.Keyboard.F) {
-                    data.enterKeyPressed();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.Q) {
-                    data.actionbar.ability1Pressed();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.W) {
-                    data.actionbar.ability2Pressed();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.E) {
-                    data.actionbar.ability3Pressed();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.R) {
-                    data.actionbar.ability4Pressed()
-                }
-
-                if (e.keyCode == Phaser.Keyboard.Z) {
-                    data.actionbar.potion1Pressed();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.X) {
-                    data.actionbar.potion2Pressed();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.I) {
-                    data.actionbar.getBag().frame = 1;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.H) {
-                    data.actionbar.getTown().frame = 1;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.C) {
-                    data.actionbar.getStats().frame = 1;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.K) {
-                    data.player.healEntity(50, false);
-                }
-
-                if (e.keyCode == Phaser.Keyboard.J) {
-                    data.player.dealDamage(5, false, "red", true, false);
-                }
-
-                if (e.keyCode == Phaser.Keyboard.M) {
-                    data.player.getAbilityManager().getEnergyManager().regenEnergy(5);
-                }
-
-                if (e.keyCode == Phaser.Keyboard.N) {
-                    data.player.getAbilityManager().getEnergyManager().useAbility(5);
-                }
-            }
-
-            this.gsm.game.input.keyboard.onUpCallback = function (e) {
-                if (e.keyCode == Phaser.Keyboard.ESC) {
-                    data.dialogs.togglePauseMenu();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.O) {
-                    data.player.invincible = data.player.invincible ? false : true;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.Q) {
-                    data.actionbar.getAbility1().frame = 0;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.W) {
-                    data.actionbar.getAbility2().frame = 0;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.E) {
-                    data.actionbar.getAbility3().frame = 0;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.R) {
-                    data.actionbar.getAbility4().frame = 0;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.Z) {
-                    data.actionbar.getPotion1().frame = 0;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.X) {
-                    data.actionbar.getPotion2().frame = 0;
-                }
-
-                if (e.keyCode == Phaser.Keyboard.I) {
-                    data.actionbar.getBag().frame = 0;
-                    data.charMenu.closeMenu();
-                    data.bag.flipMenu();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.H) {
-                    data.actionbar.getTown().frame = 0;
-                    if (data.gsm.game.paused || !data.player.alive)
-                        return false;
-                    data.gsm.setState(States.TOWN_STATE);
-                }
-
-                if (e.keyCode == Phaser.Keyboard.C) {
-                    data.actionbar.getStats().frame = 0;
-                    data.bag.closeMenu();
-                    data.charMenu.flipMenu();
-                }
-
-                if (e.keyCode == Phaser.Keyboard.V) {
-                    if (data.gsm.game.paused || !data.player.alive)
-                        return false;
-                    data.gsm.setState(States.LEVEL1_STATE);
-                }
-
-                if (e.keyCode == Phaser.Keyboard.B) {
-                    if (data.gsm.game.paused || !data.player.alive)
-                        return false;
-                    data.gsm.setState(States.LEVEL2_STATE);
-                }
-
-                if (e.keyCode == Phaser.Keyboard.G) {
-                    if (data.gsm.game.paused || !data.player.alive)
-                        return false;
-                    data.gsm.setState(States.LEVEL3_STATE);
-                }
-            }
-        }
-
-        public findObjectsByType(type, map, layer): any {
-            var result = new Array();
-            map.objects[layer].forEach(function (element) {
-                if (element.properties.type === type) {
-                    element.y -= map.tileHeight;
-                    result.push(element);
-                }
-            });
-            return result;
-        }
-
+        
         public placeEnemies(element, group): void {
             var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
             baddie.makeHealthBar();
@@ -479,19 +267,19 @@
         }
 
         public end(): boolean {
-            this.testTimer.stop();
-            this.testTimer.destroy();
+            super.end();
             this.gsm.musicBox.stopByID('final_hour');
             this.doors.destroy(true);
-            this.gsm.game.camera.reset();
-            this.player.destroy(true);
-            this.enemies.destroy(true);
             this.map.destroy();
             this.floorlayer.destroy();
             this.wallPaperlayer.destroy();
             this.backgroundlayer.destroy();
             this.starislayer.destroy();
             return true;
+        }
+
+        public defineCustomKeys(): void {
+            //don't do anything
         }
 
         public getType(): any {

@@ -56,7 +56,7 @@
     <Content Include="assets\res\audio\PlayerHurt2.mp3" />
     <Content Include="assets\res\audio\PlayerHurt3.mp3" />
     <Content Include="assets\res\audio\Regular_Hit.mp3" />
-    <Content Include="assets\res\audio\Spell_not_Ready.mp3" />
+    <Content Include="assets\res\audio\spell_not_ready.mp3" />
     <Content Include="assets\res\audio\Three_Attack.mp3" />
     <Content Include="assets\res\audio\Unhover.mp3" />
     <Content Include="assets\res\audio\Whirlwind.mp3" />
@@ -166,6 +166,7 @@
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level3State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level2State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level1State.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\level-states\LevelState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\HelpMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\LevelSelectState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\MainMenuState.ts" />
@@ -177,6 +178,7 @@
     <TypeScriptCompile Include="assets\scripts\States\tutorial\DungeonTutorialState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\tutorial\TownTutorialState.ts" />
     <TypeScriptCompile Include="assets\scripts\util\JukeBox.ts" />
+    <TypeScriptCompile Include="assets\scripts\util\keys\KeyEvent.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />
     <TypeScriptCompile Include="assets\scripts\util\ResourceList.ts" />
     <TypeScriptCompile Include="assets\scripts\util\ResourceManager.ts" />

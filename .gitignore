@@ -3,3 +3,4 @@ obj/
 .vs/
 /Balanced/Balanced/assets/scripts/**/*.js
 /Balanced/Balanced/assets/scripts/**/*.js.map
+web.*

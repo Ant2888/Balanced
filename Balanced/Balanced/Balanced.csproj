@@ -120,9 +120,9 @@
     <Content Include="assets\res\tutorial\tut_screen1.png" />
     <Content Include="assets\res\tutorial\tut_screen2.png" />
     <Content Include="assets\res\tutorial\tut_yes_btn.png" />
-    <Content Include="assets\scripts\floatingText.js" />
+    <Content Include="assets\floatingText.js" />
     <Content Include="index.html" />
-    <Content Include="assets\scripts\phaser.js" />
+    <Content Include="assets\phaser.js" />
     <Content Include="assets\res\phaser2.jpg" />
     <Content Include="web.config" />
   </ItemGroup>

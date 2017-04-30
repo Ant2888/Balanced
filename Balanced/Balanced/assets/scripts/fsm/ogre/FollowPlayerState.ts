@@ -2,6 +2,8 @@
 
     export class FollowPlayerState extends FiniteState {
 
+        public EPSILON = 5;
+
         constructor(sys: OgreStateSystem, gsm: States.GameStateManager) {
             super(sys, gsm);
         }
@@ -15,8 +17,15 @@
         }
 
         public doLogic(): void {
-
+            
             var ogre = <ENTITIES.Ogre>this.system.ai;
+
+            if (ogre.x + this.EPSILON >= this.system.player.x
+                && ogre.x - this.EPSILON <= this.system.player.x) {
+                ogre.walk(0);
+                return;
+            }
+
             var ms = (ogre.x > this.system.player.x ? -1 : 1) * ogre.WALK_SPEED;
             ogre.walk(ms);
 

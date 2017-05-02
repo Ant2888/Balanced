@@ -187,7 +187,7 @@ class BalancedGame {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         rem.addResource(new UTIL.Resource('balance_notif', 'assets/res/balance-menus/balance_notif.png', UTIL.BALANCE_NOTIF_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 520, 146);
+            this.game.load.spritesheet(e.key, e.assetUrl, 615, 170);
         }, this);
         rem.addResource(new UTIL.Resource('dd_twn_btn', 'assets/res/hud/dd_twn_btn.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 120, 35);

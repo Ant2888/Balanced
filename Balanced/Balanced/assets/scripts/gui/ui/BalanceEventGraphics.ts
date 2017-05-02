@@ -10,6 +10,8 @@
         private gsm: States.GameStateManager;
         private inNotif: boolean;
 
+        private timer: Phaser.Timer;
+
         private curText: Phaser.Text;
 
         private static NOTIF_IN_TIME = 700;
@@ -20,7 +22,7 @@
 
         public initialize(gsm: States.GameStateManager): void {
             this.gsm = gsm;
-            this.img = this.gsm.game.add.sprite(466, -146, 'balance_notif');
+            this.img = this.gsm.game.add.sprite(466, -170, 'balance_notif');
             this.img.fixedToCamera = true;
             this.inNotif = false;
             //this.img.exists = false;
@@ -33,12 +35,18 @@
             if (this.curText !== undefined && this.curText !== null)
                 this.curText.destroy();
 
-            this.curText = this.gsm.game.add.text(466 + 30, -146 + 50,
+            this.curText = this.gsm.game.add.text(466 + 30, -170 + 50,
                 event.getNotifText(), {
-                    fill: 'yellow', font: 'papyrus', fontSize: '20px',
-                    stroke: 'black', strokeThickness: 2});
+                    fill: 'white', font: 'papyrus', fontSize: '20px',
+                    stroke: 'black', strokeThickness: 4});
             this.curText.fixedToCamera = true;
 
+            this.timer = this.gsm.game.time.create(true);
+            this.timer.loop(100, () => {
+                this.img.frame = this.img.frame != 0 ? 0 : 1;
+            }, this);
+
+            this.timer.start();
             this.tweenInOut();
         }
 
@@ -50,14 +58,17 @@
             this.inNotif = true;
             
             var a = this.gsm.game.add.tween(this.img.cameraOffset).to({"y": 0});
-            var b = this.gsm.game.add.tween(this.img.cameraOffset).to({ "y": -146 }, undefined, undefined, undefined, 2000);
+            var b = this.gsm.game.add.tween(this.img.cameraOffset).to({ "y": -170 }, undefined, undefined, undefined, 2000);
             var c = this.gsm.game.add.tween(this.curText.cameraOffset).to({ "y": 0+50 });
-            var d = this.gsm.game.add.tween(this.curText.cameraOffset).to({ "y": -146+50 }, undefined, undefined, undefined, 2000);
+            var d = this.gsm.game.add.tween(this.curText.cameraOffset).to({ "y": -170+50 }, undefined, undefined, undefined, 2000);
 
             a.chain(b);
             c.chain(d);
 
-            b.onComplete.add(function () { this.inNotif = false }, this);
+            b.onComplete.add(function () {
+                this.inNotif = false
+                this.timer.stop();
+            }, this);
 
             a.start();
             c.start();

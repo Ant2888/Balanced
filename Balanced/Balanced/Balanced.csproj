@@ -61,6 +61,7 @@
     <Content Include="assets\res\audio\Unhover.mp3" />
     <Content Include="assets\res\audio\Whirlwind.mp3" />
     <Content Include="assets\res\balance-menus\balance_notif.png" />
+    <Content Include="assets\res\balance-menus\balance_notif_old.png" />
     <Content Include="assets\res\boot\Balanced Logo.png" />
     <Content Include="assets\res\boot\mm_background_only.png" />
     <Content Include="assets\res\boot\Phaser Logo.png" />

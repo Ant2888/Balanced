@@ -147,7 +147,7 @@
         private onUp(e: Phaser.Key): void {
             var _e = e.keyCode;
             var res = this.KeyMatrix[_e];
-            if (res !== undefined && res !== null)
+            if (res !== undefined && res !== null && res.onUp)
                 (<UTIL.KeyEvent>res).onUp.call(res.context, e);
         }
         
@@ -155,7 +155,7 @@
             var _e = e.keyCode;
             var res = this.KeyMatrix[_e];
             
-            if (res !== undefined && res !== null)
+            if (res !== undefined && res !== null && res.onDown)
                 (<UTIL.KeyEvent>res).onDown.call(res.context, e);
         }
 
@@ -163,7 +163,7 @@
             var _e = e.keyCode;
             var res = this.KeyMatrix[_e];
 
-            if (res !== undefined && res !== null)
+            if (res !== undefined && res !== null && res.onPress)
                 (<UTIL.KeyEvent>res).onPress.call(res.context, e);
         }
 

@@ -116,6 +116,8 @@
          * @param cost
          */
         public useAbility(cost: number): boolean {
+            cost = Math.round(cost);
+
             if (this.energy - cost < 0)
                 return false;
 
@@ -133,6 +135,7 @@
          * @param regenRate
          */
         public regenEnergy(regenRate: number, display?: boolean): void {
+            regenRate = Math.round(regenRate);
 
             if (!this.ent.alive)
                 return;

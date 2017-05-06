@@ -231,6 +231,9 @@
 
             this.remTimer = 10000;
 
+            if (this.textHolder)
+                this.textHolder.destroy(true);
+
             this.textHolder = this.gsm.game.add.text(362, 600, '10.0',
                 { fill: 'white', font: 'papyrus', fontSize: '16px', fontStyle: 'bold' });
             this.textHolder.fixedToCamera = true;
@@ -268,6 +271,9 @@
             this.player.getAbilityManager().attemptCast(ENTITIES.Player.POTION_TWO);
 
             this.remTimer2 = 10000;
+
+            if (this.textHolder2)
+                this.textHolder2.destroy(true);
 
             this.textHolder2 = this.gsm.game.add.text(402, 635, '10.0',
                 { fill: 'white', font: 'papyrus', fontSize: '16px', fontStyle: 'bold' });

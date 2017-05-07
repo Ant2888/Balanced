@@ -290,6 +290,9 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('twn_hall', 'assets/res/town/twn_hall_sprite.png', UTIL.TWN_HALL_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 224, 352);
         }, this);
+        rem.addResource(new UTIL.Resource('town', 'assets/res/town/town.png', UTIL.TWN_HALL_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 3840, 720);
+        }, this);
         // ----------------------------------------TOWN RESOURCES END
 
         // -----------------------------------------LEVEL s RESOURCES

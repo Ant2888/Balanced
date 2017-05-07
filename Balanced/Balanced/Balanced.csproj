@@ -104,6 +104,7 @@
     <Content Include="assets\res\options-menu\om_background.png" />
     <Content Include="assets\res\options-menu\om_cancel_btns.png" />
     <Content Include="assets\res\options-menu\om_ok_btns.png" />
+    <Content Include="assets\res\town\town.png" />
     <Content Include="assets\res\town\twn_background.png" />
     <Content Include="assets\res\town\twn_dungeon_sprite.png" />
     <Content Include="assets\res\town\twn_hall_sprite.png" />
@@ -175,7 +176,7 @@
     <TypeScriptCompile Include="assets\scripts\gui\ui\ActionBarGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\States\StateList.ts" />
     <TypeScriptCompile Include="assets\scripts\States\test-states\TestState2.ts" />
-    <TypeScriptCompile Include="assets\scripts\States\TownState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\level-states\TownState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\tutorial\DungeonTutorialState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\tutorial\TownTutorialState.ts" />
     <TypeScriptCompile Include="assets\scripts\util\JukeBox.ts" />

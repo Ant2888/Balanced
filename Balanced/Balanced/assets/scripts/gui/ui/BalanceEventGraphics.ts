@@ -73,9 +73,6 @@
             a.start();
             c.start();
         }
-
-        public resetPos(): void {
-
-        }
+        
     }
 }

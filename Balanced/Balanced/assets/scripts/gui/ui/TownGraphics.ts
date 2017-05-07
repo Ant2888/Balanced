@@ -1,17 +1,15 @@
 ﻿module GUI {
     /**
-    *This is the town gui of the game
-    *
-    * @author Emerson
-    */
+     * Town graphic of the game. To be placed into the town state
+     * @author Anthony
+     */
     export class TownGraphics extends GameObject {
 
         private backgroundImage: Phaser.Sprite;
-
-        private shop: Phaser.Button;
-        private inn: Phaser.Button;
-        private dungeon: Phaser.Button;
-        private hall: Phaser.Button;
+        private floor: Phaser.Sprite;
+        private dungeon: Phaser.Sprite;
+        private inn: Phaser.Sprite;
+        private shop: Phaser.Sprite;
 
         private gsm: States.GameStateManager;
 
@@ -21,72 +19,65 @@
 
         public initialize(gsm: States.GameStateManager): void {
             this.gsm = gsm;
+            this.group.enableBody = true;
 
-            this.backgroundImage = gsm.game.add.sprite(0, 0, 'twn_background');
+            this.backgroundImage = gsm.game.add.sprite(0, 0, 'town');
             this.group.add(this.backgroundImage);
+            this.backgroundImage.body.immovable = true;
+            this.backgroundImage.body.allowGravity = false;
 
-            this.setShopButton(this.shopButtonPressed);
-            this.setInnButton(this.innButtonPressed);
-            this.setDungeonButton(this.dungeonButtonPressed);
-            this.setHallButton(this.hallButtonPressed);
-        }
+            this.floor = this.gsm.game.add.sprite(0, this.gsm.game.world.height - 140);
+            this.group.add(this.floor);
+            this.floor.body.setSize(3840, 1);
+            this.floor.body.immovable = true;
+            this.floor.body.allowGravity = false;
 
-        // initializes the buttons
-        public setShopButton(func: any): void {
-            this.shop = this.gsm.game.add.button(224, 416, 'twn_shop', func, this, 1, 0, 2);
+            this.shop = this.gsm.game.add.sprite(367, this.gsm.game.world.height - 280);
             this.group.add(this.shop);
-        }
+            this.shop.body.setSize(75, 105);
+            this.shop.body.immovable = true;
+            this.shop.body.allowGravity = false;
 
-        public setInnButton(func: any): void {
-            this.inn = this.gsm.game.add.button(928, 288, 'twn_inn', func, this, 1, 0, 2);
+            this.inn = this.gsm.game.add.sprite(1640, this.gsm.game.world.height - 275);
             this.group.add(this.inn);
-        }
+            this.inn.body.setSize(75, 105);
+            this.inn.body.immovable = true;
+            this.inn.body.allowGravity = false;
 
-        public setDungeonButton(func: any): void {
-            this.dungeon = this.gsm.game.add.button(1028, 0, 'twn_dungeon', func, this, 2, 0, 1);
+            this.dungeon = this.gsm.game.add.sprite(3550, this.gsm.game.world.height - 350);
             this.group.add(this.dungeon);
+            this.dungeon.body.setSize(170, 170);
+            this.dungeon.body.immovable = true;
+            this.dungeon.body.allowGravity = false;
         }
 
-        public setHallButton(func: any): void {
-            this.hall = this.gsm.game.add.button(640, 0, 'twn_hall', func, this, 1, 0);
-            this.group.add(this.hall);
+        /**
+         * Gets the floor of the graphic
+         */
+        public getFloor(): Phaser.Sprite {
+            return this.floor;
         }
 
-        private shopButtonPressed(): any {
-            console.log('shop button pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private innButtonPressed(): any {
-            console.log('inn button pressed');
-            //this.gsm.setState(States.PROTOTYPE_STATE);
-        }
-
-        private dungeonButtonPressed(): any {
-            console.log('dungeon button pressed');
-            this.gsm.setState(States.LEVEL_SELECT_STATE);
-        }
-
-        private hallButtonPressed(): any {
-            console.log('hall button pressed');
-            //this.gsm.setState(States.LEVEL_SELECT_STATE);
-        }
-
-        // getters
-        public getBackgroundImage(): Phaser.Sprite {
-            return this.backgroundImage;
-        }
-
-        public getShop(): Phaser.Button {
+        /**
+         * Gets the shop sprite
+         */
+        public getShop(): Phaser.Sprite {
             return this.shop;
         }
 
-        public getInn(): Phaser.Button {
+        /**
+         * Gets the inn sprite
+         */
+        public getInn(): Phaser.Sprite {
             return this.inn;
         }
 
-        public getDungeon(): Phaser.Button {
+        /**
+         * Gets the dungeon sprite
+         */
+        public getDungeon(): Phaser.Sprite {
             return this.dungeon;
         }
+
     }
 }

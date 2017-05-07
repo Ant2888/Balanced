@@ -329,6 +329,9 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('ogre', 'assets/res/level1-dungeon/ogre.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 96, 96);
         }, this);
+        rem.addResource(new UTIL.Resource('coin', 'assets/res/level1-dungeon/coin.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
 
         // -------------------------------------------START SPALSH SCREEN
         rem.addResource(new UTIL.Resource('balanced_logo', 'assets/res/boot/Balanced Logo.png', UTIL.BADDIE_ID), true, function (e) {

@@ -6,6 +6,8 @@
      */
     export class Player extends Entity {
 
+        public static SAVE_COINS = 0;
+
         public static allCurrentEvent = [];
 
         // modifiers
@@ -233,6 +235,27 @@
             box.addSound('Bag_Open');
             box.addSound('Bag_Close');
             box.addSound('OpenMenu');
+        }
+
+        public addCoin(): void {
+            Player.SAVE_COINS += 1;
+            new FloatingText(this.gsm.game, <FloatingText.Options>{
+                //easing: Phaser.Easing.Sinusoidal.Out,
+                text: '+1 Coin',
+                animation: 'up',
+                textOptions: <FloatingText.TextOptions>{
+                    fontSize: 18,
+                    fill: 'gold',
+                    stroke: 'black',
+                    strokeThickness: 1,
+                    wordWrap: false,
+                    wordWrapWidth: 200,
+                    font: "Courier"
+                },
+                x: this.x,
+                y: this.y - 35,
+                timeToLive: 300
+            });
         }
 
     }

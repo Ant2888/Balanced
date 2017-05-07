@@ -132,6 +132,8 @@ module States {
             var onUp = e => {
                 if (e.keyCode == Phaser.Keyboard.F)
                     this.enterKeyPressed();
+                if (e.keyCode == Phaser.Keyboard.V)
+                    this.gsm.setState(States.LEVEL1_STATE);
             };
 
             var onPressed = e => { }; 

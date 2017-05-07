@@ -93,6 +93,7 @@
     <Content Include="assets\res\level1-dungeon\baddie.png" />
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
     <Content Include="assets\res\level1-dungeon\castledoors.png" />
+    <Content Include="assets\res\level1-dungeon\coin.png" />
     <Content Include="assets\res\level1-dungeon\grunge_tile.png" />
     <Content Include="assets\res\level1-dungeon\ogre.png" />
     <Content Include="assets\res\level1-dungeon\tiled.png" />
@@ -169,6 +170,8 @@
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level2State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level1State.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\LevelState.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\Loot.ts" />
+    <TypeScriptCompile Include="assets\scripts\States\LootManager.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\HelpMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\LevelSelectState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\MainMenuState.ts" />

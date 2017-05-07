@@ -310,8 +310,7 @@ var FloatingText = function (state, options) {
                 y: floatingTextGroup.y - _obj._distance
             }, 400, 100, _obj._easing);
 
-            tweenObj.onComplete.addOnce(function() {
-                reg.floatingGroup = floatingTextGroup;
+            tweenObj.onComplete.addOnce(function () {
                 var _tweenObj = tweenProperty(floatingTextGroup, "alpha", {
                     alpha: 0
                 }, 150, _obj._timeToLive);

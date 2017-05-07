@@ -26,21 +26,35 @@
             frame?: string | number) {
             super(gsm, x, y, key, frame);
 
+            this.dropList.push(
+                { context: this, dropAmount: 5, entity: this, 
+                    createItem: g => {
+                        return g.game.add.sprite(this.x, this.y, 'coin');
+                    },
+                    overlapWithPlayer: (player, me) => {
+                        player.addCoin();
+                        me.kill();
+                    }
+                }
+            );
+
             this.player = player;
             this.startPosition = new Phaser.Point(x, y);
             this.abm = new COMBAT.OgreAbilities(this, gsm);
 
             this.attackSize = { width: 96 - 4, height: 96 - 26, wOffset: 2, hOffset: 26 };
-            this.hitSize = { width: 96 - 16, height: 96 - 32, wOffset: 8, hOffset: 32  };
+            this.hitSize = { width: 96 - 16, height: 96 - 32, wOffset: 8, hOffset: 32 };
 
             this.body.setSize(this.hitSize.width, this.hitSize.height,
                 this.hitSize.wOffset, this.hitSize.hOffset);
 
             this.addOnDeathCallBack(function () {
                 var val = this.randomValWithRandomness(2, 1);
+
                 this.gsm.musicBox.playByID(val == 3 ? 'OgreDeath1' :
                     (val == 2 ? 'OgreDeath2' : 'OgreDeath3'),
                     undefined, undefined, UTIL.SFX, false, false);
+
                 this.animations.currentAnim.onComplete.add(() => { this.kill() }, this);
             }, this);
 
@@ -50,7 +64,7 @@
 
                 var val = this.randomValWithRandomness(2, 2);
                 this.gsm.musicBox.playByID(val == 4 ? 'OgreHurt2' :
-                    (val == 3 ? 'OgreHurt3' : (val == 2 ? 'OgreHurt4':'OgreHurt5')),
+                    (val == 3 ? 'OgreHurt3' : (val == 2 ? 'OgreHurt4' : 'OgreHurt5')),
                     undefined, undefined, UTIL.SFX, false, false);
             }, this);
 

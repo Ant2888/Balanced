@@ -7,6 +7,7 @@
     export abstract class Entity extends Phaser.Sprite{
         
         public gsm: States.GameStateManager;
+        public dropList: States.Loot[];
 
         // STATS
         public ATTACK_SPEED = 12;
@@ -27,7 +28,7 @@
         public static flinchL = 'flinchL';
         public static flinchR = 'flinchR';
         public static jumpL   = 'jumpL';
-        public static jumpR = 'jumpR';
+        public static jumpR   = 'jumpR';
         protected jumpL_lastFrame: number;
         protected jumpR_lastFrame: number;
         //END PLACEHOLDERS
@@ -64,6 +65,7 @@
                 | Phaser.BitmapData | PIXI.Texture, frame?: string | number) {
             super(gsm.game, x, y, key, frame);
             this.gsm = gsm;
+            this.dropList = new Array();
 
             this.maxHealth = 100;
             this.health = 100;

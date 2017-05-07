@@ -57,6 +57,8 @@
 
             //check if the doors are around
             this.gsm.game.physics.arcade.overlap(this.player, this.doors, this.doDoorLogic, null, this);
+            //do the loot stuff
+            this.lm.checkOverlaps(this.floorlayer, this.player);
 
             //find the doors
             var exitDoor;
@@ -282,6 +284,12 @@
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;
             this.enemies.add(baddie);
+
+            baddie.addOnDeathCallBack(() => {
+                baddie.dropList.forEach(loot => {
+                    this.lm.dropItem(loot);
+                }, this);
+            }, this);
         }
 
         public end(): boolean {

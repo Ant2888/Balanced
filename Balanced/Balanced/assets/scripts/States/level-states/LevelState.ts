@@ -15,6 +15,7 @@
         //entities, incl. player; destroyed on end
         protected enemies: Phaser.Group;
         protected player: ENTITIES.Player;
+        protected lm: LootManager;
         //-
 
         //balance stuff
@@ -39,6 +40,7 @@
             super(gsm);
             this.generateDefaultKeys();
             this.defineCustomKeys();
+            this.lm = new LootManager(this.gsm);
         }
 
         public init(): void {
@@ -56,6 +58,7 @@
             //-
 
             this.bm = new BALANCE.BalanceManager(this.gsm);
+            this.lm.initialize();
 
             //graphics
             var group = this.gsm.game.add.group();
@@ -110,6 +113,7 @@
         }
 
         public end(): boolean {
+            this.lm.destroyLoot();
             this.balanceTimer.stop();
             this.balanceTimer.destroy();
             this.gsm.game.camera.reset();

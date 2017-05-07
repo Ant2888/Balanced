@@ -8,7 +8,9 @@
 
         public static SAVE_COINS = 0;
 
-        public static allCurrentEvent = [];
+        //this should contain an array of events to 
+        //dispatch on the player
+        public static allCurrentEvent = new Array();
 
         // modifiers
         public ab1_mod: COMBAT.Ability;
@@ -88,6 +90,10 @@
             this.overHeadText.anchor.setTo(.5, .5);
 
             this.addChild(this.overHeadText);
+
+            Player.allCurrentEvent.forEach(e => {
+                e(this);
+            });
         }
         
         public recalcModifiers(): void {
@@ -237,11 +243,15 @@
             box.addSound('OpenMenu');
         }
 
-        public addCoin(): void {
-            Player.SAVE_COINS += 1;
+        public addCoin(amount?: number): void {
+
+            if (amount === undefined || amount === null)
+                amount = 1;
+
+            Player.SAVE_COINS += amount;
             new FloatingText(this.gsm.game, <FloatingText.Options>{
                 //easing: Phaser.Easing.Sinusoidal.Out,
-                text: '+1 Coin',
+                text: '+'+amount+' Coin',
                 animation: 'up',
                 textOptions: <FloatingText.TextOptions>{
                     fontSize: 18,

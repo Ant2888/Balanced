@@ -9,7 +9,7 @@
     export abstract class LevelState extends State {
 
         //debug var; there should only be 1
-        public static DEBUG = true;
+        public static DEBUG = false;
         //-
 
         //entities, incl. player; destroyed on end
@@ -86,11 +86,6 @@
             //-
             
             this.doKeyLogic();
-
-            //setup the balancing
-            ENTITIES.Player.allCurrentEvent.forEach(e => {
-                this.bm.dispatchEvent(e, this.player, false, false);
-            }, this);
 
             this.balanceTimer = this.gsm.game.time.create(false);
             this.balanceTimer.loop(Math.floor(Math.random() * (30000 - 15000 + 1)) + 15000, () => {

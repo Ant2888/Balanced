@@ -10,7 +10,8 @@ module States {
         private townGraphics: GUI.TownGraphics;
         private player: ENTITIES.Player;
         private keyboard: Phaser.CursorKeys;
-        
+
+        private shop: GUI.ShopMenuGraphics;
 
         constructor(gsm: States.GameStateManager) {
             super(gsm);
@@ -44,12 +45,33 @@ module States {
                 this.doDungeonLogic, null, this);
 
             //not overlapping
-            if (this.gsm.game.time.now > this.townGraphics.getShop()['lastOverlapped'] &&
-                this.gsm.game.time.now > this.townGraphics.getInn()['lastOverlapped'] &&
-                this.gsm.game.time.now > this.townGraphics.getDungeon()['lastOverlapped']) {
+            var clearAll = true;
+
+            if (this.gsm.game.time.now > this.townGraphics.getShop()['lastOverlapped']) {
+                this.shop.closeMenu();
+                clearAll = clearAll && true;
+            } else {
+                clearAll = clearAll && false;
+            }
+
+            if (this.gsm.game.time.now > this.townGraphics.getInn()['lastOverlapped']) {
+                //todo
+                clearAll = clearAll && true;
+            } else {
+                clearAll = clearAll && false;
+            }
+
+            if (this.gsm.game.time.now > this.townGraphics.getDungeon()['lastOverlapped']) {
+                clearAll = clearAll && true;
+            } else {
+                clearAll = clearAll && false;
+            }
+
+            if (clearAll) {
                 this.player.overHeadText.text = '';
                 this.player.overHeadText.clearColors();
             }
+
         }
 
         public init(): void {
@@ -62,14 +84,10 @@ module States {
         public startup(): boolean {
             this.gsm.musicBox.playByID('dark_loop', undefined, undefined, .2, true, false);
             this.gsm.game.world.setBounds(0, 0, 3840, 720);
-            var group = this.gsm.game.add.group();
 
+            var group = this.gsm.game.add.group();
             this.townGraphics = new GUI.TownGraphics(group);
             this.gsm.getGUIM().addGroup(this.townGraphics);
-
-            this.townGraphics.getShop()['lastOverlapped'] = 0;
-            this.townGraphics.getInn()['lastOverlapped'] = 0;
-            this.townGraphics.getDungeon()['lastOverlapped'] = 0;
 
             this.player = new ENTITIES.Player(this.gsm, 70, this.gsm.game.world.height - (4 * 64), 'tempPlayer');
             this.player.loadEntitySounds(this.gsm.musicBox);
@@ -77,10 +95,20 @@ module States {
             this.player.scale.setTo(2, 2);
             this.gsm.game.camera.follow(this.player)
 
-            var health = new GUI.HealthAndEnergyGraphics(group, this.player);
+            var group2 = this.gsm.game.add.group();
+            this.shop = new GUI.ShopMenuGraphics(group2, this.player);
+            var health = new GUI.HealthAndEnergyGraphics(group2, this.player);
+
             this.gsm.getGUIM().addGroup(health);
+            this.gsm.getGUIM().addGroup(this.shop);
+
+            this.townGraphics.getShop()['lastOverlapped'] = 0;
+            this.townGraphics.getInn()['lastOverlapped'] = 0;
+            this.townGraphics.getDungeon()['lastOverlapped'] = 0;
+            
             //setup key events
             this.doKeyLogic();
+
 
             return true;
         }
@@ -134,6 +162,8 @@ module States {
                     this.enterKeyPressed();
                 if (e.keyCode == Phaser.Keyboard.V)
                     this.gsm.setState(States.LEVEL1_STATE);
+                if (e.keyCode == Phaser.Keyboard.TILDE)
+                    this.player.addCoin(100);
             };
 
             var onPressed = e => { }; 
@@ -152,7 +182,8 @@ module States {
             } else if (this.townGraphics.getInn()['lastOverlapped'] > this.gsm.game.time.now) {
                 console.log('INN NYI');
             } else if (this.townGraphics.getShop()['lastOverlapped'] > this.gsm.game.time.now) {
-                console.log('SHOP NYI');
+                if (!this.shop.isOpen())
+                    this.shop.openMenu();
             }
         }
 

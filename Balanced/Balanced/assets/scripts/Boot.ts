@@ -213,7 +213,15 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('close_btn_ss', 'assets/res/in-game-menus/close_btn_ss.png', UTIL.CLOSE_BTN_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 25, 25);
         }, this);
-
+        rem.addResource(new UTIL.Resource('shop_menu', 'assets/res/in-game-menus/shop_menu.png', UTIL.CLOSE_BTN_SS_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('shop_item', 'assets/res/in-game-menus/shop_item.png', UTIL.CLOSE_BTN_SS_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('purchase_btn', 'assets/res/in-game-menus/purchase_btn.png', UTIL.CLOSE_BTN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 109, 37);
+        }, this);
         // --------------------------------- character menus
 
         // --------------------------------- levelsel menus

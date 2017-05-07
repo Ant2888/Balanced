@@ -86,6 +86,9 @@
     <Content Include="assets\res\in-game-menus\close_btn_ss.png" />
     <Content Include="assets\res\in-game-menus\drop_btn_ss.png" />
     <Content Include="assets\res\in-game-menus\inv_menu.png" />
+    <Content Include="assets\res\in-game-menus\purchase_btn.png" />
+    <Content Include="assets\res\in-game-menus\shop_item.png" />
+    <Content Include="assets\res\in-game-menus\shop_menu.png" />
     <Content Include="assets\res\level-menu\ls_background.png" />
     <Content Include="assets\res\level-menu\ls_level1_btns.png" />
     <Content Include="assets\res\level-menu\ls_level2_btns.png" />
@@ -164,6 +167,8 @@
     <TypeScriptCompile Include="assets\scripts\gui\ui\CharGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\BagGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\HealthAndEnergyGraphics.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\ShopItem.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\ShopMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\TownGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\TownTutorialGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\Level3State.ts" />
@@ -228,7 +233,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64290</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64290/</IISUrl>
+          <IISUrl>http://localhost:55555/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

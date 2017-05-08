@@ -50,7 +50,7 @@
 
         public startup(): boolean {
             //player init and init the enemy group
-            this.player = new ENTITIES.Player(this.gsm, 4 * 64, 4 * 64, 'tempPlayer');
+            this.player = new ENTITIES.Player(this.gsm, 6 * 64, 4 * 64, 'tempPlayer');
             this.player.loadEntitySounds(this.gsm.musicBox);
             this.gsm.game.camera.follow(this.player);
             this.player.inputEnabled = true;

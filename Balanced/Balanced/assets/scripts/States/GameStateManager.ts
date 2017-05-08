@@ -12,6 +12,8 @@ module States {
         public game: Phaser.Game;
         public musicBox: UTIL.JukeBox;
 
+        
+
         protected state: States.State;
         protected guiM: GUI.GUIManager;
 
@@ -36,6 +38,8 @@ module States {
             if (this.state.startup() == false) {
                 //TODO: ERROUT
             }
+            
+            
         }
 
         /**
@@ -78,6 +82,7 @@ module States {
             }
 
             this.state = s;
+            
         }
 
         /**
@@ -88,6 +93,7 @@ module States {
             if (this.state.startup() == false) {
                 //TODO: ERROUT
             }
+
         }
 
         /**
@@ -100,6 +106,7 @@ module States {
 
             //Destroys all inputs registered
             this.game.input.destroy();
+            
         }
 
         /**

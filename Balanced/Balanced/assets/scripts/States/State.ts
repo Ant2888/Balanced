@@ -3,10 +3,10 @@ module States {
     /**
      * This class acts as a template for all States. Use it as an abstract class
      * and extend it to create a new game state.
-     * @author Anthony 
+     * @author Anthony, Emerson 
      */
     export abstract class State {
-
+        private volumeButton: Phaser.Button;
         protected gsm: States.GameStateManager;
 
         /**
@@ -61,6 +61,36 @@ module States {
          */
         public render(): void {
 
+        }
+
+        public buildSoundButton(): void {
+            this.volumeButton = this.gsm.game.add.button(1230, 0, 'sound_btn', function () {
+                if (UTIL.MASTER == 1) {
+                    this.gsm.game.sound.volume = .5;
+                    this.volumeButton.frame = 1;
+                    UTIL.MASTER = .5;
+                } else if (UTIL.MASTER == .5) {
+                    this.gsm.game.sound.volume = 0;
+                    this.volumeButton.frame = 2;
+                    UTIL.MASTER = 0;
+                } else if (UTIL.MASTER == 0) {
+                    this.gsm.game.sound.volume = 1;
+                    this.volumeButton.frame = 0;
+                    UTIL.MASTER = 1;
+                }
+            }, this);
+
+            switch (UTIL.MASTER) {
+                case 0: this.volumeButton.frame = 2; this.gsm.game.sound.volume = 0; break;
+                case .5: this.volumeButton.frame = 1; this.gsm.game.sound.volume = .5; console.log('.5'); break;
+                case 1: this.volumeButton.frame = 0; this.gsm.game.sound.volume = 1; console.log('1'); break;
+            }
+
+            this.volumeButton.fixedToCamera = true;
+        }
+
+        public destroySoundButton(): void {
+            this.volumeButton.destroy(true);
         }
     }
 }

@@ -37,7 +37,7 @@
             btn2.setOutSound(this.gsm.musicBox.findSound('Unhover'));
             btn2.setOverSound(this.gsm.musicBox.findSound('Hover'));
 
-            var btn3 = this.mainMenu.getOptionsButton();
+            var btn3 = this.mainMenu.getControlesButton();
             btn3.setDownSound(this.gsm.musicBox.findSound('ClickDown'));
             btn3.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
             btn3.setOutSound(this.gsm.musicBox.findSound('Unhover'));
@@ -49,6 +49,8 @@
             btn4.setOutSound(this.gsm.musicBox.findSound('Unhover'));
             btn4.setOverSound(this.gsm.musicBox.findSound('Hover'));
             this.setupKeybinds(this);
+
+            this.buildSoundButton();
             return true;
         }
 
@@ -72,6 +74,7 @@
 
         public end(): boolean {
             this.gsm.musicBox.stopByID('dark_intro');
+            this.destroySoundButton();
             return true;
         }
 

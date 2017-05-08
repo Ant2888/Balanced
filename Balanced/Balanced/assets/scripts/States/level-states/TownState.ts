@@ -3,14 +3,14 @@ module States {
     /**
      * The town state the user will start in
      *
-     * @author Anthony
+     * @author Anthony, Emerson
      */
     export class TownState extends State {
 
         private townGraphics: GUI.TownGraphics;
         private player: ENTITIES.Player;
         private keyboard: Phaser.CursorKeys;
-
+        
         private shop: GUI.ShopMenuGraphics;
 
         constructor(gsm: States.GameStateManager) {
@@ -109,6 +109,7 @@ module States {
             //setup key events
             this.doKeyLogic();
 
+            this.buildSoundButton();
 
             return true;
         }
@@ -190,6 +191,7 @@ module States {
         public end(): boolean {
             this.gsm.musicBox.stopByID('dark_loop');
             this.gsm.game.world.setBounds(0, 0, 1280, 720);
+            this.destroySoundButton();
             return true;
         }
         
@@ -207,5 +209,6 @@ module States {
         public getType(): any {
             return this;
         }
+                
     }
 }

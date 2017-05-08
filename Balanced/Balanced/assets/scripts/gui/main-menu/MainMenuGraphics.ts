@@ -10,7 +10,7 @@
 
         private playButton: Phaser.Button;
         private creditButton: Phaser.Button;
-        private optionsButton: Phaser.Button;
+        private controlesButton: Phaser.Button;
         private gsm: States.GameStateManager;
 
         constructor(group: Phaser.Group) {
@@ -24,7 +24,7 @@
             this.group.add(this.backgroundImage);
 
             this.setPlayButton(this.playButtonPressed);
-            this.setOptionsButton(this.optionsButtonPressed);
+            this.setControlesButton(this.optionsButtonPressed);
             this.setCreditButton(this.loadButtonPressed);
         }
 
@@ -39,9 +39,9 @@
             this.group.add(this.creditButton);
         }        
 
-        public setOptionsButton(func: any): void {
-            this.optionsButton = this.gsm.game.add.button(265, 380, 'mmOptionsButton', func, this, 1, 0, 2);
-            this.group.add(this.optionsButton);
+        public setControlesButton(func: any): void {
+            this.controlesButton = this.gsm.game.add.button(265, 380, 'mmControlesButton', func, this, 1, 0, 2);
+            this.group.add(this.controlesButton);
         }
 
         private playButtonPressed(): any {
@@ -72,8 +72,8 @@
             return this.creditButton;
         }
 
-        public getOptionsButton(): Phaser.Button {
-            return this.optionsButton;
+        public getControlesButton(): Phaser.Button {
+            return this.controlesButton;
         }
     }
 }

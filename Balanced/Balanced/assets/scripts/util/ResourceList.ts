@@ -76,12 +76,15 @@ declare class UTIL {
     static SFX: number;
     static MENU_SFX: number;
     static MUSIC: number;
+    static MASTER: number;
+
 
     //--------------- HUD
 }
 UTIL.SFX = .1;
 UTIL.MENU_SFX = .1;
 UTIL.MUSIC = .3;
+UTIL.MASTER = 1;
 
 //GIVE THE GLOBAL VAR THE VALUE
 

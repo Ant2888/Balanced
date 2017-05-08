@@ -4,7 +4,7 @@
      * This class servers as a prototype for what a typical
      * level state can and should look like. All levels that
      * are going to be considered typical should use this.
-     * @author Anthony
+     * @author Anthony, Emerson
      */
     export abstract class LevelState extends State {
 
@@ -36,6 +36,7 @@
         protected dialogs: GUI.DialogGraphics;
         //-
 
+        
         constructor(gsm: GameStateManager) {
             super(gsm);
             this.generateDefaultKeys();
@@ -55,6 +56,7 @@
             this.gsm.game.camera.follow(this.player);
             this.player.inputEnabled = true;
             this.enemies = this.gsm.game.add.group();
+            this.gsm.game.sound.volume = .3;
             //-
 
             this.bm = new BALANCE.BalanceManager(this.gsm);
@@ -84,7 +86,7 @@
                 this.charMenu.flipMenu();
             }, this);
             //-
-            
+
             this.doKeyLogic();
 
             this.balanceTimer = this.gsm.game.time.create(false);
@@ -104,6 +106,8 @@
             this.balanceTimer.start();
             //-
 
+            this.buildSoundButton();
+
             return true;
         }
 
@@ -114,6 +118,7 @@
             this.gsm.game.camera.reset();
             this.player.destroy(true);
             this.enemies.destroy(true);
+            this.destroySoundButton();
             return true;
         }
 
@@ -158,11 +163,11 @@
             if (res !== undefined && res !== null && res.onUp)
                 (<UTIL.KeyEvent>res).onUp.call(res.context, e);
         }
-        
+
         private onDown(e: Phaser.Key): void {
             var _e = e.keyCode;
             var res = this.KeyMatrix[_e];
-            
+
             if (res !== undefined && res !== null && res.onDown)
                 (<UTIL.KeyEvent>res).onDown.call(res.context, e);
         }
@@ -325,6 +330,8 @@
 
             return result;
         }
+
+       
 
     }
 }

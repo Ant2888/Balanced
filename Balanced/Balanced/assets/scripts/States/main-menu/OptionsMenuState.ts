@@ -28,12 +28,6 @@
         }
 
         public startup(): boolean {
-            var btn1 = this.optionsMenu.getCancelButton();
-            btn1.setDownSound(this.gsm.musicBox.findSound('ClickDown'));
-            btn1.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
-            btn1.setOutSound(this.gsm.musicBox.findSound('Unhover'));
-            btn1.setOverSound(this.gsm.musicBox.findSound('Hover'));
-
 
             var btn2 = this.optionsMenu.getOkButton();
             btn2.setDownSound(this.gsm.musicBox.findSound('ClickDown'));

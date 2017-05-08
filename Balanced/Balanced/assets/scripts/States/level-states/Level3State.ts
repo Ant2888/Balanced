@@ -180,7 +180,7 @@
 
             // collision on blockedLayer           
             this.map.setCollisionBetween(1, 100, true, 'floors');
-
+            
             this.createDoors();
 
             var exitDoor = this.doors.getBottom();

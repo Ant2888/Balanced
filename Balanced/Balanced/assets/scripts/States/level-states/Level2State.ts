@@ -196,8 +196,8 @@
 
             this.createDoors();
 
-            var exitDoor = this.doors.getBottom();
-            var entDoor = this.doors.getTop();
+            var exitDoor = this.doors.getTop();
+            var entDoor = this.doors.getBottom();
             exitDoor.doorType = 'exit';
             exitDoor.lastOverlapped = 0;
             entDoor.doorType = 'enter';
@@ -211,8 +211,8 @@
             entDoor.body.gravity.y = -1200;
 
             super.startup();
-            this.player.x = 16 * 64;
-            this.player.y = 16 * 64;
+            this.player.x = 2 * 64;
+            this.player.y = 15 * 64;
 
             this.createEnemies();
 

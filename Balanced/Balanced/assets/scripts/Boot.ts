@@ -251,16 +251,13 @@ class BalancedGame {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         rem.addResource(new UTIL.Resource('mmPlayButton', 'assets/res/main-menu/mm_play_btns.png', UTIL.MM_PLAYBUTTON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
+            this.game.load.spritesheet(e.key, e.assetUrl, 770, 110);
         }, this);
-        rem.addResource(new UTIL.Resource('mmLoadButton', 'assets/res/main-menu/mm_load_btns.png', UTIL.MM_LOADBUTTON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
-        }, this);
-        rem.addResource(new UTIL.Resource('mmHelpButton', 'assets/res/main-menu/mm_help_btns.png', UTIL.MM_HELPBUTTON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 200, 80);
-        }, this);
+        rem.addResource(new UTIL.Resource('mmCreditButton', 'assets/res/main-menu/mm_credits_btns.png', UTIL.MM_LOADBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 770, 110);
+        }, this);        
         rem.addResource(new UTIL.Resource('mmOptionsButton', 'assets/res/main-menu/mm_options_btns.png', UTIL.MM_HELPBUTTON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 330, 80);
+            this.game.load.spritesheet(e.key, e.assetUrl, 770, 110);
         }, this);
         // -------------------------------------END MAIN MENU
 
@@ -306,10 +303,7 @@ class BalancedGame {
         }, this);
         // ----------------------------------------TOWN RESOURCES END
 
-        // -----------------------------------------LEVEL s RESOURCES
-        rem.addResource(new UTIL.Resource('protolvl', 'assets/res/level1-dungeon/Balanced_level1.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
-            this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
-        }, this);
+        // -----------------------------------------LEVEL s RESOURCES        
         rem.addResource(new UTIL.Resource('level1', 'assets/res/level1-dungeon/level1.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
             this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
         }, this);
@@ -322,7 +316,13 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('grunge_tile', 'assets/res/level1-dungeon/grunge_tile.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
+        rem.addResource(new UTIL.Resource('nature', 'assets/res/level1-dungeon/nature.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
         rem.addResource(new UTIL.Resource('castledoors', 'assets/res/level1-dungeon/castledoors.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl);
+        }, this);
+        rem.addResource(new UTIL.Resource('dirtdoor', 'assets/res/level1-dungeon/dirtdoor.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         rem.addResource(new UTIL.Resource('tiled', 'assets/res/level1-dungeon/tiled.png', UTIL.PROTOTYPE_TILESET_ID), true, function (e) {
@@ -397,6 +397,12 @@ class BalancedGame {
             this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
         }, this);
         // -------------------------------------------END TUTORIAL SCREEN
+
+        // -------------------------------------------DUNGEON TUTORIAL SCREEN
+        rem.addResource(new UTIL.Resource('tutorial', 'assets/res/level1-dungeon/tutorial.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {
+            this.game.load.tilemap(e.key, e.assetUrl, null, Phaser.Tilemap.TILED_JSON);
+        }, this);
+        // -------------------------------------------END DUNGEON TUTORIAL SCREEN
 
 
     }
@@ -474,6 +480,7 @@ class BalancedGame {
             States.LEVEL3_STATE = new States.Level3State(this.gsm);
             States.TOWN_STATE = new States.TownState(this.gsm);
             States.TOWN_TUTORIAL_STATE = new States.TownTutorialState(this.gsm);
+            States.DUNGEON_TUTORIAL_STATE = new States.DungeonTutorialState(this.gsm);
             // END STATES
             this.gsm.initState();
         }

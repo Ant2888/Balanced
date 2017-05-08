@@ -39,6 +39,9 @@ declare class States {
 
     static TOWN_TUTORIAL_STATE: States.State;
     static TOWN_TUTORIAL_STATE_ID: number;
+
+    static DUNGEON_TUTORIAL_STATE: States.State;
+    static DUNGEON_TUTORIAL_STATE_ID: number;
     
 }
 
@@ -64,3 +67,4 @@ States.LEVEL2_STATE_ID = 207;
 States.LEVEL3_STATE_ID = 208;
 
 States.TOWN_TUTORIAL_STATE_ID = 209;
+States.DUNGEON_TUTORIAL_STATE_ID = 210;

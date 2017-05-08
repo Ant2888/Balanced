@@ -84,7 +84,7 @@
                 this.player.y = 1240;
             }
 
-            //star logic
+            //stair logic
             if (this.stairOverlap != null && !(this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
                 this.player.body.allowGravity = false;
                 this.player.body.velocity.x = 0;
@@ -184,6 +184,8 @@
             this.map.addTilesetImage('grunge_tile', 'grunge_tile');
             this.map.addTilesetImage('castledoors', 'castledoors');
             this.map.addTilesetImage('tiled', 'tiled');
+            this.map.addTilesetImage('dirtdoor', 'dirtdoor');
+            this.map.addTilesetImage('nature', 'nature');
 
             // create layer
             this.backgroundlayer = this.map.createLayer('background');
@@ -200,10 +202,10 @@
             this.map.setCollisionBetween(1, 100, true, 'floors');
 
             this.createDoors();
-
+            
             //define the exit and enter door
-            var exitDoor = this.doors.getBottom();
-            var entDoor = this.doors.getTop();
+            var exitDoor = this.doors.getTop();
+            var entDoor = this.doors.getBottom();
             exitDoor.doorType = 'exit';
             exitDoor.lastOverlapped = 0;
             entDoor.doorType = 'enter';

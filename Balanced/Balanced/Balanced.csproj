@@ -105,8 +105,7 @@
     <Content Include="assets\res\level1-dungeon\ogre_mage.png" />
     <Content Include="assets\res\level1-dungeon\tiled.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />
-    <Content Include="assets\res\main-menu\mm_help_btns.png" />
-    <Content Include="assets\res\main-menu\mm_load_btns.png" />
+    <Content Include="assets\res\main-menu\mm_credits_btns.png" />
     <Content Include="assets\res\main-menu\mm_options_btns.png" />
     <Content Include="assets\res\main-menu\mm_play_btns.png" />
     <Content Include="assets\res\options-menu\om_background.png" />

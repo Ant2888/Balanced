@@ -73,7 +73,7 @@
             bmd.ctx.fillStyle = '#FF4848';
             bmd.ctx.fill();
 
-            this.healthBar = this.gsm.game.add.image(134, 7, bmd);
+            this.healthBar = this.gsm.game.add.image(134, 5, bmd);
             this.healthBar.fixedToCamera = true; 
 
             this.group.add(this.healthBar);
@@ -88,7 +88,7 @@
             bmd2.ctx.fillStyle = '#FEE74F';
             bmd2.ctx.fill();
 
-            this.energyBar = this.gsm.game.add.image(134, 43, bmd2);
+            this.energyBar = this.gsm.game.add.image(134, 41, bmd2);
             this.energyBar.fixedToCamera = true;
 
             this.group.add(this.energyBar);

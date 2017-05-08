@@ -65,6 +65,8 @@
 
             //check if the doors are around
             this.gsm.game.physics.arcade.overlap(this.player, this.doors, this.doDoorLogic, null, this);
+            //do the loot stuff
+            this.lm.checkOverlaps(this.floorlayer, this.player);
 
                         
             if (this.player.y >= 1314) {
@@ -212,8 +214,6 @@
         }
 
         public createEnemies(): void {
-            this.enemies = this.gsm.game.add.group();
-
             this.objectLayer = this.findObjectsByType('enemy', this.map, 'enemies');
             this.objectLayer.forEach(function (element) {
                 this.placeEnemies(element, this.enemies);
@@ -249,12 +249,19 @@
         
         public placeEnemies(element, group): void {
             var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
+            baddie.body.bounce.y = .2;
             baddie.makeHealthBar();
             baddie.makeEnergyBar();
 
             this.gsm.game.physics.arcade.enable(baddie);
             baddie.body.collideWorldBounds = true;
             this.enemies.add(baddie);
+
+            baddie.addOnDeathCallBack(() => {
+                baddie.dropList.forEach(loot => {
+                    this.lm.dropItem(loot);
+                }, this);
+            }, this);
         }
 
         public createFromTiledObject(element, group): void {

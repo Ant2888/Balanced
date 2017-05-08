@@ -165,7 +165,12 @@
             this.cart.forEach(e => {
                 ENTITIES.Player.allCurrentEvent.push(e.bought);
             }, this);
-            this.generateShopItems();
+
+            this.cart = new Array();
+            this.setShopCost(0);
+
+            if (this.shopItem !== null && this.shopItem !== undefined)
+                this.shopItem.destroy(true);
         }
 
         /**

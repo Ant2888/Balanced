@@ -302,14 +302,18 @@
             });
         }
 
-        public findObjectsByType(type, map, layer): any {
+        public findObjectsByType(typeProp, map, layer): any {
             var result = new Array();
-            map.objects[layer].forEach(function (element) {
-                if (element.properties.type === type) {
-                    element.y -= map.tileHeight;
-                    result.push(element);
+
+            var arr = map.objects[layer];
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].properties.type == typeProp) {
+                    arr[i].y -= map.tileHeight;
+                    result.push(arr[i]);
                 }
-            });
+            }
+
             return result;
         }
 

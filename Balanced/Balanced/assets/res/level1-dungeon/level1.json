@@ -46,13 +46,13 @@
         }, 
         {
          "draworder":"topdown",
-         "height":0,
+         "height":24,
          "name":"doors",
          "objects":[
                 {
                  "gid":100,
                  "height":192,
-                 "id":10,
+                 "id":41,
                  "name":"",
                  "properties":
                     {
@@ -70,37 +70,37 @@
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":299.992,
-                 "y":319.992
+                 "x":320.181818181818,
+                 "y":319.878787878788
                 }, 
                 {
                  "gid":101,
                  "height":192,
-                 "id":12,
+                 "id":42,
                  "name":"",
                  "properties":
                     {
                      "id":"exit",
                      "sprite":"castledoors",
-                     "type ":"door"
+                     "type":"door"
                     },
                  "propertytypes":
                     {
                      "id":"string",
                      "sprite":"string",
-                     "type ":"string"
+                     "type":"string"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":128,
-                 "x":4800.04,
-                 "y":1343.94
+                 "x":4799.75,
+                 "y":1343.875
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":0,
+         "width":80,
          "x":0,
          "y":0
         }, 
@@ -552,7 +552,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":40,
+ "nextobjectid":43,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":64,
@@ -577,7 +577,7 @@
          "imageheight":320,
          "imagewidth":448,
          "margin":0,
-         "name":"dungeon",
+         "name":"grunge_tile",
          "spacing":0,
          "tilecount":35,
          "tileheight":64,

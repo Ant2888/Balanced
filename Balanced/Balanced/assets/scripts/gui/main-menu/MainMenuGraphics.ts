@@ -9,8 +9,7 @@
         private backgroundImage: Phaser.Image;
 
         private playButton: Phaser.Button;
-        private loadButton: Phaser.Button;
-        private helpButton: Phaser.Button;
+        private creditButton: Phaser.Button;
         private optionsButton: Phaser.Button;
         private gsm: States.GameStateManager;
 
@@ -25,29 +24,23 @@
             this.group.add(this.backgroundImage);
 
             this.setPlayButton(this.playButtonPressed);
-            this.setLoadButton(this.loadButtonPressed);
-            this.setHelpButton(this.helpButtonPressed);
             this.setOptionsButton(this.optionsButtonPressed);
+            this.setCreditButton(this.loadButtonPressed);
         }
 
         // initializes the buttons
         public setPlayButton(func: any): void {
-            this.playButton = this.gsm.game.add.button(550, 280, 'mmPlayButton', func, this, 1, 0, 2);
+            this.playButton = this.gsm.game.add.button(265, 260, 'mmPlayButton', func, this, 1, 0, 2);
             this.group.add(this.playButton);
         }
 
-        public setLoadButton(func: any): void {
-            this.loadButton = this.gsm.game.add.button(550, 360, 'mmLoadButton', func, this, 1, 0, 2);
-            this.group.add(this.loadButton);
-        }
-
-        public setHelpButton(func: any): void {
-            this.helpButton = this.gsm.game.add.button(550, 440, 'mmHelpButton', func, this, 1, 0, 2);
-            this.group.add(this.helpButton);
-        }
+        public setCreditButton(func: any): void {
+            this.creditButton = this.gsm.game.add.button(265, 490, 'mmCreditButton', func, this, 1, 0, 2);
+            this.group.add(this.creditButton);
+        }        
 
         public setOptionsButton(func: any): void {
-            this.optionsButton = this.gsm.game.add.button(465, 520, 'mmOptionsButton', func, this, 1, 0, 2);
+            this.optionsButton = this.gsm.game.add.button(265, 380, 'mmOptionsButton', func, this, 1, 0, 2);
             this.group.add(this.optionsButton);
         }
 
@@ -59,12 +52,7 @@
 
         private loadButtonPressed(): any {
             console.log('load button was pressed');
-        }
-
-        private helpButtonPressed(): any {
-            console.log('help button was pressed');
-            this.gsm.setState(States.HELP_MENU_STATE);
-        }
+        }        
 
         private optionsButtonPressed(): any {
             console.log('options button was pressed');
@@ -80,12 +68,8 @@
             return this.playButton;
         }
 
-        public getLoadButton(): Phaser.Button {
-            return this.loadButton;
-        }
-
-        public getHelpButton(): Phaser.Button {
-            return this.helpButton;
+        public getCreditButton(): Phaser.Button {
+            return this.creditButton;
         }
 
         public getOptionsButton(): Phaser.Button {

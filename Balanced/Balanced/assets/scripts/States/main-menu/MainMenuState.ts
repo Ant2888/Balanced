@@ -30,13 +30,8 @@
 
         public startup(): boolean {
             this.gsm.musicBox.playByID('dark_intro', undefined, undefined, .4, true, false);
-            var btn1 = this.mainMenu.getHelpButton();
-            btn1.setDownSound(this.gsm.musicBox.findSound('ClickDown'));
-            btn1.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
-            btn1.setOutSound(this.gsm.musicBox.findSound('Unhover'));
-            btn1.setOverSound(this.gsm.musicBox.findSound('Hover'));
-
-            var btn2 = this.mainMenu.getLoadButton();
+            
+            var btn2 = this.mainMenu.getCreditButton();
             btn2.setDownSound(this.gsm.musicBox.findSound('ClickDown'));
             btn2.setUpSound(this.gsm.musicBox.findSound('ClickLetGo'));
             btn2.setOutSound(this.gsm.musicBox.findSound('Unhover'));
@@ -76,6 +71,7 @@
         }
 
         public end(): boolean {
+            this.gsm.musicBox.stopByID('dark_intro');
             return true;
         }
 

@@ -132,6 +132,8 @@ module States {
             var onUp = e => {
                 if (e.keyCode == Phaser.Keyboard.F)
                     this.enterKeyPressed();
+                if (e.keyCode == Phaser.Keyboard.V)
+                    this.gsm.setState(States.DUNGEON_TUTORIAL_STATE);
             };
 
             var onPressed = e => { }; 

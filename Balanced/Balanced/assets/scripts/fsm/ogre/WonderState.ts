@@ -43,22 +43,22 @@
             //deal with checking if we are there yet. When we are start the timer for the wait interval
             this.walkLoop = this.system.gsm.game.time.create(true);
             this.walkLoop.loop(50, () => {
-                if (this.timeOut <= 0) {
-                    this.system.ai.walk(0);
-                    this.waitForRndInterval();
-                    this.walkLoop.stop();
-                    this.walkLoop.destroy();
-                } else if ((this.system.ai.x == (this.curGoto + this.EPSILON))
+                this.checkWallRiding();
+
+                if ((this.timeOut <= 0) || (this.system.ai.x == (this.curGoto + this.EPSILON))
                     || (this.system.ai.x == (this.curGoto - this.EPSILON))) {
                     this.system.ai.walk(0);
                     this.waitForRndInterval();
                     this.walkLoop.stop();
                     this.walkLoop.destroy();
-                }
+                } 
+
                 this.timeOut -= 50;
             }, this);
             this.walkLoop.start();
         }
+
+        public checkWallRiding(): void { }
 
         public waitForRndInterval(): void {
             var ogre = <ENTITIES.Ogre>this.system.ai;

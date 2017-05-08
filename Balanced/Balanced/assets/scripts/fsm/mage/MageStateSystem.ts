@@ -1,5 +1,8 @@
 ﻿module FSM {
 
+    /**
+     * @author Anthony
+     */
     export class MageStateSystem extends StateSystem{
 
         public attack: CastSpellState;

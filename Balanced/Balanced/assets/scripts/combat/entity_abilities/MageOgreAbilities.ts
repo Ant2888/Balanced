@@ -28,10 +28,21 @@
             ogre.body.setSize(ogre.attackSize.width, ogre.attackSize.height,
                 ogre.attackSize.wOffset, ogre.attackSize.hOffset);
 
-            if (this.ent.facingLeft)
-                this.ent.playAnimState(ENTITIES.Entity.attackL, 15, false, false, true);
-            else
-                this.ent.playAnimState(ENTITIES.Entity.attackR, 15, false, false, true);
+            var bullet = this.getMageOgre().fireBall.bullets.getTop();
+            var player = this.getMageOgre().player;
+
+            if (this.ent.facingLeft) {
+                bullet.scale.x = -Math.abs(bullet.scale.x);
+                this.ent.playAnimState(ENTITIES.Entity.attackL, 10, false, false, true);
+
+                this.getMageOgre().fireBall.fire(this.ent, player.x, player.y);
+            }
+            else {
+                bullet.scale.x = Math.abs(bullet.scale.x);
+                this.ent.playAnimState(ENTITIES.Entity.attackR, 10, false, false, true);
+
+                this.getMageOgre().fireBall.fire(this.ent, player.x, player.y);
+            }
 
             this.ent.animations.currentAnim.onComplete.add(function () {
                 this.body.setSize(this.hitSize.width, this.hitSize.height,

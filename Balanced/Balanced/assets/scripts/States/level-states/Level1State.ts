@@ -33,6 +33,7 @@
             this.gsm.game.physics.arcade.collide(this.player.energyWave.bullets, this.floorlayer,
                 function (e) { e.kill() });
 
+
             //this.gsm.game.physics.arcade.collide(this.baddies, this.player);
             this.gsm.game.physics.arcade.overlap(this.player, this.enemies, this.player.dealWithOverlap, null, this.player);
             this.gsm.game.physics.arcade.overlap(this.player.energyWave.bullets,
@@ -54,6 +55,21 @@
             //dont do the stuff below if we're dead
             if (!this.player.alive)
                 return;
+            
+            this.enemies.forEachAlive(e => {
+                if (e instanceof ENTITIES.MageOgre) {
+                    this.gsm.game.physics.arcade.overlap(this.player, e.fireBall.bullets,
+                        (ply: ENTITIES.Player, me) => {
+                            ply.dealDamage(35, false, 'purple', true, true, null,
+                                {
+                                    dx: 64 * (me.scale.x > 0 ? -1 : 1),
+                                    dy: -64,
+                                    time: 200
+                                });
+                            me.kill();
+                    });
+                }
+            }, this);
 
             //check if the doors are around
             this.gsm.game.physics.arcade.overlap(this.player, this.doors, this.doDoorLogic, null, this);
@@ -175,10 +191,10 @@
             super.init();
             this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
         }
-        
+
         public startup(): boolean {
             this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
-            
+
             this.map = this.gsm.game.add.tilemap('level1');
 
             this.map.addTilesetImage('grunge_tile', 'grunge_tile');
@@ -202,7 +218,7 @@
             this.map.setCollisionBetween(1, 100, true, 'floors');
 
             this.createDoors();
-            
+
             //define the exit and enter door
             var exitDoor = this.doors.getTop();
             var entDoor = this.doors.getBottom();
@@ -217,22 +233,21 @@
             entDoor.enableBody = true;
             exitDoor.body.gravity.y = -1200;
             entDoor.body.gravity.y = -1200;
-            
+
             super.startup();
 
             this.createEnemies();
-            
+
             (<ENTITIES.Ogre>this.enemies.getTop()).loadEntitySounds(this.gsm.musicBox);
 
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour') }, this);
 
             this.backgroundlayer.resizeWorld();
-            
+
             return true;
         }
 
         public createEnemies(): void {
-
             this.objectLayer = this.findObjectsByType('enemy', this.map, 'enemies');
             this.objectLayer.forEach(function (element) {
                 this.placeEnemies(element, this.enemies);
@@ -276,9 +291,18 @@
             }
 
         }
-        
+
         public placeEnemies(element, group): void {
-            var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
+            var baddie;
+
+            if (element.properties.class !== undefined && element.properties.class !== null) {
+                //create mage
+                baddie = new ENTITIES.MageOgre(this.gsm, element.x, element.y, this.player, 'ogre_mage');
+            }
+            else {
+                baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
+            }
+
             baddie.body.bounce.y = .2;
             baddie.makeHealthBar();
             baddie.makeEnergyBar();
@@ -305,8 +329,8 @@
             this.starislayer.destroy();
             return true;
         }
-        
-        public defineCustomKeys(): void{
+
+        public defineCustomKeys(): void {
             //don't do anything
         }
 

@@ -335,7 +335,7 @@ class BalancedGame {
             this.game.load.spritesheet(e.key, e.assetUrl, 37, 64);
         }, this);
         rem.addResource(new UTIL.Resource('fire_ball', 'assets/res/level1-dungeon/fire_ball.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 37, 64);
+            this.game.load.spritesheet(e.key, e.assetUrl, 32, 32);
         }, this);
         rem.addResource(new UTIL.Resource('baddie', 'assets/res/level1-dungeon/baddie.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
@@ -479,7 +479,6 @@ class BalancedGame {
             States.LEVEL2_STATE = new States.Level2State(this.gsm);
             States.LEVEL3_STATE = new States.Level3State(this.gsm);
             States.TOWN_STATE = new States.TownState(this.gsm);
-            States.TOWN_TUTORIAL_STATE = new States.TownTutorialState(this.gsm);
             States.DUNGEON_TUTORIAL_STATE = new States.DungeonTutorialState(this.gsm);
             // END STATES
             this.gsm.initState();

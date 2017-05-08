@@ -9,7 +9,7 @@
     export abstract class LevelState extends State {
 
         //debug var; there should only be 1
-        public static DEBUG = false;
+        public static DEBUG = true;
         //-
 
         //entities, incl. player; destroyed on end
@@ -121,7 +121,16 @@
             if (LevelState.DEBUG) {
                 this.gsm.game.debug.body(this.player);
                 this.gsm.game.debug.bodyInfo(this.player, 100, 110);
-                this.enemies.forEachAlive(e => { this.gsm.game.debug.body(e) }, this);
+                this.enemies.forEachAlive(e => {
+                    this.gsm.game.debug.body(e);
+
+                    if (e instanceof ENTITIES.MageOgre) {
+                        e.fireBall.bullets.forEachAlive(_e => {
+                            this.gsm.game.debug.body(_e);
+                        }, this);
+                    }
+                }, this);
+
             }
         }
 

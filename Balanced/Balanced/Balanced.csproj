@@ -194,7 +194,6 @@
     <TypeScriptCompile Include="assets\scripts\States\test-states\TestState2.ts" />
     <TypeScriptCompile Include="assets\scripts\States\level-states\TownState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\tutorial\DungeonTutorialState.ts" />
-    <TypeScriptCompile Include="assets\scripts\States\tutorial\TownTutorialState.ts" />
     <TypeScriptCompile Include="assets\scripts\util\JukeBox.ts" />
     <TypeScriptCompile Include="assets\scripts\util\keys\KeyEvent.ts" />
     <TypeScriptCompile Include="assets\scripts\util\Resource.ts" />

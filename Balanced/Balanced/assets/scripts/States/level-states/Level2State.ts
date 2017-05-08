@@ -51,6 +51,23 @@
             if (!this.player.alive)
                 return;
 
+
+            this.enemies.forEachAlive(e => {
+                if (e instanceof ENTITIES.MageOgre) {
+                    this.gsm.game.physics.arcade.overlap(this.player, e.fireBall.bullets,
+                        (ply: ENTITIES.Player, me) => {
+                            ply.dealDamage(35, false, 'purple', true, true, null,
+                                {
+                                    dx: 64 * (me.scale.x > 0 ? -1 : 1),
+                                    dy: -64,
+                                    time: 200
+                                });
+                            me.kill();
+                        });
+                }
+            }, this);
+
+
             //check if the doors are around
             this.gsm.game.physics.arcade.overlap(this.player, this.doors, this.doDoorLogic, null, this);
             //do the loot stuff
@@ -272,7 +289,16 @@
         }
 
         public placeEnemies(element, group): void {
-            var baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
+            var baddie;
+
+            if (element.properties.class !== undefined && element.properties.class !== null) {
+                //create mage
+                baddie = new ENTITIES.MageOgre(this.gsm, element.x, element.y, this.player, 'ogre_mage');
+            }
+            else {
+                baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
+            }
+
             baddie.body.bounce.y = .2;
             baddie.makeHealthBar();
             baddie.makeEnergyBar();

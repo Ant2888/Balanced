@@ -169,8 +169,17 @@
             this.cart = new Array();
             this.setShopCost(0);
 
-            if (this.shopItem !== null && this.shopItem !== undefined)
-                this.shopItem.destroy(true);
+            var container = new Array();
+            if (this.shopItem !== null && this.shopItem !== undefined) {
+                this.shopItem.forEachAlive(e => {
+                    if (e.x >= 0)
+                        container.push(e);
+                }, this);
+
+                container.forEach(e => { e.destroy(true) });
+            }
+
+
         }
 
         /**

@@ -8,14 +8,15 @@
         public ab1_mod: COMBAT.Ability;
 
         //AI STUFF
-        public VISION_X = 64 * 3;
-        public VISION_Y = 64 * 3;
+        public VISION_X = 64 * 10;
+        public VISION_Y = 64 * 1;
         public GCD = 2500;
         //END AI
 
         public player: ENTITIES.Player;
         public fireBall: Phaser.Weapon;
         protected FIRE_BALL = 'fire_ball';
+        public stateLogic: FSM.MageStateSystem;
 
         constructor(gsm: States.GameStateManager, x: number, y: number, player: ENTITIES.Player,
             key?: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture,
@@ -26,8 +27,8 @@
             this.fireBall.addBulletAnimation('fire_anim', [0, 1, 2], 10, false);
             this.fireBall.bulletAnimation = 'fire_anim';
             this.fireBall.bulletKillType = Phaser.Weapon.KILL_LIFESPAN;
-            this.fireBall.bulletLifespan = 750;
-            this.fireBall.bulletSpeed = 800;
+            this.fireBall.bulletLifespan = 800;
+            this.fireBall.bulletSpeed = 1000;
             this.fireBall.bulletRotateToVelocity = true;
             this.fireBall.bulletGravity.y = -this.gsm.game.physics.arcade.gravity.y;
             this.fireBall.fireRate = 250;
@@ -47,6 +48,9 @@
             );
 
             this.player = player;
+
+            this.abm = new COMBAT.MageOgreAbilities(this, this.gsm);
+            this.stateLogic = new FSM.MageStateSystem(this.gsm, this, this.player);
 
             this.attackSize = { width: 96 - 4, height: 96 - 26, wOffset: 2, hOffset: 26 };
             this.hitSize = { width: 96 - 16, height: 96 - 32, wOffset: 8, hOffset: 32 };
@@ -89,8 +93,8 @@
             this.animations.add(Entity.walkL, [2, 3, 4, 5, 6, 7, 8, 9], 15, false);
             this.animations.add(Entity.walkR, [10, 11, 12, 13, 14, 15, 16, 17], 15, false);
 
-            this.animations.add(Entity.dieL, [49, 50, 51], 8, false);
-            this.animations.add(Entity.dieR, [56, 57, 58], 8, false);
+            this.animations.add(Entity.dieL, [30, 31, 32, 33], 15, false);
+            this.animations.add(Entity.dieR, [34, 35, 36, 37], 15, false);
 
             this.animations.add(Entity.idleL, [0], 1, false);
             this.animations.add(Entity.idleR, [1], 1, false);

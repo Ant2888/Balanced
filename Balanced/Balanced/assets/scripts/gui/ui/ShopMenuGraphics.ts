@@ -39,6 +39,38 @@
                     p.ab3_mod.dmg =
                         p.ab3_mod.dmg * 1.10;
                 }
+            },
+            buff_slash_cost: {
+                text: 'Slash Cost -25%',
+                goldCost: 50,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab1_mod.energyCost =
+                        p.ab1_mod.energyCost * .75;
+                }
+            },
+            buff_slash_damage: {
+                text: 'Slash Damage +10%',
+                goldCost: 50,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab1_mod.dmg =
+                        p.ab1_mod.dmg * 1.10;
+                }
+            },
+            buff_wave_cost: {
+                text: 'Energy Wave Cost -25%',
+                goldCost: 50,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab2_mod.energyCost =
+                        p.ab2_mod.energyCost * .75;
+                }
+            },
+            buff_wave_damage: {
+                text: 'Energy Wave Damage +10%',
+                goldCost: 50,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab2_mod.dmg =
+                        p.ab2_mod.dmg * 1.10;
+                }
             }
         };
 
@@ -71,12 +103,12 @@
             this.menu.anchor.setTo(.5, .5);
             this.menu.fixedToCamera = true;
 
-            this.playerGold = this.gsm.game.add.text(-10, -15, '0', {
+            this.playerGold = this.gsm.game.add.text(-10, 138, '0', {
                 fill: 'gold', font: 'Courier', fontSize: '18px',
                 stroke: 'black', strokeThickness: 1
             });
 
-            this.shopCost = this.gsm.game.add.text(-10, 138, '0', {
+            this.shopCost = this.gsm.game.add.text(-10, -15, '0', {
                 fill: 'gold', font: 'Courier', fontSize: '18px',
                 stroke: 'black', strokeThickness: 1
             });
@@ -95,7 +127,8 @@
             this.buyBtn = this.gsm.game.add.button(-57, 40, 'purchase_btn', this.checkout, this, 1, 0, 2);
             this.menu.addChild(this.buyBtn);
             
-            this.closeMenu();
+            this.menu.exists = false;
+            this.closeBtn.exists = false;
         }
 
         /**
@@ -149,11 +182,11 @@
             var items = new Array();
             var rndEvent = Object.keys(ShopMenuGraphics.ShopMatrix);
             //generate 5 items
-            for (var i = 0; i < 5; i++){
+            for (var i = 0; i < 3; i++){
                 var shopItem = <ShopItem>(ShopMenuGraphics.ShopMatrix[rndEvent[rndEvent.length * Math.random() << 0]]);
 
-                if (items.indexOf(shopItem) >= 0)
-                    continue;
+                while (items.indexOf(shopItem) >= 0)
+                    shopItem = <ShopItem>(ShopMenuGraphics.ShopMatrix[rndEvent[rndEvent.length * Math.random() << 0]]);
 
                 items.push(shopItem);
 
@@ -210,12 +243,17 @@
             this.menu.exists = true;
             this.closeBtn.exists = true;
             this.setPlayerGold();
+
+            this.gsm.musicBox.playByID('Bag_Open', undefined, undefined, UTIL.SFX, false, false);
         }
 
         /**
          * Closes the menu, will not work if player dead or game paused
          */
         public closeMenu(): void {
+            if (!this.isOpen())
+                return;
+
             if (this.gsm.game.paused || !this.player.alive)
                 return;
 
@@ -224,6 +262,8 @@
 
             if (this.closeBtn.exists)
                 this.closeBtn.exists = false;
+
+            this.gsm.musicBox.playByID('Bag_Close', undefined, undefined, UTIL.SFX+.1, false, false);
         }
 
         /**

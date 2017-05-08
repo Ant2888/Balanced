@@ -148,6 +148,9 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('Whirlwind', 'assets/res/audio/Whirlwind.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);
+        rem.addResource(new UTIL.Resource('PickUpCoin', 'assets/res/audio/PickUpCoin.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
         // --------------------------------- AUDIO
         // --------------------------------- HUD
         rem.addResource(new UTIL.Resource('ab_ab1_ss', 'assets/res/hud/ab_ab1_ss.png', UTIL.AB_AB1_SS_ID), true, function (e) {
@@ -331,10 +334,16 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('wave_attk', 'assets/res/level1-dungeon/wave_attk.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 37, 64);
         }, this);
+        rem.addResource(new UTIL.Resource('fire_ball', 'assets/res/level1-dungeon/fire_ball.png', UTIL.HM_OKBUTTON_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 37, 64);
+        }, this);
         rem.addResource(new UTIL.Resource('baddie', 'assets/res/level1-dungeon/baddie.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 64, 64);
         }, this);
         rem.addResource(new UTIL.Resource('ogre', 'assets/res/level1-dungeon/ogre.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 96, 96);
+        }, this);
+        rem.addResource(new UTIL.Resource('ogre_mage', 'assets/res/level1-dungeon/ogre_mage.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 96, 96);
         }, this);
         rem.addResource(new UTIL.Resource('coin', 'assets/res/level1-dungeon/coin.png', UTIL.BADDIE_ID), true, function (e) {

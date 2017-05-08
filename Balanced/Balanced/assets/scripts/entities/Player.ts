@@ -241,6 +241,7 @@
             box.addSound('Bag_Open');
             box.addSound('Bag_Close');
             box.addSound('OpenMenu');
+            box.addSound('PickUpCoin');
         }
 
         public addCoin(amount?: number): void {
@@ -263,9 +264,11 @@
                     font: "Courier"
                 },
                 x: this.x,
-                y: this.y - 35,
+                y: this.y - (Math.random()*(60-35)+35),
                 timeToLive: 300
             });
+            
+            this.gsm.musicBox.playByID('PickUpCoin', undefined, undefined, UTIL.SFX, false, true);
         }
 
     }

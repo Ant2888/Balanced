@@ -89,7 +89,7 @@ module States {
             this.townGraphics = new GUI.TownGraphics(group);
             this.gsm.getGUIM().addGroup(this.townGraphics);
 
-            this.player = new ENTITIES.Player(this.gsm, 70, this.gsm.game.world.height - (4 * 64), 'tempPlayer');
+            this.player = new ENTITIES.Player(this.gsm, 1700, this.gsm.game.world.height - (4 * 64), 'tempPlayer');
             this.player.loadEntitySounds(this.gsm.musicBox);
             this.player.inputEnabled = true;
             this.player.scale.setTo(2, 2);
@@ -132,7 +132,7 @@ module States {
         private doInnLogic(): void {
             this.player.overHeadText.clearColors();
             this.townGraphics.getInn()['lastOverlapped'] = this.gsm.game.time.now + 1000;
-            this.player.overHeadText.text = 'Press \'F\' to open the inn!';
+            //this.player.overHeadText.text = 'Press \'F\' to open the inn!';
             this.player.overHeadText.addColor('yellow', ENTITIES.Player.ENTER_COLOR_IND);
             this.player.overHeadText.addColor('white', ENTITIES.Player.ENTER_COLOR_IND + 1);
         }
@@ -142,7 +142,7 @@ module States {
          */
         private doShopLogic(): void {
             this.player.overHeadText.clearColors();
-            this.townGraphics.getShop()['lastOverlapped'] = this.gsm.game.time.now + 1000;
+            this.townGraphics.getShop()['lastOverlapped'] = this.gsm.game.time.now + 200;
             this.player.overHeadText.text = 'Press \'F\' to open the shop!';
             this.player.overHeadText.addColor('yellow', ENTITIES.Player.ENTER_COLOR_IND);
             this.player.overHeadText.addColor('white', ENTITIES.Player.ENTER_COLOR_IND + 1);
@@ -178,7 +178,7 @@ module States {
 
         private enterKeyPressed(): void {
             if (this.townGraphics.getDungeon()['lastOverlapped'] > this.gsm.game.time.now) {
-                this.gsm.setState(States.LEVEL_SELECT_STATE);
+                this.gsm.setState(States.LEVEL1_STATE);
             } else if (this.townGraphics.getInn()['lastOverlapped'] > this.gsm.game.time.now) {
                 console.log('INN NYI');
             } else if (this.townGraphics.getShop()['lastOverlapped'] > this.gsm.game.time.now) {

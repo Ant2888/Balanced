@@ -29,6 +29,8 @@
     <Content Include="assets\res\audio\ClickDown.mp3" />
     <Content Include="assets\res\audio\ClickLetGo.mp3" />
     <Content Include="assets\res\audio\CloseMenu.mp3" />
+    <Content Include="assets\res\audio\CoinBounce.mp3" />
+    <Content Include="assets\res\audio\PickUpCoin.mp3" />
     <Content Include="assets\res\audio\Door_Open.mp3" />
     <Content Include="assets\res\audio\Drinking.mp3" />
     <Content Include="assets\res\audio\Fall1.mp3" />
@@ -97,8 +99,10 @@
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
     <Content Include="assets\res\level1-dungeon\castledoors.png" />
     <Content Include="assets\res\level1-dungeon\coin.png" />
+    <Content Include="assets\res\level1-dungeon\fire_ball.png" />
     <Content Include="assets\res\level1-dungeon\grunge_tile.png" />
     <Content Include="assets\res\level1-dungeon\ogre.png" />
+    <Content Include="assets\res\level1-dungeon\ogre_mage.png" />
     <Content Include="assets\res\level1-dungeon\tiled.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />
     <Content Include="assets\res\main-menu\mm_help_btns.png" />
@@ -134,6 +138,11 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="assets\scripts\balance\buffs\EventMatrix.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\MageOgreAbilities.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\MageOgre.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\mage\CastSpellState.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\mage\IdleMageState.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\mage\MageStateSystem.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\DialogGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\BalanceEvent.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\BalanceManager.ts" />

@@ -67,6 +67,7 @@
     <Content Include="assets\res\boot\Balanced Logo.png" />
     <Content Include="assets\res\boot\mm_background_only.png" />
     <Content Include="assets\res\boot\Phaser Logo.png" />
+    <Content Include="assets\res\boot\volume_btns.png" />
     <Content Include="assets\res\help-menu\hm_background.png" />
     <Content Include="assets\res\help-menu\hm_ok_btns.png" />
     <Content Include="assets\res\hud\ab_ab1_ss.png" />
@@ -91,10 +92,6 @@
     <Content Include="assets\res\in-game-menus\purchase_btn.png" />
     <Content Include="assets\res\in-game-menus\shop_item.png" />
     <Content Include="assets\res\in-game-menus\shop_menu.png" />
-    <Content Include="assets\res\level-menu\ls_background.png" />
-    <Content Include="assets\res\level-menu\ls_level1_btns.png" />
-    <Content Include="assets\res\level-menu\ls_level2_btns.png" />
-    <Content Include="assets\res\level-menu\ls_level3_btns.png" />
     <Content Include="assets\res\level1-dungeon\baddie.png" />
     <Content Include="assets\res\level1-dungeon\balancedSprite.png" />
     <Content Include="assets\res\level1-dungeon\castledoors.png" />
@@ -105,11 +102,10 @@
     <Content Include="assets\res\level1-dungeon\ogre_mage.png" />
     <Content Include="assets\res\level1-dungeon\tiled.png" />
     <Content Include="assets\res\main-menu\mm_background.png" />
+    <Content Include="assets\res\main-menu\mm_controles_btns.png" />
     <Content Include="assets\res\main-menu\mm_credits_btns.png" />
-    <Content Include="assets\res\main-menu\mm_options_btns.png" />
     <Content Include="assets\res\main-menu\mm_play_btns.png" />
     <Content Include="assets\res\options-menu\om_background.png" />
-    <Content Include="assets\res\options-menu\om_cancel_btns.png" />
     <Content Include="assets\res\options-menu\om_ok_btns.png" />
     <Content Include="assets\res\town\town.png" />
     <Content Include="assets\res\town\twn_background.png" />
@@ -167,7 +163,6 @@
     <TypeScriptCompile Include="assets\scripts\fsm\StateSystem.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\GameObject.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\HelpMenuGraphics.ts" />
-    <TypeScriptCompile Include="assets\scripts\gui\main-menu\LevelSelectGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\MainMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\main-menu\OptionsMenuGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\TestGraphic.ts" />
@@ -186,7 +181,6 @@
     <TypeScriptCompile Include="assets\scripts\States\Loot.ts" />
     <TypeScriptCompile Include="assets\scripts\States\LootManager.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\HelpMenuState.ts" />
-    <TypeScriptCompile Include="assets\scripts\States\main-menu\LevelSelectState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\MainMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\States\main-menu\OptionsMenuState.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\ActionBarGraphics.ts" />

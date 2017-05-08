@@ -15,15 +15,12 @@ class BalancedGame {
     private game: Phaser.Game;
     private gsm: States.GameStateManager;
     private loadingComplete: boolean;
-
+    
     preload() {
         //center game
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.pageAlignVertically = true;
-        this.game.scale.refresh();
-
-        this.loadingComplete = false;
-
+        this.game.scale.refresh();        
 
         this.game.load.start();
 
@@ -225,22 +222,7 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('purchase_btn', 'assets/res/in-game-menus/purchase_btn.png', UTIL.CLOSE_BTN_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 109, 37);
         }, this);
-        // --------------------------------- character menus
-
-        // --------------------------------- levelsel menus
-        rem.addResource(new UTIL.Resource('ls_background', 'assets/res/level-menu/ls_background.png', UTIL.LS_BACKGROUND_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl);
-        }, this);
-        rem.addResource(new UTIL.Resource('ls_level1_btn', 'assets/res/level-menu/ls_level1_btns.png', UTIL.LS_LEVEL1_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 280, 80);
-        }, this);
-        rem.addResource(new UTIL.Resource('ls_level2_btn', 'assets/res/level-menu/ls_level2_btns.png', UTIL.LS_LEVEL2_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 280, 80);
-        }, this);
-        rem.addResource(new UTIL.Resource('ls_level3_btn', 'assets/res/level-menu/ls_level3_btns.png', UTIL.LS_LEVEL3_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 280, 80);
-        }, this);
-        // --------------------------------- levelsel menus
+        // --------------------------------- character menus             
 
         rem.addResource(new UTIL.Resource('logo2', 'assets/res/phaser2.jpg', UTIL.TESTLOGO_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl);
@@ -256,7 +238,7 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('mmCreditButton', 'assets/res/main-menu/mm_credits_btns.png', UTIL.MM_LOADBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 770, 110);
         }, this);        
-        rem.addResource(new UTIL.Resource('mmOptionsButton', 'assets/res/main-menu/mm_options_btns.png', UTIL.MM_HELPBUTTON_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('mmControlesButton', 'assets/res/main-menu/mm_controles_btns.png', UTIL.MM_HELPBUTTON_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 770, 110);
         }, this);
         // -------------------------------------END MAIN MENU
@@ -266,11 +248,8 @@ class BalancedGame {
             this.game.load.image(e.key, e.assetUrl);
         }, this);
         rem.addResource(new UTIL.Resource('omOkButton', 'assets/res/options-menu/om_ok_btns.png', UTIL.OM_OKBUTTON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 150, 80);
-        }, this);
-        rem.addResource(new UTIL.Resource('omCancelButton', 'assets/res/options-menu/om_cancel_btns.png', UTIL.OM_CANCELBUTTON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 300, 80);
-        }, this);
+            this.game.load.spritesheet(e.key, e.assetUrl, 770, 110);
+        }, this);        
         // --------------------------------------END OPTIONS MENU
 
         // ---------------------------------------HELP MENU RESOURCES
@@ -404,11 +383,16 @@ class BalancedGame {
         }, this);
         // -------------------------------------------END DUNGEON TUTORIAL SCREEN
 
+        //volume
+        rem.addResource(new UTIL.Resource('sound_btn', 'assets/res/boot/volume_btns.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 50, 50);
+        }, this);
+        //
 
     }
 
     create() {
-        this.game.time.advancedTiming = true;
+        this.game.time.advancedTiming = true;       
 
         var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY + 300, 'Loading....', { fill: '#ffffff' });
         text.anchor.setTo(0.5, 0.5);
@@ -474,7 +458,6 @@ class BalancedGame {
             States.MAIN_MENU_STATE = new States.MainMenuState(this.gsm);
             States.OPTIONS_MENU_STATE = new States.OptionsMenuState(this.gsm);
             States.HELP_MENU_STATE = new States.HelpMenuState(this.gsm);
-            States.LEVEL_SELECT_STATE = new States.LevelSelectState(this.gsm);
             States.LEVEL1_STATE = new States.Level1State(this.gsm);
             States.LEVEL2_STATE = new States.Level2State(this.gsm);
             States.LEVEL3_STATE = new States.Level3State(this.gsm);
@@ -486,8 +469,8 @@ class BalancedGame {
         }
     }
 
-    render() {
-        this.game.debug.text(this.game.time.fps + '', 1258, 14, "#00ff00");
+    render() {    
+    this.game.debug.text(this.game.time.fps + '', 1258, 14, "#00ff00");
         if (this.gsm)
             this.gsm.render();
     }

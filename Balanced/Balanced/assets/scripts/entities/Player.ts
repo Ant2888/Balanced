@@ -108,7 +108,7 @@
 
             this.ab3_mod = {
                 energyCost: 45,
-                dmg: this.ATTACK * .75, flinchTime: 0, stunTime: 0,
+                dmg: this.ATTACK * 1.0, flinchTime: 0, stunTime: 0,
                 knockback: { dx: 10, dy: -10, time: 300, stunTime: 100 }
             };
 

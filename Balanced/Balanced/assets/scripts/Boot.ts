@@ -407,11 +407,11 @@ class BalancedGame {
 
         this.game.load.onLoadComplete.add(function () {
 
-            var DEBUGGING = true;
+            var DEBUGGING = false;
 
             text.setText("Load Complete");
 
-            this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
+            var bg = this.game.add.tileSprite(0, 0, 1280, 720, 'ss_background');
 
             var phaserLogo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'phaser_logo');
             phaserLogo.anchor.setTo(0.5, 0.5);
@@ -432,10 +432,12 @@ class BalancedGame {
                 t1.start();
             } else {
                 this.loadingComplete = true;
+                bg.destroy(true);
             }
 
             t2.onComplete.add(function (e) {
                 this.loadingComplete = true;
+                bg.destroy(true);
             }, this);
         }, this);
 

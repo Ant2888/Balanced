@@ -21,7 +21,6 @@ module States {
             this.gsm.game.physics.arcade.collide(this.player, this.townGraphics.getFloor(), () =>
             { this.player.isJumping = false }, null, this);
             
-
             if (this.keyboard.up.isDown && !this.player.isJumping) {
                 this.player.jump(-650);
                 this.player.isJumping = true;

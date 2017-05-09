@@ -129,8 +129,7 @@
 
             if (this.keyboard.up.isDown && !this.player.isJumping) {
                 this.player.jump(-650);
-
-
+                
                 this.player.isJumping = true;
             }
 

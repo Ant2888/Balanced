@@ -81,7 +81,7 @@
 
             this.ab1_mod = {
                 dmg: this.ATTACK * .35, flinchTime: Entity.FLINCH_TIME + 200,
-                knockback: { dx: 25, dy: -25, time: 500 }, energyCost: 70
+                knockback: { dx: 25, dy: -25, time: 500 }, energyCost: 100
             };
         }
 

@@ -2,7 +2,7 @@
 
     export class CastSpellState extends FiniteState {
 
-        public EPSILON = 10;
+        public EPSILON = 5;
         
         constructor(sys: MageStateSystem, gsm: States.GameStateManager) {
             super(sys, gsm);

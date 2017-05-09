@@ -261,22 +261,7 @@ class BalancedGame {
         }, this);
         // ----------------------------------------END HELP MENU RESOURCES
 
-        // ----------------------------------------TOWN RESOURCES
-        rem.addResource(new UTIL.Resource('twn_background', 'assets/res/town/twn_background.png', UTIL.TWN_BACKGROUND_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 1280, 720);
-        }, this);
-        rem.addResource(new UTIL.Resource('twn_shop', 'assets/res/town/twn_shop_sprite.png', UTIL.TWN_STORE_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 448, 288);
-        }, this);
-        rem.addResource(new UTIL.Resource('twn_inn', 'assets/res/town/twn_inn_sprite.png', UTIL.TWN_INN_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 320, 288);
-        }, this);
-        rem.addResource(new UTIL.Resource('twn_dungeon', 'assets/res/town/twn_dungeon_sprite.png', UTIL.TWN_DUNGEON_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 187, 154);
-        }, this);
-        rem.addResource(new UTIL.Resource('twn_hall', 'assets/res/town/twn_hall_sprite.png', UTIL.TWN_HALL_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 224, 352);
-        }, this);
+        // ----------------------------------------TOWN RESOURCES        
         rem.addResource(new UTIL.Resource('town', 'assets/res/town/town.png', UTIL.TWN_HALL_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl, 3840, 720);
         }, this);
@@ -342,20 +327,32 @@ class BalancedGame {
         // -------------------------------------------END SPALSH SCREEN
 
         // -------------------------------------------TUTORIAL SCREEN
-        rem.addResource(new UTIL.Resource('pm_background', 'assets/res/tutorial/pm_background.png', UTIL.BADDIE_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 350, 350);
+        rem.addResource(new UTIL.Resource('tut_screen1', 'assets/res/tutorial/tut_screen1.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
         }, this);
-        rem.addResource(new UTIL.Resource('pm_help_btn', 'assets/res/tutorial/pm_help_btn.png', UTIL.BADDIE_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
+        rem.addResource(new UTIL.Resource('tut_screen2', 'assets/res/tutorial/tut_screen2.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
         }, this);
-        rem.addResource(new UTIL.Resource('pm_mainmenu_btn', 'assets/res/tutorial/pm_mainmenu_btn.png', UTIL.BADDIE_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
+        rem.addResource(new UTIL.Resource('tut_screen3', 'assets/res/tutorial/tut_screen3.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
         }, this);
-        rem.addResource(new UTIL.Resource('pm_options_btn', 'assets/res/tutorial/pm_options_btn.png', UTIL.BADDIE_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
+        rem.addResource(new UTIL.Resource('tut_screen4', 'assets/res/tutorial/tut_screen4.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
         }, this);
-        rem.addResource(new UTIL.Resource('pm_resume_btn', 'assets/res/tutorial/pm_resume_btn.png', UTIL.BADDIE_ID), true, function (e) {
-            this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
+        rem.addResource(new UTIL.Resource('tut_screen5', 'assets/res/tutorial/tut_screen5.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_screen6', 'assets/res/tutorial/tut_screen6.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_screen7', 'assets/res/tutorial/tut_screen7.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_screen8', 'assets/res/tutorial/tut_screen8.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
+        }, this);
+        rem.addResource(new UTIL.Resource('tut_screen9', 'assets/res/tutorial/tut_screen9.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 1000, 500);
         }, this);
         rem.addResource(new UTIL.Resource('tut_no_btn', 'assets/res/tutorial/tut_no_btn.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
@@ -366,16 +363,25 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('tut_background', 'assets/res/tutorial/tut_background.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl, 350, 200);
         }, this);
-        rem.addResource(new UTIL.Resource('tut_screen1', 'assets/res/tutorial/tut_screen1.png', UTIL.BADDIE_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 1280, 720);
+        // -------------------------------------------END TUTORIAL SCREEN
+
+        // -------------------------------------------PAUSE MENU
+        rem.addResource(new UTIL.Resource('pm_background', 'assets/res/pause-menu/pm_background.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 350, 350);
         }, this);
-        rem.addResource(new UTIL.Resource('tut_screen2', 'assets/res/tutorial/tut_screen2.png', UTIL.BADDIE_ID), true, function (e) {
-            this.game.load.image(e.key, e.assetUrl, 1280, 720);
-        }, this);
-        rem.addResource(new UTIL.Resource('tut_next_btn', 'assets/res/tutorial/tut_next_btns.png', UTIL.BADDIE_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('pm_help_btn', 'assets/res/pause-menu/pm_help_btn.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
         }, this);
-        // -------------------------------------------END TUTORIAL SCREEN
+        rem.addResource(new UTIL.Resource('pm_mainmenu_btn', 'assets/res/pause-menu/pm_mainmenu_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_options_btn', 'assets/res/pause-menu/pm_options_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
+        }, this);
+        rem.addResource(new UTIL.Resource('pm_resume_btn', 'assets/res/pause-menu/pm_resume_btn.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl, 200, 50);
+        }, this);
+        // -------------------------------------------END PAUSE MENU
 
         // -------------------------------------------DUNGEON TUTORIAL SCREEN
         rem.addResource(new UTIL.Resource('tutorial', 'assets/res/level1-dungeon/tutorial.json', UTIL.PROTOTYPE_TILEMAP_ID), true, function (e) {

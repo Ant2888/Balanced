@@ -78,6 +78,11 @@ declare class UTIL {
     static MUSIC: number;
     static MASTER: number;
 
+    static DOONCE: boolean;
+
+    static PART1: boolean;
+    static PART2: boolean;
+    static PART3: boolean;
 
     //--------------- HUD
 }
@@ -113,6 +118,11 @@ UTIL.BALANCE_NOTIF_ID = 16;
 //FRANCOIS START AT 100
 
 //EMERSON START AT 200
+UTIL.DOONCE = true;
+UTIL.PART1 = true;
+UTIL.PART2 = true;
+UTIL.PART3 = true;
+
 UTIL.MM_BACKGROUND_ID = 200;
 UTIL.MM_PLAYBUTTON_ID = 201;
 UTIL.MM_LOADBUTTON_ID = 202;

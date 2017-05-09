@@ -36,6 +36,7 @@
             btn2.setOverSound(this.gsm.musicBox.findSound('Hover'));
 
             this.setupKeybinds(this);
+            this.buildSoundButton();
             return true;
         }
 
@@ -57,7 +58,8 @@
             }
         } 
 
-        public end(): boolean {           
+        public end(): boolean {
+            this.destroySoundButton();         
             return true;
         }
 

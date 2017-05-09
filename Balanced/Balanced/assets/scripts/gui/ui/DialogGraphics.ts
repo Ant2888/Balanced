@@ -26,6 +26,7 @@
         // reference to the gsm and the player   
         private gsm: States.GameStateManager;
         private player: ENTITIES.Player;
+        private text: Phaser.Text;
 
         constructor(group: Phaser.Group, player: ENTITIES.Player) {
             super(205, group);
@@ -145,7 +146,8 @@
 
             //yes
             this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2), (this.gsm.game.height / 2) - 30, 'tut_yes_btn', function () {
-                this.gsm.setState(States.TOWN_TUTORIAL_STATE);
+                this.gsm.game.paused = false;  
+                this.gsm.setState(States.DUNGEON_TUTORIAL_STATE);
             }, this, 1, 0, 2);
 
             this.tut_yes_btn.anchor.setTo(.5, .5);
@@ -154,12 +156,163 @@
 
             //no
             this.tut_no_btn = this.gsm.game.add.button((this.gsm.game.width / 2), (this.gsm.game.height / 2) + 40, 'tut_no_btn', function () {
+                this.gsm.game.paused = false;
                 this.gsm.setState(States.TOWN_STATE);
             }, this, 1, 0, 2);
             this.tut_no_btn.anchor.setTo(.5, .5);
             this.tut_no_btn.fixedToCamera = true;
             this.group.add(this.tut_no_btn);
-                        
+
+            this.gsm.game.paused = true;  
+        }
+
+        public tutorialState1(): void {
+            // tut menu background
+            this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen1');
+            this.tut_background.anchor.setTo(.5, .5);
+            this.tut_background.fixedToCamera = true;
+            
+            
+            //ok
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2)+95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+                this.tut_background.destroy(true);
+                this.tut_yes_btn.destroy(true);
+                this.tutorialState2();
+            }, this, 1, 0, 2);
+
+            this.tut_yes_btn.anchor.setTo(.5, .5);
+            this.tut_yes_btn.fixedToCamera = true;
+                                    
+            this.gsm.game.paused = true;
+        }
+
+        public tutorialState2(): void {
+            // tut menu background
+            this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen2');
+            this.tut_background.anchor.setTo(.5, .5);
+            this.tut_background.fixedToCamera = true;
+            
+            //ok
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2)+95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+                this.tut_background.destroy(true);
+                this.tut_yes_btn.destroy(true);
+                this.gsm.game.paused = false;
+
+                this.text = this.gsm.game.add.text(680, 400, 'MOVE HERE\n \x20\x20\x7C\x7C\x0D\x0A\x20\x20\x20\x7C\x7C\x0D\x0A\x20\x20\x20\x7C\x7C\x0D\x0A\x20\x20\x5C\x20\x20\x2F\x0D\x0A\x20\x20\x20', { fill: 'red', font: 'papyrus', fontSize: '12px', fontStyle: 'bold' });
+            }, this, 1, 0, 2);
+
+            this.tut_yes_btn.anchor.setTo(.5, .5);
+            this.tut_yes_btn.fixedToCamera = true;
+            
+
+        }
+
+        public tutorialState3(): void {     
+            this.text.destroy(true);
+
+            // tut menu background
+            this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen3');
+            this.tut_background.anchor.setTo(.5, .5);
+            this.tut_background.fixedToCamera = true;                                   
+
+            //ok
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+                this.tut_background.destroy(true);
+                this.tut_yes_btn.destroy(true);
+                this.gsm.game.paused = false;                
+            }, this, 1, 0, 2);
+
+            this.tut_yes_btn.anchor.setTo(.5, .5);
+            this.tut_yes_btn.fixedToCamera = true;
+
+            this.text = this.gsm.game.add.text(1305, 400, 'MOVE HERE\n \x20\x20\x7C\x7C\x0D\x0A\x20\x20\x20\x7C\x7C\x0D\x0A\x20\x20\x20\x7C\x7C\x0D\x0A\x20\x20\x5C\x20\x20\x2F\x0D\x0A\x20\x20\x20', { fill: 'red', font: 'papyrus', fontSize: '12px', fontStyle: 'bold' });
+            
+            this.gsm.game.paused = true;
+        }
+
+        public tutorialState4(): void {
+            this.text.destroy(true);
+
+            // tut menu background
+            this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen4');
+            this.tut_background.anchor.setTo(.5, .5);
+            this.tut_background.fixedToCamera = true;
+
+            //ok
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+                this.tut_background.destroy(true);
+                this.tut_yes_btn.destroy(true);
+                this.gsm.game.paused = false;
+
+               
+                this.text = this.gsm.game.add.text(1270, 90, 'MOVE HERE\n \x20\x20\x7C\x7C\x0D\x0A\x20\x20\x20\x7C\x7C\x0D\x0A\x20\x20\x20\x7C\x7C\x0D\x0A\x20\x20\x5C\x20\x20\x2F\x0D\x0A\x20\x20\x20', { fill: 'red', font: 'papyrus', fontSize: '12px', fontStyle: 'bold' });
+            }, this, 1, 0, 2);
+
+            this.tut_yes_btn.anchor.setTo(.5, .5);
+            this.tut_yes_btn.fixedToCamera = true;
+
+            this.gsm.game.paused = true;
+        }
+
+        public tutorialState5(): void {
+            this.text.destroy(true);
+
+            // tut menu background
+            this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen5');
+            this.tut_background.anchor.setTo(.5, .5);
+            this.tut_background.fixedToCamera = true;
+
+            //ok
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+                this.tut_background.destroy(true);
+                this.tut_yes_btn.destroy(true);
+                this.tutorialState6();
+            }, this, 1, 0, 2);
+
+            this.tut_yes_btn.anchor.setTo(.5, .5);
+            this.tut_yes_btn.fixedToCamera = true;
+
+            this.gsm.game.paused = true;
+        }
+
+        public tutorialState6(): void {  
+            this.text.destroy(true);
+
+            // tut menu background
+            this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width, this.gsm.game.height / 2, 'tut_screen6');
+            this.tut_background.anchor.setTo(.5, .5);
+            this.tut_background.fixedToCamera = true;
+
+            //ok
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+                this.tut_background.destroy(true);
+                this.tut_yes_btn.destroy(true);
+                this.tutorialState7();
+            }, this, 1, 0, 2);
+
+            this.tut_yes_btn.anchor.setTo(.5, .5);
+            this.tut_yes_btn.fixedToCamera = true;
+            
+        }
+
+        public tutorialState7(): void {
+            // tut menu background
+            this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen7');
+            this.tut_background.anchor.setTo(.5, .5);
+            this.tut_background.fixedToCamera = true;
+
+            //ok
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+                this.tut_background.destroy(true);
+                this.tut_yes_btn.destroy(true);
+                this.gsm.game.paused = false;
+
+            }, this, 1, 0, 2);
+
+            this.tut_yes_btn.anchor.setTo(.5, .5);
+            this.tut_yes_btn.fixedToCamera = true;
+            this.group.add(this.tut_yes_btn);
+
         }
     }
 }

@@ -8,6 +8,7 @@ module States {
     export class TownState extends State {
 
         private townGraphics: GUI.TownGraphics;
+        private dialogGraphics: GUI.DialogGraphics;
         private player: ENTITIES.Player;
         private keyboard: Phaser.CursorKeys;
         
@@ -82,6 +83,8 @@ module States {
         }
 
         public startup(): boolean {
+            
+
             this.gsm.musicBox.playByID('dark_loop', undefined, undefined, .2, true, false);
             this.gsm.game.world.setBounds(0, 0, 3840, 720);
 
@@ -98,9 +101,11 @@ module States {
             var group2 = this.gsm.game.add.group();
             this.shop = new GUI.ShopMenuGraphics(group2, this.player);
             var health = new GUI.HealthAndEnergyGraphics(group2, this.player);
+            this.dialogGraphics = new GUI.DialogGraphics(group2, this.player);
 
             this.gsm.getGUIM().addGroup(health);
             this.gsm.getGUIM().addGroup(this.shop);
+            this.gsm.getGUIM().addGroup(this.dialogGraphics);
 
             this.townGraphics.getShop()['lastOverlapped'] = 0;
             this.townGraphics.getInn()['lastOverlapped'] = 0;
@@ -110,6 +115,10 @@ module States {
             this.doKeyLogic();
 
             this.buildSoundButton();
+            if (UTIL.DOONCE) {
+                this.dialogGraphics.tutorialMenu();
+                UTIL.DOONCE = false;
+            }
 
             return true;
         }

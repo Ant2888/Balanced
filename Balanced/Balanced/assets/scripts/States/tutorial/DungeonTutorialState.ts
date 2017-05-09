@@ -125,6 +125,21 @@
                 this.player.walk(0);
             }
 
+            if ((this.player.body.x > 678 && this.player.body.x < 700) && UTIL.PART1) {
+                UTIL.PART1 = !UTIL.PART1;
+                this.dialogs.tutorialState3();
+            }
+
+            if ((this.player.body.x > 1305 && this.player.body.x < 1330) && UTIL.PART2) {
+                UTIL.PART2 = !UTIL.PART2;
+                this.dialogs.tutorialState4();
+            }
+
+            if ((this.player.body.x > 1240 && this.player.body.x < 1270) && this.player.body.y <= 144 && UTIL.PART3) {
+                UTIL.PART3 = !UTIL.PART3;
+                this.dialogs.tutorialState5();
+            }
+
             this.stairOverlap = this.map.getTileWorldXY(this.player.x, this.player.y, this.map.tileWidth, this.map.tileHeight, "stairs");
         }
 
@@ -218,6 +233,9 @@
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour') }, this);
 
             this.backgroundlayer.resizeWorld();
+            this.balanceTimer.stop();
+
+            this.dialogs.tutorialState1();
 
             return true;
         }

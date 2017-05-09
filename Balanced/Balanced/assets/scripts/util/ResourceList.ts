@@ -83,6 +83,8 @@ declare class UTIL {
     static PART1: boolean;
     static PART2: boolean;
     static PART3: boolean;
+    static PART4: boolean;
+    static ISLEARNING: boolean;
 
     //--------------- HUD
 }
@@ -122,6 +124,8 @@ UTIL.DOONCE = true;
 UTIL.PART1 = true;
 UTIL.PART2 = true;
 UTIL.PART3 = true;
+UTIL.PART4 = true;
+UTIL.ISLEARNING = false;
 
 UTIL.MM_BACKGROUND_ID = 200;
 UTIL.MM_PLAYBUTTON_ID = 201;

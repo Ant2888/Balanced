@@ -80,7 +80,7 @@
                 this.dialogs.togglePauseMenu();
             }, this);
 
-            this.actionbar.getBag().onInputDown.add(function (e) {
+            /*this.actionbar.getBag().onInputDown.add(function (e) {
                 this.charMenu.closeMenu();
                 this.bag.flipMenu();
             }, this);
@@ -88,7 +88,7 @@
             this.actionbar.getStats().onInputDown.add(function () {
                 this.bag.closeMenu();
                 this.charMenu.flipMenu();
-            }, this);
+            }, this);*/
             //-
 
             this.doKeyLogic();

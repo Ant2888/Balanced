@@ -62,7 +62,9 @@
 
             if (!this.player.alive)
                 return;
-            
+
+            this.actionbar.setCoinText(ENTITIES.Player.SAVE_COINS);
+
             this.enemies.forEachAlive(e => {
                 if (e instanceof ENTITIES.MageOgre) {
                     this.gsm.game.physics.arcade.overlap(this.player, e.fireBall.bullets,

@@ -413,7 +413,7 @@ class BalancedGame {
 
         this.game.load.onLoadComplete.add(function () {
 
-            var DEBUGGING = false;
+            var DEBUGGING = true;
 
             text.setText("Load Complete");
 

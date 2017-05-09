@@ -38,6 +38,9 @@
         protected remTimer2: number;
         protected textHolder2: Phaser.Text;
 
+        private coin_image: Phaser.Sprite;
+        private coin_text: Phaser.Text;
+
         constructor(group: Phaser.Group, player: ENTITIES.Player) {            
             super(203, group);
             this.player = player;
@@ -59,9 +62,22 @@
             this.setPotion1(this.potion1Pressed);
             this.setPotion2(this.potion2Pressed);
             this.setStats(this.statsPressed);
-            this.setBag(this.bagPressed);
+            //this.setBag(this.bagPressed);
             this.setTown(this.townPressed);  
             this.setOptions(this.doNothing);
+
+            this.coin_image = this.gsm.game.add.sprite(875 , 595, 'coin');
+            this.coin_image.fixedToCamera = true;
+            this.group.add(this.coin_image);
+
+            this.coin_text = this.gsm.game.add.text(889, 605, '0', {
+                fill: 'gold', font: 'Courier', fontSize: '16px',
+                stroke: 'black', strokeThickness: 1,
+                boundsAlignH: 'left'
+            });
+
+            this.coin_text.fixedToCamera = true;
+            this.group.add(this.coin_text);
 
             this.ab_ab1_text = gsm.game.add.text(470, 662, 'Q', { fontSize: '28px', fill: '#000' });
             this.ab_ab1_text.fixedToCamera = true;
@@ -84,6 +100,10 @@
 
             this.remTimer2 = 0;
             this.pot2Timer = this.gsm.game.time.create(false);
+        }
+
+        public setCoinText(number: any) {
+            this.coin_text.text = '' + number;
         }
 
         private doNothing(): void { }

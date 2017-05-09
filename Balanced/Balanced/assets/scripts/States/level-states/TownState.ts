@@ -170,7 +170,7 @@ module States {
                 if (e.keyCode == Phaser.Keyboard.F)
                     this.enterKeyPressed();
                 if (e.keyCode == Phaser.Keyboard.V)
-                    this.gsm.setState(States.DUNGEON_TUTORIAL_STATE);
+                    this.gsm.setState(States.LEVEL1_STATE);
                 if (e.keyCode == Phaser.Keyboard.TILDE)
                     this.player.addCoin(100);
             };

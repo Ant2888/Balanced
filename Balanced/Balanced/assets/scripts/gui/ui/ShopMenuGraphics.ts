@@ -23,6 +23,20 @@
                     p.ab4_mod.dmg =
                         p.ab4_mod.dmg * 1.10;
                 }
+            }, buff_whirl_damage2: {
+                text: 'Whirlwind Damage +30%',
+                goldCost: 70,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab4_mod.dmg =
+                        p.ab4_mod.dmg * 1.30;
+                }
+            }, buff_whirl_damage3: {
+                text: 'Whirlwind Damage +50%',
+                goldCost: 100,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab4_mod.dmg =
+                        p.ab4_mod.dmg * 1.50;
+                }
             },
             buff_tri_cost: {
                 text: 'TriAttack Cost -25%',
@@ -38,6 +52,22 @@
                 bought: (p: ENTITIES.Player) => {
                     p.ab3_mod.dmg =
                         p.ab3_mod.dmg * 1.10;
+                }
+            },
+            buff_tri_damage2: {
+                text: 'TriAttack Damage +30%',
+                goldCost: 70,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab3_mod.dmg =
+                        p.ab3_mod.dmg * 1.30;
+                }
+            },
+            buff_tri_damage3: {
+                text: 'TriAttack Damage +50%',
+                goldCost: 100,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab3_mod.dmg =
+                        p.ab3_mod.dmg * 1.50;
                 }
             },
             buff_slash_cost: {
@@ -56,6 +86,22 @@
                         p.ab1_mod.dmg * 1.10;
                 }
             },
+            buff_slash_damage2: {
+                text: 'Slash Damage +30%',
+                goldCost: 70,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab1_mod.dmg =
+                        p.ab1_mod.dmg * 1.30;
+                }
+            },
+            buff_slash_damage3: {
+                text: 'Slash Damage +50%',
+                goldCost: 100,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab1_mod.dmg =
+                        p.ab1_mod.dmg * 1.50;
+                }
+            },
             buff_wave_cost: {
                 text: 'Energy Wave Cost -25%',
                 goldCost: 50,
@@ -70,6 +116,22 @@
                 bought: (p: ENTITIES.Player) => {
                     p.ab2_mod.dmg =
                         p.ab2_mod.dmg * 1.10;
+                }
+            },
+            buff_wave_damage2: {
+                text: 'Energy Wave Damage +30%',
+                goldCost: 70,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab2_mod.dmg =
+                        p.ab2_mod.dmg * 1.30;
+                }
+            },
+            buff_wave_damage3: {
+                text: 'Energy Wave Damage +50%',
+                goldCost: 100,
+                bought: (p: ENTITIES.Player) => {
+                    p.ab2_mod.dmg =
+                        p.ab2_mod.dmg * 1.50;
                 }
             }
         };
@@ -196,7 +258,7 @@
             var items = new Array();
             var rndEvent = Object.keys(ShopMenuGraphics.ShopMatrix);
             //generate 5 items
-            for (var i = 0; i < 3; i++){
+            for (var i = 0; i < 6; i++){
                 var shopItem = <ShopItem>(ShopMenuGraphics.ShopMatrix[rndEvent[rndEvent.length * Math.random() << 0]]);
 
                 while (items.indexOf(shopItem) >= 0)

@@ -26,6 +26,7 @@
             this.setPlayButton(this.playButtonPressed);
             this.setControlesButton(this.optionsButtonPressed);
             this.setCreditButton(this.loadButtonPressed);
+            this.creditButton.exists = false;
         }
 
         // initializes the buttons

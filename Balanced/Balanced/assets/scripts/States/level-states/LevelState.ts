@@ -76,6 +76,10 @@
             this.gsm.getGUIM().addGroup(this.charMenu);
             this.gsm.getGUIM().addGroup(this.dialogs);
 
+            this.actionbar.setOptionsPressed(() => {
+                this.dialogs.togglePauseMenu();
+            }, this);
+
             this.actionbar.getBag().onInputDown.add(function (e) {
                 this.charMenu.closeMenu();
                 this.bag.flipMenu();

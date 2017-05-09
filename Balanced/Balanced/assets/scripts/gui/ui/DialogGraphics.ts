@@ -114,6 +114,7 @@
             this.pm_resume_btn.exists = !this.pm_resume_btn.exists; 
 
             this.gsm.game.paused = !this.gsm.game.paused;
+           
         }
 
         public deathMenu(): void {

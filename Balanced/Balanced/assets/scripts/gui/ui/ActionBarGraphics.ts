@@ -61,7 +61,7 @@
             this.setStats(this.statsPressed);
             this.setBag(this.bagPressed);
             this.setTown(this.townPressed);  
-            this.setOptions(this.optionsPressed);
+            this.setOptions(this.doNothing);
 
             this.ab_ab1_text = gsm.game.add.text(470, 662, 'Q', { fontSize: '28px', fill: '#000' });
             this.ab_ab1_text.fixedToCamera = true;
@@ -85,6 +85,8 @@
             this.remTimer2 = 0;
             this.pot2Timer = this.gsm.game.time.create(false);
         }
+
+        private doNothing(): void { }
 
         private setStats(func: any): void {
             this.ab_stats_ss = this.gsm.game.add.button(825, 605, 'ab_stats_ss', func, this, 0, 0, 1);
@@ -211,9 +213,9 @@
             this.gsm.setState(States.TOWN_STATE);
         }
 
-        public optionsPressed(): any {
-            
-            console.log('pause menu button was pressed');
+        public setOptionsPressed(func: any, context: any): void {
+            this.ab_options_ss.destroy(true);
+            this.setOptions(func.bind(context));
         }
 
         public potion1Pressed(): boolean {

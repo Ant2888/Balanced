@@ -104,23 +104,27 @@
 
             }
 
-            if (this.stairOverlap == null) {
-                this.player.body.allowGravity = true;
-            }
+            if (!UTIL.ISLEARNING) {
+                if (this.stairOverlap == null) {
+                    this.player.body.allowGravity = true;
+                }
 
-            if (this.keyboard.up.isDown && !this.player.isJumping) {
-                this.player.jump(-650);
+                if (this.keyboard.up.isDown && !this.player.isJumping) {
+                    this.player.jump(-650);
 
 
-                this.player.isJumping = true;
-            }
+                    this.player.isJumping = true;
+                }
 
-            if (this.keyboard.left.isDown) {
-                //Move to the left
-                this.player.walk(-250);
-            } else if (this.keyboard.right.isDown) {
-                //Move to the right
-                this.player.walk(250);
+                if (this.keyboard.left.isDown) {
+                    //Move to the left
+                    this.player.walk(-250);
+                } else if (this.keyboard.right.isDown) {
+                    //Move to the right
+                    this.player.walk(250);
+                } else {
+                    this.player.walk(0);
+                }
             } else {
                 this.player.walk(0);
             }
@@ -138,6 +142,11 @@
             if ((this.player.body.x > 1240 && this.player.body.x < 1270) && this.player.body.y <= 144 && UTIL.PART3) {
                 UTIL.PART3 = !UTIL.PART3;
                 this.dialogs.tutorialState5();
+            }
+
+            if ((this.player.body.x > 505 && this.player.body.x < 540) && this.player.body.y <= 208 && UTIL.PART4) {
+                UTIL.PART4 = !UTIL.PART4;
+                this.dialogs.tutorialState8();
             }
 
             this.stairOverlap = this.map.getTileWorldXY(this.player.x, this.player.y, this.map.tileWidth, this.map.tileHeight, "stairs");

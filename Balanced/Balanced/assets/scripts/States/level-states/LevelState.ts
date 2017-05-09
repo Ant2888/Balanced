@@ -9,7 +9,7 @@
     export abstract class LevelState extends State {
 
         //debug var; there should only be 1
-        public static DEBUG = true;
+        public static DEBUG = false;
         //-
 
         //entities, incl. player; destroyed on end

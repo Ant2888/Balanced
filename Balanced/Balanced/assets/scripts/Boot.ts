@@ -31,10 +31,10 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('moonlight', 'assets/res/audio/moonlight.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);
-        rem.addResource(new UTIL.Resource('dark_loop', 'assets/res/audio/dark_loop.ogg', UTIL.AB_AB1_SS_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('dark_loop', 'assets/res/audio/dark_loop.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);
-        rem.addResource(new UTIL.Resource('dark_intro', 'assets/res/audio/dark_intro.ogg', UTIL.AB_AB1_SS_ID), true, function (e) {
+        rem.addResource(new UTIL.Resource('dark_intro', 'assets/res/audio/dark_intro.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);
         rem.addResource(new UTIL.Resource('final_hour', 'assets/res/audio/final_hour.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {

@@ -64,7 +64,6 @@
     <Content Include="assets\res\audio\Whirlwind.mp3" />
     <Content Include="assets\res\balance-menus\balance_notif.png" />
     <Content Include="assets\res\balance-menus\balance_notif_old.png" />
-    <Content Include="assets\res\boot\ad.png" />
     <Content Include="assets\res\boot\Balanced Logo.png" />
     <Content Include="assets\res\boot\mm_background_only.png" />
     <Content Include="assets\res\boot\Phaser Logo.png" />
@@ -82,6 +81,7 @@
     <Content Include="assets\res\hud\ab_p2_ss.png" />
     <Content Include="assets\res\hud\ab_stats_ss.png" />
     <Content Include="assets\res\hud\ab_town_ss.png" />
+    <Content Include="assets\res\hud\boss_bar_frame.png" />
     <Content Include="assets\res\hud\dd_menu_btn.png" />
     <Content Include="assets\res\hud\dd_twn_btn.png" />
     <Content Include="assets\res\hud\dead_dialog.png" />
@@ -139,6 +139,7 @@
     <TypeScriptCompile Include="assets\scripts\fsm\mage\CastSpellState.ts" />
     <TypeScriptCompile Include="assets\scripts\fsm\mage\IdleMageState.ts" />
     <TypeScriptCompile Include="assets\scripts\fsm\mage\MageStateSystem.ts" />
+    <TypeScriptCompile Include="assets\scripts\gui\ui\BossGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\DialogGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\BalanceEvent.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\BalanceManager.ts" />

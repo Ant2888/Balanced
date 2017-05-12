@@ -87,6 +87,7 @@
             var enem = new ENTITIES.Ogre(this.system.gsm, mobX, mobY,
                 <ENTITIES.Player>this.system.player, 'ogre')
             state.enemies.add(enem);
+            enem.stateLogic.curState.elevate();
             enem.makeEnergyBar();
             enem.makeHealthBar();
 

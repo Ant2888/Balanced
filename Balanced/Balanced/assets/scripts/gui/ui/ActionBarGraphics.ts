@@ -63,7 +63,7 @@
             this.setPotion2(this.potion2Pressed);
             this.setStats(this.statsPressed);
             //this.setBag(this.bagPressed);
-            this.setTown(this.townPressed);  
+            this.setTown(this.doNothing);  
             this.setOptions(this.doNothing);
 
             this.coin_image = this.gsm.game.add.sprite(875 , 595, 'coin');
@@ -226,11 +226,9 @@
             console.log('bag button was pressed');
         }
 
-        public townPressed(): any {
-            if (this.gsm.game.paused || !this.player.alive)
-                return false;
-            console.log('town button was pressed');
-            this.gsm.setState(States.TOWN_STATE);
+        public townPressed(func: any, context: any): void {
+            this.ab_town_ss.destroy(true);
+            this.setTown(func.bind(context));
         }
 
         public setOptionsPressed(func: any, context: any): void {

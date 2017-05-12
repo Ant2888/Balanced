@@ -26,7 +26,7 @@
             if (ogre.animations.currentAnim.name != 'idleL' &&
                 ogre.animations.currentAnim.name != 'idleR') {
                 ogre.animations.currentAnim.onComplete.add((e0, e1, me) => {
-                    debugger;
+                    
                     me.playAnimState(me.facingLeft ? ENTITIES.Entity.idleL : ENTITIES.Entity.idleR,
                         1, true, true, true);
                 }, this, null, ogre);

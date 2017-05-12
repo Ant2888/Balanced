@@ -369,6 +369,9 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('tut_background', 'assets/res/tutorial/tut_background.png', UTIL.BADDIE_ID), true, function (e) {
             this.game.load.image(e.key, e.assetUrl, 350, 200);
         }, this);
+        rem.addResource(new UTIL.Resource('confirm_background', 'assets/res/tutorial/confirm_background.png', UTIL.BADDIE_ID), true, function (e) {
+            this.game.load.image(e.key, e.assetUrl, 350, 200);
+        }, this);
         // -------------------------------------------END TUTORIAL SCREEN
 
         // -------------------------------------------PAUSE MENU

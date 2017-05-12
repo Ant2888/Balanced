@@ -11,6 +11,7 @@ module States {
         private dialogGraphics: GUI.DialogGraphics;
         private player: ENTITIES.Player;
         private keyboard: Phaser.CursorKeys;
+        private spacebar: any;
         
         private shop: GUI.ShopMenuGraphics;
 
@@ -22,7 +23,7 @@ module States {
             this.gsm.game.physics.arcade.collide(this.player, this.townGraphics.getFloor(), () =>
             { this.player.isJumping = false }, null, this);
             
-            if (this.keyboard.up.isDown && !this.player.isJumping) {
+            if ((this.keyboard.up.isDown || this.spacebar.isDown) && !this.player.isJumping) {
                 this.player.jump(-650);
                 this.player.isJumping = true;
             }
@@ -77,7 +78,7 @@ module States {
         public init(): void {
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
-
+            this.spacebar = this.gsm.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             this.gsm.musicBox.addSound('dark_loop');
         }
 

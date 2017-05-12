@@ -116,6 +116,7 @@
     <Content Include="assets\res\pause-menu\pm_options_btn.png" />
     <Content Include="assets\res\pause-menu\pm_resume_btn.png" />
     <Content Include="assets\floatingText.js" />
+    <Content Include="assets\res\tutorial\confirm_background.png" />
     <Content Include="assets\res\tutorial\tut_background.png" />
     <Content Include="assets\res\tutorial\tut_no_btn.png" />
     <Content Include="assets\res\tutorial\tut_screen1.png" />

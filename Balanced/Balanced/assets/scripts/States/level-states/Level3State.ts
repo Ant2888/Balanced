@@ -12,6 +12,9 @@
         private wallPaperlayer: Phaser.TilemapLayer;
         private backgroundlayer: Phaser.TilemapLayer;
 
+        private ogreBoss: ENTITIES.OgreBoss;
+        private mageBoss: ENTITIES.MageBoss;
+
         private stairOverlap: any;
 
         private doors: Phaser.Group;
@@ -175,11 +178,11 @@
 
         public init(): void {
             super.init();
-            this.gsm.musicBox.addSound('final_hour', UTIL.MUSIC);
+            this.gsm.musicBox.addSound('moonlight', UTIL.MUSIC);
         }
 
         public startup(): boolean {
-            this.gsm.musicBox.playByID('final_hour', undefined, undefined, UTIL.MUSIC, true, false);
+            this.gsm.musicBox.playByID('moonlight', undefined, undefined, UTIL.MUSIC, true, false);
 
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
@@ -224,21 +227,22 @@
             this.player.x = 12 * 64;
             this.player.y = 11 * 64;
 
-            this.createEnemies();
-
+            var soundLoader = new ENTITIES.Ogre(this.gsm, 0, 0, this.player, 'ogre')
+            this.enemies.add(soundLoader);
             (<ENTITIES.Ogre>this.enemies.getTop()).loadEntitySounds(this.gsm.musicBox);
+            soundLoader.kill();
+
+            this.mageBoss = new ENTITIES.MageBoss(this.gsm, 12 * 64, 0 * 64, this.player, 'ogre_mage');
+            this.ogreBoss = new ENTITIES.OgreBoss(this.gsm, 30 * 64, 10 * 64, this.player, 'ogre')
+
+            this.enemies.add(this.mageBoss);
+            this.enemies.add(this.ogreBoss);
+
             this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour') }, this);
 
             this.backgroundlayer.resizeWorld();
             
             return true;
-        }
-
-        public createEnemies(): void {
-            this.objectLayer = this.findObjectsByType('enemy', this.map, 'enemies');
-            this.objectLayer.forEach(function (element) {
-                this.placeEnemies(element, this.enemies);
-            }, this);
         }
 
         public createDoors(): void {
@@ -267,45 +271,10 @@
             }
 
         }
-        
-        public placeEnemies(element, group): void {
-            var baddie;
-
-            if (element.properties.class !== undefined && element.properties.class !== null) {
-                //create mage
-                baddie = new ENTITIES.MageOgre(this.gsm, element.x, element.y, this.player, 'ogre_mage');
-            }
-            else {
-                baddie = new ENTITIES.Ogre(this.gsm, element.x, element.y, this.player, 'ogre');
-            }
-
-            baddie.body.bounce.y = .2;
-            baddie.makeHealthBar();
-            baddie.makeEnergyBar();
-
-            this.gsm.game.physics.arcade.enable(baddie);
-            baddie.body.collideWorldBounds = true;
-            this.enemies.add(baddie);
-
-            baddie.addOnDeathCallBack(() => {
-                baddie.dropList.forEach(loot => {
-                    this.lm.dropItem(loot);
-                }, this);
-            }, this);
-        }
-
-        public createFromTiledObject(element, group): void {
-            var sprite = group.create(element.x, element.y, element.properties.sprite);
-            sprite.anchor.setTo(0, .67);
-            //copy all properties to the sprite
-            Object.keys(element.properties).forEach(function (key) {
-                sprite[key] = element.properties[key];
-            });
-        }
 
         public end(): boolean {
             super.end();
-            this.gsm.musicBox.stopByID('final_hour');
+            this.gsm.musicBox.stopByID('moonlight');
             this.doors.destroy(true);
             this.map.destroy();
             this.floorlayer.destroy();

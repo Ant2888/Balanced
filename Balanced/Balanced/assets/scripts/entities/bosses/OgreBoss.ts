@@ -2,7 +2,7 @@
     /**
      * @author Anthony
      */
-    export class Ogre extends Entity {
+    export class OgreBoss extends Entity {
 
         public static ABILITY_ONE = 1;
         public ab1_mod: COMBAT.Ability;
@@ -13,13 +13,12 @@
         public VISION_Y = 64 * 3;
         public WALK_INTERVAL = [1000, 4000];
         public WALK_SPEED = 125;
-        public ATTACK_DISTANCE = 60;
+        public ATTACK_DISTANCE = 135;
         public GCD = 1200;
         //END AI
 
         public player: ENTITIES.Player;
-        public startPosition: Phaser.Point;
-        public stateLogic: FSM.OgreStateSystem;
+        public stateLogic: FSM.OgreBossAI;
 
         constructor(gsm: States.GameStateManager, x: number, y: number, player: ENTITIES.Player,
             key?: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture,
@@ -27,7 +26,8 @@
             super(gsm, x, y, key, frame);
 
             this.dropList.push(
-                { context: this, dropAmount: 5, entity: this, 
+                {
+                    context: this, dropAmount: 200, entity: this,
                     createItem: g => {
                         return g.game.add.sprite(this.x, this.y, 'coin');
                     },
@@ -39,24 +39,13 @@
             );
 
             this.player = player;
-            this.startPosition = new Phaser.Point(x, y);
-            this.abm = new COMBAT.OgreAbilities(this, gsm);
+            this.abm = new COMBAT.OgreBossAbilities(this, gsm); //CHANGE THIS
 
             this.attackSize = { width: 96 - 4, height: 96 - 26, wOffset: 2, hOffset: 26 };
             this.hitSize = { width: 96 - 16, height: 96 - 32, wOffset: 8, hOffset: 32 };
 
             this.body.setSize(this.hitSize.width, this.hitSize.height,
                 this.hitSize.wOffset, this.hitSize.hOffset);
-
-            this.addOnDeathCallBack(function () {
-                var val = this.randomValWithRandomness(2, 1);
-
-                this.gsm.musicBox.playByID(val == 3 ? 'OgreDeath1' :
-                    (val == 2 ? 'OgreDeath2' : 'OgreDeath3'),
-                    undefined, undefined, UTIL.SFX, false, false);
-
-                this.animations.currentAnim.onComplete.add(() => { this.kill() }, this);
-            }, this);
 
             this.addOnDamageCallback(function (d, h) {
                 if (h == 0)
@@ -68,12 +57,29 @@
                     undefined, undefined, UTIL.SFX, false, false);
             }, this);
 
-            this.stateLogic = new FSM.OgreStateSystem(this.gsm, this, this.player);
+            this.addOnDeathCallBack(function () {
+                var val = this.randomValWithRandomness(2, 1);
+
+                this.gsm.musicBox.playByID(val == 3 ? 'OgreDeath1' :
+                    (val == 2 ? 'OgreDeath2' : 'OgreDeath3'),
+                    undefined, undefined, UTIL.SFX, false, false);
+
+                this.animations.currentAnim.onComplete.add(() => {
+                    this.alive = false;
+                    this.stateLogic.isDumb = true;
+                }, this);
+            }, this);
+
+           this.stateLogic = new FSM.OgreBossAI(this.gsm, this, this.player);
 
             this.ab1_mod = {
                 dmg: this.ATTACK * .25, flinchTime: Entity.FLINCH_TIME + 200,
-                knockback: { dx: 25, dy: -25, time: 500 }, energyCost: 60
+                knockback: { dx: 200, dy: -75, time: 500 }, energyCost: 60
             };
+            this.maxHealth = 2000;
+            this.health = 2000;
+
+            this.scale.setTo(2.5, 2.5);
         }
 
         public dealWithOverlap(player: Phaser.Sprite, me: Phaser.Sprite | Phaser.Group): void {
@@ -93,10 +99,10 @@
 
         private tryAttack(player: Player): void {
             var mod = this.ab1_mod;
-            var damage = this.randomValWithRandomness(mod.dmg+7, this.RANDOMNESS);
+            var damage = this.randomValWithRandomness(mod.dmg + 7, this.RANDOMNESS);
             mod.knockback.dx = Math.abs(mod.knockback.dx) * (this.facingLeft ? -1 : 1);
 
-            player.dealDamage(damage, damage > (mod.dmg+7 + (this.RANDOMNESS / 2)), 'red', true, mod.flinchTime > 0,
+            player.dealDamage(damage, damage > (mod.dmg + 7 + (this.RANDOMNESS / 2)), 'red', true, mod.flinchTime > 0,
                 mod.flinchTime, mod.knockback, this.facingLeft);
         }
 
@@ -135,7 +141,7 @@
             box.addSound('OgreHurt4');
             box.addSound('OgreHurt5');
             box.addSound('fireball_sound');
-        } 
+        }
     }
 
 }

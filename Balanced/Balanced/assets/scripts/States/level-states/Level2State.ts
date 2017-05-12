@@ -60,10 +60,10 @@
                                 });
                             me.kill();
                         });
-                    this.gsm.game.physics.arcade.collide(this.floorlayer, e.fireBall.bullets,
+                    /**this.gsm.game.physics.arcade.collide(this.floorlayer, e.fireBall.bullets,
                         (me, floor) => {
                             me.kill();
-                        });
+                        });**/
                 }
             }, this);
 

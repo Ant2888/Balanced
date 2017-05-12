@@ -148,6 +148,9 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('PickUpCoin', 'assets/res/audio/PickUpCoin.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
             this.game.load.audio(e.key, e.assetUrl);
         }, this);
+        rem.addResource(new UTIL.Resource('fireball_sound', 'assets/res/audio/fireball_sound.mp3', UTIL.AB_AB1_SS_ID), true, function (e) {
+            this.game.load.audio(e.key, e.assetUrl);
+        }, this);
         // --------------------------------- AUDIO
         // --------------------------------- HUD
         rem.addResource(new UTIL.Resource('ab_ab1_ss', 'assets/res/hud/ab_ab1_ss.png', UTIL.AB_AB1_SS_ID), true, function (e) {
@@ -413,7 +416,7 @@ class BalancedGame {
 
         this.game.load.onLoadComplete.add(function () {
 
-            var DEBUGGING = false;
+            var DEBUGGING = true;
 
             text.setText("Load Complete");
 

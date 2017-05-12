@@ -9,11 +9,11 @@
     export abstract class LevelState extends State {
 
         //debug var; there should only be 1
-        public static DEBUG = false;
+        public static DEBUG = true;
         //-
 
         //entities, incl. player; destroyed on end
-        protected enemies: Phaser.Group;
+        public enemies: Phaser.Group;
         protected player: ENTITIES.Player;
         protected lm: LootManager;
         //-

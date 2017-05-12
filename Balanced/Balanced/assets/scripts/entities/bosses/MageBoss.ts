@@ -2,7 +2,7 @@
     /**
      * @author Anthony
      */
-    export class MageOgre extends Entity {
+    export class MageBoss extends Entity {
 
         public static ABILITY_ONE = 1;
         public ab1_mod: COMBAT.Ability;
@@ -16,7 +16,7 @@
         public player: ENTITIES.Player;
         public fireBall: Phaser.Weapon;
         protected FIRE_BALL = 'fire_ball';
-        public stateLogic: FSM.MageStateSystem;
+        public stateLogic: FSM.MageBossAI;
 
         constructor(gsm: States.GameStateManager, x: number, y: number, player: ENTITIES.Player,
             key?: string | Phaser.RenderTexture | Phaser.BitmapData | PIXI.Texture,
@@ -36,7 +36,7 @@
 
             this.dropList.push(
                 {
-                    context: this, dropAmount: 12, entity: this,
+                    context: this, dropAmount: 400, entity: this,
                     createItem: g => {
                         return g.game.add.sprite(this.x, this.y, 'coin');
                     },
@@ -49,8 +49,8 @@
 
             this.player = player;
 
-            this.abm = new COMBAT.MageOgreAbilities(this, this.gsm);
-            this.stateLogic = new FSM.MageStateSystem(this.gsm, this, this.player);
+            this.abm = new COMBAT.MageBossAbilities(this, this.gsm);
+            this.stateLogic = new FSM.MageBossAI(this.gsm, this, this.player);
 
             this.attackSize = { width: 96 - 4, height: 96 - 26, wOffset: 2, hOffset: 26 };
             this.hitSize = { width: 96 - 16, height: 96 - 32, wOffset: 8, hOffset: 32 };
@@ -64,8 +64,8 @@
                 this.gsm.musicBox.playByID(val == 3 ? 'OgreDeath1' :
                     (val == 2 ? 'OgreDeath2' : 'OgreDeath3'),
                     undefined, undefined, UTIL.SFX, false, false);
-
-                this.animations.currentAnim.onComplete.add(() => { this.kill() }, this);
+                //dont kill him 
+                //this.animations.currentAnim.onComplete.add(() => { this.kill() }, this);
             }, this);
 
             this.addOnDamageCallback(function (d, h) {
@@ -77,12 +77,16 @@
                     (val == 3 ? 'OgreHurt3' : (val == 2 ? 'OgreHurt4' : 'OgreHurt5')),
                     undefined, undefined, UTIL.SFX, false, false);
             }, this);
-            
+
 
             this.ab1_mod = {
                 dmg: this.ATTACK * .35, flinchTime: Entity.FLINCH_TIME + 200,
                 knockback: { dx: 25, dy: -25, time: 500 }, energyCost: 100
             };
+
+            this.maxHealth = 2000;
+            this.health = 2000;
+            this.scale.setTo(2.5, 2.5);
         }
 
         public dealWithOverlap(player: Phaser.Sprite, me: Phaser.Sprite | Phaser.Group): void {
@@ -125,6 +129,7 @@
             box.addSound('OgreHurt5');
             box.addSound('fireball_sound');
         }
+        
     }
 
 }

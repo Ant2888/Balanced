@@ -30,6 +30,7 @@
     <Content Include="assets\res\audio\ClickLetGo.mp3" />
     <Content Include="assets\res\audio\CloseMenu.mp3" />
     <Content Include="assets\res\audio\CoinBounce.mp3" />
+    <Content Include="assets\res\audio\fireball_sound.mp3" />
     <Content Include="assets\res\audio\PickUpCoin.mp3" />
     <Content Include="assets\res\audio\Door_Open.mp3" />
     <Content Include="assets\res\audio\Drinking.mp3" />
@@ -134,11 +135,21 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="assets\scripts\balance\buffs\EventMatrix.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\MageBossAbilities.ts" />
     <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\MageOgreAbilities.ts" />
+    <TypeScriptCompile Include="assets\scripts\combat\entity_abilities\OgreBossAbilities.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\bosses\MageBoss.ts" />
+    <TypeScriptCompile Include="assets\scripts\entities\bosses\OgreBoss.ts" />
     <TypeScriptCompile Include="assets\scripts\entities\MageOgre.ts" />
     <TypeScriptCompile Include="assets\scripts\fsm\mage\CastSpellState.ts" />
     <TypeScriptCompile Include="assets\scripts\fsm\mage\IdleMageState.ts" />
     <TypeScriptCompile Include="assets\scripts\fsm\mage\MageStateSystem.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre_boss\MageBossAI.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre_boss\MageBossP1State.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre_boss\MageBossP2State.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre_boss\OgreBossAI.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre_boss\OgreBossP1State.ts" />
+    <TypeScriptCompile Include="assets\scripts\fsm\ogre_boss\OgreBossP2State.ts" />
     <TypeScriptCompile Include="assets\scripts\gui\ui\DialogGraphics.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\BalanceEvent.ts" />
     <TypeScriptCompile Include="assets\scripts\balance\BalanceManager.ts" />

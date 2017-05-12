@@ -18,6 +18,11 @@
         private tut_yes_btn: Phaser.Button;
         private tut_no_btn: Phaser.Button;
 
+        // variables for the town confirm dialog
+        private confirm_background: Phaser.Sprite;
+        private confirm_yes_btn: Phaser.Button;
+        private confirm_no_btn: Phaser.Button;
+
         // variables for the death dialog
         private dd_background: Phaser.Sprite;
         private dd_menu_btn: Phaser.Button;
@@ -28,7 +33,8 @@
         private player: ENTITIES.Player;
         private text: Phaser.Text;
 
-       
+        private confirmMenuShowing: boolean;
+        private pauseMenuShowing: boolean;
 
         constructor(group: Phaser.Group, player: ENTITIES.Player) {
             super(205, group);
@@ -36,16 +42,69 @@
         }
 
         public initialize(gsm: States.GameStateManager): void {
+            this.confirmMenuShowing = false;
+            this.pauseMenuShowing = false;
+
             this.gsm = gsm;
             if (this.player == null || this.player == undefined)
                 return;
 
             this.puaseMenu();
+            this.townConfirm();
 
             this.player.addOnDeathCallBack(function () {
                 this.deathMenu();
             }, this);
-        }s
+        }
+
+        public townConfirm(): void {
+            // pause menu background
+            this.confirm_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'confirm_background');
+            this.confirm_background.anchor.setTo(.5, .5);
+            this.confirm_background.fixedToCamera = true;
+            this.group.add(this.confirm_background);
+
+            //yes
+            this.confirm_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2), (this.gsm.game.height / 2) - 10, 'tut_yes_btn', function () {
+                this.toggleConfirmMenu();
+                this.gsm.setState(States.TOWN_STATE);
+            }, this, 1, 0, 2);
+
+            this.confirm_yes_btn.anchor.setTo(.5, .5);
+            this.confirm_yes_btn.fixedToCamera = true;
+            this.group.add(this.confirm_yes_btn);
+
+            //no
+            this.confirm_no_btn = this.gsm.game.add.button((this.gsm.game.width / 2), (this.gsm.game.height / 2) + 50, 'tut_no_btn', function () {
+                this.toggleConfirmMenu();
+            }, this, 1, 0, 2);
+            this.confirm_no_btn.anchor.setTo(.5, .5);
+            this.confirm_no_btn.fixedToCamera = true;
+            this.group.add(this.confirm_no_btn);
+
+            this.confirm_no_btn.anchor.setTo(.5, .5);
+            this.confirm_no_btn.fixedToCamera = true;
+            this.group.add(this.confirm_no_btn);
+
+
+            // dont show anything untill requested
+            this.confirm_background.exists = false;
+            this.confirm_yes_btn.exists = false;
+            this.confirm_no_btn.exists = false;
+        }
+
+        public toggleConfirmMenu(): void {
+            // if you are dead dont open the pause menu..
+            if (!this.player.alive || this.pauseMenuShowing)
+                return;
+
+            this.confirm_background.exists = !this.confirm_background.exists;
+            this.confirm_yes_btn.exists = !this.confirm_yes_btn.exists;
+            this.confirm_no_btn.exists = !this.confirm_no_btn.exists;
+
+            this.gsm.game.paused = !this.gsm.game.paused;
+            this.confirmMenuShowing = !this.confirmMenuShowing;
+        }
 
         public puaseMenu(): void {
             // pause menu background
@@ -53,7 +112,7 @@
             this.pm_background.anchor.setTo(.5, .5);
             this.pm_background.fixedToCamera = true;
             this.group.add(this.pm_background);
-            
+
             //resume
             this.pm_resume_btn = this.gsm.game.add.button((this.gsm.game.width / 2), (this.gsm.game.height / 2) - 80, 'pm_resume_btn', function () {
                 this.togglePauseMenu();
@@ -92,29 +151,29 @@
             }, this, 1, 0, 2);
             this.pm_help_btn.anchor.setTo(.5, .5);
             this.pm_help_btn.fixedToCamera = true;
-            this.group.add(this.pm_help_btn);     
+            this.group.add(this.pm_help_btn);
 
             // dont show anything untill requested
             this.pm_background.exists = false;
             this.pm_help_btn.exists = false;
             this.pm_mainmenu_btn.exists = false;
             this.pm_options_btn.exists = false;
-            this.pm_resume_btn.exists = false;      
+            this.pm_resume_btn.exists = false;
         }
 
         public togglePauseMenu(): void {
             // if you are dead dont open the pause menu..
-            if (!this.player.alive)
+            if (!this.player.alive || this.confirmMenuShowing)
                 return;
 
             this.pm_background.exists = !this.pm_background.exists;
             this.pm_help_btn.exists = !this.pm_help_btn.exists;
             this.pm_mainmenu_btn.exists = !this.pm_mainmenu_btn.exists;
             this.pm_options_btn.exists = !this.pm_options_btn.exists;
-            this.pm_resume_btn.exists = !this.pm_resume_btn.exists; 
+            this.pm_resume_btn.exists = !this.pm_resume_btn.exists;
 
             this.gsm.game.paused = !this.gsm.game.paused;
-           
+            this.pauseMenuShowing = !this.pauseMenuShowing;
         }
 
         public deathMenu(): void {
@@ -149,7 +208,7 @@
 
             //yes
             this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2), (this.gsm.game.height / 2) - 30, 'tut_yes_btn', function () {
-                this.gsm.game.paused = false;  
+                this.gsm.game.paused = false;
                 this.gsm.setState(States.DUNGEON_TUTORIAL_STATE);
             }, this, 1, 0, 2);
 
@@ -166,7 +225,7 @@
             this.tut_no_btn.fixedToCamera = true;
             this.group.add(this.tut_no_btn);
 
-            this.gsm.game.paused = true;  
+            this.gsm.game.paused = true;
         }
 
         public tutorialState1(): void {
@@ -174,9 +233,9 @@
             this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen1');
             this.tut_background.anchor.setTo(.5, .5);
             this.tut_background.fixedToCamera = true;
-                        
+
             //ok
-            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2)+95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
                 this.tut_background.destroy(true);
                 this.tut_yes_btn.destroy(true);
                 this.tutorialState2();
@@ -193,9 +252,9 @@
             this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen2');
             this.tut_background.anchor.setTo(.5, .5);
             this.tut_background.fixedToCamera = true;
-            
+
             //ok
-            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2)+95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
+            this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
                 this.tut_background.destroy(true);
                 this.tut_yes_btn.destroy(true);
                 UTIL.ISLEARNING = false;
@@ -204,18 +263,18 @@
 
             this.tut_yes_btn.anchor.setTo(.5, .5);
             this.tut_yes_btn.fixedToCamera = true;
-            
+
 
         }
 
-        public tutorialState3(): void {     
+        public tutorialState3(): void {
             this.text.destroy(true);
             UTIL.ISLEARNING = true;
 
             // tut menu background
             this.tut_background = this.gsm.game.add.sprite(this.gsm.game.width / 2, this.gsm.game.height / 2, 'tut_screen3');
             this.tut_background.anchor.setTo(.5, .5);
-            this.tut_background.fixedToCamera = true;                                   
+            this.tut_background.fixedToCamera = true;
 
             //ok
             this.tut_yes_btn = this.gsm.game.add.button((this.gsm.game.width / 2) + 95, (this.gsm.game.height / 2) + 195, 'omOkButton', function () {
@@ -228,7 +287,7 @@
             this.tut_yes_btn.fixedToCamera = true;
 
             this.text = this.gsm.game.add.text(1305, 400, 'MOVE HERE\n \x20\x20\x7C\x7C\x0D\x0A\x20\x20\x20\x7C\x7C\x0D\x0A\x20\x20\x20\x7C\x7C\x0D\x0A\x20\x20\x5C\x20\x20\x2F\x0D\x0A\x20\x20\x20', { fill: 'red', font: 'papyrus', fontSize: '12px', fontStyle: 'bold' });
-            
+
         }
 
         public tutorialState4(): void {
@@ -274,7 +333,7 @@
 
         }
 
-        public tutorialState6(): void {  
+        public tutorialState6(): void {
             this.text.destroy(true);
 
             // tut menu background
@@ -346,7 +405,7 @@
                 this.tut_background.destroy(true);
                 this.tut_yes_btn.destroy(true);
                 UTIL.ISLEARNING = false;
-                
+
             }, this, 1, 0, 2);
 
             this.tut_yes_btn.anchor.setTo(.5, .5);

@@ -101,13 +101,13 @@
                 this.player.y = 1240;
             }
 
-            if (this.stairOverlap != null && !(this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
+            if (this.stairOverlap != null && !(this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown || this.spacebar.isDown)) {
                 this.player.body.allowGravity = false;
                 this.player.body.velocity.x = 0;
                 this.player.body.velocity.y = 0;
 
 
-            } else if (this.stairOverlap != null && (this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown)) {
+            } else if (this.stairOverlap != null && (this.keyboard.down.isDown || this.keyboard.up.isDown || this.keyboard.left.isDown || this.keyboard.right.isDown || this.spacebar.isDown)) {
                 if (this.keyboard.down.isDown) {
                     this.player.jump(450);
                 }
@@ -117,7 +117,7 @@
                 if (this.keyboard.right.isDown) {
                     this.player.walk(250);
                 }
-                if (this.keyboard.up.isDown) {
+                if (this.keyboard.up.isDown || this.spacebar.isDown) {
                     this.player.jump(-450);
                 }
 
@@ -128,7 +128,7 @@
                 this.player.body.allowGravity = true;
             }
 
-            if (this.keyboard.up.isDown && !this.player.isJumping) {
+            if ((this.keyboard.up.isDown || this.spacebar.isDown) && !this.player.isJumping) {
                 this.player.jump(-650);
 
                 

@@ -26,6 +26,7 @@
         //key's and key manager
         protected keyboard: Phaser.CursorKeys;
         protected KeyMatrix: any; //HashMap for keys -- caps only
+        protected spacebar: any;
         //-
 
         //default player graphics
@@ -47,6 +48,7 @@
         public init(): void {
             this.gsm.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.gsm.game.physics.arcade.gravity.y = 1200;
+            this.spacebar = this.gsm.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
         }
 
         public startup(): boolean {
@@ -78,6 +80,10 @@
 
             this.actionbar.setOptionsPressed(() => {
                 this.dialogs.togglePauseMenu();
+            }, this);
+
+            this.actionbar.townPressed(() => {
+                this.dialogs.toggleConfirmMenu();
             }, this);
 
             /*this.actionbar.getBag().onInputDown.add(function (e) {
@@ -241,10 +247,13 @@
 
             this.KeyMatrix[Phaser.Keyboard.H] = {
                 key: Phaser.Keyboard.H, context: this, onDown: e => {
-                    this.actionbar.getTown().frame = 0;
-                    this.gsm.setState(States.TOWN_STATE);
+                    this.actionbar.getTown().frame = 1;
+                    
                 }, onUp: e =>
-                { this.actionbar.getTown().frame = 1 }
+                {
+                    this.actionbar.getTown().frame = 0
+                    this.dialogs.toggleConfirmMenu();
+                }
             };
 
             this.KeyMatrix[Phaser.Keyboard.C] = {

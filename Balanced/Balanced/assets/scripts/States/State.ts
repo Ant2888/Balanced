@@ -82,8 +82,8 @@ module States {
 
             switch (UTIL.MASTER) {
                 case 0: this.volumeButton.frame = 2; this.gsm.game.sound.volume = 0; break;
-                case .5: this.volumeButton.frame = 1; this.gsm.game.sound.volume = .5; console.log('.5'); break;
-                case 1: this.volumeButton.frame = 0; this.gsm.game.sound.volume = 1; console.log('1'); break;
+                case .5: this.volumeButton.frame = 1; this.gsm.game.sound.volume = .5; break;
+                case 1: this.volumeButton.frame = 0; this.gsm.game.sound.volume = 1; break;
             }
 
             this.volumeButton.fixedToCamera = true;

@@ -96,14 +96,14 @@
 
         public updateBoss1Health() {
             if (this.boss1.health >= 0 && this.boss1.health <= 100) {
-                this.healthBar1.width = ((323 / this.boss1.maxHealth) * this.boss1.health);
+                this.healthBar1.width = ((616 / this.boss1.maxHealth) * this.boss1.health);
             }
 
         }
 
         public updateBoss2Health() {
             if (this.boss2.health >= 0 && this.boss2.health <= 100) {
-                this.healthBar2.width = ((323 / this.boss2.maxHealth) * this.boss2.health);
+                this.healthBar2.width = ((161 / this.boss2.maxHealth) * this.boss2.health);
             }
         }
     }

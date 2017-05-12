@@ -92,6 +92,7 @@
             //-
 
             this.doKeyLogic();
+            
 
             this.balanceTimer = this.gsm.game.time.create(false);
             this.balanceTimer.loop(Math.floor(Math.random() * (30000 - 15000 + 1)) + 15000, () => {

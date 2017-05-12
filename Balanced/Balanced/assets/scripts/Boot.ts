@@ -201,6 +201,9 @@ class BalancedGame {
         rem.addResource(new UTIL.Resource('dd_background', 'assets/res/hud/dead_dialog.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
             this.game.load.spritesheet(e.key, e.assetUrl);
         }, this);
+        rem.addResource(new UTIL.Resource('boss_bar', 'assets/res/hud/boss_bar_frame.png', UTIL.AB_TOWN_SS_ID), true, function (e) {
+            this.game.load.spritesheet(e.key, e.assetUrl);
+        }, this);
         // --------------------------------- HUD
 
         // --------------------------------- character menus

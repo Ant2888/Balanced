@@ -12,7 +12,11 @@
         private wallPaperlayer: Phaser.TilemapLayer;
         private backgroundlayer: Phaser.TilemapLayer;
 
+        private bossGraphic: GUI.BossGraphics;
+
+        //boss 2
         private ogreBoss: ENTITIES.OgreBoss;
+        //boss 1
         private mageBoss: ENTITIES.MageBoss;
 
         private stairOverlap: any;
@@ -38,6 +42,8 @@
             this.gsm.game.physics.arcade.overlap(this.player.energyWave.bullets,
                 this.enemies, this.player.dealWithOverlap, null, this.player);
 
+            this.bossGraphic.updateBoss1Health();
+            this.bossGraphic.updateBoss2Health();
            
             if (this.player.body.onFloor()) {
                 this.player.isJumping = false;
@@ -67,7 +73,7 @@
                 if (e instanceof ENTITIES.MageOgre) {
                     this.gsm.game.physics.arcade.overlap(this.player, e.fireBall.bullets,
                         (ply: ENTITIES.Player, me) => {
-                            ply.dealDamage(35, false, 'purple', true, true, null,
+                            ply.dealDamage(50, false, 'purple', true, true, null,
                                 {
                                     dx: 64 * (me.scale.x > 0 ? -1 : 1),
                                     dy: -64,
@@ -75,8 +81,20 @@
                                 });
                             me.kill();
                         });
-                    this.gsm.game.physics.arcade.collide(this.floorlayer, e.fireBall.bullets,
+                    /**this.gsm.game.physics.arcade.collide(this.floorlayer, e.fireBall.bullets,
                         (me, floor) => {
+                            me.kill();
+                        });**/
+                }
+                else if (e instanceof ENTITIES.MageBoss) {
+                    this.gsm.game.physics.arcade.overlap(this.player, e.fireBall.bullets,
+                        (ply: ENTITIES.Player, me) => {
+                            ply.dealDamage(35, false, 'purple', true, true, null,
+                                {
+                                    dx: 170,
+                                    dy: -64,
+                                    time: 200
+                                });
                             me.kill();
                         });
                 }
@@ -179,6 +197,7 @@
         public init(): void {
             super.init();
             this.gsm.musicBox.addSound('moonlight', UTIL.MUSIC);
+            this.gsm.musicBox.addSound('dark_loop', UTIL.MUSIC);
         }
 
         public startup(): boolean {
@@ -187,8 +206,7 @@
             // setup the tilemap
             this.keyboard = this.gsm.game.input.keyboard.createCursorKeys();
             this.map = this.gsm.game.add.tilemap('level3');
-
-
+            
             this.map.addTilesetImage('grunge_tile', 'grunge_tile');
             this.map.addTilesetImage('castledoors', 'castledoors');
             this.map.addTilesetImage('tiled', 'tiled');
@@ -224,6 +242,7 @@
             entDoor.body.gravity.y = -1200;
 
             super.startup();
+
             this.player.x = 12 * 64;
             this.player.y = 11 * 64;
 
@@ -238,7 +257,58 @@
             this.enemies.add(this.mageBoss);
             this.enemies.add(this.ogreBoss);
 
-            this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('final_hour') }, this);
+            this.ogreBoss.addOnDeathCallBack(() => {
+                this.ogreBoss.dropList.forEach(loot => {
+                    this.lm.dropItem(loot);
+                }, this);
+
+                var timer = this.gsm.game.time.create(true);
+                timer.add(3000, () => { this.ogreBoss.overHeadText.text = ''; }, this);
+                this.ogreBoss.overHeadText.text = 'How could I lose?';
+                timer.start();
+
+                //send the game into phase 2
+                this.ogreBoss.stateLogic.curState.elevate();
+                this.mageBoss.stateLogic.curState.elevate();
+
+            }, this);
+
+            this.mageBoss.addOnDeathCallBack(() => {
+                var timer = this.gsm.game.time.create(true);
+                timer.add(3000, () => { this.mageBoss.overHeadText.text = ''; }, this);
+                this.mageBoss.overHeadText.text = 'Aggghhhhh';
+                timer.start();
+
+                this.mageBoss.dropList.forEach(loot => {
+                    this.lm.dropItem(loot);
+                }, this);
+
+                this.enemies.forEach(e => {
+                    (<ENTITIES.Entity>e).dealDamage(9999, false, 'yellow', true, false);
+                }, this)
+                this.gsm.musicBox.stopByID('moonlight');
+                this.gsm.musicBox.playByID('dark_loop', undefined, undefined, UTIL.MUSIC, true, false);
+            }, this);
+
+            this.mageBoss.addOnDamageCallback((dmg, hp) => {
+                //just entered 75%
+                if (hp <= this.mageBoss.maxHealth * .5 && hp + dmg > this.mageBoss.maxHealth * .5) {
+                    var mage = <ENTITIES.MageBoss>(this.mageBoss);
+                    mage.stateLogic.p2.isHalf = true;
+                    mage.stateLogic.p2.justStart = true;
+                }
+                else if (hp <= this.mageBoss.maxHealth * .25 && hp + dmg > this.mageBoss.maxHealth * .25) {
+                    var mage = <ENTITIES.MageBoss>(this.mageBoss);
+                    mage.stateLogic.p2.isQuarter = true;
+                    mage.stateLogic.p2.justStart = true;
+                }
+
+            }, this);
+
+            this.bossGraphic = new GUI.BossGraphics(this.graphicsGroup, this.mageBoss, this.ogreBoss);
+            this.gsm.getGUIM().addGroup(this.bossGraphic);
+
+            this.player.addOnDeathCallBack(function () { this.gsm.musicBox.stopByID('moonlight') }, this);
 
             this.backgroundlayer.resizeWorld();
             
@@ -275,6 +345,7 @@
         public end(): boolean {
             super.end();
             this.gsm.musicBox.stopByID('moonlight');
+            this.gsm.musicBox.stopByID('dark_loop');
             this.doors.destroy(true);
             this.map.destroy();
             this.floorlayer.destroy();

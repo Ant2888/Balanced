@@ -33,7 +33,6 @@
         public static POTION_ONE = 5;
         public static POTION_TWO = 6;
 
-        public overHeadText: Phaser.Text;
 
         protected WAVE_ATK = 'wave_attk';
         public energyWave: Phaser.Weapon;
@@ -83,13 +82,6 @@
                     undefined, undefined, UTIL.SFX, false, false);
             }, this);
 
-            this.overHeadText = this.gsm.game.add.text(0, -18, '', {
-                fill: 'white', font: 'papyrus', fontSize: '14px',
-                stroke: 'black', strokeThickness: 2
-            });
-            this.overHeadText.anchor.setTo(.5, .5);
-
-            this.addChild(this.overHeadText);
 
             Player.allCurrentEvent.forEach(e => {
                 e(this);
@@ -153,11 +145,15 @@
 
         public dealWithOverlap(me: Phaser.Sprite, other: Phaser.Sprite | Phaser.Group): void {
             if (me instanceof Phaser.Bullet) {
+                if (!other.alive) return;
                 this.bulletLogic(me, <Entity>other);
             }
             
             if (other instanceof Phaser.Group) {
-                (<Phaser.Group>other).forEach(function (e) { this.doAttackLogic(<Entity>e) }, this);
+                (<Phaser.Group>other).forEach(function (e) {
+                    if (!e.alive) return;
+                    this.doAttackLogic(<Entity>e)
+                }, this);
             } else {
                 this.doAttackLogic(<Entity>other);
             }

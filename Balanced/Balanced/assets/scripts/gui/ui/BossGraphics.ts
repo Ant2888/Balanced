@@ -38,7 +38,7 @@
 
             bmd.ctx.beginPath();
             bmd.ctx.rect(0, 0, 616, 15);
-            bmd.ctx.fillStyle = 'gray';
+            bmd.ctx.fillStyle = '#8a0707';
             bmd.ctx.fill();
             var background = this.gsm.game.add.image(20, 535, bmd);
             //background.anchor.setTo(.5, .5);
@@ -63,7 +63,7 @@
         public buildBoss2HealthBar(): void {
             this.boss2Bar = this.gsm.game.add.image(634, 531, 'boss_bar')
             //this.boss1Bar.anchor.setTo(.5, .5);
-            this.boss1Bar.fixedToCamera = true;
+            this.boss2Bar.fixedToCamera = true;
             this.group.add(this.boss2Bar);
 
 
@@ -72,7 +72,7 @@
 
             bmd.ctx.beginPath();
             bmd.ctx.rect(0, 0, 616, 15);
-            bmd.ctx.fillStyle = 'gray';
+            bmd.ctx.fillStyle = '#8a0707';
             bmd.ctx.fill();
             var background = this.gsm.game.add.image(646, 535, bmd);
             //background.anchor.setTo(.5, .5);
@@ -95,15 +95,15 @@
         }
 
         public updateBoss1Health() {
-            if (this.boss1.health >= 0 && this.boss1.health <= 100) {
+            if (this.boss1.health >= 0 && this.boss1.health <= this.boss1.maxHealth) {
                 this.healthBar1.width = ((616 / this.boss1.maxHealth) * this.boss1.health);
             }
 
         }
 
         public updateBoss2Health() {
-            if (this.boss2.health >= 0 && this.boss2.health <= 100) {
-                this.healthBar2.width = ((161 / this.boss2.maxHealth) * this.boss2.health);
+            if (this.boss2.health >= 0 && this.boss2.health <= this.boss2.maxHealth) {
+                this.healthBar2.width = ((616 / this.boss2.maxHealth) * this.boss2.health);
             }
         }
     }

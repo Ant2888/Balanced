@@ -8,7 +8,7 @@
         public ab1_mod: COMBAT.Ability;
 
         //AI STUFF
-        public VISION_X = 64 * 10;
+        public VISION_X = 64 * 9;
         public VISION_Y = 64 * 1;
         public GCD = 2500;
         //END AI

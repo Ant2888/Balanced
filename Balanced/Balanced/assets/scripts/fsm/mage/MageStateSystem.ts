@@ -7,10 +7,12 @@
 
         public attack: CastSpellState;
         public idle: IdleMageState;
+        public alwaysAttack: boolean;
 
         constructor(gsm: States.GameStateManager, ai: ENTITIES.MageOgre,
             player: ENTITIES.Player) {
             super(gsm, ai, player);
+            this.alwaysAttack = false;
             this.initStates();
         }
 

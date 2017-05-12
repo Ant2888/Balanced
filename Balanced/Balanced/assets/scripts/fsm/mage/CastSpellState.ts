@@ -31,7 +31,7 @@
         }
 
         public checkCondition(): void {
-            if (this.delvLogic())
+            if (this.delvLogic() && !(<MageStateSystem>this.system).alwaysAttack)
                 this.deElevate();
         }
 

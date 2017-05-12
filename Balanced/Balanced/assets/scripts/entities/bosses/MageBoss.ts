@@ -28,7 +28,7 @@
             this.fireBall.bulletAnimation = 'fire_anim';
             this.fireBall.bulletKillType = Phaser.Weapon.KILL_LIFESPAN;
             this.fireBall.bulletLifespan = 800;
-            this.fireBall.bulletSpeed = 1000;
+            this.fireBall.bulletSpeed = 700;
             this.fireBall.bulletRotateToVelocity = true;
             this.fireBall.bulletGravity.y = -this.gsm.game.physics.arcade.gravity.y;
             this.fireBall.fireRate = 250;
@@ -84,8 +84,8 @@
                 knockback: { dx: 25, dy: -25, time: 500 }, energyCost: 100
             };
 
-            this.maxHealth = 2000;
-            this.health = 2000;
+            this.maxHealth = 1000;
+            this.health = 1000;
             this.scale.setTo(2.5, 2.5);
         }
 

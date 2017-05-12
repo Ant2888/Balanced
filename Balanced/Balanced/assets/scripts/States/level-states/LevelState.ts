@@ -34,6 +34,7 @@
         protected charMenu: GUI.CharGraphics;
         protected bag: GUI.BagGraphics;
         protected dialogs: GUI.DialogGraphics;
+        protected graphicsGroup: Phaser.Group;
         //-
 
         
@@ -63,12 +64,12 @@
             this.lm.initialize();
 
             //graphics
-            var group = this.gsm.game.add.group();
-            this.actionbar = new GUI.ActionBarGraphics(group, this.player);
-            this.unitframe = new GUI.HealthAndEnergyGraphics(group, this.player);
-            this.bag = new GUI.BagGraphics(group, this.player);
-            this.charMenu = new GUI.CharGraphics(group, this.player);
-            this.dialogs = new GUI.DialogGraphics(group, this.player);
+            this.graphicsGroup = this.gsm.game.add.group();
+            this.actionbar = new GUI.ActionBarGraphics(this.graphicsGroup, this.player);
+            this.unitframe = new GUI.HealthAndEnergyGraphics(this.graphicsGroup, this.player);
+            this.bag = new GUI.BagGraphics(this.graphicsGroup, this.player);
+            this.charMenu = new GUI.CharGraphics(this.graphicsGroup, this.player);
+            this.dialogs = new GUI.DialogGraphics(this.graphicsGroup, this.player);
 
             this.gsm.getGUIM().addGroup(this.actionbar);
             this.gsm.getGUIM().addGroup(this.unitframe);
@@ -134,7 +135,7 @@
                 this.enemies.forEachAlive(e => {
                     this.gsm.game.debug.body(e);
 
-                    if (e instanceof ENTITIES.MageOgre) {
+                    if (e instanceof ENTITIES.MageOgre || e instanceof ENTITIES.MageBoss) {
                         e.fireBall.bullets.forEachAlive(_e => {
                             this.gsm.game.debug.body(_e);
                         }, this);

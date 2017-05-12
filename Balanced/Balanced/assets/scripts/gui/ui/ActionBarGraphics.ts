@@ -70,7 +70,7 @@
             this.coin_image.fixedToCamera = true;
             this.group.add(this.coin_image);
 
-            this.coin_text = this.gsm.game.add.text(889, 605, '0', {
+            this.coin_text = this.gsm.game.add.text(875, 610, '0', {
                 fill: 'gold', font: 'Courier', fontSize: '16px',
                 stroke: 'black', strokeThickness: 1,
                 boundsAlignH: 'left'

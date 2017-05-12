@@ -37,7 +37,7 @@
                 this.castingEvent.loop(Math.random() * (5000 - 2000) + 2000,
                     this.spawnMobsOnInterval, this);
 
-                this.castingEvent.start(2700);
+                this.castingEvent.start(2200);
 
             } else if (!this.avoidingBoss) {
                 //player jumped down so lets make sure we dont spawn a mob

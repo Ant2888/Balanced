@@ -37,6 +37,8 @@
         public isJumping: boolean;
         public invincible: boolean; 
 
+        public overHeadText: Phaser.Text;
+
         public static FLINCH_TIME = 1000;
 
         protected onDeathCallback: any[];
@@ -94,6 +96,14 @@
             this.gsm.game.physics.arcade.enable(this);
             this.body.gravity.y = 500;
             this.body.collideWorldBounds = true;
+
+            this.overHeadText = this.gsm.game.add.text(0, -18, '', {
+                fill: 'white', font: 'papyrus', fontSize: '14px',
+                stroke: 'black', strokeThickness: 2
+            });
+            this.overHeadText.anchor.setTo(.5, .5);
+
+            this.addChild(this.overHeadText);
         }
 
         public abstract dealWithOverlap(first: Phaser.Sprite, second: Phaser.Sprite | Phaser.Group);

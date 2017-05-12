@@ -74,10 +74,10 @@
 
             this.ab1_mod = {
                 dmg: this.ATTACK * .25, flinchTime: Entity.FLINCH_TIME + 200,
-                knockback: { dx: 200, dy: -75, time: 500 }, energyCost: 60
+                knockback: { dx: 200, dy: -75, time: 500 }, energyCost: 90
             };
-            this.maxHealth = 2000;
-            this.health = 2000;
+            this.maxHealth = 800;
+            this.health = 800;
 
             this.scale.setTo(2.5, 2.5);
         }

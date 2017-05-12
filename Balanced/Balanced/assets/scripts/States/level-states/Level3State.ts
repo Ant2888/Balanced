@@ -131,7 +131,7 @@
                 if (this.keyboard.right.isDown) {
                     this.player.walk(250);
                 }
-                if (this.keyboard.up.isDown) {
+                if (this.keyboard.up.isDown || this.spacebar.isDown) {
                     this.player.jump(-450);
                 }
 
@@ -142,9 +142,8 @@
                 this.player.body.allowGravity = true;
             }
 
-            if (this.keyboard.up.isDown && !this.player.isJumping) {
+            if ((this.keyboard.up.isDown || this.spacebar.isDown) && !this.player.isJumping) {
                 this.player.jump(-650);
-
                 
                 this.player.isJumping = true;
             }                       

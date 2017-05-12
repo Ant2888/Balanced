@@ -264,31 +264,7 @@
                     this.charMenu.flipMenu();
                 }, onUp: e =>
                 { this.actionbar.getStats().frame = 0 }
-            };
-
-            this.KeyMatrix[Phaser.Keyboard.K] = {
-                key: Phaser.Keyboard.K, context: this, onDown: e => {
-                    this.player.healEntity(50, false);
-                }
-            };
-
-            this.KeyMatrix[Phaser.Keyboard.J] = {
-                key: Phaser.Keyboard.J, context: this, onDown: e => {
-                    this.player.dealDamage(5, false, "red", true, false);
-                }
-            };
-
-            this.KeyMatrix[Phaser.Keyboard.M] = {
-                key: Phaser.Keyboard.M, context: this, onDown: e => {
-                    this.player.getAbilityManager().getEnergyManager().regenEnergy(5);
-                }
-            };
-
-            this.KeyMatrix[Phaser.Keyboard.N] = {
-                key: Phaser.Keyboard.N, context: this, onDown: e => {
-                    this.player.getAbilityManager().getEnergyManager().useAbility(5);
-                }
-            };
+            };           
 
             this.KeyMatrix[Phaser.Keyboard.ESC] = {
                 key: Phaser.Keyboard.ESC, context: this, onUp: e => {
@@ -296,26 +272,26 @@
                 }
             };
 
-            this.KeyMatrix[Phaser.Keyboard.O] = {
+            this.KeyMatrix[Phaser.Keyboard.NUMPAD_5] = {
                 key: Phaser.Keyboard.O, context: this, onUp: e => {
                     this.player.invincible = this.player.invincible ? false : true;
                 }
             };
 
-            this.KeyMatrix[Phaser.Keyboard.V] = {
-                key: Phaser.Keyboard.V, context: this, onUp: e => {
+            this.KeyMatrix[Phaser.Keyboard.NUMPAD_7] = {
+                key: Phaser.Keyboard.NUMPAD_1, context: this, onUp: e => {
                     this.gsm.setState(States.LEVEL1_STATE);
                 }
             };
 
-            this.KeyMatrix[Phaser.Keyboard.B] = {
-                key: Phaser.Keyboard.B, context: this, onUp: e => {
+            this.KeyMatrix[Phaser.Keyboard.NUMPAD_8] = {
+                key: Phaser.Keyboard.NUMPAD_2, context: this, onUp: e => {
                     this.gsm.setState(States.LEVEL2_STATE);
                 }
             };
 
-            this.KeyMatrix[Phaser.Keyboard.G] = {
-                key: Phaser.Keyboard.G, context: this, onUp: e => {
+            this.KeyMatrix[Phaser.Keyboard.NUMPAD_9] = {
+                key: Phaser.Keyboard.NUMPAD_3, context: this, onUp: e => {
                     this.gsm.setState(States.LEVEL3_STATE);
                 }
             };

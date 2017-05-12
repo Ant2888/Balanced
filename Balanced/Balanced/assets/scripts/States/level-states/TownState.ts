@@ -170,9 +170,9 @@ module States {
             var onUp = e => {
                 if (e.keyCode == Phaser.Keyboard.F)
                     this.enterKeyPressed();
-                if (e.keyCode == Phaser.Keyboard.V)
+                if (e.keyCode == Phaser.Keyboard.NUMPAD_7)
                     this.gsm.setState(States.LEVEL1_STATE);
-                if (e.keyCode == Phaser.Keyboard.TILDE)
+                if (e.keyCode == Phaser.Keyboard.NUMPAD_4)
                     this.player.addCoin(100);
             };
 
